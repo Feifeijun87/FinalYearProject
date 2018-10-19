@@ -181,11 +181,12 @@
                         </tr>
                     
                     <tr><td colspan="2">
-                        <div class="container" runat="server" id="container">
-                     
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label1" runat="server" Width ="110px" Text="StudentID" Font-Bold="True"></asp:Label>  
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label1" runat="server" Width ="110px" Text="StudentID" Font-Bold="True"></asp:Label>  
                             <asp:Label ID="Label2" runat="server" Width="170px" Text="Student Name" Font-Bold="True"></asp:Label>
                             <asp:Label ID="Label3" runat="server" Text="Total Score" Font-Bold="True"></asp:Label>
+                        <div class="container" runat="server" id="container">
+                     
+                       
                             
                             <asp:Repeater ID="Repeater1"  runat="server" OnItemCommand="Repeater1_ItemCommand" >
                              <ItemTemplate>
@@ -230,7 +231,7 @@
                     <%-- if not need combine string "<%# Eval("CourseID") %>" will do,
                          if want call c# function and bind the return value "<%# calculatePercentage(int.Parse(Eval("doneNumber").ToString())) %>"  something like that--%>                    <%-- The value inside eval is the column name of the data in sql  --%>                    <%-- next, c# code there --%>
                  
-         <asp:Panel ID="Panel2" runat="server" Visible="false" >
+         <asp:Panel ID="Panel2" runat="server" Visible="False" >
             <table style="margin-left: 20px; border-bottom-style: none; width:600px" class="auto-style6">
                 <tr>
                     <td colspan="2">

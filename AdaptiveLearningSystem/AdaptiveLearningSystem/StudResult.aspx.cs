@@ -23,6 +23,7 @@ namespace AdaptiveLearningSystem
 
                 if (!IsPostBack)
                 {
+                    lblUserName.Text = Session["studName"].ToString();
                     //course, coursename, tutNum, tutTitle, studID
                     //studentID = Session["StudentID"].ToString();
                     conn.Open();

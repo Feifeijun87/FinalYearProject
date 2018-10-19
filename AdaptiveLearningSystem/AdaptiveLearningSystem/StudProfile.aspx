@@ -7,7 +7,7 @@
     <title>Adaptive Learning System</title>
     <link rel="icon" href="images/tarIco.ico" />
 
-    <link rel="stylesheet" runat="server" media="screen" href="main.css"/>
+    <link rel="stylesheet" runat="server" media="screen" href="studMain.css"/>
     <link rel="stylesheet" runat="server" media="screen" href="ProfileLec.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style>

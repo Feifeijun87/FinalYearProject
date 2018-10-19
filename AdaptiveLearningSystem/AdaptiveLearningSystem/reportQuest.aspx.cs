@@ -53,10 +53,12 @@ namespace AdaptiveLearningSystem
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["lecturerID"] != null)
             {
-                if (Session["lecturerID"] != null)
+                if (!IsPostBack)
                 {
+                    lblUserName.Text = Session["lecName"].ToString();
+
                     intakeID = Request.QueryString["intake"].ToString();//intakeID
                     course = Request.QueryString["course"].ToString();//BASCXXXX Title
                     tutorial = Request.QueryString["tutorial"].ToString();//T3 XXXX
@@ -134,11 +136,12 @@ namespace AdaptiveLearningSystem
                     }
                     conn.Close();
                 }
-                else
-                {
-                    Response.Redirect("Login.aspx");
-                }
             }
+            else
+            {
+                Response.Redirect("Login.aspx");
+            }
+            
         }
 
         protected void ProfilesLinkButton_Click(object sender, EventArgs e)

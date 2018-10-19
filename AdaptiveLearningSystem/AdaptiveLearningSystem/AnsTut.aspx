@@ -5,8 +5,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
-    <link rel="stylesheet" runat="server" media="screen" href="main.css" />
+    <title>Adaptive Learning System</title>
+    <link rel="icon" href="images/tarIco.ico" />
+    <link rel="stylesheet" runat="server" media="screen" href="studMain.css"/>
     <link rel="stylesheet" runat="server" media="screen" href="TutorialCreate.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <style>

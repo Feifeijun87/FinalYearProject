@@ -166,6 +166,7 @@
     <Content Include="StudentRegister.css" />
     <Content Include="StudHome.aspx" />
     <Content Include="StudIndiResult.aspx" />
+    <Content Include="studMain.css" />
     <Content Include="StudProfile.aspx" />
     <Content Include="StudResult.aspx" />
     <Content Include="TutorialCreate.css" />

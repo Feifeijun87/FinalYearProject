@@ -22,6 +22,7 @@ namespace AdaptiveLearningSystem
             {
                 if (!IsPostBack)
                 {
+                    lblUserName.Text = Session["lecName"].ToString();
                     sql = "SELECT v.IntakeID FROM CourseAvailable v WHERE v.Status = 1 AND v.LecturerID = @lecID GROUP BY v.IntakeID";
                     SqlCommand cmdGetIntake = new SqlCommand(sql, conn);
                     cmdGetIntake.Parameters.AddWithValue("@lecID", Session["lecturerID"].ToString());

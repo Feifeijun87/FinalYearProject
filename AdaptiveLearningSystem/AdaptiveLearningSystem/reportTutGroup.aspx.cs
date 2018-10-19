@@ -46,7 +46,8 @@ namespace AdaptiveLearningSystem
             {
                 if (!IsPostBack)
                 {
-                        if (Session["tutIntakeID"] != null)
+                    lblUserName.Text = Session["lecName"].ToString();
+                    if (Session["tutIntakeID"] != null)
                         {
                             intakeID = Session["tutIntakeID"].ToString();
                             course = Session["tutCourse"].ToString();
@@ -159,7 +160,7 @@ namespace AdaptiveLearningSystem
             {
                 using (HtmlTextWriter hw = new HtmlTextWriter(sw))
                 {
-                    //Panel2.Visible = true;
+                    Panel2.Visible = true;
                     Panel2.RenderControl(hw);
                     StringReader sr = new StringReader(sw.ToString());
                     Document pdfDoc = new Document(PageSize.A4, 50f, 50f, 50f, 50f);
@@ -172,7 +173,7 @@ namespace AdaptiveLearningSystem
                     Response.Cache.SetCacheability(HttpCacheability.NoCache);
                     Response.Write(pdfDoc);
                     Response.End();
-                    // Panel2.Visible = false;
+                    Panel2.Visible = false;
                 }
             }
         }
