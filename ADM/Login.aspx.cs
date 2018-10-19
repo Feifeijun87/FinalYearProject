@@ -8,13 +8,13 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Text;
 using System.Data;
+using System.Web.Configuration;
 
 namespace AdaptiveLearningSystem
 {
     public partial class Login : System.Web.UI.Page
     {
-        SqlConnection conn = new SqlConnection(@"Data Source=ASUS\SQLSERVER;Initial Catalog=fyp;Integrated Security=True");
-
+        SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["fyp"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -73,7 +73,7 @@ namespace AdaptiveLearningSystem
                     Session["address"] = lecturerRead.GetString(8).ToString();
                     Session["position"] = lecturerRead.GetString(9).ToString();
                     Session["lecFaculty"] = lecturerRead.GetString(10).ToString();
-                    Session["facultyName"] = lecturerRead.GetString(11).ToString();
+                    Session["facultyName"] = lecturerRead.GetString(12).ToString();
                     Response.Redirect("LecHome.aspx");
                 }
             }
@@ -99,6 +99,16 @@ namespace AdaptiveLearningSystem
         protected void btnStudentSignUp_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void lbtnStudForgetPass_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void lbtnLecForgetPass_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LecForgetPass.aspx");
         }
     }
 }

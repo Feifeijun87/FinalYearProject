@@ -1,0 +1,197 @@
+﻿.course-content {
+    display: none;
+    overflow: hidden;
+    position: absolute;
+    top: 15%;
+    right: 53%;
+    background-color: #f9f9f9;
+    min-width: 171px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    text-align: left;
+}
+
+.course-item {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.coursebtn:hover .course-content {
+    display: block;
+}
+
+.course-content .course-item:hover {
+    background-color: #f1f1f1;
+}
+
+.NoResult {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+    color: gray;
+}
+
+.caption {
+    display: block;
+}
+
+.testbtn:hover {
+    color: green;
+}
+
+.MyCourseList {
+    float: left;
+    width: 100%;
+    clear: left;
+    border-bottom: 1px solid black;
+}
+
+    .MyCourseList:hover {
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    }
+
+        .MyCourseList:hover .CourseButtonGroup {
+            display: inline-block;
+        }
+
+.container {
+    border-top: 1px solid black;
+    margin-bottom: 10%;
+}
+
+.CourseButtonGroup {
+    float: right;
+    margin-top: 13px;
+    margin-right: 5%;
+    margin-bottom: 15px;
+    display: none;
+}
+
+.CourseName {
+    font-weight: bold;
+    font-size: 14pt;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.CourseDetails {
+    color: gray;
+}
+
+.CourseDesc {
+    margin-top: 10px;
+    margin-left: 20px;
+    float: left;
+    margin-bottom: 13px;
+}
+
+.SelectButton {
+    background-color: #1A7FEC;
+    border: none;
+    color: white;
+    padding: 10px 27px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.DropButton {
+    background-color: #ff0000;
+    border: none;
+    color: white;
+    padding: 10px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.CourseButton:hover, .CreateButton:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.NoResult {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+    color: gray;
+}
+
+.caption {
+    display: block;
+}
+
+.CreateButton {
+    background-color: #1A7FEC;
+    border: none;
+    color: white;
+    padding: 10px 27px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.background {
+    background-color: black;
+    opacity: 0.8;
+    filter: alpha(opacity=90);
+}
+
+.editProf td {
+    height: 40px;
+    border-bottom: none;
+}
+
+.pnlActivateTutorial {
+    width: 40%;
+    background-color: white;
+}
+
+.panelDtl {
+    float: left;
+    width: 100%;
+}
+
+.activateDtl {
+    float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.stayRight {
+    text-align: right;
+}
+
+.BottomButtonGroup {
+    float: right;
+    margin-top: 10px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.BottomButton {
+    background-color: #1A7FEC;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+    .BottomButton:active {
+        background-color: #1421CC;
+    }
+
+.hide {
+    display: none;
+}

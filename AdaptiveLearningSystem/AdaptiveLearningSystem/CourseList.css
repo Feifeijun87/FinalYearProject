@@ -1,0 +1,84 @@
+﻿.CourseTable{
+    margin-bottom:20px;
+    margin-left:100px;
+}
+
+.BottomButtonGroup{
+    float:right;
+    margin-top:10px;
+    margin-right:20px;
+    margin-bottom:20px;
+}
+.BottomButton{
+    background-color: #1A7FEC; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor:pointer;
+}
+
+.BottomButton:active {
+    background-color: #1421CC;
+}
+
+.tutorialGrpList {
+    margin-left: 7%;
+}
+
+.txtSearchName {
+    width: 40%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.auto-style1 {
+    width: 126px;
+}
+
+.auto-style2 {
+    width: 427px;
+}
+
+.course-content {
+    display: none;
+    overflow: hidden;
+    position: absolute;
+    top: 15%;
+    right: 53%;
+    background-color: #f9f9f9;
+    min-width: 171px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    text-align: left;
+}
+
+.course-item {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.coursebtn:hover .course-content {
+    display: block;
+}
+
+.course-content .course-item:hover {
+    background-color: #f1f1f1;
+}
+
+.NoResult {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+    color: gray;
+}
+
+.caption {
+    display: block;
+}

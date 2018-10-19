@@ -1,0 +1,51 @@
+﻿.profilePanel{
+    margin-left:20px;
+}
+
+.BottomButtonGroup{
+    float:right;
+    margin-top:10px;
+    margin-right:20px;
+    margin-bottom:20px;
+}
+.BottomButton{
+    border-style: none;
+    border-color: inherit;
+    border-width: medium;
+    background-color: #1A7FEC; /* Green */
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor:pointer;
+    margin-bottom: 0px;
+}
+
+.BottomButton:active{
+    background-color:#1421CC;
+}
+
+.background {
+            background-color: black;
+            opacity: 0.8;
+            filter: alpha(opacity=90);
+        }
+                    .editProf td {
+    height:40px;
+    border-bottom:none;
+}
+.pnlChgPass{
+    width:40%;
+    background-color:white;
+}
+.panelDtl{
+    float:left;
+    width:100%;
+}
+.editProf{
+    float:left;
+    margin-left:20px;
+    margin-top:20px;
+}

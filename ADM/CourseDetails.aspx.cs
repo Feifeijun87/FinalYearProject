@@ -8,19 +8,24 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Text;
 using System.Data;
+using System.Web.Configuration;
 
 namespace AdaptiveLearningSystem
 {
     public partial class CourseDetails : System.Web.UI.Page
     {
-  
-        SqlConnection conn = new SqlConnection(@"Data Source=ASUS\SQLSERVER;Initial Catalog=fyp;Integrated Security=True");
+
+        SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["fyp"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblUserName.Text = Session["lecName"].ToString();
             lblErrorMessage.Visible = false;
-            if (!IsPostBack) {
-                lblErrorMessage.Visible = false;
-                conn.Open();
+            if (!IsPostBack)
+            {
+                if (Session["lecturerID"] != null)
+                {
+                    lblErrorMessage.Visible = false;
+                    conn.Open();
                     SqlCommand cmd = new SqlCommand("prc_course_group", conn);
                     cmd.Parameters.AddWithValue("@CourseID", Request.QueryString["course"].ToString());
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -32,7 +37,12 @@ namespace AdaptiveLearningSystem
                     chkboxTutorialGroup.DataTextField = "TutorialGrpName";
                     chkboxTutorialGroup.DataValueField = "TutorialGrpID";
                     chkboxTutorialGroup.DataBind();
-                conn.Close();
+                    conn.Close();
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
             }
 
             
@@ -82,6 +92,28 @@ namespace AdaptiveLearningSystem
             }
         }
 
+        protected void ProfilesLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LecProfile.aspx");
+        }
+
+        protected void TutorialLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CourseList.aspx");
+        }
+
+        protected void HomeLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LecHome.aspx");
+        }
+
+        protected void LogOutLinkButton_Click(object sender, EventArgs e)
+        {
+            Session.Clear();//clear session
+            Session.Abandon();//Abandon session
+
+            Response.Redirect("Login.aspx");
+        }
 
     }
 }

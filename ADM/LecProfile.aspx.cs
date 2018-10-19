@@ -7,22 +7,36 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data;
+using System.Web.Configuration;
 
 namespace AdaptiveLearningSystem
 {
     public partial class LecProfile : System.Web.UI.Page
     {
-        SqlConnection conn = new SqlConnection(@"Data Source=ASUS\SQLSERVER;Initial Catalog=fyp;Integrated Security=True");
+        SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["fyp"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
-        
+        {
+            if (!IsPostBack)
             {
-            lblUserName.Text = Session["lecName"].ToString();
-            lblTutorName.Text = Session["lecTitle"].ToString()+" "+ Session["lecName"].ToString();
-            lblPosition.Text = Session["position"].ToString();
-            lblContact.Text = Session["contactNo"].ToString();
-            lblEmail.Text = Session["email"].ToString();
-            lblFaculty.Text = Session["facultyName"].ToString();
-            lblOfficeLoc.Text = Session["officeLoc"].ToString();
+                if (Session["lecturerID"] != null)
+                {
+                    lblUserName.Text = Session["lecName"].ToString();
+                    lblUserName.Text = Session["lecName"].ToString();
+                    lblTutorName.Text = Session["lecTitle"].ToString() + " " + Session["lecName"].ToString();
+                    lblPosition.Text = Session["position"].ToString();
+                    lblContact.Text = Session["contactNo"].ToString();
+                    lblEmail.Text = Session["email"].ToString();
+                    lblFaculty.Text = Session["facultyName"].ToString();
+                    lblOfficeLoc.Text = Session["officeLoc"].ToString();
+                    //take lecturer image by using username , student can use other, just chg in sql
+                    //for student, change the type to other than lec, then go profilePic.ashx.cs
+                    LecProfileImg.ImageUrl = "~/profilePic.ashx?id=" + Session["username"].ToString() + "&type=lec";
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
         }
 
         protected void btnChgNewPass_Click(object sender, EventArgs e)
@@ -113,6 +127,23 @@ namespace AdaptiveLearningSystem
         protected void HomeLinkButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("LecHome.aspx");
+        }
+
+        protected void ProfilesLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LecProfile.aspx");
+        }
+
+        protected void TutorialLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CourseList.aspx");
+        }
+        protected void LogOutLinkButton_Click(object sender, EventArgs e)
+        {
+            Session.Clear();//clear session
+            Session.Abandon();//Abandon session
+
+            Response.Redirect("Login.aspx");
         }
     }
 }

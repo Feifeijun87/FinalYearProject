@@ -1,0 +1,92 @@
+﻿.profilePanel{
+    margin-left:20px;
+}
+
+td{
+    border-bottom: 1px dotted #000;
+}
+
+.BottomButtonGroup {
+    float: right;
+    margin-top: 10px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.BottomButton {
+    background-color: #1A7FEC;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+    .BottomButton:active {
+        background-color: #1421CC;
+    }
+
+.background {
+    background-color: black;
+    opacity: 0.8;
+    filter: alpha(opacity=90);
+}
+
+.editProf td {
+    height: 40px;
+    border-bottom: none;
+}
+
+.pnlChgPass, .pnlChgOffice, .pnlChgContact {
+    width: 40%;
+    background-color: white;
+}
+
+.panelDtl {
+    float: left;
+    width: 100%;
+}
+
+.editProf {
+    float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.stayRight {
+    text-align: right;
+}
+
+.course-content {
+    display: none;
+    overflow: hidden;
+    position: absolute;
+    top: 15%;
+    right: 53%;
+    background-color: #f9f9f9;
+    min-width: 171px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    text-align: left;
+}
+
+.course-item {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.coursebtn:hover .course-content {
+    display: block;
+}
+
+.course-content .course-item:hover {
+    background-color: #f1f1f1;
+}
+.lblError{
+    margin-left:17px;
+}

@@ -40,15 +40,6 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.WebControls.Label lblUserName;
         
         /// <summary>
-        /// ProfileLinkButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ProfileLinkButton;
-        
-        /// <summary>
         /// LogOutLinkButton control.
         /// </summary>
         /// <remarks>
@@ -67,13 +58,22 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.WebControls.LinkButton HomeLinkButton;
         
         /// <summary>
-        /// TutorialLinkButton control.
+        /// MyCourseLinkButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton TutorialLinkButton;
+        protected global::System.Web.UI.WebControls.LinkButton MyCourseLinkButton;
+        
+        /// <summary>
+        /// EnrollCourseLinkButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton EnrollCourseLinkButton;
         
         /// <summary>
         /// ResultLinkButton control.
@@ -101,5 +101,41 @@ namespace AdaptiveLearningSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptrTutorialTrack;
+        
+        /// <summary>
+        /// NoResultPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl NoResultPanel;
+        
+        /// <summary>
+        /// imgNoTutorial control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgNoTutorial;
+        
+        /// <summary>
+        /// lblNoTutorialTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNoTutorialTitle;
+        
+        /// <summary>
+        /// lblNoTutorialDesc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNoTutorialDesc;
     }
 }

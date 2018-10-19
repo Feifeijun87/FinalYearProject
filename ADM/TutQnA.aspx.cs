@@ -22,7 +22,7 @@ namespace ADM
             con.Open();
             if (con.State == System.Data.ConnectionState.Open)
             {
-                DisplayMessage(this, "Connection to the database successful");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Office Location Changed Successfully'); window.location.href='TutQnA.aspx';", true);
             }
         }
 

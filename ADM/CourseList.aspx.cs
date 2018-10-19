@@ -9,24 +9,45 @@ using System.Configuration;
 using System.Text;
 using System.Data;
 using System.Drawing;
+using System.Web.Configuration;
+
 
 namespace AdaptiveLearningSystem
 {
     public partial class CourseList : System.Web.UI.Page
     {
-        SqlConnection conn = new SqlConnection(@"Data Source=ASUS\SQLSERVER;Initial Catalog=fyp;Integrated Security=True");
-            DataTable dt = new DataTable();
+        SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["fyp"].ConnectionString);
+        DataTable dt = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
         {
-            SqlCommand cmd = new SqlCommand("prc_course_list", conn);
-            cmd.CommandType = CommandType.StoredProcedure;
-            SqlDataAdapter sda = new SqlDataAdapter();
-            sda.SelectCommand = cmd;
+            if (!IsPostBack)
+            {
+                if (Session["lecturerID"] != null)
+                {
+                    lblUserName.Text = Session["lecName"].ToString();
+                    SqlCommand cmd = new SqlCommand("prc_course_list", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    SqlDataAdapter sda = new SqlDataAdapter();
+                    sda.SelectCommand = cmd;
 
-            sda.Fill(dt);
-            GridView1.DataSource = dt;
-            GridView1.DataBind();
+                    sda.Fill(dt);
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
 
+                        NoResultPanel.Visible = false;
+                        GridView1.DataSource = dt;
+                        GridView1.DataBind();
+                    }
+                    else
+                    {
+                        txtSearchName.Visible = false;
+                    }
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
         }
 
         protected void txtSearchName_TextChanged(object sender, EventArgs e)
@@ -102,5 +123,19 @@ namespace AdaptiveLearningSystem
         {
             Response.Redirect("LecHome.aspx");
         }
+
+        protected void TutorialLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CourseList.aspx");
+        }
+
+        protected void LogOutLinkButton_Click(object sender, EventArgs e)
+        {
+            Session.Clear();//clear session
+            Session.Abandon();//Abandon session
+
+            Response.Redirect("Login.aspx");
+        }
+
     }
 }

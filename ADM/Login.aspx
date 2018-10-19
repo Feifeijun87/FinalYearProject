@@ -4,7 +4,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Login Page - Adaptive Learning System</title>
+    <link rel="icon" href="images/tarIco.ico" />
+
     <link rel="stylesheet" runat="server" media="screen" href="Login.css"/>
     <script type="text/javascript">
         function check() {
@@ -56,7 +58,7 @@
 
                                 <asp:TextBox ID="txtStudentID" CssClass="LoginTextbox" runat="server" placeholder="Student ID"></asp:TextBox>
                                 <asp:TextBox ID="txtStudentPassword" CssClass="LoginTextbox" runat="server" placeholder="Password"></asp:TextBox>
-                                <asp:LinkButton CssClass="ForgetPass" ID="lbtnStudForgetPass" runat="server">Forget Password?</asp:LinkButton>
+                                <asp:LinkButton CssClass="ForgetPass" ID="lbtnStudForgetPass" runat="server" OnClick="lbtnStudForgetPass_Click" style="height: 20px">Forget Password?</asp:LinkButton>
                             </div>
 
                             <div class="loginButton">
@@ -70,7 +72,7 @@
 
                                 <asp:TextBox ID="txtLecturerID" CssClass="LoginTextbox" runat="server" placeholder="Lecturer ID"></asp:TextBox>
                                 <asp:TextBox ID="txtLecturerPassword" CssClass="LoginTextbox" runat="server" placeholder="Password" TextMode="Password"></asp:TextBox>
-                                <asp:LinkButton CssClass="ForgetPass" ID="lbtnLecForgetPass" runat="server">Forget Password?</asp:LinkButton>
+                                <asp:LinkButton CssClass="ForgetPass" ID="lbtnLecForgetPass" runat="server" OnClick="lbtnLecForgetPass_Click">Forget Password?</asp:LinkButton>
                             </div>
 
                             <div class="loginButton">
