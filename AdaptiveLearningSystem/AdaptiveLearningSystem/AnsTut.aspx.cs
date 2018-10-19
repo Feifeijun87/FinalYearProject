@@ -65,7 +65,8 @@ namespace AdaptiveLearningSystem
                 //time = secUsed
                 if (markingAns() == true)
                 {
-
+                    lblAnsEnter.Visible = false;
+                    
 
                     if (listRandomLevel[currCount].ToString() == "easy")
                     {
@@ -109,6 +110,7 @@ namespace AdaptiveLearningSystem
                     }
                     else
                     {
+
                         currCount += 1;
                         lblQNum.Text = "";
                         lblQNum.Text = (currCount + 1).ToString();
@@ -116,6 +118,7 @@ namespace AdaptiveLearningSystem
                         mm = listRandomTime[currCount];
                         ss = 0;
                         secUsed = 0;
+                        txtAns.Text = String.Empty;
                         Timer1.Enabled = true;
                     }
                 }
@@ -223,12 +226,13 @@ namespace AdaptiveLearningSystem
         protected int computeMarkForMatching(double matchRate)
         {
             int point = 0;
-            if (matchRate > 60)
-                point = 1;
+
+            if (matchRate > 90)
+                point = 3;
             else if (matchRate > 75)
                 point = 2;
-            else if (matchRate > 90)
-                point = 3;
+            else if (matchRate > 60)
+                point = 1;
 
             return point;
         }
@@ -238,11 +242,12 @@ namespace AdaptiveLearningSystem
             int point = 0;
             double timeLimitInSec = Double.Parse(listTime[currCount].ToString()) * 60;
             double timePercent = (Double.Parse(secUsed.ToString()) / timeLimitInSec ) * 100;
-            if (timePercent < 25)
+ 
+            if (timePercent <= 25)
                 point = 3;
-            else if (timePercent < 50)
+            else if (timePercent <= 50)
                 point = 2;
-            else if (timePercent < 75)
+            else if (timePercent <= 75)
                 point = 1;
 
             return point;
@@ -373,7 +378,8 @@ namespace AdaptiveLearningSystem
         {
             SqlCommand cmd = new SqlCommand("prc_get_stud_result_per_ques", conn);
             cmd.Parameters.AddWithValue("@StudentID", Session["studID"].ToString());
-            cmd.Parameters.AddWithValue("@TutorialID", tutorialID);
+            cmd.Parameters.AddWithValue("@TutorialNumber", tutNum);
+            cmd.Parameters.AddWithValue("@CourseID", courseID);
             cmd.CommandType = CommandType.StoredProcedure;
             SqlDataAdapter sda = new SqlDataAdapter();
             sda.SelectCommand = cmd;
@@ -381,7 +387,7 @@ namespace AdaptiveLearningSystem
             sda.Fill(dt);
             if (dt != null && dt.Rows.Count > 0)
             {
-                //  NoResultPanel.Visible = false;
+                
                 Repeater1.DataSource = dt;
                 Repeater1.DataBind();
             }
@@ -461,6 +467,7 @@ namespace AdaptiveLearningSystem
             //tutorialName = 
             if (Session["studID"] != null)
             {
+                lblUserName.Text = Session["studName"].ToString();
                 if (!IsPostBack)
                 {
                     studID = Session["studID"].ToString();
@@ -514,11 +521,11 @@ namespace AdaptiveLearningSystem
                     i = 0;
                     for (int j = 0; j < listQuest.Count; j++)
                     {
-                        if (listLevel[j].ToString().Contains("easy"))
+                        if (listLevel[j].ToString().ToLower().Contains("easy"))
                         {
                             listEasyQuestionID.Add(listQuestID.ElementAt(j));
                         }
-                        else if (listLevel[j].ToString().Contains("medium"))
+                        else if (listLevel[j].ToString().ToLower().Contains("medium"))
                         {
                             listMedQuestionID.Add(listQuestID.ElementAt(j));
                         }
@@ -546,13 +553,13 @@ namespace AdaptiveLearningSystem
                         if (dtr.Read())
                         {
                             listCompletedQuestion.Add(true); //store done questID
-                            if (listLevel[j].ToString().Contains("easy"))
+                            if (listLevel[j].ToString().ToLower().Contains("easy"))
                             {
                                 easyDone += 1;
                                 listEasyDoneQID.Add(listQuestID.ElementAt(j));
 
                             }
-                            else if (listLevel[j].ToString().Contains("medium"))
+                            else if (listLevel[j].ToString().ToLower().Contains("medium"))
                             {
                                 medDone += 1;
                                 listMedDoneQID.Add(listQuestID.ElementAt(j));

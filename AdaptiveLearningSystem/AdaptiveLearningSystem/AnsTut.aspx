@@ -226,7 +226,7 @@
                                 <td class="auto-style4">Answers:
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtAns" runat="server" Height="50px" Width="460px"></asp:TextBox><br />
+                                    <asp:TextBox ID="txtAns" runat="server" Height="50px" Width="460px" TextMode="MultiLine"></asp:TextBox><asp:Label ID="Label8" Visible="false" runat="server" Text="correct"></asp:Label><br />
                                     <asp:Label ID="lblAnsEnter" runat="server" ForeColor="Red"></asp:Label>
                                     <br />
 </td>
@@ -270,7 +270,7 @@
             <asp:Repeater ID="Repeater1" runat="server">
                 <ItemTemplate>              
             <div class="detailPosition"">
-                <asp:Label ID="Label4" runat="server" Text='<%# String.Concat("Question ",  Eval("QuestionSeqNo"))%>'></asp:Label>
+                <asp:Label ID="Label4" runat="server" Text='<%# String.Concat("Question ",  Container.ItemIndex + 1) %>'></asp:Label>
                 <asp:Label  CssClass="qwer" ID="Label5" runat="server" Text='<%#Eval("Points")%>'></asp:Label>
             </div>
                     </ItemTemplate>
