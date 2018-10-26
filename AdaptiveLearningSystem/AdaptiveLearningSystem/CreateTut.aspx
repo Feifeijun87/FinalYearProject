@@ -252,7 +252,6 @@
                             </tr>
 
                         </table>
-                        <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
                         <br />
                     </div>
                    

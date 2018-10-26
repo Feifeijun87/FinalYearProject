@@ -142,6 +142,33 @@ namespace AdaptiveLearningSystem
             }
         }
 
+        protected Boolean checkKeyword(string ans, string keywd)
+        {
+            int count = 0;
+            char delimiters = ' ';
+            string[] splitArray = keywd.Split(delimiters);
+            for (int i = 0; i < splitArray.Length; i++)
+            {
+                if (ans.Contains(splitArray[i]))
+                {
+                   
+                }
+                else
+                {
+                    count += 1;
+                }
+            }
+
+            if(count==0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         protected void Button2_Click(object sender, EventArgs e) //next
         {
             clearLabel();
@@ -162,6 +189,11 @@ namespace AdaptiveLearningSystem
             else if (keywGet == "")
             {
                 lblKeyEnter.Text = "Please fill in the keyword!";
+            }
+            else if(checkKeyword(ansGet,keywGet) == false)
+            {
+                lblKeyEnter.Text = "The keyword must exist in the answer provided!";
+
             }
             else
             {
