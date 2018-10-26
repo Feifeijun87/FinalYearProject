@@ -39,6 +39,12 @@ namespace AdaptiveLearningSystem
             }
         }
 
+        protected void btnEnroll_Click(object sender, EventArgs e)
+        {
+
+            Response.Redirect("LecResultHome.aspx");
+        }
+
         string sql;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -135,10 +141,14 @@ namespace AdaptiveLearningSystem
                             Repeater1.DataBind();
                             Repeater2.DataSource = dt;
                             Repeater2.DataBind();
+                        NoResultPanel.Visible = false;
                         }
                         else
                         {
                             container.Visible = false;
+                        btnBack.Visible = false;
+                        lblSavePDF.Visible = false;
+                        NoResultPanel.Visible = true;
                             //filler.Visible = false;
                         }
                         conn.Close();

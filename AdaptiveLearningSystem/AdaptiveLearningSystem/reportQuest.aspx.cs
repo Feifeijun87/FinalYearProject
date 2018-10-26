@@ -22,6 +22,11 @@ namespace AdaptiveLearningSystem
 
         static string tutGroupID, lecID, intakeID, tutID, courseID, course, tutGroup, tutorial, tutNum, studentID, coursename, tutTitle;
 
+        protected void btnEnroll_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LecResultHome.aspx");
+        }
+
         protected void lblBack_Click(object sender, EventArgs e)
         {
             Response.Redirect("LecResultHome.aspx");
@@ -128,10 +133,14 @@ namespace AdaptiveLearningSystem
                         Repeater1.DataBind();
                         Repeater2.DataSource = dt;
                         Repeater2.DataBind();
+                        NoResultPanel.Visible = false;
                     }
                     else
                     {
                         container.Visible = false;
+                        NoResultPanel.Visible = true;
+                        btnBack.Visible = false;
+                        lblSavePDF.Visible = false;
                         //filler.Visible = false;
                     }
                     conn.Close();

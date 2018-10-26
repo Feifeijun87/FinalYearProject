@@ -129,11 +129,21 @@
             
                             </ItemTemplate>
         </asp:Repeater>
-                            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
                         </div>
                         </td></tr>
                 </table>
 
+
+            <div class="NoResult" runat="server" id="NoResultPanel">
+                <asp:Image CssClass="NoResultImg" ID="imgNoTutorial" ImageUrl="~/images/no-results.png" Width="30%" Height="20%" runat="server" />
+                 <div class="caption">
+                    <h1><asp:Label CssClass="NoResultTitle" ID="lblNoTutorialTitle" runat="server" Text="Whooops!"></asp:Label></h1>
+                    <asp:Label CssClass="NoResultDesc" ID="lblNoResultDesc" runat="server" Text="Currently there has no tutorial available."></asp:Label>
+                </div>
+                 <div style="float: left; margin-left: 43%; margin-top: 10px; margin-bottom: 10px">
+                    <asp:Button CssClass="EnrollButton" ID="btnEnroll" runat="server" Text="Create Tutorial" OnClick="btnEnroll_Click" />
+                </div>
+            </div>
           </div>
      
     </form>

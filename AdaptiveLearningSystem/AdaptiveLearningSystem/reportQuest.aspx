@@ -197,16 +197,29 @@
                   </div>
             </ItemTemplate>
         </asp:Repeater>
-                         </div>      
+                            </div>  
                               </td></tr>
-   </table></asp:Panel>
-
-
-        
+   </table>
             <div class="BottomButtonGroup">
         <asp:Button ID="lblBack" runat="server" Text="Back" CssClass="BottomButton" OnClick="lblBack_Click" />
         <asp:Button ID="lblSavePDF" runat="server" OnClick="Button2_Click" Text="Save to PDF" CssClass="BottomButton" />
-            </div></div>
+            </div>
+
+                 <div class="NoResult" runat="server" id="NoResultPanel">
+                <asp:Image CssClass="NoResultImg" ID="imgNoTutorial" ImageUrl="~/images/no-results.png" Width="30%" Height="20%" runat="server" />
+                 <div class="caption">
+                    <h1><asp:Label CssClass="NoResultTitle" ID="lblNoTutorialTitle" runat="server" Text="Whooops!"></asp:Label></h1>
+                    <asp:Label CssClass="NoResultDesc" ID="lblNoResultDesc" runat="server" Text="Report is not available."></asp:Label>
+                </div>
+                 <div style="float: left; margin-left: 43%; margin-top: 10px; margin-bottom: 10px">
+                    <asp:Button CssClass="EnrollButton" ID="btnBack" runat="server" Text="Back to report selection" OnClick="btnEnroll_Click" />
+                </div>
+            </div>
+
+            </asp:Panel>
+
+
+        </div> 
      
             
          <asp:Panel ID="Panel2" runat="server" Visible="False" >
