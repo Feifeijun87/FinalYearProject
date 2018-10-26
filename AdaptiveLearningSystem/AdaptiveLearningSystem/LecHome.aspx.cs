@@ -57,11 +57,6 @@ namespace AdaptiveLearningSystem
 
             return percentage;
         }
-        protected void rptrTutorialTrack_ItemCommand(object source, RepeaterCommandEventArgs e)
-        {
-
-        }
-
 
         protected void ProfilesLinkButton_Click(object sender, EventArgs e)
         {
@@ -94,6 +89,41 @@ namespace AdaptiveLearningSystem
         protected void ResultLinkButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("LecResultHome.aspx");
+        }
+
+        protected void rptrTutorialTrack_ItemCommand1(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "select")
+            {
+                Label lbl = new Label();
+                lbl = (Label)e.Item.FindControl("lblTutorial");
+                string[] splitted = lbl.Text.Trim().Split(' ');
+                string tutNumber = splitted[1];
+                lbl = (Label)e.Item.FindControl("lblChapterName");
+                string chapterName = lbl.Text.Trim();
+                SqlCommand cmd = new SqlCommand("prc_get_student_not_complete_tutorial", conn);
+                cmd.Parameters.AddWithValue("@LecturerID", Session["lecturerID"].ToString());
+                cmd.Parameters.AddWithValue("@TutorialNumber", int.Parse(tutNumber));
+                cmd.Parameters.AddWithValue("@ChapterName", chapterName);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter sda = new SqlDataAdapter();
+                sda.SelectCommand = cmd;
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+                rptStudentNotDome.DataSource = dt;
+                rptStudentNotDome.DataBind();
+                mdlStudentNotDone.Show();
+            }
+        }
+
+        protected void btnClose_Click(object sender, EventArgs e)
+        {
+            mdlStudentNotDone.Hide();
+        }
+
+        protected void btnEnroll_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LecCourse.aspx");
         }
     }
 }

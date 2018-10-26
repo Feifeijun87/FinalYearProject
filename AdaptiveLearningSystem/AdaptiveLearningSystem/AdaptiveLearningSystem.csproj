@@ -115,6 +115,7 @@
     <Content Include="AnsTut.aspx" />
     <Content Include="CreateTut.aspx" />
     <Content Include="EditTut.aspx" />
+    <Content Include="EditTutHome.aspx" />
     <Content Include="LecResultHome.aspx" />
     <Content Include="LecturerRegister.aspx" />
     <Content Include="LecturerRegister.css" />
@@ -230,6 +231,13 @@
     </Compile>
     <Compile Include="EditTut.aspx.designer.cs">
       <DependentUpon>EditTut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditTutHome.aspx.cs">
+      <DependentUpon>EditTutHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditTutHome.aspx.designer.cs">
+      <DependentUpon>EditTutHome.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

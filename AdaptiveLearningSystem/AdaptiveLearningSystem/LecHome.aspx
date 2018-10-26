@@ -71,6 +71,60 @@
         .caption{
             display:block;
         }
+        .BottomButton {
+            position:absolute;
+            margin-top:50px;
+            display:none;
+    background-color: #1A7FEC;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+        body{
+            overflow:hidden;
+        }
+
+    .BottomButton:active {
+        background-color: #1421CC;
+    }
+    .tutorialCompletion:hover .BottomButton{
+        display:inline-block;
+    }
+        .pnlButton {
+            display: inline-block;
+            background-color: #1A7FEC;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            float: right;
+            margin-top: 50px;
+            margin-right: 10px;
+        }
+        .background {
+    background-color: black;
+    opacity: 0.8;
+    filter: alpha(opacity=90);
+}
+        .EnrollButton {
+    background-color: #1A7FEC;
+    border: none;
+    color: white;
+    padding: 10px 27px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 12px;
+    cursor: pointer;
+}
+
     </style>
     
 </head>
@@ -123,7 +177,8 @@
                 <h1><i>TutorialTrack</i>
                 </h1>
             </div>
-            <asp:Repeater ID="rptrTutorialTrack" runat="server">
+            <div style="width:100%;">
+            <asp:Repeater ID="rptrTutorialTrack" runat="server" OnItemCommand="rptrTutorialTrack_ItemCommand1">
                 <ItemTemplate>
                     <div class="tutorialCompletion" style="float: left; width: 100%; height: 140px;">
                         <div class="container" style="float: left; margin-left: 20px; margin-top: 20px;">
@@ -135,7 +190,7 @@
                         <script src="jQuery-plugin-progressbar.js"></script>
                         <script src="js.js"></script>
 
-                        <div class="description" style="margin-top: 20px; margin-left: 120px; float: left;">
+                        <div class="description" style="margin-top: 20px; margin-left: 120px; width:55%; float: left;">
                             <div class="courseName" style="font-size: 20pt">
 
                                 <asp:Label ID="Label1" runat="server"><%# Eval("CourseID") %></asp:Label>
@@ -145,8 +200,8 @@
                             </div>
                             <div class="tutorialName">
 
-                                <asp:Label ID="Label2" runat="server">Tutorial <%# Eval("TutorialNumber") %> :</asp:Label>
-                                <asp:Label ID="Label3" runat="server"><%# Eval("ChapterName") %></asp:Label>
+                                <asp:Label ID="lblTutorial" runat="server" Text='<%# String.Concat("Tutorial ", Eval("TutorialNumber")," : " )%> '></asp:Label>
+                                <asp:Label ID="lblChapterName" runat="server" Text='<%# Eval("ChapterName") %>'></asp:Label>
 
                             </div>
 
@@ -159,19 +214,68 @@
 
                                 <asp:Label ID="Label4" runat="server">Date:<%# Eval("StartDate") %> to <%# Eval("ExpiryDate") %></asp:Label>
                             </div>
+                            
+
                         </div>
+                        <asp:Button ID="btnSelect" CommandName="select" CssClass="BottomButton" runat="server" Text="View Who Not Done" />
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
+            </div>
             <div class="NoResult" runat="server" id="NoResultPanel">
                 <asp:Image CssClass="NoResultImg" ID="imgNoTutorial" ImageUrl="~/images/no-results.png" Width="30%" Height="20%" runat="server" />
                  <div class="caption">
                     <h1><asp:Label CssClass="NoResultTitle" ID="lblNoTutorialTitle" runat="server" Text="Whooops!"></asp:Label></h1>
                     <asp:Label CssClass="NoResultDesc" ID="lblNoTutorialDesc" runat="server" Text="Currently there has no tutorial been activated."></asp:Label>
                 </div>
+                 <div style="float: left; margin-left: 43%; margin-top: 10px; margin-bottom: 10px">
+                    <asp:Button CssClass="EnrollButton" ID="btnEnroll" runat="server" Text="Go Activate" OnClick="btnEnroll_Click" />
+                </div>
             </div>
         </div>
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <asp:Panel ID="pnlStudentNotDone" runat="server" style="width:45%; background-color:white; height:300px; overflow-y:auto;">
+            <div style="background-color:white;">
+                <div style="background-color:aqua;">
+                <asp:Label ID="Label16" runat="server" Text="Student List" style="font-family:'Times New Roman', Times, serif; font-size:14pt;color:blue; font-weight:bold;margin-left:35%;"></asp:Label>
+                    </div>
+                <div class="pnlHeader" style="margin-bottom:10px; margin-top:10px;">
+                    <asp:Label ID="Label7" runat="server" Text="No." style="margin-left:10px;"></asp:Label>
+                    <asp:Label ID="Label8" runat="server" Text="StudentID" style="margin-left:10px;"></asp:Label>
+                    <asp:Label ID="Label9" runat="server" Text="Student Name" style="margin-left:40px;"></asp:Label>
+                    <asp:Label ID="Label10" runat="server" Text="Programme" style="margin-left:90px;"></asp:Label>
+                    <asp:Label ID="Label11" runat="server" Text="Tutorial Group" style="margin-left:30px;"></asp:Label>
+                </div>
 
+                    <asp:Repeater ID="rptStudentNotDome" runat="server">
+
+                        <ItemTemplate>    
+                            <div class="pnlContent" style="margin-bottom:10px; width:100%; display:inline-block;">                    
+                    <asp:Label ID="lblPnlContent" runat="server" Text='<%# Container.ItemIndex + 1 %>' style="position:absolute;margin-left:8px;"></asp:Label>
+                    <asp:Label ID="Label12" runat="server" Text='<%#Eval("StudentID")%>' style="position:absolute;margin-left:45px;"></asp:Label>
+                    <asp:Label ID="Label13" runat="server" Text='<%#Eval("StudentName")%>' style="position:absolute;margin-left:160px; width:150px;"></asp:Label>
+                    <asp:Label ID="Label14" runat="server" Text='<%#Eval("ProgramID")%>' style="position:absolute;margin-left:360px;"></asp:Label>
+                    <asp:Label ID="Label15" runat="server" Text='<%#Eval("TutorialGroupID")%>' style="position:absolute;margin-left:490px;"></asp:Label>
+                                 </div>
+                            </ItemTemplate>
+                        <AlternatingItemTemplate>
+                                                        <div class="pnlContent" style="margin-bottom:10px; width:100%; display:inline-block;">                    
+                    <asp:Label ID="lblPnlContent" runat="server" Text='<%# Container.ItemIndex + 1 %>' style="position:absolute;margin-left:8px;"></asp:Label>
+                    <asp:Label ID="Label12" runat="server" Text='<%#Eval("StudentID")%>' style="position:absolute;margin-left:45px;"></asp:Label>
+                    <asp:Label ID="Label13" runat="server" Text='<%#Eval("StudentName")%>' style="position:absolute;margin-left:160px; width:150px;"></asp:Label>
+                    <asp:Label ID="Label14" runat="server" Text='<%#Eval("ProgramID")%>' style="position:absolute;margin-left:360px;"></asp:Label>
+                    <asp:Label ID="Label15" runat="server" Text='<%#Eval("TutorialGroupID")%>' style="position:absolute;margin-left:490px;"></asp:Label>
+                                 </div>
+                        </AlternatingItemTemplate>
+
+                    </asp:Repeater>
+                    </div>
+
+                <asp:Button CssClass="pnlButton" ID="btnClose" runat="server" Text="Close" OnClick="btnClose_Click" />
+           
+        </asp:Panel>
+        <asp:Button ID="hide" runat="server" Text="Button" style="display:none;" />
+        <ajaxToolkit:ModalPopupExtender ID="mdlStudentNotDone" TargetControlID="hide" BackgroundCssClass="background" PopupControlID="pnlStudentNotDone" runat="server"></ajaxToolkit:ModalPopupExtender>
     </form>
 </body>
 </html>
