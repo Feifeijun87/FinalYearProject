@@ -41,6 +41,8 @@ namespace AdaptiveLearningSystem
             {
                 if (!IsPostBack)
                 {
+                    lblUserName.Text = Session["lecName"].ToString();
+                    Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
                     sql = " SELECT DISTINCT c.CourseID + ' ' + c.CourseName AS Course FROM CourseAvailable a, Course c WHERE a.LecturerID = @lecID AND a.CourseID = c.CourseID AND a.Status =1";
                     SqlCommand cmdGetCourse = new SqlCommand(sql, conn);
                     cmdGetCourse.Parameters.AddWithValue("@lecID", Session["lecturerID"].ToString());
@@ -106,6 +108,11 @@ namespace AdaptiveLearningSystem
                 {
                     lblKeyEnter.Text = "Please fill in the keyword!";
                 }
+                else if (checkKeyword(ansGet, keywGet) == false)
+                {
+                    lblKeyEnter.Visible = true;
+                    lblKeyEnter.Text = "The keyword must exist in the answer provided!";
+                }
                 else
                 {
                     if (questGet != "" && ansGet != "" && keywGet != "") //means got a question
@@ -140,6 +147,8 @@ namespace AdaptiveLearningSystem
                 }
 
             }
+            Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
+
         }
 
         protected Boolean checkKeyword(string ans, string keywd)
@@ -178,22 +187,26 @@ namespace AdaptiveLearningSystem
             int timeGet = ddlCompleteTime.SelectedIndex;
             int levelGet = ddlLevel.SelectedIndex;
 
+            
             if (questGet == "")
             {
+                lblQuestEnter.Visible = true;
                 lblQuestEnter.Text = "Please fill in the question!";
             }
             else if (ansGet == "")
             {
+                lblAnsEnter.Visible = true;
                 lblAnsEnter.Text = "Please fill in the sample answer!";
             }
             else if (keywGet == "")
             {
+                lblKeyEnter.Visible = true;
                 lblKeyEnter.Text = "Please fill in the keyword!";
             }
             else if(checkKeyword(ansGet,keywGet) == false)
             {
+                lblKeyEnter.Visible = true;
                 lblKeyEnter.Text = "The keyword must exist in the answer provided!";
-
             }
             else
             {
@@ -203,13 +216,7 @@ namespace AdaptiveLearningSystem
                 key[currCount] = keywGet;
                 time[currCount] = timeGet;
                 level[currCount] = levelGet;
-
-                //listQuestion.Add(questGet);
-                //listAnswer.Add(ansGet);
-                //listKeyw.Add(keywGet);
-                // listQTime.Add(timeGet);
-                //listQLevel.Add(levelGet);
-
+                
                 currCount += 1;
                 //Label2.Text = " next currcount = " + currCount;
                 lblQNum.Text = "";
@@ -238,6 +245,7 @@ namespace AdaptiveLearningSystem
 
 
             }
+            Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
         }
 
         protected void clearLabel()
@@ -314,8 +322,11 @@ namespace AdaptiveLearningSystem
             string ansGet = txtAns.Text.Trim();
             string keywGet = txtKeyword.Text.Trim();
             int timeGet = ddlCompleteTime.SelectedIndex;
-            int levelGet = ddlLevel.SelectedIndex;
+            easy = 0;
+            medium = 0;
+            hard = 0;
 
+            int levelGet = ddlLevel.SelectedIndex;
             if (questGet == "" && ansGet == "" && keywGet == "" && question.Length == 0)
             {//no quest avai
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Please enter at least one question'); window.location.href='CreateTut.aspx';", true);
@@ -335,6 +346,11 @@ namespace AdaptiveLearningSystem
                 {
                     lblKeyEnter.Text = "Please fill in the keyword!";
                 }
+                else if (checkKeyword(ansGet, keywGet) == false)
+                {
+                    lblKeyEnter.Visible = true;
+                    lblKeyEnter.Text = "The keyword must exist in the answer provided!";
+                }
                 else
                 {
                     if (questGet != "" && ansGet != "" && keywGet != "") //means got a question
@@ -352,19 +368,13 @@ namespace AdaptiveLearningSystem
                     if (currCount > totalCount) //new quest
                     {
                         ++totalCount;
+                        currCount -= 1;
 
                     }
-                    currCount -= 1;
+                    
 
                 }
-
-
-                // txtQues.Text = "";
-                // txtAns.Text = "";
-                //txtKeyword.Text = "";
-                //ddlCompleteTime.SelectedIndex = 0;
-                // ddlLevel.SelectedIndex = 0;
-                //clearLabel();
+                
 
                 if (checkTutNumTitle() == true)
                 {
@@ -426,6 +436,7 @@ namespace AdaptiveLearningSystem
                                 hard += 1;
                             }
                         }
+                        Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
 
                         lblCompEasyNum.Text = easy.ToString();
                         lblCompMedNum.Text = medium.ToString();
@@ -453,8 +464,11 @@ namespace AdaptiveLearningSystem
             string hardGet = txtDifficult.Text;
             int easyGetInt = 0, mediumGetInt = 0, HardGetInt = 0, valid = 0;
 
+            lblCompErrorMsg.Visible = false;
+
             if (easyGet == "" || mediumGet == "" || hardGet == "")
             {
+                lblCompErrorMsg.Visible = true;
                 lblCompErrorMsg.Text = "Please enter a digit";
             }
             else
@@ -512,6 +526,7 @@ namespace AdaptiveLearningSystem
 
                 if (valid > 0)
                 {
+                    lblCompErrorMsg.Visible = true;
                     lblCompErrorMsg.Text = "Compulsory question must be at least one and within range!";
 
                 }
@@ -583,7 +598,7 @@ namespace AdaptiveLearningSystem
                         txt += "Db Question" + (i + 1) + "success";
                     }
                     Label4.Text = txt;
-                    // ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial Created Successfully'); window.location.href='CreateTut.aspx';", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial Created Successfully'); window.location.href='CreateTut.aspx';", true);
 
                 }
 
@@ -660,6 +675,15 @@ namespace AdaptiveLearningSystem
 
                     clearLabel();
                 }
+            }
+            else
+            {
+                txtQues.Text = "";
+                txtAns.Text = "";
+                txtKeyword.Text = "";
+                ddlCompleteTime.SelectedIndex = 0;
+                ddlLevel.SelectedIndex = 0;
+                clearLabel();
             }
 
         }

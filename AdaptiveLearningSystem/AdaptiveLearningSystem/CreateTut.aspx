@@ -155,7 +155,7 @@
                         <tr>
                             <td colspan="2" class="auto-style5">
                                 <label id="subjname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Course:&nbsp; </label>&nbsp;
-                                <asp:DropDownList ID="ddlCourse" runat="server" Width="241px" Height="33px" OnSelectedIndexChanged="DropDownList3_SelectedIndexChanged" AutoPostBack="True">
+                                <asp:DropDownList ID="ddlCourse" runat="server" Width="381px" Height="33px" OnSelectedIndexChanged="DropDownList3_SelectedIndexChanged" AutoPostBack="True">
                                 </asp:DropDownList>
                                 <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
                                 <br />
@@ -261,7 +261,7 @@
                         <asp:Button CssClass="BottomButton" ID="btnBack" runat="server" OnClick="Button1_Click" Text="Back" />
                         <asp:Button CssClass="BottomButton" ID="btnNext" runat="server" OnClick="Button2_Click" Text="Next" />
                         <asp:Button CssClass="BottomButton" ID="btnReset" runat="server" OnClick="Button3_Click" Text="Reset" />
-                        <asp:Button CssClass="BottomButton" ID="btnFin" runat="server" OnClick="Button4_Click" Text="Finish" />
+                        <asp:Button CssClass="BottomButton" ID="btnFin" runat="server" OnClick="Button4_Click" Text="Finish" style="width: 122px" />
                     </div>
                 </div>
 
@@ -280,7 +280,7 @@
                         <td class="auto-style7">
                             Compulsory Easy:</td>
                         <td class="auto-style8">
-                            <asp:TextBox ID="txtEasy" runat="server" Width="62px" Height="29px"></asp:TextBox>/ <asp:Label ID="lblCompEasyNum" runat="server">0</asp:Label>
+                            <asp:TextBox ID="txtEasy" runat="server" Width="62px"></asp:TextBox>/ <asp:Label ID="lblCompEasyNum" runat="server">0</asp:Label>
                             
                         </td>
                     </tr>

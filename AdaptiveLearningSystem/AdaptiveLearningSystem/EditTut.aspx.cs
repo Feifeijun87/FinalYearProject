@@ -44,6 +44,7 @@ namespace AdaptiveLearningSystem
             {
                 if (!IsPostBack)
                 {
+                    lblUserName.Text = Session["lecName"].ToString();
                     currCount = 0;
                     //lecID = Session["lecturerID"].ToString();
                     courseID = Request.QueryString["course"].ToString();
@@ -67,7 +68,7 @@ namespace AdaptiveLearningSystem
                     }
                     conn.Close();
 
-                    sql = "SELECT q.QuestionID,q.Question,q.SampleAns,q.Keyword,q.TimeLimit,q.Level FROM Tutorial t, Question q WHERE q.TutorialID = @tutID AND q.Status = 1 GROUP BY q.QuestionID,q.Question,q.SampleAns,q.Keyword,q.TimeLimit,q.Level ORDER BY q.QuestionID";
+                    sql = "SELECT q.QuestionID,q.Question,q.SampleAns,q.Keyword,q.TimeLimit,q.Level FROM Tutorial t, Question q WHERE q.TutorialID = @tutID AND q.Status = 1 GROUP BY q.QuestionID,q.Question,q.SampleAns,q.Keyword,q.TimeLimit,q.Level ORDER BY q.QuestionID ASC";
                     SqlCommand cmdGetQuest = new SqlCommand(sql, conn);
                     cmdGetQuest.Parameters.AddWithValue("@tutID", tutID);
                     conn.Open();
@@ -111,7 +112,7 @@ namespace AdaptiveLearningSystem
                     totalCount = oriQuestCount;
 
                     string txt = "";
-                    for (int i = 0; i < 4; i++)
+                    for (int i = 0; i < oriQuestCount; i++)
                     {
                         txt += i + "=" + qid[i];
                     }
@@ -157,6 +158,11 @@ namespace AdaptiveLearningSystem
                 {
                     lblKeyEnter.Text = "Please fill in the keyword!";
                 }
+                else if (checkKeyword(ansGet, keywGet) == false)
+                {
+                    lblKeyEnter.Visible = true;
+                    lblKeyEnter.Text = "The keyword must exist in the answer provided!";
+                }
                 else
                 {
                     if (questGet != "" && ansGet != "" && keywGet != "") //means got a question
@@ -168,10 +174,10 @@ namespace AdaptiveLearningSystem
                         time[currCount] = timeGet;
                         level[currCount] = levelGet;
 
-                        //if (currCount == totalCount)
-                        //{
-                        //    ++totalCount;
-                        //}
+                        if (currCount == totalCount)
+                        {
+                            ++totalCount;
+                        }
                     }
                     currCount -= 1;
 
@@ -213,6 +219,11 @@ namespace AdaptiveLearningSystem
             else if (keywGet == "")
             {
                 lblKeyEnter.Text = "Please fill in the keyword!";
+            }
+            else if (checkKeyword(ansGet, keywGet) == false)
+            {
+                lblKeyEnter.Visible = true;
+                lblKeyEnter.Text = "The keyword must exist in the answer provided!";
             }
             else
             {
@@ -327,6 +338,9 @@ namespace AdaptiveLearningSystem
             string keywGet = txtKeyword.Text.Trim();
             int timeGet = ddlCompleteTime.SelectedIndex;
             int levelGet = ddlLevel.SelectedIndex;
+            easy = 0;
+            medium = 0;
+            hard = 0;
 
             if (questGet == "" && ansGet == "" && keywGet == "" && question.Length == 0)
             {//no quest avai
@@ -346,6 +360,11 @@ namespace AdaptiveLearningSystem
                 else if (keywGet == "" && (questGet != "" || ansGet != ""))
                 {
                     lblKeyEnter.Text = "Please fill in the keyword!";
+                }
+                else if (checkKeyword(ansGet, keywGet) == false)
+                {
+                    lblKeyEnter.Visible = true;
+                    lblKeyEnter.Text = "The keyword must exist in the answer provided!";
                 }
                 else
                 {
@@ -446,6 +465,32 @@ namespace AdaptiveLearningSystem
         }
 
 
+        protected Boolean checkKeyword(string ans, string keywd)
+        {
+            int count = 0;
+            char delimiters = ' ';
+            string[] splitArray = keywd.Split(delimiters);
+            for (int i = 0; i < splitArray.Length; i++)
+            {
+                if (ans.Contains(splitArray[i]))
+                {
+
+                }
+                else
+                {
+                    count += 1;
+                }
+            }
+
+            if (count == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         protected void btnContactCancel_Click(object sender, EventArgs e)
         {

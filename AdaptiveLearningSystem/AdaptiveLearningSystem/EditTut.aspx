@@ -210,13 +210,13 @@
                             <td class="auto-style9">
                                 <label id="tutnum" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Tutorial:&nbsp; <asp:TextBox ID="txtTutNum" runat="server" Width="101px" OnTextChanged="txtTutNum_TextChanged"></asp:TextBox>
                                 <br />
-                                    <asp:Label ID="lblTutNumEnter" runat="server" ForeColor="Red" Visible="False"></asp:Label>
+                                    <asp:Label ID="lblTutNumEnter" runat="server" ForeColor="Red"></asp:Label>
                                 </label>
                             </td>
                             <td class="auto-style10">
                                 <label id="tutname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Tutorial Title: <asp:TextBox ID="txtTutName" runat="server" Width="288px"></asp:TextBox>
                                 <br />
-                                    <asp:Label ID="lblTutTitleEnter" runat="server" ForeColor="Red" Visible="False"></asp:Label>
+                                    <asp:Label ID="lblTutTitleEnter" runat="server" ForeColor="Red"></asp:Label>
                                 </label>
 
                                 </td>
@@ -238,7 +238,7 @@
                                     <asp:TextBox ID="txtQues" runat="server" Height="50px" Width="460px" TextMode="MultiLine"></asp:TextBox>
 
                                     <br />
-                                    <asp:Label ID="lblQuestEnter" runat="server" ForeColor="Red" Visible="False"></asp:Label>
+                                    <asp:Label ID="lblQuestEnter" runat="server" ForeColor="Red"></asp:Label>
                                     <br />
                                 </td>
                             </tr>
@@ -247,7 +247,7 @@
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtAns" runat="server" Height="50px" Width="460px" TextMode="MultiLine"></asp:TextBox><br />
-                                    <asp:Label ID="lblAnsEnter" runat="server" ForeColor="Red" Visible="False"></asp:Label>
+                                    <asp:Label ID="lblAnsEnter" runat="server" ForeColor="Red"></asp:Label>
                                     <br />
 </td>
                             </tr>
@@ -256,7 +256,7 @@
                                 </td>
                                 <td><asp:TextBox ID="txtKeyword" runat="server" Height="50px" Width="460px" TextMode="MultiLine"></asp:TextBox>
                                     <br />Please seperate each keyword by ','<br />
-                                    <asp:Label ID="lblKeyEnter" runat="server" ForeColor="Red" Visible="False"></asp:Label>
+                                    <asp:Label ID="lblKeyEnter" runat="server" ForeColor="Red"></asp:Label>
                                     <br />
 </td>
                             </tr>
@@ -306,7 +306,7 @@
                         <asp:Button CssClass="BottomButton" ID="btnBack" runat="server" OnClick="Button1_Click" Text="Back" />
                         <asp:Button CssClass="BottomButton" ID="btnNext" runat="server" OnClick="Button2_Click" Text="Next" />
                         <asp:Button CssClass="BottomButton" ID="btnReset" runat="server" OnClick="Button3_Click" Text="Reset" />
-                        <asp:Button CssClass="BottomButton" ID="btnFin" runat="server" OnClick="Button4_Click" Text="Finish" />
+                        <asp:Button CssClass="BottomButton" ID="btnFin" runat="server" OnClick="Button4_Click" Text="Finish" style="height: 54px" />
                     </div>
                 </div>
 
@@ -348,7 +348,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <asp:Label ID="lblCompErrorMsg" runat="server" ForeColor="Red" Visible="False"></asp:Label>
+                            <asp:Label ID="lblCompErrorMsg" runat="server" ForeColor="Red"></asp:Label>
                         </td>
                     </tr>
                 </table>
