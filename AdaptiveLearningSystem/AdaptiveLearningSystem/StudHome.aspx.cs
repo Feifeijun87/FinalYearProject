@@ -13,22 +13,26 @@ namespace AdaptiveLearningSystem
 {
     public partial class StudHome : System.Web.UI.Page
     {
-        static string tutNum;
+
+        static string studentID = "", tutNum;
         SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["fyp"].ConnectionString);
 
         protected void Page_Load(object sender, EventArgs e)
         {
             //studentID = Session["studID"].ToString();
-            if (Session["studID"] != null)
+            Session["studID"] = "abc";
+            if (!IsPostBack)
             {
-                if (!IsPostBack)
+                //course, coursename, tutNum, tutTitle, studID
+                if (Session["studID"] != null)
                 {
-                    lblUserName.Text = Session["studName"].ToString();
-                    //course, coursename, tutNum, tutTitle, studID
+                    //studentID = Session["StudentID"].ToString();
+                    studentID = "17WMR09512";
+                    Session["StudentID"] = studentID;
                     conn.Open();
-                    string sql = "SELECT A.CourseID, A.CourseName AS 'Course Name', A.TutorialNumber AS 'Tutorial Number', A.ChapterName AS 'ChapterName',  A.NoOfQuestion AS 'No Of Question' FROM( SELECT t.StartDate, t.ExpiryDate, t.TutorialID, t.TutorialNumber, t.ChapterName, c.CourseID, c.CourseName, t.CompulsaryEasy + t.CompulsaryHard + t.CompulsaryMedium AS NoOfQuestion FROM  Tutorial t, Course c WHERE c.CourseID = t.CourseID AND t.Status = 1 GROUP BY t.StartDate, t.ExpiryDate, t.TutorialID, t.TutorialNumber, t.ChapterName, c.CourseID, c.CourseName, t.CompulsaryEasy + t.CompulsaryHard + t.CompulsaryMedium)a LEFT JOIN CourseAvailable v ON A.CourseID = v.CourseID LEFT JOIN Intake i ON v.IntakeID = i.IntakeID LEFT JOIN TutorialGroup g ON g.TutorialGrpID = v.TutorialGrpID LEFT JOIN Student s ON s.IntakeID = i.IntakeID AND s.TutorialGroupID = g.TutorialGrpID LEFT JOIN TutorialCheck k ON s.StudentID = k.StudentID AND a.TutorialID = k.TutorialID WHERE v.Status = 1 AND s.StudentID = @studID AND k.CheckID IS NULL group by A.TutorialID,A.StartDate, A.ExpiryDate, A.TutorialNumber,A.ChapterName,A.CourseID,A.CourseName, A.NoOfQuestion,k.CheckID";
+                    string sql = "SELECT A.CourseID,A.CourseName, A.TutorialNumber,A.ChapterName, A.ExpiryDate, A.NoOfQuestion,COUNT(z.AnswerID) AS 'Done Question' FROM( SELECT t.StartDate, t.ExpiryDate, t.TutorialID, t.TutorialNumber, t.ChapterName, c.CourseID, c.CourseName, t.CompulsaryEasy + t.CompulsaryHard + t.CompulsaryMedium AS NoOfQuestion FROM  Tutorial t, Course c WHERE c.CourseID = t.CourseID AND t.Status = 1 GROUP BY t.StartDate, t.ExpiryDate, t.TutorialID, t.TutorialNumber, t.ChapterName, c.CourseID, c.CourseName, t.CompulsaryEasy + t.CompulsaryHard + t.CompulsaryMedium)a LEFT JOIN CourseAvailable v ON A.CourseID = v.CourseID LEFT JOIN Intake i ON v.IntakeID = i.IntakeID LEFT JOIN TutorialGroup g ON g.TutorialGrpID = v.TutorialGrpID LEFT JOIN Student s ON s.IntakeID = i.IntakeID AND s.TutorialGroupID = g.TutorialGrpID LEFT JOIN TutorialCheck k ON s.StudentID = k.StudentID AND a.TutorialID = k.TutorialID LEFT JOIN Question q ON q.TutorialID = a.TutorialID LEFT JOIN StudAns z ON s.StudentID = z.StudentID AND z.QuestionID = q.QuestionID WHERE v.Status = 1 AND s.StudentID = @studID AND k.CheckID IS NULL group by A.TutorialID,A.StartDate, A.ExpiryDate, A.TutorialNumber,A.ChapterName,A.CourseID,A.CourseName, A.NoOfQuestion,k.CheckID";
                     SqlCommand cmdGetResult = new SqlCommand(sql, conn);
-                    cmdGetResult.Parameters.AddWithValue("@studID", Session["studID"].ToString());
+                    cmdGetResult.Parameters.AddWithValue("@studID", studentID);
                     DataTable dt = new DataTable();
                     cmdGetResult.CommandType = CommandType.Text;
                     SqlDataAdapter sda = new SqlDataAdapter();
@@ -39,23 +43,56 @@ namespace AdaptiveLearningSystem
                     sda.Fill(dt);
                     if (dt != null && dt.Rows.Count > 0)
                     {
-                        GridView1.DataSource = dt;
-                        GridView1.DataBind();
+                        Repeater1.DataSource = dt;
+                        Repeater1.DataBind();
+                        lblNoData.Text = "Available tutorials : ";
                     }
                     else
                     {
-                        GridView1.Visible = false;
+                        container.Visible = false;
                         lblNoData.Text = "No tutorial available";
                     }
 
                     conn.Close();
                 }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
             }
-            else
+        }
+
+        protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            string courseID, coursename = "", tutNum, tutTitle = "", questDone;
+
+            if (e.CommandName == "select") //edit
             {
-                Response.Redirect("Login.aspx");
+                Label lblCourseID1 = new Label();
+                lblCourseID1 = (Label)e.Item.FindControl("lblCourseID");
+                courseID = lblCourseID1.Text;
+
+                Label lblCoursename1 = new Label();
+                lblCoursename1 = (Label)e.Item.FindControl("lblCoursename");
+                coursename = lblCoursename1.Text;
+
+                Label lblTutorial1 = new Label();
+                lblTutorial1 = (Label)e.Item.FindControl("lblTutorial");
+                tutNum = lblTutorial1.Text;
+
+                Label lblTutName1 = new Label();
+                lblTutName1 = (Label)e.Item.FindControl("lblTutName");
+                tutTitle = lblTutName1.Text;
+
+                Label lblDone1 = new Label();
+                lblDone1 = (Label)e.Item.FindControl("lblDone");
+                questDone = lblDone1.Text;
+
+
+
+                Response.Redirect("AnsTut.aspx?tutNum=" + tutNum + "&courseID=" + courseID + "&coursename=" + coursename + "&chapname=" + tutTitle + "&questDone=" + questDone);
+
             }
-            
         }
 
         protected void HomeLinkButton_Click(object sender, EventArgs e)
@@ -73,26 +110,8 @@ namespace AdaptiveLearningSystem
             Response.Redirect("StudProfile.aspx");
         }
 
-        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            foreach (GridViewRow row in GridView1.Rows)
-            {
-                if (row.RowIndex == GridView1.SelectedIndex)
-                {
-                    row.BackColor = ColorTranslator.FromHtml("#A1DCF2");
-                    row.ToolTip = string.Empty;
 
-                    //tutnum, courseID
-                    Response.Redirect("AnsTut.aspx?tutNum=" + row.Cells[3].Text.ToString() + "&courseID=" + row.Cells[1].Text.ToString() + "&coursename=" + row.Cells[2].Text.ToString() + "&chapname=" + row.Cells[4].Text.ToString());
 
-                }
-                else
-                {
-                    row.BackColor = ColorTranslator.FromHtml("#FFFFFF");
-                    row.ToolTip = "Click to select this row.";
-                }
-            }
-        }
 
         protected void ResultLinkButton_Click1(object sender, EventArgs e)
         {

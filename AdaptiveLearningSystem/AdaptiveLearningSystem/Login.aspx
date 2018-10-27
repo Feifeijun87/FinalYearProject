@@ -69,7 +69,7 @@
                         <div runat="server" id="LecturerPanel">
                             <div class="loginDetails">
 
-                                <asp:TextBox ID="txtLecturerID" CssClass="LoginTextbox" runat="server" placeholder="Lecturer ID"></asp:TextBox>
+                                <asp:TextBox ID="txtLecturerID" CssClass="LoginTextbox" runat="server" placeholder="Username"></asp:TextBox>
                                 <asp:TextBox ID="txtLecturerPassword" CssClass="LoginTextbox" runat="server" placeholder="Password" TextMode="Password"></asp:TextBox>
                                 <asp:LinkButton CssClass="ForgetPass" ID="lbtnLecForgetPass" runat="server" OnClick="lbtnLecForgetPass_Click">Forget Password?</asp:LinkButton>
                             </div>

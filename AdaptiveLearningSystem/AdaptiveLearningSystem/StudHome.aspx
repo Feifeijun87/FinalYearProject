@@ -8,6 +8,7 @@
     <link rel="icon" href="images/tarIco.ico" />
     <link rel="stylesheet" runat="server" media="screen" href="studMain.css"/>
     <link rel="stylesheet" runat="server" media="screen" href="CourseList.css"/>
+     <link rel="stylesheet" href="LecCourse.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script> 
 
@@ -74,7 +75,9 @@
             </ul>
         </div> 
        <%-- start your coding inside div below --%>
-    <div class="wrap-content" >
+    
+
+        <div class="wrap-content" >
         <div class="Header">
             <h1><i>
                Student Home Page</i>
@@ -85,25 +88,44 @@
             <div style="margin-top:20px;">
 
                 <asp:Label ID="lblNoData" runat="server" Text=""></asp:Label>
+                <br />
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
+                <table style="width:100%">
+                    <tr>
+                        <td>
+                            <div class="container" runat="server" id="container">
+                     <asp:Repeater ID="Repeater1"  runat="server" OnItemCommand="Repeater1_ItemCommand" >
+                             <ItemTemplate>
+                           
+                               <div class="MyCourseList">
+                <div class="CourseDesc">
+                         
+                <asp:Label ID="lblCourseID" runat="server"  Text='<%#Eval("CourseID")%>' ></asp:Label> <asp:Label ID="lblCoursename" runat="server" Text='<%#Eval("CourseName")%>'></asp:Label>
+                          <br />Tutorial 
+                     <asp:Label ID="lblTutorial" runat="server"  Text ='<%#Eval("TutorialNumber")%>' ></asp:Label>  - <asp:Label ID="lblTutName" runat="server" Text='<%#Eval("ChapterName")%>'></asp:Label>
+                    <br />                        
+                         
+                    Number of question done : <asp:Label ID="lblDone" runat="server" Text='<%#Eval("Done Question")%>'></asp:Label> / <asp:Label ID="lblTotalQuest" runat="server" Text='<%#Eval("NoOfQuestion")%>'></asp:Label>
+                    <br />
+                    Expiry date: <asp:Label ID="lblExpDate" runat="server" Text='<%#Eval("ExpiryDate")%>'></asp:Label>
+                    <br />
 
-                <asp:GridView ID="GridView1" runat="server" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
-                 <AlternatingRowStyle BackColor="White" />
-                    <Columns>
-                        <asp:CommandField ShowSelectButton="True" />
-                    </Columns>
-            <EditRowStyle BackColor="#2461BF" />
-            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-            <RowStyle BackColor="#EFF3FB" />
-            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-            <SortedAscendingCellStyle BackColor="#F5F7FB" />
-            <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-            <SortedDescendingCellStyle BackColor="#E9EBEF" />
-            <SortedDescendingHeaderStyle BackColor="#4870BE" />
-                </asp:GridView>
+                </div>
+                   <div class="CourseButtonGroup">
+                       <asp:Button CssClass="SelectButton CourseButton" ID="btnSelect" runat="server" Text="Answer Tutorial" CommandName="select" />
+                
+                
+                   </div>
+                       </div>
+            
+                            </ItemTemplate>
+        </asp:Repeater>
+                          
+                        </div>
+                        </td>
+                    </tr>
+                </table>
             </ContentTemplate>
     </asp:UpdatePanel>
 </div>
@@ -112,4 +134,5 @@
     </form>
 </body>
 </html>
+
 
