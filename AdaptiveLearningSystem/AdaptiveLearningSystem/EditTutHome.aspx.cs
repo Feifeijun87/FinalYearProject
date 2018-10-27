@@ -127,16 +127,23 @@ namespace AdaptiveLearningSystem
                     {
                         Repeater1.DataSource = dt;
                         Repeater1.DataBind();
+                        NoResultPanel.Visible = false;
 
                     }
                     else
                     {
                         container.Visible = false;
+                        NoResultPanel.Visible = true;
                         //filler.Visible = false;
                     }
                     conn.Close();
                 }
             }
+        }
+
+        protected void btnEnroll_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CreateTut.aspx");
         }
     }
     
