@@ -14,25 +14,38 @@ namespace AdaptiveLearningSystem
     public partial class StudHome : System.Web.UI.Page
     {
 
-        static string studentID = "", tutNum;
+        static string tutNum;
         SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["fyp"].ConnectionString);
 
         protected void Page_Load(object sender, EventArgs e)
         {
             //studentID = Session["studID"].ToString();
-            Session["studID"] = "abc";
-            if (!IsPostBack)
+
+
+            //course, coursename, tutNum, tutTitle, studID
+            if (Session["studID"] != null)
             {
-                //course, coursename, tutNum, tutTitle, studID
-                if (Session["studID"] != null)
+                if (!IsPostBack)
                 {
+                    lblUserName.Text = Session["studName"].ToString();
                     //studentID = Session["StudentID"].ToString();
-                    studentID = "17WMR09512";
-                    Session["StudentID"] = studentID;
                     conn.Open();
-                    string sql = "SELECT A.CourseID,A.CourseName, A.TutorialNumber,A.ChapterName, A.ExpiryDate, A.NoOfQuestion,COUNT(z.AnswerID) AS 'Done Question' FROM( SELECT t.StartDate, t.ExpiryDate, t.TutorialID, t.TutorialNumber, t.ChapterName, c.CourseID, c.CourseName, t.CompulsaryEasy + t.CompulsaryHard + t.CompulsaryMedium AS NoOfQuestion FROM  Tutorial t, Course c WHERE c.CourseID = t.CourseID AND t.Status = 1 GROUP BY t.StartDate, t.ExpiryDate, t.TutorialID, t.TutorialNumber, t.ChapterName, c.CourseID, c.CourseName, t.CompulsaryEasy + t.CompulsaryHard + t.CompulsaryMedium)a LEFT JOIN CourseAvailable v ON A.CourseID = v.CourseID LEFT JOIN Intake i ON v.IntakeID = i.IntakeID LEFT JOIN TutorialGroup g ON g.TutorialGrpID = v.TutorialGrpID LEFT JOIN Student s ON s.IntakeID = i.IntakeID AND s.TutorialGroupID = g.TutorialGrpID LEFT JOIN TutorialCheck k ON s.StudentID = k.StudentID AND a.TutorialID = k.TutorialID LEFT JOIN Question q ON q.TutorialID = a.TutorialID LEFT JOIN StudAns z ON s.StudentID = z.StudentID AND z.QuestionID = q.QuestionID WHERE v.Status = 1 AND s.StudentID = @studID AND k.CheckID IS NULL group by A.TutorialID,A.StartDate, A.ExpiryDate, A.TutorialNumber,A.ChapterName,A.CourseID,A.CourseName, A.NoOfQuestion,k.CheckID";
+                    string sql = @"SELECT A.CourseID,A.CourseName, A.TutorialNumber,A.ChapterName, A.ExpiryDate, A.NoOfQuestion, COUNT(n.AnswerID) AS 'Done Question'
+                                    FROM(
+                                    SELECT t.StartDate, t.ExpiryDate, t.TutorialID, t.TutorialNumber, t.ChapterName, c.CourseID, c.CourseName, t.CompulsaryEasy + t.CompulsaryHard + t.CompulsaryMedium AS NoOfQuestion
+                                    FROM  Tutorial t, Course c WHERE c.CourseID = t.CourseID AND t.Status = 1 AND CONVERT(Date, GetDate()) BETWEEN CONVERT(date, t.StartDate) AND CONVERT(date, t.ExpiryDate)
+                                    GROUP BY t.StartDate, t.ExpiryDate, t.TutorialID, t.TutorialNumber, t.ChapterName, c.CourseID, c.CourseName, t.CompulsaryEasy + t.CompulsaryHard + t.CompulsaryMedium)a
+                                    LEFT JOIN CourseAvailable v ON A.CourseID = v.CourseID
+                                    LEFT JOIN Intake i ON v.IntakeID = i.IntakeID
+                                    LEFT JOIN TutorialGroup g ON v.TutorialGrpID = g.TutorialGrpID
+                                    LEFT JOIN Student s ON i.IntakeID = s.IntakeID AND s.TutorialGroupID = g.TutorialGrpID
+                                    LEFT JOIN TutorialCheck k ON k.StudentID = s.StudentID AND k.TutorialID = A.TutorialID  AND k.CheckID IS NULL
+                                        LEFT JOIN Question q ON q.TutorialID = A.TutorialID
+                                    LEFT JOIN StudAns n ON s.StudentID = n.StudentID AND n.QuestionID = q.QuestionID
+                                    WHERE s.StudentID = @studID
+                                    GROUP BY A.CourseID,A.CourseName, A.TutorialNumber,A.ChapterName, A.ExpiryDate, A.NoOfQuestion";
                     SqlCommand cmdGetResult = new SqlCommand(sql, conn);
-                    cmdGetResult.Parameters.AddWithValue("@studID", studentID);
+                    cmdGetResult.Parameters.AddWithValue("@studID", Session["studID"].ToString());
                     DataTable dt = new DataTable();
                     cmdGetResult.CommandType = CommandType.Text;
                     SqlDataAdapter sda = new SqlDataAdapter();
@@ -55,12 +68,13 @@ namespace AdaptiveLearningSystem
 
                     conn.Close();
                 }
-                else
-                {
-                    Response.Redirect("Login.aspx");
-                }
+            }
+            else
+            {
+                Response.Redirect("Login.aspx");
             }
         }
+        
 
         protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
@@ -124,6 +138,14 @@ namespace AdaptiveLearningSystem
             Session.Abandon();//Abandon session
 
             Response.Redirect("Login.aspx");
+        }
+        protected int calculatePercentage(int numerator, int denominator)
+        {
+
+            double result = Math.Round(((double)numerator / (double)denominator) * 100);
+            int percentage = int.Parse(result.ToString());
+
+            return percentage;
         }
     }
 }
