@@ -147,6 +147,11 @@ namespace AdaptiveLearningSystem
                 }
 
             }
+            else
+            {
+                btnRemove.Visible = false;
+                btnBack.Visible = false;
+            }
             Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
 
         }
@@ -210,7 +215,6 @@ namespace AdaptiveLearningSystem
             }
             else
             {
-                //Label2.Text = " Now currcount = " + currCount;
                 question[currCount] = questGet;
                 answer[currCount] = ansGet;
                 key[currCount] = keywGet;
@@ -218,7 +222,6 @@ namespace AdaptiveLearningSystem
                 level[currCount] = levelGet;
                 
                 currCount += 1;
-                //Label2.Text = " next currcount = " + currCount;
                 lblQNum.Text = "";
                 lblQNum.Text = (currCount + 1).ToString();
 
@@ -234,7 +237,14 @@ namespace AdaptiveLearningSystem
                 }
                 else
                 {
-                    ++totalCount;
+                    if(currCount==totalCount)
+                    {
+
+                    }
+                    else
+                    {
+                        ++totalCount;
+                    }
                     txtQues.Text = "";
                     txtAns.Text = "";
                     txtKeyword.Text = "";
@@ -243,6 +253,8 @@ namespace AdaptiveLearningSystem
                     clearLabel();
                 }
 
+                btnRemove.Visible = true;
+                btnBack.Visible = true;
 
             }
             Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
@@ -454,7 +466,10 @@ namespace AdaptiveLearningSystem
 
         protected void btnContactCancel_Click(object sender, EventArgs e)
         {
+            lblCompErrorMsg.Text = "";
+            lblCompErrorMsg.Visible = false;
             ModalPopupExtender3.Hide();
+
         }
 
         protected void btnChgContact_Click(object sender, EventArgs e) //done

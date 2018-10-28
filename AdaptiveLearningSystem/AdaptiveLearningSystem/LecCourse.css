@@ -56,6 +56,17 @@
             display: inline-block;
         }
 
+        .MyCourseList1{
+            float: left;
+    width: 100%;
+    clear: left;
+    border-bottom: 1px solid black;
+        }
+
+        .MyCourseList1:hover .CourseButtonGroup {
+            display: inline-block;
+        }
+
 .container {
     border-top: 1px solid black;
     margin-bottom: 10%;

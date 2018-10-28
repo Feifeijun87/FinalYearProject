@@ -173,7 +173,7 @@
                           <tr><td>
                               <div class="container" runat="server" id="container">
                              
-                 <div class="MyCourseList"> 
+                 <div class="MyCourseList1"> 
                 <table style="margin-left: 20px; border-bottom-style: none;" class="auto-style1">                       
                         <asp:Repeater ID="Repeater1"  runat="server">
                              <ItemTemplate>

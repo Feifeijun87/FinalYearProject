@@ -227,7 +227,6 @@ namespace AdaptiveLearningSystem
             }
             else
             {
-                //Label2.Text = " Now currcount = " + currCount;
                 question[currCount] = questGet;
                 answer[currCount] = ansGet;
                 key[currCount] = keywGet;
@@ -250,7 +249,15 @@ namespace AdaptiveLearningSystem
                 }
                 else
                 {
-                    ++totalCount;
+                    if (currCount == totalCount)
+                    {
+
+                    }
+                    else
+                    {
+                        ++totalCount;
+                    }
+
                     txtQues.Text = "";
                     txtAns.Text = "";
                     txtKeyword.Text = "";
