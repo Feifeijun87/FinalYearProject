@@ -245,6 +245,7 @@ namespace AdaptiveLearningSystem
                     {
                         ++totalCount;
                     }
+
                     txtQues.Text = "";
                     txtAns.Text = "";
                     txtKeyword.Text = "";
@@ -375,14 +376,15 @@ namespace AdaptiveLearningSystem
                         level[currCount] = levelGet;
 
                         currCount += 1;
-                    }
+                        if (currCount > totalCount) //new quest
+                        {
+                            ++totalCount;
 
-                    if (currCount > totalCount) //new quest
-                    {
-                        ++totalCount;
+                        }
                         currCount -= 1;
-
                     }
+
+                    
                     
 
                 }
