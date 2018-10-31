@@ -79,6 +79,9 @@ namespace AdaptiveLearningSystem
                         Session["position"] = lecturerRead.GetString(10).ToString();
                         Session["lecFaculty"] = lecturerRead.GetString(12).ToString();
                         Session["facultyName"] = lecturerRead.GetString(13).ToString();
+                        if (!lecturerRead.IsDBNull(lecturerRead.GetOrdinal("ProfilePic")))
+                            Session["lecProfilePic"] = "true";
+                        
                         Response.Redirect("LecHome.aspx");
                     }
                 }
@@ -122,6 +125,8 @@ namespace AdaptiveLearningSystem
                         Session["studProgramme"] = studentRead.GetString(10).ToString();
                         Session["studFacultyID"] = studentRead.GetString(11).ToString();
                         Session["studFacultyName"] = studentRead.GetString(12).ToString();
+                        if (!studentRead.IsDBNull(studentRead.GetOrdinal("ProfilePic")))
+                            Session["studProfilePic"] = "true";
                         Response.Redirect("StudHome.aspx");
                     }
                 }

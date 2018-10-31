@@ -271,7 +271,7 @@
                     </asp:Repeater>
                     </div>
 
-                <asp:Button CssClass="pnlButton" ID="btnClose" runat="server" Text="Close" OnClick="btnClose_Click" />
+                <asp:Button CssClass="pnlButton" ID="btnClose" runat="server" Text="Close" OnClick="btnClose_Click" style="margin-bottom:10px;" />
            
         </asp:Panel>
         <asp:Button ID="hide" runat="server" Text="Button" style="display:none;" />

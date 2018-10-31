@@ -71,6 +71,7 @@ namespace AdaptiveLearningSystem
             lblNoTutGroup.Visible = false;
             ddlIntake.SelectedIndex = 0;
             btnDone.Visible = false;
+            
             //Label1.Text = "";
             //Label1.Text = (radReportSelect.SelectedValue).ToString();
 

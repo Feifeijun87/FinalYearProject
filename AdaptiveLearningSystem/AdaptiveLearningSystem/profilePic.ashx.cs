@@ -29,15 +29,17 @@ namespace AdaptiveLearningSystem
 
             context.Response.ContentType = "image/jpeg";
             Stream strm = ShowEmpImage(ID, userType);
-            byte[] buffer = new byte[4096];
-            int byteSeq = strm.Read(buffer, 0, 4096);
 
-            while (byteSeq > 0)
-            {
-                context.Response.OutputStream.Write(buffer, 0, byteSeq);
-                byteSeq = strm.Read(buffer, 0, 4096);
-            }
-            //context.Response.BinaryWrite(buffer);
+                byte[] buffer = new byte[4096];
+                int byteSeq = strm.Read(buffer, 0, 4096);
+
+                while (byteSeq > 0)
+                {
+                    context.Response.OutputStream.Write(buffer, 0, byteSeq);
+                    byteSeq = strm.Read(buffer, 0, 4096);
+                }
+                //context.Response.BinaryWrite(buffer);}
+
         }
 
         public Stream ShowEmpImage(string ID, string userType)

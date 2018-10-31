@@ -44,7 +44,11 @@ namespace AdaptiveLearningSystem
                     lblTutGrp.Text = groupname.ToString();
                     //take lecturer image by using username , student can use other, just chg in sql
                     //for student, change the type to other than lec, then go profilePic.ashx.cs
-                    LecProfileImg.ImageUrl = "~/profilePic.ashx?id=" + Session["studID"].ToString() + "&type=stud";
+                    if (Session["studProfilePic"] != null)
+                        LecProfileImg.ImageUrl = "~/profilePic.ashx?id=" + Session["studID"].ToString() + "&type=stud";
+                    else
+                        LecProfileImg.ImageUrl = Page.ResolveUrl("~/images/defaultProfileImg.jpg");
+                    
                 }
             }
             else
@@ -138,7 +142,7 @@ namespace AdaptiveLearningSystem
         {
             if (checkContact() == true)
             {
-                Session["contactNo"] = txtNewContact.Text;
+                Session["studContact"] = txtNewContact.Text;
                 string sql = "UPDATE Student SET ContactNo = @contactno WHERE StudentID = @studID";
                 SqlCommand cmdUpdate = new SqlCommand(sql, conn);
                 cmdUpdate.Parameters.AddWithValue("@contactno", txtNewContact.Text);
