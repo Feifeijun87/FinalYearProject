@@ -28,9 +28,13 @@ namespace AdaptiveLearningSystem
                     lblEmail.Text = Session["email"].ToString();
                     lblFaculty.Text = Session["facultyName"].ToString();
                     lblOfficeLoc.Text = Session["officeLoc"].ToString();
+                    
                     //take lecturer image by using username , student can use other, just chg in sql
                     //for student, change the type to other than lec, then go profilePic.ashx.cs
-                    LecProfileImg.ImageUrl = "~/profilePic.ashx?id=" + Session["username"].ToString() + "&type=lec";
+                    if(Session["lecProfilePic"]!=null)
+                        LecProfileImg.ImageUrl = "~/profilePic.ashx?id=" + Session["username"].ToString() + "&type=lec";
+                    else
+                        LecProfileImg.ImageUrl = Page.ResolveUrl("~/images/defaultProfileImg.jpg");
                 }
                 else
                 {
@@ -98,7 +102,7 @@ namespace AdaptiveLearningSystem
                 writePass.UpdateCommand.ExecuteNonQuery();
                 cmd.Dispose();
                 conn.Close();
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Password Changed Successfully'); window.location.href='LecProfile.aspx';", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Password Changed Successfully'); window.location.href='LecProfile.aspx;", true);
 
 
             }
@@ -129,6 +133,7 @@ namespace AdaptiveLearningSystem
                 lblOfficeErrorMsg.Text = "Invalid Office Location Format.";
                 return false;
             }
+            
             return true;
         }
 
