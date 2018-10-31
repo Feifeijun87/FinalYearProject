@@ -106,7 +106,7 @@ namespace AdaptiveLearningSystem
 
                     for (int i = 2; i < splitArray1.Length; i++)
                     {
-                        tutTitle += splitArray1[i] + " "; //coursename
+                        tutTitle += splitArray1[i] + " "; 
                     }
                     tutTitle = tutTitle.TrimEnd();
                     StringBuilder sb = new StringBuilder(tutNum);

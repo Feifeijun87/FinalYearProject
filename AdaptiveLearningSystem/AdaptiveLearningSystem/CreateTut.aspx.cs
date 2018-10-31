@@ -20,11 +20,9 @@ namespace AdaptiveLearningSystem
         static int[] time = new int[100];
         static int[] level = new int[100];
         static int totalCount, currCount;
-        static string tryy = "";
         static int easy, medium, hard, tutNumInt;
-        static int durationInt = 0;
         string sql, questionID = "";
-        static string courseID, tutorialID;
+        static string courseID,coursename, tutorialID;
         static string tutNumGet;
         static string tutTitleGet;
         List<string> listQuest = new List<string>();
@@ -148,6 +146,12 @@ namespace AdaptiveLearningSystem
 
             }
             else
+            {
+                btnRemove.Visible = false;
+                btnBack.Visible = false;
+            }
+
+            if(currCount==0)
             {
                 btnRemove.Visible = false;
                 btnBack.Visible = false;
@@ -347,6 +351,7 @@ namespace AdaptiveLearningSystem
             }
             else
             {
+                clearLabel();
                 if (questGet == "" && (ansGet != "" || keywGet != ""))
                 {
                     lblQuestEnter.Text = "Please fill in the question!";
@@ -385,11 +390,6 @@ namespace AdaptiveLearningSystem
                     }
 
                     
-                    
-
-                }
-                
-
                 if (checkTutNumTitle() == true)
                 {
                     //get tut ID
@@ -406,6 +406,12 @@ namespace AdaptiveLearningSystem
                     char delimiters = ' ';
                     string[] splitArray = courseID.Split(delimiters);
                     courseID = splitArray[0];
+
+                    for (int i = 1; i < splitArray.Length; i++)
+                    {
+                        coursename += splitArray[i] + " "; //coursename
+                    }
+                    coursename = coursename.TrimEnd();
 
                     sql = "SELECT TutorialNumber FROM [Tutorial] WHERE CourseID = @courseID";
                     SqlCommand cmdGetTutNum = new SqlCommand(sql, conn);
@@ -458,7 +464,7 @@ namespace AdaptiveLearningSystem
                         ModalPopupExtender3.Show();
                     }
                 }
-
+            }
 
 
             }
@@ -615,7 +621,8 @@ namespace AdaptiveLearningSystem
                         txt += "Db Question" + (i + 1) + "success";
                     }
                     Label4.Text = txt;
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial Created Successfully'); window.location.href='CreateTut.aspx';", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial Created Successfully'); window.location.href='TutorialList.aspx';", true);
+                    //Response.Redirect("TutorialList.aspx?course=" + courseID + "&name=" + coursename);
 
                 }
 
@@ -681,7 +688,7 @@ namespace AdaptiveLearningSystem
                 }
                 else
                 {
-                    ++totalCount;
+                    //++totalCount;
                     txtQues.Text = "";
                     txtAns.Text = "";
                     txtKeyword.Text = "";

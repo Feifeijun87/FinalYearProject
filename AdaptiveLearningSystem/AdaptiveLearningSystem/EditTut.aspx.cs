@@ -22,9 +22,7 @@ namespace AdaptiveLearningSystem
         static int[] status = new int[100];
         static string[] leveltext = new string[100];
         static int totalCount, currCount;
-        static string tryy = "";
         static int easy, medium, hard, tutNumInt;
-        static int durationInt = 0;
         string sql, questionID = "";
         static string tutorialID, lecID;
         static string tutNumGet;
@@ -196,6 +194,17 @@ namespace AdaptiveLearningSystem
                 }
 
             }
+            else
+            {
+                //btnRemove.Visible = false;
+                btnBack.Visible = false;
+            }
+
+            if (currCount == 0)
+            {
+                //btnRemove.Visible = false;
+                btnBack.Visible = false;
+            }
         }
 
         protected void Button2_Click(object sender, EventArgs e) //next
@@ -265,7 +274,8 @@ namespace AdaptiveLearningSystem
                     ddlLevel.SelectedIndex = 0;
                     clearLabel();
                 }
-
+                btnRemove.Visible = true;
+                btnBack.Visible = true;
 
             }
         }
@@ -356,6 +366,7 @@ namespace AdaptiveLearningSystem
             }
             else
             {
+                clearLabel();
                 if (questGet == "" && (ansGet != "" || keywGet != ""))
                 {
                     lblQuestEnter.Text = "Please fill in the question!";
@@ -385,26 +396,22 @@ namespace AdaptiveLearningSystem
                         level[currCount] = levelGet;
 
                         currCount += 1;
+                        if (currCount > totalCount) //new quest
+                        {
+                            ++totalCount;
+
+                        }
+                        currCount -= 1;
                     }
 
-                    if (currCount > totalCount) //new quest
-                    {
-                        ++totalCount;
-
-                    }
-                    currCount -= 1;
-
-                }
-
+                    
 
                 if (checkTutNumTitle() == true)
                 {
                     //get tut ID
                     conn.Open();
 
-                    char delimiters = ' ';
-                    string[] splitArray = courseID.Split(delimiters);
-                    courseID = splitArray[0];
+
 
                     sql = "SELECT TutorialNumber,TutorialID FROM [Tutorial] WHERE CourseID = @courseID";
                     SqlCommand cmdGetTutNum = new SqlCommand(sql, conn);
@@ -465,7 +472,7 @@ namespace AdaptiveLearningSystem
                         ModalPopupExtender3.Show();
                     }
                 }
-
+            }
 
 
             }
@@ -712,7 +719,8 @@ namespace AdaptiveLearningSystem
 
                 }
                 //lblNoCourseFound.Text = txt;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial Edited Successfully'); window.location.href='EditTutHome.aspx';", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial Edited Successfully'); window.location.href='TutorialList.aspx';", true);
+                //Response.Redirect("TutorialList.aspx?course=" + courseID + "&name=" + coursename);
 
             }
 
@@ -741,6 +749,7 @@ namespace AdaptiveLearningSystem
 
         protected void btnRemove_Click(object sender, EventArgs e)
         {
+            clearLabel();
             if (currCount != totalCount) //cannot remove blank and last item
             {
                 listQuest = question.ToList();
@@ -754,7 +763,6 @@ namespace AdaptiveLearningSystem
                 listKey.RemoveAt(currCount);
                 listlevel.RemoveAt(currCount);
                 listTime.RemoveAt(currCount);
-                //status[currCount] = 0;
 
                 totalCount -= 1;
                 if (currCount > totalCount)
@@ -780,7 +788,7 @@ namespace AdaptiveLearningSystem
                 }
                 else
                 {
-                    ++totalCount;
+                    //++totalCount;
                     txtQues.Text = "";
                     txtAns.Text = "";
                     txtKeyword.Text = "";

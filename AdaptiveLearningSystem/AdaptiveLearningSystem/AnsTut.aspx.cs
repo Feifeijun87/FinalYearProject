@@ -770,22 +770,30 @@ namespace AdaptiveLearningSystem
 
         protected void Timer1_Tick(object sender, EventArgs e)
         {
+            int mmshow, ssshow;
+
             ss--;
             secUsed++;
+
             if (ss < 0)
             {
                 mm--;
                 ss = 59;
+            }
+            mmshow = mm;
+            ssshow = ss;
 
-                if (mm < 0)
-                {
-                    mm = 0;
-                    ss = 00;
-                }
+            if (mm < 0)
+            {
+                mmshow = 0;
+                ssshow = 00;
             }
 
+           
 
-            lblTimeCount.Text = mm.ToString() + ":" + ss.ToString("D2");
+          
+
+            lblTimeCount.Text = mmshow.ToString() + ":" + ssshow.ToString("D2");
         }
 
         protected void HomeLinkButton_Click(object sender, EventArgs e)

@@ -302,11 +302,11 @@
                    
 
                     <div class="BottomButtonGroup">
-                        <asp:Button CssClass="BottomButton" ID="btnRemove" runat="server" Text="Remove this question" OnClick="btnRemove_Click" />
-                        <asp:Button CssClass="BottomButton" ID="btnBack" runat="server" OnClick="Button1_Click" Text="Back" />
+                        <asp:Button CssClass="BottomButton" ID="btnRemove" runat="server" Text="Remove this question" OnClick="btnRemove_Click" Visible="True" />
+                        <asp:Button CssClass="BottomButton" ID="btnBack" runat="server" OnClick="Button1_Click" Text="Back" Visible="False" />
                         <asp:Button CssClass="BottomButton" ID="btnNext" runat="server" OnClick="Button2_Click" Text="Next" />
-                        <asp:Button CssClass="BottomButton" ID="btnReset" runat="server" OnClick="Button3_Click" Text="Reset" />
-                        <asp:Button CssClass="BottomButton" ID="btnFin" runat="server" OnClick="Button4_Click" Text="Finish" style="height: 54px" />
+                        <asp:Button CssClass="BottomButton" ID="btnReset" runat="server" OnClick="Button3_Click" Text="Reset" Visible="False" />
+                        <asp:Button CssClass="BottomButton" ID="btnFin" runat="server" OnClick="Button4_Click" Text="Finish" />
                     </div>
                 </div>
 
@@ -325,7 +325,7 @@
                         <td class="auto-style7">
                             Compulsory Easy:</td>
                         <td class="auto-style8">
-                            <asp:TextBox ID="txtEasy" runat="server" Width="62px" Height="29px"></asp:TextBox>/ <asp:Label ID="lblCompEasyNum" runat="server">0</asp:Label>
+                            <asp:TextBox ID="txtEasy" runat="server" Width="62px" ></asp:TextBox>/ <asp:Label ID="lblCompEasyNum" runat="server">0</asp:Label>
                             
                         </td>
                     </tr>
