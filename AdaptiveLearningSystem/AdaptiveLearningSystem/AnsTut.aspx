@@ -84,6 +84,21 @@
             }
 
     </style>
+
+    <script type = "text/javascript">
+        function Confirm() {
+            var confirm_value = document.createElement("INPUT");
+            confirm_value.type = "hidden";
+            confirm_value.name = "confirm_value";
+            if (confirm("Are you sure want to stop doing this tutorial?")) {
+                confirm_value.value = "Yes";
+            } else {
+                confirm_value.value = "No";
+            }
+            document.forms[0].appendChild(confirm_value);
+        }
+    </script>
+
     <script>
 
         $(document).ready(function () {
@@ -251,10 +266,9 @@
 
                     <div class="BottomButtonGroup">
                         
-                        <asp:Button CssClass="BottomButton" ID="btnReset" runat="server" OnClick="Button3_Click" Text="Reset" />
                         <asp:Button CssClass="BottomButton" ID="btnScore" runat="server" OnClick="btnScore_Click" Text="Result" />
                         <asp:Button CssClass="BottomButton" ID="btnNext" runat="server" OnClick="Button2_Click" Text="Next" />
-                        <asp:Button CssClass="BottomButton" ID="btnDone" runat="server" OnClick="Button4_Click" Text="Done" />
+                        <asp:Button CssClass="BottomButton" ID="btnDone" runat="server" OnClick="Button4_Click" Text="Done" OnClientClick = "Confirm()" />
                     </div>
                     
                         

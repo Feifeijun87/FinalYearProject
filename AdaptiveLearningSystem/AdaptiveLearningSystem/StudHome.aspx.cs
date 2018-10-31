@@ -101,9 +101,7 @@ namespace AdaptiveLearningSystem
                 Label lblDone1 = new Label();
                 lblDone1 = (Label)e.Item.FindControl("lblDone");
                 questDone = lblDone1.Text;
-
-
-
+                
                 Response.Redirect("AnsTut.aspx?tutNum=" + tutNum + "&courseID=" + courseID + "&coursename=" + coursename + "&chapname=" + tutTitle + "&questDone=" + questDone);
 
             }

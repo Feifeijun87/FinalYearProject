@@ -138,7 +138,7 @@ namespace AdaptiveLearningSystem
         {
             if (checkContact() == true)
             {
-                Session["contactNo"] = txtNewContact.Text;
+                Session["studContact"] = txtNewContact.Text;
                 string sql = "UPDATE Student SET ContactNo = @contactno WHERE StudentID = @studID";
                 SqlCommand cmdUpdate = new SqlCommand(sql, conn);
                 cmdUpdate.Parameters.AddWithValue("@contactno", txtNewContact.Text);
@@ -147,7 +147,6 @@ namespace AdaptiveLearningSystem
                 cmdUpdate.ExecuteNonQuery();
                 conn.Close();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Contact Number Changed Successfully'); window.location.href='StudProfile.aspx';", true);
-                //Response.Redirect("StudProfile.aspx");
             }
         }
 

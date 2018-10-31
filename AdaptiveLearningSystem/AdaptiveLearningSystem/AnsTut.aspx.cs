@@ -44,7 +44,7 @@ namespace AdaptiveLearningSystem
         static List<string> listRandomQuestion = new List<string>();
         static List<int> listRandomTime = new List<int>();
         static List<string> listRandomLevel = new List<string>();
-        static int mm = 0, ss = 0;
+        static int mm = 0, ss = 0, questdone;
         static int secUsed = 0;
         static string tutCheckID;
         static int pgload;
@@ -54,11 +54,13 @@ namespace AdaptiveLearningSystem
             string ansGet = txtAns.Text;
             if (ansGet == "")
             {
-                //lblAnsEnter.Text = "Please enter your answer!";
-                lblAnsEnter.Text = pgload.ToString();
+                lblAnsEnter.Text = "Please enter your answer!";
+                //lblAnsEnter.Text = pgload.ToString();
             }
             else
             {
+                mm = 0;
+                ss = 0;
                 Timer1.Enabled = false;
 
                 //your code here
@@ -110,10 +112,10 @@ namespace AdaptiveLearningSystem
                     }
                     else
                     {
-
                         currCount += 1;
+                        questdone += 1;
                         lblQNum.Text = "";
-                        lblQNum.Text = (currCount + 1).ToString();
+                        lblQNum.Text = (questdone + 1).ToString();
                         lblQuest.Text = listRandomQuestion[currCount].ToString();
                         mm = listRandomTime[currCount];
                         ss = 0;
@@ -403,83 +405,126 @@ namespace AdaptiveLearningSystem
         protected void Button4_Click(object sender, EventArgs e)//done
         {
             string ansGet = txtAns.Text;
-            if (ansGet == "")
-            {
-                //lblAnsEnter.Text = "Please enter your answer!";
-                lblAnsEnter.Text = pgload.ToString();
-            }
-            else
-            {
-                Timer1.Enabled = false;
 
-                //your code here
-                //time = secUsed
-
-                if (listRandomLevel[currCount].ToString() == "easy")
+            string confirmValue = Request.Form["confirm_value"];
+            if (confirmValue == "Yes")
+            {
+                if (ansGet == "")
                 {
-                    easyLeft--;
-                }
-                else if (listRandomLevel[currCount].ToString() == "medium")
-                {
-                    medLeft--;
+                    //lblAnsEnter.Text = "Please enter your answer!";
+                    //lblAnsEnter.Text = pgload.ToString();
+                    Response.Redirect("StudHome.aspx");
                 }
                 else
                 {
-                    hardLeft--;
+                    Timer1.Enabled = false;
+
+                    if (markingAns() == true)
+                    {
+                        //your code here
+                        //time = secUsed
+
+                        if (listRandomLevel[currCount].ToString() == "easy")
+                        {
+                            easyLeft--;
+                        }
+                        else if (listRandomLevel[currCount].ToString() == "medium")
+                        {
+                            medLeft--;
+                        }
+                        else
+                        {
+                            hardLeft--;
+                        }
+
+                        if (easyLeft == 0 && medLeft == 0 && hardLeft == 0)
+                        {
+                            //update tutorial check
+                            conn.Open();
+                            string sql = "SELECT COUNT(CheckID) FROM [TutorialCheck]";
+                            SqlCommand cmdTutCount = new SqlCommand(sql, conn);
+                            int checkID = (int)cmdTutCount.ExecuteScalar();
+                            checkID += 1;
+                            tutCheckID = "C" + checkID.ToString();
+
+                            int status = 1;
+                            sql = "insert into [TutorialCheck] values (@p1,@p2,@p3,@p4,@p5,@p6)";
+                            conn.Open();
+                            SqlCommand cmdAddTut = new SqlCommand(sql, conn);
+                            cmdAddTut.Parameters.AddWithValue("@p1", tutCheckID); //check ID
+                            cmdAddTut.Parameters.AddWithValue("@p2", status); //status
+                            cmdAddTut.Parameters.AddWithValue("@p3", studID); //stud ID
+                            cmdAddTut.Parameters.AddWithValue("@p4", tutorialID); //tutorialID
+                            cmdAddTut.Parameters.AddWithValue("@p5", DateTime.Now.ToShortDateString()); //complete date
+                            cmdAddTut.Parameters.AddWithValue("@p6", DateTime.Now.ToLongTimeString()); //complete time          
+                            cmdAddTut.ExecuteNonQuery();
+                            conn.Close();
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('You has completed this tutorial'); window.location.href='StudHome.aspx';", true);
+                        }
+                        mm = 0;
+                        ss = 0;
+                        Response.Redirect("StudHome.aspx");
+                    }
+                    else
+                    {
+                        lblAnsEnter.Text = "Incorrect. Please try again";
+                        lblAnsEnter.Visible = true;
+                        Timer1.Enabled = true;
+                    }
                 }
-
-                if (easyLeft == 0 && medLeft == 0 && hardLeft == 0)
-                {
-                    //update tutorial check
-                    conn.Open();
-                    string sql = "SELECT COUNT(CheckID) FROM [TutorialCheck]";
-                    SqlCommand cmdTutCount = new SqlCommand(sql, conn);
-                    int checkID = (int)cmdTutCount.ExecuteScalar();
-                    checkID += 1;
-                    tutCheckID = "C" + checkID.ToString();
-
-                    int status = 1;
-                    sql = "insert into [TutorialCheck] values (@p1,@p2,@p3,@p4,@p5,@p6)";
-                    conn.Open();
-                    SqlCommand cmdAddTut = new SqlCommand(sql, conn);
-                    cmdAddTut.Parameters.AddWithValue("@p1", tutCheckID); //check ID
-                    cmdAddTut.Parameters.AddWithValue("@p2", status); //status
-                    cmdAddTut.Parameters.AddWithValue("@p3", studID); //stud ID
-                    cmdAddTut.Parameters.AddWithValue("@p4", tutorialID); //tutorialID
-                    cmdAddTut.Parameters.AddWithValue("@p5", DateTime.Now.ToShortDateString()); //complete date
-                    cmdAddTut.Parameters.AddWithValue("@p6", DateTime.Now.ToLongTimeString()); //complete time          
-                    cmdAddTut.ExecuteNonQuery();
-                    conn.Close();
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('You has completed this tutorial'); window.location.href='AnsTut.aspx';", true);
-
-                    Response.Redirect("StudHome.aspx");
-                }
+                //this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('You clicked YES!')", true);
             }
+            else
+            {
+                //this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('You clicked NO!')", true);
+            }
+
+
+           
+
+
         }
 
         Random rnd = new Random();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //pgload++;
-            //courseID = Session["courseID"].ToString();
-            //tutorialID = Session["tutID"].ToString();
-            //tutorialName = 
+            listQuestID.Clear();
+            listQuest.Clear();
+            listLevel.Clear();
+            listTime.Clear();
+            listEasyQuestionID.Clear();
+            listMedQuestionID.Clear();
+            listHardQuestionID.Clear();
+            listCompletedQuestion.Clear();
+            listEasyDoneQID.Clear();
+            listMedDoneQID.Clear();
+            listHardDoneQID.Clear();
+            listTemp.Clear();
+            listTempEasyQID.Clear();
+            listTempMedQID.Clear();
+            listTempHardQID.Clear();
+            listRandomQuestionID.Clear();
+            listRandomQuestion.Clear();
+            listRandomTime.Clear();
+            listRandomLevel.Clear();
+
+            
             if (Session["studID"] != null)
             {
                 lblUserName.Text = Session["studName"].ToString();
                 if (!IsPostBack)
                 {
                     studID = Session["studID"].ToString();
-                    //studID = "17WMR09512";
+                    mm = 0;
+                    ss = 0;
                     Timer1.Enabled = false;
-                    //courseID = "BAIT3153";
-                    //tutorialID = "T3";
 
                     tutNum = Request.QueryString["tutNum"].ToString();
                     courseID = Request.QueryString["courseID"].ToString();
                     courseName = Request.QueryString["coursename"].ToString();
                     chapName = Request.QueryString["chapname"].ToString();
+                    questdone = int.Parse(Request.QueryString["questDone"].ToString());
 
                     lblCourse.Text = courseID + " " + courseName;
                     lblTutorial.Text = tutNum;
@@ -500,6 +545,11 @@ namespace AdaptiveLearningSystem
                         listQuest.Add(dtr.GetString(1));
                         listLevel.Add(dtr.GetString(2));
                         listTime.Add(dtr.GetInt32(3));
+                    }
+                    string hh = "";
+                    for(int k=0;k<listQuestID.Count;k++)
+                    {
+                        hh += listQuestID[k];
                     }
                     conn.Close();
                     conn.Open();
@@ -624,7 +674,7 @@ namespace AdaptiveLearningSystem
 
                     Label1.Text = "final random:" + txt;
 
-                    lblQNum.Text = (currCount + 1).ToString();
+                    lblQNum.Text = (questdone + 1).ToString();
                     lblQuest.Text = listRandomQuestion[currCount].ToString();
                     mm = listRandomTime[currCount];
                     //lblTimeCount.Text = mm.ToString();
@@ -788,11 +838,7 @@ namespace AdaptiveLearningSystem
                 mmshow = 0;
                 ssshow = 00;
             }
-
-           
-
-          
-
+            
             lblTimeCount.Text = mmshow.ToString() + ":" + ssshow.ToString("D2");
         }
 
