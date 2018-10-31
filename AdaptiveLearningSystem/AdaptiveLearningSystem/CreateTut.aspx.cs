@@ -621,7 +621,7 @@ namespace AdaptiveLearningSystem
                         txt += "Db Question" + (i + 1) + "success";
                     }
                     Label4.Text = txt;
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial Created Successfully'); window.location.href='TutorialList.aspx';", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial Created Successfully'); window.location.href='TutorialList.aspx?course=" + courseID + "&name=" + coursename+"';", true);
                     //Response.Redirect("TutorialList.aspx?course=" + courseID + "&name=" + coursename);
 
                 }

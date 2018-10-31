@@ -21,6 +21,18 @@ namespace AdaptiveLearningSystem
             {
                 if (!IsPostBack)
                 {
+                    string groupname="";
+
+                    conn.Open();
+                    string sql = "SELECT g.TutorialGrpName FROM TutorialGroup g WHERE g.TutorialGrpID = @groupID";
+                    SqlCommand cmdGetGroupID = new SqlCommand(sql, conn);
+                    cmdGetGroupID.Parameters.AddWithValue("@groupID", Session["studGroup"].ToString());
+                    SqlDataReader dtr = cmdGetGroupID.ExecuteReader();
+                    while (dtr.Read())
+                    {
+                        groupname = dtr.GetString(0);
+                    }
+                    conn.Close();
 
                     //lblUserName.Text = Session["lecName"].ToString();
                     lblUserName.Text = Session["studName"].ToString();
@@ -29,7 +41,7 @@ namespace AdaptiveLearningSystem
                     lblContact.Text = Session["studContact"].ToString();
                     lblEmail.Text = Session["studEmail"].ToString();
                     lblFaculty.Text = Session["studFacultyName"].ToString();
-                    lblTutGrp.Text = Session["studGroup"].ToString();
+                    lblTutGrp.Text = groupname.ToString();
                     //take lecturer image by using username , student can use other, just chg in sql
                     //for student, change the type to other than lec, then go profilePic.ashx.cs
                     LecProfileImg.ImageUrl = "~/profilePic.ashx?id=" + Session["studID"].ToString() + "&type=stud";
@@ -127,7 +139,7 @@ namespace AdaptiveLearningSystem
             if (checkContact() == true)
             {
                 Session["contactNo"] = txtNewContact.Text;
-                string sql = "UPDATE Student  SET SET ContactNo = @contactno WHERE StudentID = @studID";
+                string sql = "UPDATE Student SET ContactNo = @contactno WHERE StudentID = @studID";
                 SqlCommand cmdUpdate = new SqlCommand(sql, conn);
                 cmdUpdate.Parameters.AddWithValue("@contactno", txtNewContact.Text);
                 cmdUpdate.Parameters.AddWithValue("@studID", Session["studID"].ToString());
@@ -135,6 +147,7 @@ namespace AdaptiveLearningSystem
                 cmdUpdate.ExecuteNonQuery();
                 conn.Close();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Contact Number Changed Successfully'); window.location.href='StudProfile.aspx';", true);
+                //Response.Redirect("StudProfile.aspx");
             }
         }
 

@@ -719,7 +719,7 @@ namespace AdaptiveLearningSystem
 
                 }
                 //lblNoCourseFound.Text = txt;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial Edited Successfully'); window.location.href='TutorialList.aspx';", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial Edited Successfully'); window.location.href='TutorialList.aspx?course=" + courseID + "&name=" + coursename + "';", true);
                 //Response.Redirect("TutorialList.aspx?course=" + courseID + "&name=" + coursename);
 
             }
