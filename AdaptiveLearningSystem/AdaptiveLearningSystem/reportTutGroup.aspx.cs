@@ -170,7 +170,8 @@ namespace AdaptiveLearningSystem
                         conn.Close();
 
                         lblTutComplete.Text = studDone.ToString() + "/" + studTotal.ToString();
-                        lblTutComplete1.Text = studDone.ToString() + "/" + studTotal.ToString();
+                        lblkkk.Text = studDone.ToString() + "/" + studTotal.ToString();
+                        //lbltutcomple.Text = studDone.ToString() + "/" + studTotal.ToString();
 
                         if (studDone != studTotal)
                         {

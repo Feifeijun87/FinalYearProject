@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Adaptive Learning System</title>
@@ -62,42 +63,11 @@
             width: 100%;
         }
 
+        .auto-style9 {
+            height: 31px;
+        }
+
         </style>
-    <style>
-        .course-content {
-            display: none;
-            overflow: hidden;
-            position: absolute;
-            top: 15%;
-            right: 53%;
-            background-color: #f9f9f9;
-            min-width: 171px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            text-align:left;
-        }
-        .course-item {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-        .coursebtn:hover .course-content {
-            display: block;
-        }
-        .course-content .course-item:hover {
-            background-color: #f1f1f1;
-        }
-        .NoResult{
-            display:block;
-            text-align:center;
-            margin-bottom:10px;
-            color:gray
-        }
-        .caption{
-            display:block;
-        }
-    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -138,8 +108,6 @@
         </div>
          <%-- start your coding inside div below --%>
 
-        
-     
         <div class="wrap-content">
             <asp:Panel ID="Panel1" runat="server" >
             <table style="margin-left: 20px; border-bottom-style: none;" class="auto-style1">
@@ -196,12 +164,11 @@
                        
                                 <asp:Label ID="lblNumber" runat="server" Width ="5px" Text='<%# Container.ItemIndex + 1 %>'> </asp:Label> . 
                
-                <asp:Label ID="lblStudentID" runat="server" Width =" 110px" Text='<%# String.Format("{0,-20}",Eval("StudentID"))%>' ></asp:Label>
+                <asp:Label ID="lblStudentID" runat="server" Width =" 130px" Text='<%# String.Format("{0,-20}",Eval("StudentID"))%>' ></asp:Label>
                           
                      <asp:Label ID="lblStudName" runat="server" Width="180px" Text ='<%# String.Format("{0,-60}",Eval("StudentName"))%>' ></asp:Label>  
                         
-                    <asp:Label ID="Label4" runat="server" Width =" 10px" Text=" | "></asp:Label>         
-                
+                   
                          <asp:Label ID="lblTotalScore" runat="server" Text='<%# String.Format("{0,4}",Eval("Total Score"))%>'></asp:Label>
                     
                     </div>
@@ -230,7 +197,7 @@
                
                           <asp:Label ID="lblStudentID" runat="server" Width =" 150px" Text='<%#Eval("StudentID")%>' ></asp:Label>
                 
-                        <asp:Label ID="lblStudName" runat="server" Width="180px" Text ='<%# Eval("StudentName")%>' ></asp:Label>  
+                        <asp:Label ID="lblStudName" runat="server" Width="200px" Text ='<%# Eval("StudentName")%>' ></asp:Label>  
                           
                   <asp:Label ID="lblTutGroup" runat="server" Text='<%# Eval("TutorialGrpName")%>'></asp:Label>
                     
@@ -259,10 +226,15 @@
         <asp:Button ID="lblBack" runat="server" Text="Back" CssClass="BottomButton" OnClick="lblBack_Click" />
         <asp:Button ID="lblSavePDF" runat="server" OnClick="Button2_Click" Text="Save to PDF" CssClass="BottomButton" />
             </div></div>
-
-        <asp:Panel ID="Panel2" runat="server" Visible="False" >
+     
+         <%-- control put inside itemtemplate --%>            
+                    
+                    <%-- if not need combine string "<%# Eval("CourseID") %>" will do,
+                         if want call c# function and bind the return value "<%# calculatePercentage(int.Parse(Eval("doneNumber").ToString())) %>"  something like that--%>                    <%-- The value inside eval is the column name of the data in sql  --%>                    <%-- next, c# code there --%>
+                 
+         <asp:Panel ID="Panel2" runat="server" Visible="False" >
             <table style="margin-left: 20px; border-bottom-style: none; width:600px" class="auto-style6">
-                <tr><td colspan="4"><hr /></td></tr>
+                <tr><td colspan="2"><hr /></td></tr>
                 <tr>
                     <td colspan="2">
                         
@@ -314,9 +286,7 @@
                                     <asp:Label ID="Label10" runat="server" Width="163px" Text="Student Name" Font-Bold="True" CssClass="auto-style7"></asp:Label>
                             
                                 </td>
-                                <td>
-                                    
-                                </td>
+                                
                                 <td>
                                     <asp:Label ID="Label11" runat="server" Text="Total Score" Font-Bold="True"></asp:Label>
                             
@@ -328,54 +298,49 @@
                                 <td>
                                     <asp:Label ID="lblNumber" runat="server" Width ="5px" Text='<%# Container.ItemIndex + 1 %>'> </asp:Label> . 
                
-                <asp:Label ID="lblStudentID" runat="server" Width =" 120px" Text='<%# String.Format("{0,-20}",Eval("StudentID"))%>' ></asp:Label>
+                <asp:Label ID="lblStudentID" runat="server" Width =" 150px" Text='<%# String.Format("{0,-20}",Eval("StudentID"))%>' ></asp:Label>
                           
                                 </td>
                                 <td>
-                                    <asp:Label ID="lblStudName" runat="server" Width="200px" Text ='<%# String.Format("{0,-60}",Eval("StudentName"))%>' ></asp:Label>  
+                                    <asp:Label ID="lblStudName" runat="server" Width="180px" Text ='<%# String.Format("{0,-60}",Eval("StudentName"))%>' ></asp:Label>  
                        
                                 </td>
-                                <td>
-                                    <asp:Label ID="Label4" runat="server" Width =" 10px" Text=" | "></asp:Label>         
-                
-                                </td>
+                               
                                 <td>
                                      <asp:Label ID="lblTotalScore" runat="server" Text='<%# String.Format("{0,4}",Eval("Total Score"))%>'></asp:Label>
                     
                                 </td>
-                            </tr><tr><td colspan="4">
-                        Tutorial Completion : 
-                        <asp:Label ID="lblTutComplete1" runat="server"></asp:Label> students
-                        </td></tr>
+                            </tr>
                         
                                
             </ItemTemplate>
-        </asp:Repeater></table>
+        </asp:Repeater><tr><td colspan="3">
+                        Tutorial Completion : 
+                       <asp:Label ID="lblkkk" runat="server" Text="Label"></asp:Label>students<br/><hr />
+                        </td></tr></table>
 </td></tr>
                 <tr>
                    <td colspan="2">
                        <div class="container" runat="server" id="container1">
                             <div class="MyCourseList"> 
-                <table style="margin-left: 20px; border-bottom-style: none; width:100%" class="auto-style1">   
-                                       <tr><td>Student who did not completed the tutorial : <asp:Label ID="lblTutComplete1" runat="server" Text="Label"></asp:Label> students</td></tr> 
+               <table style="width:100%">   
+                                       <tr><td colspan="3">Student who did not completed the tutorial : </td></tr> 
                         <asp:Repeater ID="Repeater3"  runat="server">
                              <ItemTemplate>
                                  <tr><td class="auto-style5">
                                 <asp:Label ID="lblNumber" runat="server" Width ="5px" Text='<%# Container.ItemIndex + 1 %>'> </asp:Label> . 
                
                           <asp:Label ID="lblStudentID" runat="server" Width =" 150px" Text='<%#Eval("StudentID")%>' ></asp:Label>
-                
+                </td>
+                                     <td>
                         <asp:Label ID="lblStudName" runat="server" Width="180px" Text ='<%# Eval("StudentName")%>' ></asp:Label>  
-                          
+                          </td><td>
                   <asp:Label ID="lblTutGroup" runat="server" Text='<%# Eval("TutorialGrpName")%>'></asp:Label>
                     
                             </td></tr>
                
                                  </ItemTemplate>
-        </asp:Repeater>
-                        <tr><td></td></tr>
-                    
-                </table>
+        </asp:Repeater></table>
                   </div>
                            </div>
                            
@@ -387,4 +352,3 @@
     </form>
 </body>
 </html>
-

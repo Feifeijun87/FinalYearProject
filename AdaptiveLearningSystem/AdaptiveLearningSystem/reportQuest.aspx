@@ -57,10 +57,6 @@
             height: 50px;
         }
 
-        .auto-style9 {
-            height: 31px;
-        }
-
         </style>
     <style>
         .course-content {

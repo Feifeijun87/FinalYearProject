@@ -22,8 +22,8 @@ namespace AdaptiveLearningSystem
         static int compEasy = 0, compMed = 0, compHard = 0;
         static int easyDone = 0, medDone = 0, hardDone = 0;
         static int easyLeft = 0, medLeft = 0, hardLeft = 0, totalQuestLeft = 0;
-        static string tutorialID = "";
-        static string courseID = "", studID, tutNum, courseName, chapName;
+        static string tutorialID;
+        static string courseID, studID, tutNum, courseName, chapName;
 
         static List<string> listQuestID = new List<string>();
         static List<string> listQuest = new List<string>();
@@ -59,8 +59,7 @@ namespace AdaptiveLearningSystem
             }
             else
             {
-                mm = 0;
-                ss = 0;
+                
                 Timer1.Enabled = false;
 
                 //your code here
@@ -68,13 +67,13 @@ namespace AdaptiveLearningSystem
                 if (markingAns() == true)
                 {
                     lblAnsEnter.Visible = false;
-                    
+                    string tt = listRandomLevel[currCount].Trim().ToString();
 
-                    if (listRandomLevel[currCount].ToString() == "easy")
+                    if (listRandomLevel[currCount].Trim().ToString() == "easy")
                     {
                         easyLeft--;
                     }
-                    else if (listRandomLevel[currCount].ToString() == "medium")
+                    else if (listRandomLevel[currCount].Trim().ToString() == "medium")
                     {
                         medLeft--;
                     }
@@ -92,6 +91,7 @@ namespace AdaptiveLearningSystem
                         int checkID = (int)cmdTutCount.ExecuteScalar();
                         checkID += 1;
                         tutCheckID = "C" + checkID.ToString();
+                        conn.Close();
 
                         int status = 1;
                         sql = "insert into [TutorialCheck] values (@p1,@p2,@p3,@p4,@p5,@p6)";
@@ -99,13 +99,13 @@ namespace AdaptiveLearningSystem
                         SqlCommand cmdAddTut = new SqlCommand(sql, conn);
                         cmdAddTut.Parameters.AddWithValue("@p1", tutCheckID); //check ID
                         cmdAddTut.Parameters.AddWithValue("@p2", status); //status
-                        cmdAddTut.Parameters.AddWithValue("@p3", @studID); //stud ID
+                        cmdAddTut.Parameters.AddWithValue("@p3", studID); //stud ID
                         cmdAddTut.Parameters.AddWithValue("@p4", tutorialID); //tutorialID
                         cmdAddTut.Parameters.AddWithValue("@p5", DateTime.Now.ToShortDateString()); //complete date
                         cmdAddTut.Parameters.AddWithValue("@p6", DateTime.Now.ToLongTimeString()); //complete time          
                         cmdAddTut.ExecuteNonQuery();
                         conn.Close();
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('You has completed this tutorial'); window.location.href='AnsTut.aspx';", true);
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('You has completed this tutorial'); window.location.href='StudHome.aspx';", true);
 
                         //back to tut page
 
@@ -115,6 +115,7 @@ namespace AdaptiveLearningSystem
                         currCount += 1;
                         questdone += 1;
                         lblQNum.Text = "";
+                        lblAnsEnter.Text = "";
                         lblQNum.Text = (questdone + 1).ToString();
                         lblQuest.Text = listRandomQuestion[currCount].ToString();
                         mm = listRandomTime[currCount];
@@ -413,6 +414,22 @@ namespace AdaptiveLearningSystem
                 {
                     //lblAnsEnter.Text = "Please enter your answer!";
                     //lblAnsEnter.Text = pgload.ToString();
+                   
+                    listQuestID.Clear();
+                    listQuest.Clear();
+                    listLevel.Clear();
+                    listTime.Clear();
+                    listEasyQuestionID.Clear();
+                    listMedQuestionID.Clear();
+                    listHardQuestionID.Clear();
+                    listCompletedQuestion.Clear();
+                    listEasyDoneQID.Clear();
+                    listMedDoneQID.Clear();
+                    listHardDoneQID.Clear();
+                    listTemp.Clear();
+                    listTempEasyQID.Clear();
+                    listTempMedQID.Clear();
+                    listTempHardQID.Clear();
                     Response.Redirect("StudHome.aspx");
                 }
                 else
@@ -459,10 +476,41 @@ namespace AdaptiveLearningSystem
                             cmdAddTut.Parameters.AddWithValue("@p6", DateTime.Now.ToLongTimeString()); //complete time          
                             cmdAddTut.ExecuteNonQuery();
                             conn.Close();
+                            listQuestID.Clear();
+                            listQuest.Clear();
+                            listLevel.Clear();
+                            listTime.Clear();
+                            listEasyQuestionID.Clear();
+                            listMedQuestionID.Clear();
+                            listHardQuestionID.Clear();
+                            listCompletedQuestion.Clear();
+                            listEasyDoneQID.Clear();
+                            listMedDoneQID.Clear();
+                            listHardDoneQID.Clear();
+                            listTemp.Clear();
+                            listTempEasyQID.Clear();
+                            listTempMedQID.Clear();
+                            listTempHardQID.Clear();
                             ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('You has completed this tutorial'); window.location.href='StudHome.aspx';", true);
+
                         }
                         mm = 0;
                         ss = 0;
+                        listQuestID.Clear();
+                        listQuest.Clear();
+                        listLevel.Clear();
+                        listTime.Clear();
+                        listEasyQuestionID.Clear();
+                        listMedQuestionID.Clear();
+                        listHardQuestionID.Clear();
+                        listCompletedQuestion.Clear();
+                        listEasyDoneQID.Clear();
+                        listMedDoneQID.Clear();
+                        listHardDoneQID.Clear();
+                        listTemp.Clear();
+                        listTempEasyQID.Clear();
+                        listTempMedQID.Clear();
+                        listTempHardQID.Clear();
                         Response.Redirect("StudHome.aspx");
                     }
                     else
@@ -489,27 +537,7 @@ namespace AdaptiveLearningSystem
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            listQuestID.Clear();
-            listQuest.Clear();
-            listLevel.Clear();
-            listTime.Clear();
-            listEasyQuestionID.Clear();
-            listMedQuestionID.Clear();
-            listHardQuestionID.Clear();
-            listCompletedQuestion.Clear();
-            listEasyDoneQID.Clear();
-            listMedDoneQID.Clear();
-            listHardDoneQID.Clear();
-            listTemp.Clear();
-            listTempEasyQID.Clear();
-            listTempMedQID.Clear();
-            listTempHardQID.Clear();
-            listRandomQuestionID.Clear();
-            listRandomQuestion.Clear();
-            listRandomTime.Clear();
-            listRandomLevel.Clear();
-
-            
+          
             if (Session["studID"] != null)
             {
                 lblUserName.Text = Session["studName"].ToString();
@@ -530,14 +558,28 @@ namespace AdaptiveLearningSystem
                     lblTutorial.Text = tutNum;
                     lblTitle.Text = chapName;
 
+                    //get tut ID
+                    conn.Open();
+                    string sql = "SELECT TutorialID FROM Tutorial WHERE TutorialNumber = @tutNum AND CourseID = @courseID";
+                    SqlCommand cmdGetTutID = new SqlCommand(sql, conn);
+                    cmdGetTutID.Parameters.AddWithValue("@tutNum", tutNum);
+                    cmdGetTutID.Parameters.AddWithValue("@courseID", courseID);
+                    SqlDataReader dtr = cmdGetTutID.ExecuteReader();
+                    while (dtr.Read())
+                    {
+                        tutorialID = dtr.GetString(0);
+                    }
+                    conn.Close();
+
+
                     conn.Open();
 
                     //get quest
-                    string sql = "SELECT q.QuestionID, q.Question, q.Level, q.TimeLimit  FROM Question q, Tutorial t WHERE t.TutorialNumber = @tutNum AND t.CourseID = @courseID AND t.TutorialID = q.TutorialID AND q.Status = 1";
+                    sql = "SELECT q.QuestionID, q.Question, q.Level, q.TimeLimit  FROM Question q, Tutorial t WHERE t.TutorialNumber = @tutNum AND t.CourseID = @courseID AND t.TutorialID = q.TutorialID AND q.Status = 1";
                     SqlCommand cmdGetQuest = new SqlCommand(sql, conn);
                     cmdGetQuest.Parameters.AddWithValue("@tutNum", tutNum);
                     cmdGetQuest.Parameters.AddWithValue("@courseID", courseID);
-                    SqlDataReader dtr = cmdGetQuest.ExecuteReader();
+                    dtr = cmdGetQuest.ExecuteReader();
                     int i = 0;
                     while (dtr.Read())
                     {
@@ -786,6 +828,11 @@ namespace AdaptiveLearningSystem
 
         static List<string> RandomizeStrings(string[] arr)
         {
+            listRandomQuestionID.Clear();
+            listRandomQuestion.Clear();
+            listRandomTime.Clear();
+            listRandomLevel.Clear();
+
             List<KeyValuePair<int, string>> list =
                 new List<KeyValuePair<int, string>>();
             // Add all strings from array.

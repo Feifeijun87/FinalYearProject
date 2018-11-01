@@ -52,7 +52,6 @@ namespace AdaptiveLearningSystem
 
                     pdfDoc.Add(gif);
                     XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
-                    XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
                     pdfDoc.Close();
                     Response.ContentType = "application/pdf";
                     Response.AddHeader("content-disposition", "attachment;filename=StudIndiResult.pdf");
@@ -71,7 +70,15 @@ namespace AdaptiveLearningSystem
                 if (!IsPostBack)
                 {
                     //course, coursename, tutNum, tutTitle, studID
-                    lblUserName.Text = Session["studName"].ToString();
+                    if(Session["lecturerID"] != null)
+                    {
+                        lblUserName.Text = Session["lecName"].ToString();
+                    }
+                    else
+                    {
+                        lblUserName.Text = Session["studName"].ToString();
+                    }
+                    
 
                     courseID = Request.QueryString["course"].ToString();
                     courseName = Request.QueryString["coursename"].ToString();

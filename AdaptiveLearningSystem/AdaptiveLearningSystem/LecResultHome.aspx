@@ -73,6 +73,9 @@
         .caption{
             display:block;
         }
+            .auto-style3 {
+                width: 157px;
+            }
     </style>
     </head>
 <body >
@@ -131,38 +134,80 @@
             <div style="margin-top:20px;">
        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
-                <asp:RadioButtonList ID="radReportSelect" runat="server" OnSelectedIndexChanged="RadioButtonList1_SelectedIndexChanged" AutoPostBack="True">
+                <table style="width:100%">
+                    <tr>
+                        <td colspan="2">
+                            Please select the type of report : 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                             <asp:RadioButtonList ID="radReportSelect" runat="server" OnSelectedIndexChanged="RadioButtonList1_SelectedIndexChanged" AutoPostBack="True">
                     <asp:ListItem Value="tutGroup" Selected="True">View tutorial group performance</asp:ListItem>
                     <asp:ListItem Value="quest">View performance by question</asp:ListItem>
                 </asp:RadioButtonList>
-                <br />
-                <asp:Label ID="lblNoIntake" runat="server" Text="You haven't enrolled any courses." Visible="False"></asp:Label>
-                <br />
-                <br />
-                <asp:Label ID="lblIntake" runat="server" Text="Intake : "></asp:Label>
-                <asp:DropDownList ID="ddlIntake" runat="server" OnSelectedIndexChanged="ddlIntake_SelectedIndexChanged" AutoPostBack="True">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                                <br />           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style3">
+                            <asp:Label ID="lblIntake" runat="server" Text="Intake : "></asp:Label>
+                        </td>
+                        <td>
+                             <asp:DropDownList ID="ddlIntake" runat="server" OnSelectedIndexChanged="ddlIntake_SelectedIndexChanged" AutoPostBack="True">
                 </asp:DropDownList>
-                <br />
-                <br />
-                <asp:Label ID="lblCourse" runat="server" Text="Course : " Visible="False"></asp:Label>
-                <asp:DropDownList ID="ddlCourse" runat="server" OnSelectedIndexChanged="ddlCourse_SelectedIndexChanged" Visible="False" AutoPostBack="True">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <asp:Label ID="lblNoIntake" runat="server" Text="You haven't enrolled any courses." Visible="False"></asp:Label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="auto-style3">
+                            <asp:Label ID="lblCourse" runat="server" Text="Course : " Visible="False"></asp:Label>              
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlCourse" runat="server" OnSelectedIndexChanged="ddlCourse_SelectedIndexChanged" Visible="False" AutoPostBack="True">
                 </asp:DropDownList>
-                <br />
-                <br />
-                <asp:Label ID="lblNoTutorial" runat="server" Text="No tutorial found" Visible="False"></asp:Label>
-                <br />
-                <asp:Label ID="lblTutorial" runat="server" Text="Tutorial : " Visible="False"></asp:Label>
-                <asp:DropDownList ID="ddlTutorial" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" Visible="False">
+                        </td>
+                    </tr>
+                     <tr>
+                         <td colspan="2">
+                             <asp:Label ID="lblNoTutorial" runat="server" Text="No tutorial found" Visible="False"></asp:Label>
+                         </td>
+                     </tr>
+                    <tr>
+                        <td class="auto-style3">
+                            <asp:Label ID="lblTutorial" runat="server" Text="Tutorial : " Visible="False"></asp:Label>
+                        </td>
+                        <td>
+                             <asp:DropDownList ID="ddlTutorial" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" Visible="False">
                 </asp:DropDownList>
-                <br />
-                <br />
-                <asp:Label ID="lblNoTutGroup" runat="server" Text="No tutorial group found" Visible="False"></asp:Label>
-                <br />
-                <asp:Label ID="lblTutGroup" runat="server" Text="Tutorial Group : " Visible="False"></asp:Label>
-                <asp:DropDownList ID="ddlTutGroup" runat="server" Visible="False" AutoPostBack="True" OnSelectedIndexChanged="ddlTutGroup_SelectedIndexChanged">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <asp:Label ID="lblNoTutGroup" runat="server" Text="No tutorial group found" Visible="False"></asp:Label>
+                
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style3">
+                            <asp:Label ID="lblTutGroup" runat="server" Text="Tutorial Group : " Visible="False"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlTutGroup" runat="server" Visible="False" AutoPostBack="True" OnSelectedIndexChanged="ddlTutGroup_SelectedIndexChanged">
                 </asp:DropDownList>
-                <br />
-                <br />
+                        </td>
+                    </tr>
+                </table>
+              
             <div class="BottomButtonGroup">
                         <asp:Button CssClass="BottomButton" ID="btnDone" runat="server" Text="Done" OnClick="btnDone_Click" Visible="False" />
                         </div>

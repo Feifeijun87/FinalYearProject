@@ -121,15 +121,6 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.WebControls.RadioButtonList radReportSelect;
         
         /// <summary>
-        /// lblNoIntake control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNoIntake;
-        
-        /// <summary>
         /// lblIntake control.
         /// </summary>
         /// <remarks>
@@ -146,6 +137,15 @@ namespace AdaptiveLearningSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlIntake;
+        
+        /// <summary>
+        /// lblNoIntake control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNoIntake;
         
         /// <summary>
         /// lblCourse control.

@@ -14,7 +14,7 @@ namespace AdaptiveLearningSystem
     public partial class LecResultHome : System.Web.UI.Page
     {
         SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["fyp"].ConnectionString);
-        static string sql,  intakeID, courseID;
+        static string sql,lecID, intakeID, courseID;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,6 +22,7 @@ namespace AdaptiveLearningSystem
             {
                 if (!IsPostBack)
                 {
+                    lecID = Session["lecturerID"].ToString();
                     lblUserName.Text = Session["lecName"].ToString();
                     sql = "SELECT v.IntakeID FROM CourseAvailable v WHERE v.Status = 1 AND v.LecturerID = @lecID GROUP BY v.IntakeID";
                     SqlCommand cmdGetIntake = new SqlCommand(sql, conn);
@@ -106,7 +107,7 @@ namespace AdaptiveLearningSystem
             }
             else
             {
-                //lblNoIntake.Visible = true;
+                lblNoIntake.Visible = true;
             }
             conn.Close();
 
@@ -141,7 +142,7 @@ namespace AdaptiveLearningSystem
                 ddlTutorial.DataBind();
                 ddlTutorial.Items.Insert(0, new ListItem(String.Empty, String.Empty));
                 ddlTutorial.SelectedIndex = 0;
-
+                lblNoTutorial.Visible = false;
 
             }
             else

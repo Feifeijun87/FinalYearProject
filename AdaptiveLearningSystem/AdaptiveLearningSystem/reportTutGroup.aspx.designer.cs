@@ -319,6 +319,15 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.WebControls.Repeater Repeater2;
         
         /// <summary>
+        /// lblkkk control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblkkk;
+        
+        /// <summary>
         /// container1 control.
         /// </summary>
         /// <remarks>
@@ -326,15 +335,6 @@ namespace AdaptiveLearningSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl container1;
-        
-        /// <summary>
-        /// lblTutComplete1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTutComplete1;
         
         /// <summary>
         /// Repeater3 control.

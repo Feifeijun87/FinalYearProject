@@ -78,10 +78,11 @@ namespace AdaptiveLearningSystem
 
         protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            string courseID, coursename = "", tutNum, tutTitle = "", questDone;
-
+            string courseID, coursename = "", tutNum, tutTitle = "", questDone, ttlQuest;
+            int numQD, numTQ;
             if (e.CommandName == "select") //edit
             {
+
                 Label lblCourseID1 = new Label();
                 lblCourseID1 = (Label)e.Item.FindControl("lblCourseID");
                 courseID = lblCourseID1.Text;
@@ -101,8 +102,24 @@ namespace AdaptiveLearningSystem
                 Label lblDone1 = new Label();
                 lblDone1 = (Label)e.Item.FindControl("lblDone");
                 questDone = lblDone1.Text;
-                
-                Response.Redirect("AnsTut.aspx?tutNum=" + tutNum + "&courseID=" + courseID + "&coursename=" + coursename + "&chapname=" + tutTitle + "&questDone=" + questDone);
+
+                Label lbltotalquest1 = new Label();
+                lbltotalquest1 = (Label)e.Item.FindControl("lbltotalquest");
+                ttlQuest = lbltotalquest1.Text;
+
+                numQD = int.Parse(questDone);
+                numTQ = int.Parse(ttlQuest);
+
+                if(numTQ == numQD)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial already completed!'); window.location.href='StudHome.aspx';", true);
+
+                }
+                else
+                {
+                    Response.Redirect("AnsTut.aspx?tutNum=" + tutNum + "&courseID=" + courseID + "&coursename=" + coursename + "&chapname=" + tutTitle + "&questDone=" + questDone);
+
+                }
 
             }
         }
