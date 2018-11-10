@@ -34,8 +34,7 @@
             $(".dropdown").removeClass("activeBackground");
 
         });
-
-
+        
     </script>
     <style>
         .course-content {
@@ -168,7 +167,7 @@
                 <li>
                     <asp:LinkButton CssClass="SecondNavList" ID="ResultLinkButton" OnClick="ResultLinkButton_Click" runat="server">Report</asp:LinkButton></li>
                 <li>
-                    <asp:LinkButton CssClass="SecondNavList" ID="ProfilesLinkButton" runat="server" OnClick="ProfilesLinkButton_Click">My Profile</asp:LinkButton></li>
+                    <asp:LinkButton CssClass="SecondNavList" ID="ProfilesLinkButton" runat="server"  OnClick="ProfilesLinkButton_Click">My Profile</asp:LinkButton></li>
             </ul>
         </div>
         <%-- Content Code Below --%>

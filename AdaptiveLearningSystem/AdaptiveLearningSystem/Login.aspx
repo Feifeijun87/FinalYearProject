@@ -41,15 +41,15 @@
 
                         <div class="loginTitle">
                             <h1>
-                                <asp:Label ID="Label1" runat="server" Text="Label"> Log In</asp:Label></h1>
+                                <asp:Label ID="Label1" runat="server" Text="Label"> LOGIN</asp:Label></h1>
                         </div>
                         <div class="errorMessage">
                             
                                 <asp:Label ID="lblError" runat="server" Text="Label" ForeColor="Red" style="display: none;"></asp:Label>
                         </div>
                         <div class="categoryButton" runat="server" id="CategoryPanel">
-                            <asp:Button CssClass="btnSignIn" ID="btnStudent" runat="server" Text="Sign In As Student" OnClick="btnStudent_Click" />
-                            <asp:Button CssClass="btnSignIn" ID="btnLecturer" runat="server" Text="Sign In As Lecturer" OnClick="btnLecturer_Click" />
+                            <asp:Button CssClass="btnSignIn" ID="btnStudent" runat="server" Text="I Am A Student" OnClick="btnStudent_Click" />
+                            <asp:Button CssClass="btnSignIn" ID="btnLecturer" runat="server" Text="I Am A Lecturer" OnClick="btnLecturer_Click" />
                         </div>
 
 

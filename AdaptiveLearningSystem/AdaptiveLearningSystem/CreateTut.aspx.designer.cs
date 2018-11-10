@@ -22,15 +22,6 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// ScriptManager1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
-        
-        /// <summary>
         /// profilePic control.
         /// </summary>
         /// <remarks>
@@ -47,15 +38,6 @@ namespace AdaptiveLearningSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblUserName;
-        
-        /// <summary>
-        /// ProfileLinkButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ProfileLinkButton;
         
         /// <summary>
         /// LogOutLinkButton control.
@@ -76,13 +58,22 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.WebControls.LinkButton HomeLinkButton;
         
         /// <summary>
-        /// TutorialLinkButton control.
+        /// MyCourseLinkButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton TutorialLinkButton;
+        protected global::System.Web.UI.WebControls.LinkButton MyCourseLinkButton;
+        
+        /// <summary>
+        /// EnrollCourseLinkButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton EnrollCourseLinkButton;
         
         /// <summary>
         /// ResultLinkButton control.
@@ -101,6 +92,15 @@ namespace AdaptiveLearningSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton ProfilesLinkButton;
+        
+        /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
         /// UpdatePanel5 control.

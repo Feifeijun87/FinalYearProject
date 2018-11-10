@@ -68,10 +68,11 @@ namespace AdaptiveLearningSystem
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["lecturerID"] != null)
             {
-                if (Session["lecturerID"] != null)
+                if (!IsPostBack)
                 {
+                    lblUserName.Text = Session["lecName"].ToString();
                     intakeID = Request.QueryString["intake"].ToString();//intakeID
                     course = Request.QueryString["course"].ToString();//BASCXXXX Title
                     tutorial = Request.QueryString["tutorial"].ToString();//T3 XXXX
@@ -142,7 +143,7 @@ namespace AdaptiveLearningSystem
                         Repeater2.DataBind();
                         conn.Close();
 
-                        sql = "SELECT COUNT(s.StudentID) FROM Student s, CourseAvailable a, TutorialCheck k WHERE a.IntakeID = @intakeID AND a.CourseID = @courseID AND k.TutorialID = @tutID AND a.TutorialGrpID = s.TutorialGroupID AND k.StudentID = s.StudentID AND a.LecturerID = @lecID AND a.Status = 1";
+                        sql = "SELECT COUNT(s.StudentID) FROM Student s, CourseAvailable a, TutorialCheck k, Tutorial t WHERE a.IntakeID = @intakeID AND a.CourseID = @courseID AND k.TutorialID = @tutID AND a.TutorialGrpID = s.TutorialGroupID AND k.StudentID = s.StudentID AND a.LecturerID = @lecID AND a.Status = 1 AND k.TutorialID=t.TutorialID AND CONVERT(date, k.CompletionDate) BETWEEN CONVERT(date, t.StartDate) AND CONVERT(date, t.ExpiryDate)";
                         SqlCommand cmdDone = new SqlCommand(sql, conn);
                         cmdDone.Parameters.AddWithValue("@intakeID", intakeID);
                         cmdDone.Parameters.AddWithValue("@courseID", courseID);
@@ -166,7 +167,7 @@ namespace AdaptiveLearningSystem
 
                         if (studDone != studTotal)
                         {
-                            sql = "SELECT S.StudentID AS StudentID,S.StudentName,p.ProgramID,s.TutorialGroupID, g.TutorialGrpName FROM( SELECT c.CourseID, c.CourseName, v.IntakeID, v.TutorialGrpID FROM Course c, CourseAvailable v, TutorialGroup g WHERE v.Status = 1 AND c.CourseID = v.CourseID AND v.LecturerID = @lecID AND c.CourseID = @courseID AND v.IntakeID = @intakeID GROUP BY c.CourseID, c.CourseName, v.IntakeID, v.TutorialGrpID)a LEFT JOIN Intake i ON a.IntakeID = i.IntakeID LEFT JOIN TutorialGroup g ON a.TutorialGrpID = g.TutorialGrpID LEFT JOIN Student s ON s.IntakeID = i.IntakeID AND g.TutorialGrpID = s.TutorialGroupID LEFT JOIN Tutorial t ON a.CourseID = t.CourseID AND t.Status = 1 AND t.TutorialID = @tutID LEFT JOIN TutorialCheck k ON t.TutorialID = k.TutorialID AND s.StudentID = k.StudentID left join Program p ON i.ProgramID = p.ProgramID WHERE k.CheckID IS NULL GROUP BY S.StudentID,S.StudentName,p.ProgramID,s.TutorialGroupID , g.TutorialGrpName ORDER BY  g.TutorialGrpName ASC";
+                            sql = "SELECT S.StudentID AS StudentID,S.StudentName,p.ProgramID,s.TutorialGroupID, g.TutorialGrpName FROM( SELECT c.CourseID, c.CourseName, v.IntakeID, v.TutorialGrpID FROM Course c, CourseAvailable v, TutorialGroup g WHERE v.Status = 1 AND c.CourseID = v.CourseID AND v.LecturerID = @lecID AND c.CourseID = @courseID AND v.IntakeID = @intakeID GROUP BY c.CourseID, c.CourseName, v.IntakeID, v.TutorialGrpID)a LEFT JOIN Intake i ON a.IntakeID = i.IntakeID LEFT JOIN TutorialGroup g ON a.TutorialGrpID = g.TutorialGrpID LEFT JOIN Student s ON s.IntakeID = i.IntakeID AND g.TutorialGrpID = s.TutorialGroupID LEFT JOIN Tutorial t ON a.CourseID = t.CourseID AND t.Status = 1 AND t.TutorialID = @tutID LEFT JOIN TutorialCheck k ON t.TutorialID = k.TutorialID AND s.StudentID = k.StudentID left join Program p ON i.ProgramID = p.ProgramID WHERE (k.CheckID IS NULL OR CONVERT(date, k.CompletionDate) NOT BETWEEN CONVERT(date, t.StartDate) AND CONVERT(date, t.ExpiryDate)) AND s.StudentID IS NOT NULL GROUP BY S.StudentID,S.StudentName,p.ProgramID,s.TutorialGroupID , g.TutorialGrpName ORDER BY  g.TutorialGrpName ASC";
                             SqlCommand cmdGetStudNotComplete = new SqlCommand(sql, conn);
                             cmdGetStudNotComplete.Parameters.AddWithValue("@intakeID", intakeID);
                             cmdGetStudNotComplete.Parameters.AddWithValue("@courseID", courseID);
@@ -203,12 +204,13 @@ namespace AdaptiveLearningSystem
                     conn.Close();
 
                 }
-                else
-                {
-                    Response.Redirect("Login.aspx");
-                }
-
             }
+            else
+            {
+                Response.Redirect("Login.aspx");
+            }
+
+            
 
         }
 

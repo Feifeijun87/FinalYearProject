@@ -113,7 +113,7 @@ namespace AdaptiveLearningSystem
 
         protected void btnCreateTutorial_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("CreateTut.aspx");
         }
 
         protected void btnActivateTutorial_Click(object sender, EventArgs e)

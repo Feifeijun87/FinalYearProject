@@ -58,33 +58,6 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.WebControls.LinkButton LogOutLinkButton;
         
         /// <summary>
-        /// HomeLinkButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton HomeLinkButton;
-        
-        /// <summary>
-        /// ResultLinkButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ResultLinkButton;
-        
-        /// <summary>
-        /// ProfilesLinkButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ProfilesLinkButton;
-        
-        /// <summary>
         /// Panel1 control.
         /// </summary>
         /// <remarks>
