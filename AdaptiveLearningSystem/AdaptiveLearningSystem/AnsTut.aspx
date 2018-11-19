@@ -247,7 +247,7 @@
 </td>
                             </tr>
                             <tr>
-                                <td></td>
+                                <td>Point awarded time left : </td>
                                 <td>
                                     <asp:UpdatePanel ID="up1" runat="server" UpdateMode="always">
         <ContentTemplate>

@@ -430,6 +430,23 @@ namespace AdaptiveLearningSystem
                     listTempEasyQID.Clear();
                     listTempMedQID.Clear();
                     listTempHardQID.Clear();
+                    totalCount = 0;
+                    currCount = 0;
+                    randomQIDCount = 0;
+                    compEasy = 0;
+                    compMed = 0;
+                    compHard = 0;
+                    easyDone = 0;
+                    medDone = 0;
+                    hardDone = 0;
+                    easyLeft = 0;
+                    medLeft = 0;
+                    hardLeft = 0;
+                    totalQuestLeft = 0;
+                    listRandomQuestionID.Clear();
+                    listRandomQuestion.Clear();
+                    listRandomTime.Clear();
+                    listRandomLevel.Clear();
                     Response.Redirect("StudHome.aspx");
                 }
                 else
@@ -491,6 +508,23 @@ namespace AdaptiveLearningSystem
                             listTempEasyQID.Clear();
                             listTempMedQID.Clear();
                             listTempHardQID.Clear();
+                            totalCount = 0;
+                            currCount = 0;
+                            randomQIDCount = 0;
+                            compEasy = 0;
+                            compMed = 0;
+                            compHard = 0;
+                            easyDone = 0;
+                            medDone = 0;
+                            hardDone = 0;
+                            easyLeft = 0;
+                            medLeft = 0;
+                            hardLeft = 0;
+                            totalQuestLeft = 0;
+                            listRandomQuestionID.Clear();
+                            listRandomQuestion.Clear();
+                            listRandomTime.Clear();
+                            listRandomLevel.Clear();
                             ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('You has completed this tutorial'); window.location.href='StudHome.aspx';", true);
 
                         }
@@ -511,6 +545,24 @@ namespace AdaptiveLearningSystem
                         listTempEasyQID.Clear();
                         listTempMedQID.Clear();
                         listTempHardQID.Clear();
+
+                        totalCount = 0;
+                        currCount = 0;
+                        randomQIDCount=0;
+                        compEasy = 0;
+                        compMed = 0;
+                        compHard = 0;
+                        easyDone = 0;
+                        medDone = 0;
+                        hardDone = 0;
+                        easyLeft = 0;
+                        medLeft = 0;
+                        hardLeft = 0;
+                        totalQuestLeft = 0;
+                        listRandomQuestionID.Clear();
+                        listRandomQuestion.Clear();
+                        listRandomTime.Clear();
+                        listRandomLevel.Clear();
                         Response.Redirect("StudHome.aspx");
                     }
                     else
@@ -526,11 +578,7 @@ namespace AdaptiveLearningSystem
             {
                 //this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('You clicked NO!')", true);
             }
-
-
-           
-
-
+            
         }
 
         Random rnd = new Random();

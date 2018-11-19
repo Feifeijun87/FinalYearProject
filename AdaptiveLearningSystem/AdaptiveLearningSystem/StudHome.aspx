@@ -150,7 +150,7 @@
 
                                                 <div class="tutorialDetail" style="font-size: 8pt; margin-top: 20px; position: absolute">
 
-                                                    <asp:Label ID="lblDone" runat="server" Text='<%# Eval("Done Question") %>'></asp:Label>/<asp:Label ID="lbltotalquest" runat="server" Text='<%#  Eval("NoOfQuestion") %>'></asp:Label>
+                                                    <asp:Label ID="lblDone" runat="server" Text='<%# Eval("Done Question") %>'></asp:Label>/<asp:Label ID="lbltotalquest" runat="server" Text='<%#  Eval("NoOfQuestion") %>'></asp:Label> question answered
                                                 </div>
 
                                                 <div class="tutorialDetail" style="font-size: 8pt; margin-top: 32px; position: absolute">

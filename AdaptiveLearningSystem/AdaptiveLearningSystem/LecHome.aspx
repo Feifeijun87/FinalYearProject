@@ -207,7 +207,7 @@
 
                             <div class="tutorialDetail" style="font-size: 8pt; margin-top: 20px; position: absolute">
 
-                                <asp:Label ID="Label5" runat="server"><%# Eval("doneNumber") %> / <%# Eval("totalStud") %> done</asp:Label>
+                                <asp:Label ID="Label5" runat="server"><%# Eval("doneNumber") %> / <%# Eval("totalStud") %> students done</asp:Label>
                             </div>
 
                             <div class="tutorialDetail" style="font-size: 8pt; margin-top: 32px; position: absolute">
