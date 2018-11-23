@@ -105,13 +105,13 @@
                 <asp:Label ID="lblCourseName" runat="server" Text='<%# String.Concat( Eval("CourseID").ToString().Trim(),"-",  Eval("CourseName").ToString().Trim())%>' ></asp:Label>
                 </div>
                 <div class="CourseDetails">
-                    <asp:Label ID="lblTutorial" runat="server" Text='<%# String.Concat( Eval("NoOfTutorial") ," Tutorials")%>'></asp:Label>
+                    <asp:Label ID="lblTutorial" runat="server" Text='<%# String.Concat( Eval("NoOfTutorial") ," Tutorials Created")%>'></asp:Label>
                     <asp:Label ID="Label4" runat="server" Text=" |"></asp:Label>
                     <asp:Label ID="lblGroup" runat="server" Text='<%# String.Concat( Eval("NoOfGroup")," Tutorial Groups" )%> '></asp:Label>
                 </div>
                     </div>
                 <div class="CourseButtonGroup">
-                    <asp:Button CssClass="SelectButton CourseButton" ID="btnGoTutorial" runat="server" Text="Select" CommandName="select" /><asp:Button CssClass="DropButton CourseButton" ID="btnDrop" runat="server" Text="Drop" CommandName="drop" />
+                    <asp:Button CssClass="SelectButton CourseButton" ID="btnGoTutorial" runat="server" Text="Select" CommandName="select" /><asp:Button CssClass="DropButton CourseButton" ID="btnDrop" runat="server" Text="Drop Tutorial Group" CommandName="drop" />
                 </div>
             </div>
             

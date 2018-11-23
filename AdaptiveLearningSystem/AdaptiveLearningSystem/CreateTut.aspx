@@ -246,7 +246,7 @@
                             </tr>
 
                             <tr>
-                                <td class="auto-style4">Maximum Completion Time:<br />
+                                <td class="auto-style4">Point awarded time:<br />
                                     &nbsp;</td>
                                <td class="auto-style4">
                                     <asp:DropDownList ID="ddlCompleteTime" runat="server" Width="104px" Height="30px">
@@ -286,7 +286,7 @@
 
                     <div class="BottomButtonGroup">
                         <asp:Button CssClass="BottomButton" ID="btnRemove" runat="server" Text="Remove this question" OnClick="btnRemove_Click" Visible="False" />
-                        <asp:Button CssClass="BottomButton" ID="btnBack" runat="server" OnClick="Button1_Click" Text="Back" Visible="False" />
+                        <asp:Button CssClass="BottomButton" ID="btnBack" runat="server" OnClick="Button1_Click" Text="Previous" Visible="False" />
                         <asp:Button CssClass="BottomButton" ID="btnNext" runat="server" OnClick="Button2_Click" Text="Next" />
                         <asp:Button CssClass="BottomButton" ID="btnReset" runat="server" OnClick="Button3_Click" Text="Reset" Visible="False" />
                         <asp:Button CssClass="BottomButton" ID="btnFin" runat="server" OnClick="Button4_Click" Text="Finish" style="width: 122px" />

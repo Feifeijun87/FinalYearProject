@@ -85,7 +85,7 @@
             <%-- Content Code Below --%>
         <div class="wrap-content">
             <div class="Header">
-                <h1><i>Drop Course</i>
+                <h1><i>Drop Tutorial Group</i>
                 </h1>
             </div>
        <div class="Header">
