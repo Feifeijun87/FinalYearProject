@@ -10,7 +10,7 @@
 namespace AdaptiveLearningSystem {
     
     
-    public partial class LecResultHome {
+    public partial class reportQuestbyTutGroup {
         
         /// <summary>
         /// form1 control.
@@ -20,6 +20,15 @@ namespace AdaptiveLearningSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        
+        /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
         /// profilePic control.
@@ -40,6 +49,15 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.WebControls.Label lblUserName;
         
         /// <summary>
+        /// ProfileLinkButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton ProfileLinkButton;
+        
+        /// <summary>
         /// LogOutLinkButton control.
         /// </summary>
         /// <remarks>
@@ -58,22 +76,13 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.WebControls.LinkButton HomeLinkButton;
         
         /// <summary>
-        /// MyCourseLinkButton control.
+        /// TutorialLinkButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton MyCourseLinkButton;
-        
-        /// <summary>
-        /// EnrollCourseLinkButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton EnrollCourseLinkButton;
+        protected global::System.Web.UI.WebControls.LinkButton TutorialLinkButton;
         
         /// <summary>
         /// ResultLinkButton control.
@@ -94,31 +103,13 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.WebControls.LinkButton ProfilesLinkButton;
         
         /// <summary>
-        /// ScriptManager1 control.
+        /// Panel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
-        
-        /// <summary>
-        /// UpdatePanel1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
-        /// <summary>
-        /// radReportSelect control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList radReportSelect;
+        protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
         /// lblCourse control.
@@ -130,22 +121,13 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.WebControls.Label lblCourse;
         
         /// <summary>
-        /// ddlCourse control.
+        /// lblTutorial control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCourse;
-        
-        /// <summary>
-        /// lblNoIntake control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNoIntake;
+        protected global::System.Web.UI.WebControls.Label lblTutorial;
         
         /// <summary>
         /// lblIntake control.
@@ -157,75 +139,147 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.WebControls.Label lblIntake;
         
         /// <summary>
-        /// ddlIntake control.
+        /// lblTutGrp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlIntake;
+        protected global::System.Web.UI.WebControls.Label lblTutGrp;
         
         /// <summary>
-        /// lblNoTutorial control.
+        /// container control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNoTutorial;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl container;
         
         /// <summary>
-        /// lblTutorial control.
+        /// Repeater1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTutorial;
+        protected global::System.Web.UI.WebControls.Repeater Repeater1;
         
         /// <summary>
-        /// ddlTutorial control.
+        /// lblTutComplete control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTutorial;
+        protected global::System.Web.UI.WebControls.Label lblTutComplete;
         
         /// <summary>
-        /// lblNoTutGroup control.
+        /// container1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNoTutGroup;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl container1;
         
         /// <summary>
-        /// lblTutGroup control.
+        /// Repeater3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTutGroup;
+        protected global::System.Web.UI.WebControls.Repeater Repeater3;
         
         /// <summary>
-        /// ddlTutGroup control.
+        /// lblBack control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTutGroup;
+        protected global::System.Web.UI.WebControls.Button lblBack;
         
         /// <summary>
-        /// btnDone control.
+        /// lblSavePDF control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDone;
+        protected global::System.Web.UI.WebControls.Button lblSavePDF;
+        
+        /// <summary>
+        /// Panel2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel2;
+        
+        /// <summary>
+        /// lblCourse2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCourse2;
+        
+        /// <summary>
+        /// lblTutorial2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTutorial2;
+        
+        /// <summary>
+        /// lblIntake2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblIntake2;
+        
+        /// <summary>
+        /// lblTutGrp2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTutGrp2;
+        
+        /// <summary>
+        /// Repeater2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater Repeater2;
+        
+        /// <summary>
+        /// lblTutComplete1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTutComplete1;
+        
+        /// <summary>
+        /// Repeater4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater Repeater4;
     }
 }

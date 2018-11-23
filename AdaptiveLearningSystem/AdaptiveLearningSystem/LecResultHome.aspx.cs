@@ -24,7 +24,7 @@ namespace AdaptiveLearningSystem
                 {
                     lecID = Session["lecturerID"].ToString();
                     lblUserName.Text = Session["lecName"].ToString();
-                    sql = "SELECT v.IntakeID FROM CourseAvailable v WHERE v.Status = 1 AND v.LecturerID = @lecID GROUP BY v.IntakeID";
+                    sql = "SELECT DISTINCT c.CourseID + c.CourseName AS Course FROM CourseAvailable v, Course c WHERE v.Status = 1 AND v.LecturerID = @lecID AND v.CourseID = c.CourseID GROUP BY c.CourseID + c.CourseName";
                     SqlCommand cmdGetIntake = new SqlCommand(sql, conn);
                     cmdGetIntake.Parameters.AddWithValue("@lecID", Session["lecturerID"].ToString());
                     DataTable dt = new DataTable();
@@ -35,22 +35,22 @@ namespace AdaptiveLearningSystem
                     sda.Fill(dt);
                     if (dt != null && dt.Rows.Count > 0)
                     {
-                        lblIntake.Visible = true;
-                        ddlIntake.Visible = true;
+                        lblCourse.Visible = true;
+                        ddlCourse.Visible = true;
                         lblNoIntake.Visible = false;
 
-                        ddlIntake.DataTextField = "IntakeID";
-                        ddlIntake.DataValueField = "IntakeID";
-                        ddlIntake.DataSource = dt;
-                        ddlIntake.DataBind();
-                        ddlIntake.Items.Insert(0, new ListItem(String.Empty, String.Empty));
-                        ddlIntake.SelectedIndex = 0;
+                        ddlCourse.DataTextField = "Course";
+                        ddlCourse.DataValueField = "Course";
+                        ddlCourse.DataSource = dt;
+                        ddlCourse.DataBind();
+                        ddlCourse.Items.Insert(0, new ListItem(String.Empty, String.Empty));
+                        ddlCourse.SelectedIndex = 0;
 
                     }
                     else
                     {
-                        lblIntake.Visible = false;
-                        ddlIntake.Visible = false;
+                        lblCourse.Visible = false;
+                        ddlCourse.Visible = false;
                         lblNoIntake.Visible = true;
                     }
                     conn.Close();
@@ -63,8 +63,8 @@ namespace AdaptiveLearningSystem
 
         protected void RadioButtonList1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lblCourse.Visible = false;
-            ddlCourse.Visible = false;
+            lblIntake.Visible = false;
+            ddlIntake.Visible = false;
             lblTutorial.Visible = false;
             ddlTutorial.Visible = false;
             lblTutGroup.Visible = false;
@@ -81,53 +81,13 @@ namespace AdaptiveLearningSystem
         protected void ddlIntake_SelectedIndexChanged(object sender, EventArgs e)
         {
             intakeID = ddlIntake.SelectedValue;
-            sql = " SELECT DISTINCT c.CourseID + ' ' + c.CourseName AS Course FROM CourseAvailable a, Course c WHERE a.IntakeID = @intakeID AND a.LecturerID = @lecID AND a.CourseID = c.CourseID AND a.Status =1";
+            sql = "SELECT DISTINCT  CONVERT(varchar,'T') + CONVERT(varchar,t.TutorialNumber ) + ' ' + t.ChapterName AS Tutorial  FROM Tutorial t WHERE  t.CourseID = @courseID AND t.Status = 1";
             SqlCommand cmdGetCourse = new SqlCommand(sql, conn);
-            cmdGetCourse.Parameters.AddWithValue("@intakeID", intakeID);
-            cmdGetCourse.Parameters.AddWithValue("@lecID", Session["lecturerID"].ToString());
+            cmdGetCourse.Parameters.AddWithValue("@courseID", courseID);
             DataTable dt = new DataTable();
             cmdGetCourse.CommandType = CommandType.Text;
             SqlDataAdapter sda = new SqlDataAdapter();
             sda.SelectCommand = cmdGetCourse;
-            conn.Close();
-            conn.Open();
-            sda.Fill(dt);
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                lblCourse.Visible = true;
-                ddlCourse.Visible = true;
-
-                ddlCourse.DataTextField = "Course";
-                ddlCourse.DataValueField = "Course";
-                ddlCourse.DataSource = dt;
-                ddlCourse.DataBind();
-                ddlCourse.Items.Insert(0, new ListItem(String.Empty, String.Empty));
-                ddlCourse.SelectedIndex = 0;
-                lblNoIntake.Visible = false;
-            }
-            else
-            {
-                lblNoIntake.Visible = true;
-            }
-            conn.Close();
-
-        }
-
-        protected void ddlCourse_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //sql here
-            sql = "SELECT DISTINCT  CONVERT(varchar,'T') + CONVERT(varchar,t.TutorialNumber ) + ' ' + t.ChapterName AS Tutorial FROM Tutorial t WHERE  t.CourseID = @courseID AND t.Status = 1";
-            SqlCommand cmdGetTut = new SqlCommand(sql, conn);
-            string course = ddlCourse.SelectedItem.Text;
-            char delimiters = ' ';
-            string[] splitArray = course.Split(delimiters);
-            courseID = splitArray[0];
-
-            cmdGetTut.Parameters.AddWithValue("@courseID", courseID);
-            DataTable dt = new DataTable();
-            cmdGetTut.CommandType = CommandType.Text;
-            SqlDataAdapter sda = new SqlDataAdapter();
-            sda.SelectCommand = cmdGetTut;
             conn.Close();
             conn.Open();
             sda.Fill(dt);
@@ -142,6 +102,43 @@ namespace AdaptiveLearningSystem
                 ddlTutorial.DataBind();
                 ddlTutorial.Items.Insert(0, new ListItem(String.Empty, String.Empty));
                 ddlTutorial.SelectedIndex = 0;
+            }
+            else
+            {
+                lblNoTutorial.Visible = true;
+            }
+            conn.Close();
+
+        }
+
+        protected void ddlCourse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //sql here
+            sql = "SELECT v.IntakeID  FROM CourseAvailable v WHERE v.Status = 1 AND v.LecturerID = @lecID AND v.CourseID = @courseID GROUP BY v.IntakeID";
+            SqlCommand cmdGetTut = new SqlCommand(sql, conn);
+            string course = ddlCourse.SelectedItem.Text;
+            char delimiters = ' ';
+            string[] splitArray = course.Split(delimiters);
+            courseID = splitArray[0];
+            cmdGetTut.Parameters.AddWithValue("@lecID", Session["lecturerID"].ToString());
+            cmdGetTut.Parameters.AddWithValue("@courseID", courseID);
+            DataTable dt = new DataTable();
+            cmdGetTut.CommandType = CommandType.Text;
+            SqlDataAdapter sda = new SqlDataAdapter();
+            sda.SelectCommand = cmdGetTut;
+            conn.Close();
+            conn.Open();
+            sda.Fill(dt);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                lblIntake.Visible = true;
+                ddlIntake.Visible = true;
+                ddlIntake.DataTextField = "IntakeID";
+                ddlIntake.DataValueField = "IntakeID";
+                ddlIntake.DataSource = dt;
+                ddlIntake.DataBind();
+                ddlIntake.Items.Insert(0, new ListItem(String.Empty, String.Empty));
+                ddlIntake.SelectedIndex = 0;
                 lblNoTutorial.Visible = false;
 
             }
@@ -166,22 +163,29 @@ namespace AdaptiveLearningSystem
 
         protected void btnDone_Click(object sender, EventArgs e)
         {
-            if (radReportSelect.SelectedValue == "tutGroup")
+            if (radReportSelect.SelectedValue == "tutGroup") // std perf by tut grp
             {
-                Response.Redirect("reportTutGroup.aspx?intake=" + ddlIntake.SelectedValue.ToString() + "&course=" + ddlCourse.SelectedValue.ToString() + "&tutorial= " + ddlTutorial.SelectedValue.ToString() + "&tutGroup=" + ddlTutGroup.SelectedValue.ToString());
-                //Label1.Text =" intake = " + ddlIntake.SelectedValue.ToString() + " & course = " + ddlCourse.SelectedValue.ToString() +" & tutorial = " + ddlTutorial.SelectedValue.ToString() + " & tutGroup = " + ddlTutGroup.SelectedValue.ToString();
-
+                Response.Redirect("reportStdPerfbyTutGroup.aspx?intake=" + ddlIntake.SelectedValue.ToString() + "&course=" + ddlCourse.SelectedValue.ToString() + "&tutorial= " + ddlTutorial.SelectedValue.ToString() + "&tutGroup=" + ddlTutGroup.SelectedValue.ToString());
+            }
+            else if (radReportSelect.SelectedValue == "quest") //quest perf by prog
+            {
+                Response.Redirect("reportQuestbyProg.aspx?intake=" + ddlIntake.SelectedValue.ToString() + "&course=" + ddlCourse.SelectedValue.ToString() + "&tutorial= " + ddlTutorial.SelectedValue.ToString());
+            }
+            else if(radReportSelect.SelectedValue == "tutProg") //std perf by prog
+            {
+                Response.Redirect("reportStdPerfbyProg.aspx?intake=" + ddlIntake.SelectedValue.ToString() + "&course=" + ddlCourse.SelectedValue.ToString() + "&tutorial= " + ddlTutorial.SelectedValue.ToString() + "&tutGroup=" + ddlTutGroup.SelectedValue.ToString());
 
             }
-            else if (radReportSelect.SelectedValue == "quest")
+            else if(radReportSelect.SelectedValue== "questGroup") //quest perf by tut grp
             {
-                Response.Redirect("reportQuest.aspx?intake=" + ddlIntake.SelectedValue.ToString() + "&course=" + ddlCourse.SelectedValue.ToString() + "&tutorial= " + ddlTutorial.SelectedValue.ToString());
+                Response.Redirect("reportQuestbyTutGroup.aspx?intake=" + ddlIntake.SelectedValue.ToString() + "&course=" + ddlCourse.SelectedValue.ToString() + "&tutorial= " + ddlTutorial.SelectedValue.ToString());
+
             }
         }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (radReportSelect.SelectedValue == "tutGroup")
+            if (radReportSelect.SelectedValue == "tutGroup" || radReportSelect.SelectedValue == "questGroup")
             {
                 lblNoTutorial.Visible = false;
                 //sql here

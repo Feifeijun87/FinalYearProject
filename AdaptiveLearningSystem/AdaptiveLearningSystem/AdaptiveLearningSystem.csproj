@@ -158,8 +158,10 @@
     <Content Include="Login.aspx" />
     <Content Include="Login.css" />
     <Content Include="ProfileLec.css" />
-    <Content Include="reportQuest.aspx" />
-    <Content Include="reportTutGroup.aspx" />
+    <Content Include="reportStdPerfbyProg.aspx" />
+    <Content Include="reportQuestbyProg.aspx" />
+    <Content Include="reportQuestbyTutGroup.aspx" />
+    <Content Include="reportStdPerfbyTutGroup.aspx" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="StudentForgetPass.aspx" />
@@ -295,19 +297,33 @@
       <DependentUpon>profilePic.ashx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="reportQuest.aspx.cs">
-      <DependentUpon>reportQuest.aspx</DependentUpon>
+    <Compile Include="reportStdPerfbyProg.aspx.cs">
+      <DependentUpon>reportStdPerfbyProg.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="reportQuest.aspx.designer.cs">
-      <DependentUpon>reportQuest.aspx</DependentUpon>
+    <Compile Include="reportStdPerfbyProg.aspx.designer.cs">
+      <DependentUpon>reportStdPerfbyProg.aspx</DependentUpon>
     </Compile>
-    <Compile Include="reportTutGroup.aspx.cs">
-      <DependentUpon>reportTutGroup.aspx</DependentUpon>
+    <Compile Include="reportQuestbyProg.aspx.cs">
+      <DependentUpon>reportQuestbyProg.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="reportTutGroup.aspx.designer.cs">
-      <DependentUpon>reportTutGroup.aspx</DependentUpon>
+    <Compile Include="reportQuestbyProg.aspx.designer.cs">
+      <DependentUpon>reportQuestbyProg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="reportQuestbyTutGroup.aspx.cs">
+      <DependentUpon>reportQuestbyTutGroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="reportQuestbyTutGroup.aspx.designer.cs">
+      <DependentUpon>reportQuestbyTutGroup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="reportStdPerfbyTutGroup.aspx.cs">
+      <DependentUpon>reportStdPerfbyTutGroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="reportStdPerfbyTutGroup.aspx.designer.cs">
+      <DependentUpon>reportStdPerfbyTutGroup.aspx</DependentUpon>
     </Compile>
     <Compile Include="StudentForgetPass.aspx.cs">
       <DependentUpon>StudentForgetPass.aspx</DependentUpon>
