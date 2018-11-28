@@ -33,6 +33,7 @@ namespace AdaptiveLearningSystem
                 Session["tutCourse"] = course;
                 Session["tutTutorial"] = tutorial;
                 Session["tutTutGroup"] = tutGroupID;
+                Session["prevpage"] = "tut";
                 Response.Redirect("StudIndiResult.aspx?course=" + courseID + "&coursename=" + coursename + "&tutNum=" + ("T" + tutNum) + "&tutTitle=" + tutTitle + "&studID=" + studentID);
 
 
@@ -159,7 +160,7 @@ namespace AdaptiveLearningSystem
                         int studDone = (int)cmdDone.ExecuteScalar();
                         conn.Close();
 
-                        sql = "SELECT COUNT(s.StudentID) FROM Student s, CourseAvailable a WHERE a.IntakeID = @intakeID AND a.CourseID = @courseID AND a.TutorialGrpID = @tutGrpID AND a.TutorialGrpID = s.TutorialGroupID AND a.LecturerID = @lecID AND a.Status = 1";
+                        sql = "SELECT COUNT(s.StudentID) FROM Student s, CourseAvailable a WHERE a.IntakeID = @intakeID AND a.CourseID = @courseID AND a.TutorialGrpID = @tutGrpID AND a.TutorialGrpID = s.TutorialGroupID AND a.LecturerID = @lecID AND a.Status = 1 AND a.IntakeID = s.IntakeID";
                         SqlCommand cmdTotal = new SqlCommand(sql, conn);
                         cmdTotal.Parameters.AddWithValue("@intakeID", intakeID);
                         cmdTotal.Parameters.AddWithValue("@courseID", courseID);
@@ -247,7 +248,7 @@ namespace AdaptiveLearningSystem
                     XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
                     pdfDoc.Close();
                     Response.ContentType = "application/pdf";
-                    Response.AddHeader("content-disposition", "attachment;filename=TutGroupResult.pdf");
+                    Response.AddHeader("content-disposition", "attachment;filename=ReportStdPerfbyTutGroup.pdf");
                     Response.Cache.SetCacheability(HttpCacheability.NoCache);
                     Response.Write(pdfDoc);
                     Response.End();

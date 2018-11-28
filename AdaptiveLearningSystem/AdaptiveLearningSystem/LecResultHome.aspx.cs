@@ -63,6 +63,8 @@ namespace AdaptiveLearningSystem
 
         protected void RadioButtonList1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            lblNoIntake.Visible = false;
+            lblNoTutorial.Visible = false;
             lblIntake.Visible = false;
             ddlIntake.Visible = false;
             lblTutorial.Visible = false;
@@ -70,7 +72,7 @@ namespace AdaptiveLearningSystem
             lblTutGroup.Visible = false;
             ddlTutGroup.Visible = false;
             lblNoTutGroup.Visible = false;
-            ddlIntake.SelectedIndex = 0;
+            ddlCourse.SelectedIndex = 0;
             btnDone.Visible = false;
             
             //Label1.Text = "";
@@ -81,6 +83,7 @@ namespace AdaptiveLearningSystem
         protected void ddlIntake_SelectedIndexChanged(object sender, EventArgs e)
         {
             intakeID = ddlIntake.SelectedValue;
+
             sql = "SELECT DISTINCT  CONVERT(varchar,'T') + CONVERT(varchar,t.TutorialNumber ) + ' ' + t.ChapterName AS Tutorial  FROM Tutorial t WHERE  t.CourseID = @courseID AND t.Status = 1";
             SqlCommand cmdGetCourse = new SqlCommand(sql, conn);
             cmdGetCourse.Parameters.AddWithValue("@courseID", courseID);
@@ -173,13 +176,11 @@ namespace AdaptiveLearningSystem
             }
             else if(radReportSelect.SelectedValue == "tutProg") //std perf by prog
             {
-                Response.Redirect("reportStdPerfbyProg.aspx?intake=" + ddlIntake.SelectedValue.ToString() + "&course=" + ddlCourse.SelectedValue.ToString() + "&tutorial= " + ddlTutorial.SelectedValue.ToString() + "&tutGroup=" + ddlTutGroup.SelectedValue.ToString());
-
+                Response.Redirect("reportStdPerfbyProg.aspx?intake=" + ddlIntake.SelectedValue.ToString() + "&course=" + ddlCourse.SelectedValue.ToString() + "&tutorial= " + ddlTutorial.SelectedValue.ToString());
             }
             else if(radReportSelect.SelectedValue== "questGroup") //quest perf by tut grp
             {
-                Response.Redirect("reportQuestbyTutGroup.aspx?intake=" + ddlIntake.SelectedValue.ToString() + "&course=" + ddlCourse.SelectedValue.ToString() + "&tutorial= " + ddlTutorial.SelectedValue.ToString());
-
+                Response.Redirect("reportQuestbyTutGroup.aspx?intake=" + ddlIntake.SelectedValue.ToString() + "&course=" + ddlCourse.SelectedValue.ToString() + "&tutorial= " + ddlTutorial.SelectedValue.ToString() + "&tutGroup=" + ddlTutGroup.SelectedValue.ToString());
             }
         }
 
@@ -225,7 +226,7 @@ namespace AdaptiveLearningSystem
                 }
                 conn.Close();
             }
-            else if (radReportSelect.SelectedValue == "quest")
+            else
             {
                 lblTutGroup.Visible = false;
                 ddlTutGroup.Visible = false;

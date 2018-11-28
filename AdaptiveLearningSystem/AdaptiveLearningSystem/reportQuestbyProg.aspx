@@ -140,7 +140,7 @@
                 <tr>
                     <td>
                         <div class="Header">
-                <h1><i>Tutorial Question Performance</i></h1>
+                <h1><i>Tutorial Question Performance by Programme</i></h1>
             </div>
                     </td>
                 </tr>
@@ -195,8 +195,13 @@
                         <tr><td><br /></td></tr>
                     <tr><td>
                         Tutorial Completion : 
-                        <asp:Label ID="lblTutComplete" runat="server"></asp:Label> students
+                        <asp:Label ID="lblTutComplete" runat="server"></asp:Label> students have completed the tutorial
                         </td></tr>
+                    <tr>
+                        <td>
+                            <hr />
+                        </td>
+                    </tr>
                 </table>
                   </div>
                       
@@ -250,7 +255,7 @@
                 <tr>
                     <td>
                         
-                <h1><i>Tutorial Question Performance</i></h1>
+                <h1><i>Tutorial Question Performance by Programme</i></h1>
             
                     </td>
                 </tr>
@@ -305,7 +310,7 @@
         </asp:Repeater>
                 <tr><td>
                         Tutorial Completion : 
-                        <asp:Label ID="lblTutComplete1" runat="server"></asp:Label> students
+                        <asp:Label ID="lblTutComplete1" runat="server"></asp:Label> students have completed the tutorial
                         </td></tr>
                  <tr>
                      <td>

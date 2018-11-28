@@ -196,12 +196,17 @@
                      Average Points : <asp:Label ID="lblAvgPoint" runat="server" Text='<%# Eval("Average Points")%>'></asp:Label>
                     
                     </td></tr>
+                                 <tr>
+                                     <td>
+                                         <hr />
+                                     </td>
+                                 </tr>
                                  </ItemTemplate>
         </asp:Repeater>
                         <tr><td><br /></td></tr>
                     <tr><td>
                         Tutorial Completion : 
-                        <asp:Label ID="lblTutComplete" runat="server"></asp:Label> students
+                        <asp:Label ID="lblTutComplete" runat="server"></asp:Label> students have completed the tutorial
                         </td></tr>
                 </table>
                   </div>
@@ -214,7 +219,9 @@
                        <div class="container" runat="server" id="container1">
                             <div class="MyCourseList"> 
                 <table style="margin-left: 20px; border-bottom-style: none;" class="auto-style1">   
-                                       <tr><td>Student who did not completed the tutorial : </td></tr> 
+                                       <tr><td>
+                                           <br />
+                                           Student who did not completed the tutorial : </td></tr> 
                         <asp:Repeater ID="Repeater3"  runat="server">
                              <ItemTemplate>
                                  <tr><td class="auto-style5">
@@ -318,8 +325,14 @@
         </asp:Repeater>
                 <tr><td>
                         Tutorial Completion : 
-                        <asp:Label ID="lblTutComplete1" runat="server"></asp:Label> students
+                        <asp:Label ID="lblTutComplete1" runat="server"></asp:Label> students have completed the tutorial
                         </td></tr>
+                <tr>
+                    <td>
+                        <br />
+                        <br />
+                    </td>
+                </tr>
                  <tr>
                      <td>
                          

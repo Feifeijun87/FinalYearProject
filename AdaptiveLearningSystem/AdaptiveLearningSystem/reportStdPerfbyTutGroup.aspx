@@ -63,10 +63,6 @@
             width: 100%;
         }
 
-        .auto-style9 {
-            height: 31px;
-        }
-
         </style>
 </head>
 <body>
@@ -114,7 +110,7 @@
                 <tr>
                     <td colspan="2">
                         <div class="Header">
-                <h1><i>Tutorial Group Performance</i></h1>
+                <h1><i>Student Performance by Tutorial Group</i></h1>
             </div>
                     </td>
                 </tr>
@@ -182,8 +178,7 @@
                         </div></td></tr>
                 <tr><td colspan="2">
                         Tutorial Completion : 
-                        <asp:Label ID="lblTutComplete" runat="server"></asp:Label> students
-                        </td></tr>
+                        <asp:Label ID="lblTutComplete" runat="server"></asp:Label> students have completed the tutorial</td></tr>
                  <tr>
                    <td colspan="2">
                        <div class="container" runat="server" id="Div1">
@@ -238,7 +233,7 @@
                 <tr>
                     <td colspan="2">
                         
-                <h1><i>Tutorial Group Performance</i></h1>
+                <h1><i>Student Performance by Tutorial Group</i></h1>
                     </td>
                 </tr>
                  <tr style="font-family: Arial, Helvetica, sans-serif; font-size: medium">
@@ -305,7 +300,9 @@
                                     <asp:Label ID="lblStudName" runat="server" Width="180px" Text ='<%# String.Format("{0,-60}",Eval("StudentName"))%>' ></asp:Label>  
                        
                                 </td>
-                               
+                               <td>
+                                    <asp:Label ID="lblTutGrp" runat="server" Text="Tutorial Group"></asp:Label>
+                                </td>
                                 <td>
                                      <asp:Label ID="lblTotalScore" runat="server" Text='<%# String.Format("{0,4}",Eval("Total Score"))%>'></asp:Label>
                     
@@ -316,7 +313,7 @@
             </ItemTemplate>
         </asp:Repeater><tr><td colspan="3">
                         Tutorial Completion : 
-                       <asp:Label ID="lblkkk" runat="server" Text="Label"></asp:Label>students<br/><hr />
+                       <asp:Label ID="lblkkk" runat="server" Text="Label"></asp:Label>students have completed the tutorial<br/><hr />
                         </td></tr></table>
 </td></tr>
                 <tr>

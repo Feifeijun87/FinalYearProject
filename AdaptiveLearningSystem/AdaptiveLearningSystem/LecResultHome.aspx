@@ -176,7 +176,7 @@
                                       
                         </td>
                         <td>
-                            <asp:DropDownList ID="ddlIntake" runat="server" OnSelectedIndexChanged="ddlIntake_SelectedIndexChanged"  AutoPostBack="True" style="height: 29px" Visible="False">
+                            <asp:DropDownList ID="ddlIntake" runat="server" OnSelectedIndexChanged="ddlIntake_SelectedIndexChanged"  AutoPostBack="True" Visible="False">
                 </asp:DropDownList>
                         </td>
                     </tr>

@@ -162,7 +162,15 @@ namespace AdaptiveLearningSystem
         {
             if (Session["lecturerID"] != null)
             {
-                Response.Redirect("reportTutGroup.aspx", false);
+                if(Session["prevpage"].ToString() == "prog")
+                {
+                    Response.Redirect("reportStdPerfbyProg.aspx", false);
+                }
+                else
+                {
+                    Response.Redirect("reportStdPerfbyTutGroup.aspx", false);
+                }
+                
             }
             else if (Session["studID"] != null)
             {
