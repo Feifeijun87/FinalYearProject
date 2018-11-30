@@ -33,7 +33,7 @@ namespace AdaptiveLearningSystem
         List<string> listKey = new List<string>();
         List<int> listTime = new List<int>();
         List<int> listlevel = new List<int>();
-        static int oriQuestCount;
+        static int oriQuestCount, compEasy,compMed,compHard;
         static string courseID, coursename, tutNum, tutTitle, tutID;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -55,7 +55,7 @@ namespace AdaptiveLearningSystem
 
                     //get tutID
                     conn.Open();
-                    string sql = "SELECT TutorialID FROM Tutorial WHERE TutorialNumber = @tutNum AND CourseID = @courseID";
+                    string sql = "SELECT TutorialID, CompulsaryEasy,CompulsaryMedium,CompulsaryHard FROM Tutorial WHERE TutorialNumber = @tutNum AND CourseID = @courseID GROUP BY TutorialID, CompulsaryEasy,CompulsaryMedium,CompulsaryHard";
                     SqlCommand cmdGetTutID = new SqlCommand(sql, conn);
                     cmdGetTutID.Parameters.AddWithValue("@tutNum", tutNum);
                     cmdGetTutID.Parameters.AddWithValue("@courseID", courseID);
@@ -63,6 +63,9 @@ namespace AdaptiveLearningSystem
                     while (dtr.Read())
                     {
                         tutID = dtr.GetString(0);
+                        compEasy = dtr.GetInt32(1);
+                        compMed= dtr.GetInt32(2);
+                        compHard= dtr.GetInt32(3);
                     }
                     conn.Close();
 
@@ -359,6 +362,8 @@ namespace AdaptiveLearningSystem
             medium = 0;
             hard = 0;
 
+
+
             if (questGet == "" && ansGet == "" && keywGet == "" && question.Length == 0)
             {//no quest avai
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Please enter at least one question'); window.location.href='CreateTut.aspx';", true);
@@ -469,6 +474,10 @@ namespace AdaptiveLearningSystem
                         lblCompEasyNum.Text = easy.ToString();
                         lblCompMedNum.Text = medium.ToString();
                         lblCompDiffNum.Text = hard.ToString();
+                        txtEasy.Text = compEasy.ToString();
+                            txtMed.Text = compMed.ToString();
+                            txtDifficult.Text = compHard.ToString();
+
                         ModalPopupExtender3.Show();
                     }
                 }

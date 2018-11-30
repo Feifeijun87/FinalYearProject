@@ -228,7 +228,12 @@
                     <div class="auto-style2">
 
                         <table style="margin-left: 20px; border-bottom-style: none;" class="auto-style1">
+                           
                             <tr>
+                                <td  colspan="2">Please note that all tutorial question will not be save until you complete edit the whole tutorial and update the compulsory number of question for this tutorial.</td>
+                                
+                            </tr>
+                             <tr>
                                 <td class="auto-style4">Question
                                     <asp:Label ID="lblQNum" runat="server" Text="1"></asp:Label>
                                     :

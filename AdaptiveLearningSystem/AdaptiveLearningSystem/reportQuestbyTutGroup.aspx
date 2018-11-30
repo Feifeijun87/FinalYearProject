@@ -1,7 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="reportQuest.aspx.cs" Inherits="AdaptiveLearningSystem.reportQuest" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="reportQuestbyTutGroup.aspx.cs" Inherits="AdaptiveLearningSystem.reportQuestbyTutGroup" %>
 
 <!DOCTYPE html>
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -43,7 +42,7 @@
             float: left;
             width: 100%;
             clear: left;
-
+            border-bottom: 1px solid black;
         }
            .auto-style1 {
             height: 58px;
@@ -54,7 +53,7 @@
 }
         .auto-style5 {
             width: 646px;
-            height: 20px;
+            height: 50px;
         }
 
         </style>
@@ -91,21 +90,6 @@
         }
         .caption{
             display:block;
-        }
-
-        .MyCourseList2 {
-    float: left;
-    width: 100%;
-    clear: left;
-    border-bottom: 1px solid black;
-}
-
-    .MyCourseList2:hover {
-        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-    }
-
-        .MyCourseList2:hover .CourseButtonGroup {
-            display: inline-block;
         }
     </style>
 </head>
@@ -155,7 +139,7 @@
                 <tr>
                     <td>
                         <div class="Header">
-                <h1><i>Tutorial Question Performance</i></h1>
+                <h1><i>Tutorial Question Performance by Tutorial Group</i></h1>
             </div>
                     </td>
                 </tr>
@@ -181,17 +165,24 @@
                        
                                 </td>
                         </tr>
+                <tr>
+                    <td class="auto-style5">
+                                <label id="tutGrp" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Tutorial Group : 
+                                <asp:Label ID="lblTutGrp" runat="server"></asp:Label></label>
+                       
+                                </td>
+                </tr>
                           <tr><td>
                               <div class="container" runat="server" id="container">
                              
-                 <div class="MyCourseList"> 
+                 <div class="MyCourseList1"> 
                 <table style="margin-left: 20px; border-bottom-style: none;" class="auto-style1">                       
                         <asp:Repeater ID="Repeater1"  runat="server">
                              <ItemTemplate>
-                                 <tr><td>
+                                 <tr><td class="auto-style5">
                                 <asp:Label ID="lblNumber" runat="server" Width ="5px" Text='<%# Container.ItemIndex + 1 %>'> </asp:Label> . 
                
-                <asp:Label ID="lblStudentID" runat="server" Width ="90%" Text='<%#Eval("Question")%>' ></asp:Label>
+                <asp:Label ID="lblStudentID" runat="server" Width =" 110px" Text='<%#Eval("Question")%>' ></asp:Label>
                           </td></tr>
                     <tr><td>
                         Level : <asp:Label ID="lblStudName" runat="server" Width="180px" Text ='<%# Eval("Level")%>' ></asp:Label>  
@@ -205,13 +196,17 @@
                      Average Points : <asp:Label ID="lblAvgPoint" runat="server" Text='<%# Eval("Average Points")%>'></asp:Label>
                     
                     </td></tr>
-                                 <tr><td class="auto-style5"></td></tr>
+                                 <tr>
+                                     <td>
+                                         <hr />
+                                     </td>
+                                 </tr>
                                  </ItemTemplate>
         </asp:Repeater>
                         <tr><td><br /></td></tr>
                     <tr><td>
                         Tutorial Completion : 
-                        <asp:Label ID="lblTutComplete" runat="server"></asp:Label> students
+                        <asp:Label ID="lblTutComplete" runat="server"></asp:Label> students have completed the tutorial
                         </td></tr>
                 </table>
                   </div>
@@ -222,9 +217,11 @@
                <tr>
                    <td>
                        <div class="container" runat="server" id="container1">
-                            <div class="MyCourseList2"> 
+                            <div class="MyCourseList"> 
                 <table style="margin-left: 20px; border-bottom-style: none;" class="auto-style1">   
-                                       <tr><td>Student who did not completed the tutorial : </td></tr> 
+                                       <tr><td>
+                                           <br />
+                                           Student who did not completed the tutorial : </td></tr> 
                         <asp:Repeater ID="Repeater3"  runat="server">
                              <ItemTemplate>
                                  <tr><td class="auto-style5">
@@ -266,7 +263,7 @@
                 <tr>
                     <td>
                         
-                <h1><i>Tutorial Question Performance</i></h1>
+                <h1><i>Tutorial Question Performance by Tutorial Group</i></h1>
             
                     </td>
                 </tr>
@@ -293,6 +290,13 @@
                                 </label>
 
                                 </td></tr>
+                 <tr>
+                    <td class="auto-style5">
+                                <label id="tutGrp" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Tutorial Group : 
+                                <asp:Label ID="lblTutGrp2" runat="server"></asp:Label></label>
+                       
+                                </td>
+                </tr>
                            <tr><td><br /><hr /><br /></td></tr>
                         
                      <asp:Repeater ID="Repeater2"  runat="server" >
@@ -321,8 +325,14 @@
         </asp:Repeater>
                 <tr><td>
                         Tutorial Completion : 
-                        <asp:Label ID="lblTutComplete1" runat="server"></asp:Label> students
+                        <asp:Label ID="lblTutComplete1" runat="server"></asp:Label> students have completed the tutorial
                         </td></tr>
+                <tr>
+                    <td>
+                        <br />
+                        <br />
+                    </td>
+                </tr>
                  <tr>
                      <td>
                          
@@ -352,3 +362,4 @@
     </form>
 </body>
 </html>
+

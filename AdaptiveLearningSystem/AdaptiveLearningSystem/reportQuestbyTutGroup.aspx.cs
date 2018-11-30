@@ -14,16 +14,18 @@ using iTextSharp.text.pdf;
 using iTextSharp.text.html.simpleparser;
 using iTextSharp.tool.xml;
 
-
-
 namespace AdaptiveLearningSystem
 {
-    public partial class StudIndiResult : System.Web.UI.Page
+    public partial class reportQuestbyTutGroup : System.Web.UI.Page
     {
-
-        static string courseID, sql, tutTitle, courseName, studentID, tutNum;
-
         SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["fyp"].ConnectionString);
+
+        static string tutGroupID, lecID, intakeID, tutID, courseID, course, tutGroup, tutorial, tutNum, studentID, coursename, tutTitle;
+
+        protected void lblBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LecResultHome.aspx");
+        }
 
         protected void Button2_Click(object sender, EventArgs e)
         {
@@ -54,7 +56,7 @@ namespace AdaptiveLearningSystem
                     XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
                     pdfDoc.Close();
                     Response.ContentType = "application/pdf";
-                    Response.AddHeader("content-disposition", "attachment;filename=StudIndiResult.pdf");
+                    Response.AddHeader("content-disposition", "attachment;filename=ReportQuestPerfbyTutGroup.pdf");
                     Response.Cache.SetCacheability(HttpCacheability.NoCache);
                     Response.Write(pdfDoc);
                     Response.End();
@@ -65,63 +67,83 @@ namespace AdaptiveLearningSystem
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["lecturerID"] != null || Session["studID"] != null)
+            if (!IsPostBack)
             {
-                if (!IsPostBack)
+                if (Session["lecturerID"] != null)
                 {
-                    //course, coursename, tutNum, tutTitle, studID
-                    if(Session["lecturerID"] != null)
-                    {
-                        lblUserName.Text = Session["lecName"].ToString();
-                    }
-                    else
-                    {
-                        lblUserName.Text = Session["studName"].ToString();
-                    }
                     
+                    lecID = Session["lecturerID"].ToString();
 
-                    courseID = Request.QueryString["course"].ToString();
-                    courseName = Request.QueryString["coursename"].ToString();
-                    tutNum = Request.QueryString["tutNum"].ToString();
-                    studentID = Request.QueryString["studID"].ToString();
-                    tutTitle = Request.QueryString["tutTitle"].ToString();
+                    intakeID = Request.QueryString["intake"].ToString();//intakeID
+                    course = Request.QueryString["course"].ToString();//BASCXXXX Title
+                    tutorial = Request.QueryString["tutorial"].ToString();//T3 XXXX
+                    tutGroupID = Request.QueryString["tutGroup"].ToString();//tutgroupID
+
                     conn.Open();
-                    sql = "SELECT s.StudentID,s.StudentName,t.TutorialGrpName,s.IntakeID FROM Student s, TutorialGroup t WHERE StudentID = @studID AND s.TutorialGroupID = t.TutorialGrpID";
-                    SqlCommand cmdGetStud = new SqlCommand(sql, conn);
-                    cmdGetStud.Parameters.AddWithValue("@studID", studentID);
-                    SqlDataReader dtr = cmdGetStud.ExecuteReader();
-
+                    string sql = "SELECT TutorialGrpName FROM TutorialGroup WHERE TutorialGrpID = @tutGroupID";
+                    SqlCommand cmdGetTutGroup = new SqlCommand(sql, conn);
+                    cmdGetTutGroup.Parameters.AddWithValue("@tutGroupID", tutGroupID);
+                    SqlDataReader dtr = cmdGetTutGroup.ExecuteReader();
                     while (dtr.Read())
                     {
-                        lblStudID.Text = dtr.GetString(0);
-                        lblStudName.Text = dtr.GetString(1);
-                        lblTutGroup.Text = dtr.GetString(2);
-                        lblIntake.Text = dtr.GetString(3);
+                        tutGroup = dtr.GetString(0);
                     }
                     conn.Close();
 
 
-                    lblCourse.Text = courseID.ToString() + " " + courseName.ToString();
-                    lblTutorial.Text = tutNum.ToString();
-                    lblTitle.Text = tutTitle.ToString();
+                    lblCourse.Text = course.ToString();
+                    lblTutorial.Text = tutorial.ToString();
+                    lblIntake.Text = intakeID.ToString();
+                    lblTutGrp.Text = tutGroup.ToString();
 
                     lblCourse2.Text = lblCourse.Text;
                     lblTutorial2.Text = lblTutorial.Text;
-                    lblTitle2.Text = lblTitle.Text;
-                    lblStudID2.Text = lblStudID.Text;
-                    lblStudName2.Text = lblStudName.Text;
-                    lblTutGroup2.Text = lblTutGroup.Text;
                     lblIntake2.Text = lblIntake.Text;
+                    lblTutGrp2.Text = lblTutGrp.Text;
+
+                    coursename = "";
+                    tutTitle = "";
+
+                    char delimiters = ' ';
+                    string[] splitArray = course.Split(delimiters);
+                    courseID = splitArray[0]; //courseID
+                    for (int i = 1; i < splitArray.Length; i++)
+                    {
+                        coursename += splitArray[i] + " "; //coursename
+                    }
+                    coursename = coursename.TrimEnd();
+
+                    string[] splitArray1 = tutorial.Split(delimiters);
+                    tutNum = splitArray1[1];
+
+                    for (int i = 2; i < splitArray1.Length; i++)
+                    {
+                        tutTitle += splitArray1[i] + " "; //coursename
+                    }
+                    tutTitle = tutTitle.TrimEnd();
 
                     StringBuilder sb = new StringBuilder(tutNum);
                     sb.Remove(0, 1);
                     tutNum = sb.ToString();
-                    sql = "SELECT q.Question, a.Answer, a.TimeSpent, a.MatchPercent, a.Points, q.SampleAns FROM Question q, StudAns a, Tutorial t WHERE t.CourseID = @courseID AND t.TutorialNumber = @tutNum AND a.StudentID = @studID AND q.QuestionID = a.QuestionID GROUP BY q.Question, a.Answer, a.TimeSpent, a.MatchPercent, a.Points, q.SampleAns ";
 
+                    conn.Open();
+                    sql = "SELECT TutorialID FROM Tutorial WHERE TutorialNumber = @tutNum AND CourseID = @courseID";
+                    SqlCommand cmdGetTutID = new SqlCommand(sql, conn);
+                    cmdGetTutID.Parameters.AddWithValue("@tutNum", tutNum);
+                    cmdGetTutID.Parameters.AddWithValue("@courseID", courseID);
+                    dtr = cmdGetTutID.ExecuteReader();
+                    while (dtr.Read())
+                    {
+                        tutID = dtr.GetString(0);
+                    }
+                    conn.Close();
+
+                    sql = "SELECT a.Question,a.Level, COUNT(n.AnswerID) AS 'Total Answer',ISNULL(AVG(n.Points),0) AS 'Average Points'  FROM (SELECT q.QuestionID, v.IntakeID, v.TutorialGrpID, t.TutorialID, q.Question, q.Level FROM Question q, Tutorial t, Course c, CourseAvailable v WHERE q.TutorialID = t.TutorialID AND t.CourseID = c.CourseID AND c.CourseID = v.CourseID AND t.TutorialID = @tutID AND v.LecturerID = @lecID AND v.IntakeID = @intakeID AND v.TutorialGrpID = @tutGrpID GROUP BY q.QuestionID, v.IntakeID, v.TutorialGrpID, t.TutorialID, q.Question, q.Level) a LEFT JOIN Intake i on i.IntakeID = a.IntakeID LEFT JOIN TutorialGroup g on g.TutorialGrpID = a.TutorialGrpID LEFT JOIN Student s on i.IntakeID = s.IntakeID AND s.TutorialGroupID = g.TutorialGrpID LEFT JOIN Tutorial t on t.TutorialID = a.TutorialID LEFT JOIN StudAns n on s.StudentID = n.StudentID AND n.QuestionID = a.QuestionID AND CONVERT(date, n.DateComplete) BETWEEN CONVERT(date, t.StartDate) AND CONVERT(date, t.ExpiryDate) GROUP BY a.Question, a.Level";
                     SqlCommand cmdGetResult = new SqlCommand(sql, conn);
-                    cmdGetResult.Parameters.AddWithValue("@courseID", courseID);
-                    cmdGetResult.Parameters.AddWithValue("@tutNum", tutNum);
-                    cmdGetResult.Parameters.AddWithValue("@studID", studentID);
+                    cmdGetResult.Parameters.AddWithValue("@tutID", tutID);
+                    cmdGetResult.Parameters.AddWithValue("@lecID", lecID);
+                    cmdGetResult.Parameters.AddWithValue("@intakeID", intakeID);
+                    cmdGetResult.Parameters.AddWithValue("@tutGrpID", tutGroupID);
                     DataTable dt = new DataTable();
                     cmdGetResult.CommandType = CommandType.Text;
                     SqlDataAdapter sda = new SqlDataAdapter();
@@ -131,72 +153,103 @@ namespace AdaptiveLearningSystem
                     sda.Fill(dt);
                     if (dt != null && dt.Rows.Count > 0)
                     {
-                        //NoResultPanel.Visible = false;
                         Repeater1.DataSource = dt;
                         Repeater1.DataBind();
                         Repeater2.DataSource = dt;
                         Repeater2.DataBind();
+                        conn.Close();
+
+                        sql = "SELECT COUNT(s.StudentID) FROM Student s, CourseAvailable a, TutorialCheck k WHERE a.IntakeID = @intakeID AND a.CourseID = @courseID AND k.TutorialID = @tutID AND a.TutorialGrpID = @tutGrpID AND a.TutorialGrpID = s.TutorialGroupID AND k.StudentID = s.StudentID AND a.LecturerID = @lecID AND a.Status = 1 ";
+                        SqlCommand cmdDone = new SqlCommand(sql, conn);
+                        cmdDone.Parameters.AddWithValue("@intakeID", intakeID);
+                        cmdDone.Parameters.AddWithValue("@courseID", courseID);
+                        cmdDone.Parameters.AddWithValue("@tutID", tutID);
+                        cmdDone.Parameters.AddWithValue("@tutGrpID", tutGroupID);
+                        cmdDone.Parameters.AddWithValue("@lecID", lecID);
+                        conn.Open();
+                        int studDone = (int)cmdDone.ExecuteScalar();
+                        conn.Close();
+
+                        sql = "SELECT COUNT(s.StudentID) FROM Student s, CourseAvailable a WHERE a.IntakeID = @intakeID AND a.CourseID = @courseID AND a.TutorialGrpID = @tutGrpID AND a.TutorialGrpID = s.TutorialGroupID AND a.LecturerID = @lecID AND a.Status = 1 AND a.IntakeID = s.IntakeID";
+                        SqlCommand cmdTotal = new SqlCommand(sql, conn);
+                        cmdTotal.Parameters.AddWithValue("@intakeID", intakeID);
+                        cmdTotal.Parameters.AddWithValue("@courseID", courseID);
+                        cmdTotal.Parameters.AddWithValue("@tutGrpID", tutGroupID);
+                        cmdTotal.Parameters.AddWithValue("@lecID", lecID);
+                        conn.Open();
+                        int studTotal = (int)cmdTotal.ExecuteScalar();
+                        conn.Close();
+
+                        lblTutComplete.Text = studDone.ToString() + "/" + studTotal.ToString();
+                        lblTutComplete1.Text = studDone.ToString() + "/" + studTotal.ToString();
+
+                        if (studDone != studTotal)
+                        {
+                            sql = "SELECT S.StudentID,S.StudentName,p.ProgramID,s.TutorialGroupID,g.TutorialGrpName FROM( SELECT c.CourseID, c.CourseName, v.IntakeID, v.TutorialGrpID FROM Course c, CourseAvailable v, TutorialGroup g WHERE v.Status = 1 AND c.CourseID = v.CourseID AND v.LecturerID = @lecID AND c.CourseID = @courseID AND v.IntakeID = @intakeID AND v.TutorialGrpID = @tutGrpID GROUP BY c.CourseID, c.CourseName, v.IntakeID, v.TutorialGrpID )a LEFT JOIN Intake i ON a.IntakeID = i.IntakeID LEFT JOIN TutorialGroup g ON a.TutorialGrpID = g.TutorialGrpID LEFT JOIN Student s ON s.IntakeID = i.IntakeID AND g.TutorialGrpID = s.TutorialGroupID LEFT JOIN Tutorial t ON a.CourseID = t.CourseID AND t.Status = 1 AND t.TutorialID = @tutID LEFT JOIN TutorialCheck k ON t.TutorialID = k.TutorialID AND s.StudentID = k.StudentID left join Program p ON i.ProgramID = p.ProgramID WHERE k.CheckID IS NULL GROUP BY S.StudentID,S.StudentName,p.ProgramID,s.TutorialGroupID,g.TutorialGrpName ORDER BY g.TutorialGrpName ASC";
+                            SqlCommand cmdGetStudNotComplete = new SqlCommand(sql, conn);
+                            cmdGetStudNotComplete.Parameters.AddWithValue("@intakeID", intakeID);//
+                            cmdGetStudNotComplete.Parameters.AddWithValue("@courseID", courseID);//
+                            cmdGetStudNotComplete.Parameters.AddWithValue("@tutID", tutID);
+                            cmdGetStudNotComplete.Parameters.AddWithValue("@lecID", lecID); //
+                            cmdGetStudNotComplete.Parameters.AddWithValue("@tutGrpID", tutGroupID);
+                            DataTable dt1 = new DataTable();
+                            cmdGetStudNotComplete.CommandType = CommandType.Text;
+                            SqlDataAdapter sda1 = new SqlDataAdapter();
+                            sda1.SelectCommand = cmdGetStudNotComplete;
+                            conn.Open();
+                            sda1.Fill(dt1);
+                            if (dt1 != null && dt1.Rows.Count > 0)
+                            {
+                                Repeater3.DataSource = dt1;
+                                Repeater3.DataBind();
+                                Repeater4.DataSource = dt1;
+                                Repeater4.DataBind();
+                                conn.Close();
+                            }
+                        }
+                        else
+                        {
+                            container1.Visible = false;
+                        }
+
                     }
                     else
                     {
                         container.Visible = false;
+                        container1.Visible = false;
+                        lblSavePDF.Enabled = false;
                         //filler.Visible = false;
                     }
                     conn.Close();
-                }
-            }
-            else
-            {
-                Response.Redirect("Login.aspx");
-            }
 
-
-        }
-
-        protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
-        {
-
-        }
-
-        protected void lblBack_Click(object sender, EventArgs e)
-        {
-            if (Session["lecturerID"] != null)
-            {
-                if(Session["prevpage"].ToString() == "prog")
-                {
-                    Response.Redirect("reportStdPerfbyProg.aspx", false);
                 }
                 else
                 {
-                    Response.Redirect("reportStdPerfbyTutGroup.aspx", false);
+                    Response.Redirect("Login.aspx");
                 }
-                
+
             }
-            else if (Session["studID"] != null)
-            {
-                Response.Redirect("StudResult.aspx", false);
-            }
-
-        }
-
-        protected void HomeLinkButton_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("StudHome.aspx");
-        }
-
-        protected void SqlDataSource1_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
-        {
 
         }
 
         protected void ProfilesLinkButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("StudProfile.aspx");
+            Response.Redirect("LecProfile.aspx");
         }
 
-        protected void ResultLinkButton_Click1(object sender, EventArgs e)
+        protected void TutorialLinkButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("StudResult.aspx");
+            Response.Redirect("CourseList.aspx");
+        }
+
+        protected void HomeLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LecHome.aspx");
+        }
+
+        protected void MyCourseLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LecCourse.aspx");
         }
 
         protected void LogOutLinkButton_Click(object sender, EventArgs e)
@@ -207,5 +260,9 @@ namespace AdaptiveLearningSystem
             Response.Redirect("Login.aspx");
         }
 
+        protected void ResultLinkButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LecResultHome.aspx");
+        }
     }
 }

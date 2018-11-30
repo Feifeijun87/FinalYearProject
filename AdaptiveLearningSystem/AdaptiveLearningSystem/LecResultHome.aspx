@@ -143,8 +143,10 @@
                     <tr>
                         <td colspan="2">
                              <asp:RadioButtonList ID="radReportSelect" runat="server" OnSelectedIndexChanged="RadioButtonList1_SelectedIndexChanged" AutoPostBack="True">
-                    <asp:ListItem Value="tutGroup" Selected="True">View tutorial group performance</asp:ListItem>
-                    <asp:ListItem Value="quest">View performance by question</asp:ListItem>
+                    <asp:ListItem Value="tutGroup" Selected="True">View student performance by tutorial group</asp:ListItem>
+                    <asp:ListItem Value="tutProg">View student performance by programme</asp:ListItem>
+                                 <asp:ListItem Value="questGroup">View tutotial question performance by tutorial group</asp:ListItem>
+                                 <asp:ListItem Value="quest">View tutotial question performance by programme</asp:ListItem>
                 </asp:RadioButtonList>
                         </td>
                     </tr>
@@ -155,11 +157,11 @@
                     </tr>
                     <tr>
                         <td class="auto-style3">
-                            <asp:Label ID="lblIntake" runat="server" Text="Intake : "></asp:Label>
-                        </td>
-                        <td>
-                             <asp:DropDownList ID="ddlIntake" runat="server" OnSelectedIndexChanged="ddlIntake_SelectedIndexChanged" AutoPostBack="True">
+                            <asp:Label ID="lblCourse" runat="server" Text="Course : "></asp:Label> 
+                             </td>
+                        <td><asp:DropDownList ID="ddlCourse" runat="server" OnSelectedIndexChanged="ddlCourse_SelectedIndexChanged"  AutoPostBack="True">
                 </asp:DropDownList>
+                             
                         </td>
                     </tr>
                     <tr>
@@ -170,10 +172,11 @@
 
                     <tr>
                         <td class="auto-style3">
-                            <asp:Label ID="lblCourse" runat="server" Text="Course : " Visible="False"></asp:Label>              
+                          <asp:Label ID="lblIntake" runat="server" Text="Intake : " Visible ="false"></asp:Label>
+                                      
                         </td>
                         <td>
-                            <asp:DropDownList ID="ddlCourse" runat="server" OnSelectedIndexChanged="ddlCourse_SelectedIndexChanged" Visible="False" AutoPostBack="True">
+                            <asp:DropDownList ID="ddlIntake" runat="server" OnSelectedIndexChanged="ddlIntake_SelectedIndexChanged"  AutoPostBack="True" Visible="False">
                 </asp:DropDownList>
                         </td>
                     </tr>

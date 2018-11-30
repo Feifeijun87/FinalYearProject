@@ -57,7 +57,7 @@ namespace AdaptiveLearningSystem
                     XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
                     pdfDoc.Close();
                     Response.ContentType = "application/pdf";
-                    Response.AddHeader("content-disposition", "attachment;filename=TutQuestResult.pdf");
+                    Response.AddHeader("content-disposition", "attachment;filename=ReportQuestPerfbyProg.pdf");
                     Response.Cache.SetCacheability(HttpCacheability.NoCache);
                     Response.Write(pdfDoc);
                     Response.End();
