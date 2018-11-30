@@ -122,5 +122,21 @@ namespace AdaptiveLearningSystem
         {
             Response.Redirect("LecResultHome.aspx");
         }
+
+        protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chkAll.Checked)
+            foreach(ListItem i in chkboxTutorialGroup.Items)
+            {
+                i.Selected = true;
+
+            }
+            else
+                foreach (ListItem i in chkboxTutorialGroup.Items)
+                {
+                    i.Selected = false;
+
+                }
+        }
     }
 }

@@ -83,7 +83,7 @@
                     <asp:LinkButton CssClass="SecondNavList" ID="ProfilesLinkButton" runat="server" OnClick="ProfilesLinkButton_Click">My Profile</asp:LinkButton></li>
             </ul>
         </div>
-            <%-- Content Code Below --%>
+        <%-- Content Code Below --%>
         <div class="wrap-content">
             <div class="Header">
                 <h1><i>Tutoral List - </i>
@@ -139,13 +139,51 @@
                 <table class="activateDtl">
                     <tr>
                         <td class="stayRight">
-                            <asp:Label ID="Label8" runat="server"> Please enter period of activation (days) : </asp:Label>
+                            <asp:Label ID="Label8" runat="server"> Start Date : </asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox ID="txtDays" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtStartDate" runat="server" ReadOnly="true" ></asp:TextBox>
+                            <asp:Button ID="btnStartDate" runat="server" Text="Button" OnClick="btnStartDate_Click" />
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td> <asp:Calendar ID="Calendar2" runat="server" OnDayRender="Calendar2_DayRender" OnSelectionChanged="Calendar2_SelectionChanged" Height="220px" Width="400px" DayStyle-HorizontalAlign="Center" BackColor="White" BorderColor="Black" DayNameFormat="Shortest" Font-Names="Times New Roman" Font-Size="10pt" ForeColor="Black" NextPrevFormat="FullMonth" TitleFormat="Month">
+                            <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" ForeColor="#333333" Height="10pt" />
+                        <DayStyle HorizontalAlign="Center" Width="14%" />
+                        <NextPrevStyle Font-Size="8pt" ForeColor="White" />
+                        <OtherMonthDayStyle HorizontalAlign="Center" ForeColor="#999999" />
+                        <SelectedDayStyle BackColor="#CC3333" ForeColor="White" />
+                        <SelectorStyle BackColor="#CCCCCC" Font-Bold="True" Font-Names="Verdana" Font-Size="8pt" ForeColor="#333333" Width="1%" />
+                        <TitleStyle BackColor="Black" Font-Bold="True" Font-Size="13pt" ForeColor="White" Height="14pt" />
+                        <TodayDayStyle BackColor="#CCCC99" />
+                             </asp:Calendar></td>
+                    </tr>
+                   <tr>
+                        <td class="stayRight">
+                            <asp:Label ID="Label1" runat="server"> End Date : </asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtEndDate" runat="server" ReadOnly="true"></asp:TextBox>
+                            <asp:Button ID="btnEndDate" runat="server" Text="Button" OnClick="btnEndDate_Click" />
                         </td>
                     </tr>
-                   
+                    <tr>
+                        <td>
+                           
+                        </td>
+                        <td> <asp:Calendar ID="Calendar1" runat="server" OnDayRender="Calendar1_DayRender" OnSelectionChanged="Calendar1_SelectionChanged" Height="220px" Width="400px" DayStyle-HorizontalAlign="Center" BackColor="White" BorderColor="Black" DayNameFormat="Shortest" Font-Names="Times New Roman" Font-Size="10pt" ForeColor="Black" NextPrevFormat="FullMonth" TitleFormat="Month">
+                            <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" ForeColor="#333333" Height="10pt" />
+                        <DayStyle HorizontalAlign="Center" Width="14%" />
+                        <NextPrevStyle Font-Size="8pt" ForeColor="White" />
+                        <OtherMonthDayStyle HorizontalAlign="Center" ForeColor="#999999" />
+                        <SelectedDayStyle BackColor="#CC3333" ForeColor="White" />
+                        <SelectorStyle BackColor="#CCCCCC" Font-Bold="True" Font-Names="Verdana" Font-Size="8pt" ForeColor="#333333" Width="1%" />
+                        <TitleStyle BackColor="Black" Font-Bold="True" Font-Size="13pt" ForeColor="White" Height="14pt" />
+                        <TodayDayStyle BackColor="#CCCC99" />
+                             </asp:Calendar></td>
+                    </tr>
                     <tr>
                         <td>
                             <asp:Label ID="lblActvateError" runat="server" Visible="false" ForeColor="Red"></asp:Label>

@@ -73,7 +73,7 @@
         .BottomButton {
             position:absolute;
             margin-top:50px;
-            display:none;
+            display:inline-block;
     background-color: #1A7FEC;
     border: none;
     color: white;
@@ -89,9 +89,6 @@
 
     .BottomButton:active {
         background-color: #1421CC;
-    }
-    .tutorialCompletion:hover .BottomButton{
-        display:inline-block;
     }
         .pnlButton {
             display: inline-block;
@@ -211,7 +208,7 @@
 
                             <div class="tutorialDetail" style="font-size: 8pt; margin-top: 32px; position: absolute">
 
-                                <asp:Label ID="Label4" runat="server">Date:<%# Eval("StartDate") %> to <%# Eval("ExpiryDate") %></asp:Label>
+                                <asp:Label ID="Label4" runat="server">Answer Duration: From<%# Eval("StartDate") %> to <%# Eval("ExpiryDate") %></asp:Label>
                             </div>
                             
 

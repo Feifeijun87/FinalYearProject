@@ -88,7 +88,7 @@
     <div class="wrap-content" >
         <div class="Header">
             <h1><i>
-            Course List</i>
+            Enroll Course</i>
             </h1>
        </div>
         <div style="margin-left:7%; margin-bottom:20px;">

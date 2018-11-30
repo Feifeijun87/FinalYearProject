@@ -66,7 +66,7 @@ namespace AdaptiveLearningSystem
                 lblPassErrorMsg.Text = "Both field is required.";
                 return false;
             }
-            else if (Session["studPass"].ToString() != txtOldPass.Text.ToString())
+            else if (!Session["studPass"].ToString().Trim().Equals(txtOldPass.Text.ToString()))
             {
                 lblPassErrorMsg.Visible = true;
                 lblPassErrorMsg.Text = "Invalid Old Password.";

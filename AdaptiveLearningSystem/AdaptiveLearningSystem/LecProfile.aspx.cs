@@ -20,8 +20,8 @@ namespace AdaptiveLearningSystem
             {
                 if (Session["lecturerID"] != null)
                 {
-                    lblUserName.Text = Session["lecName"].ToString();
-                    lblUserName.Text = Session["lecName"].ToString();
+                    lblUserName.Text = Session["lecPass"].ToString();
+                    
                     lblTutorName.Text = Session["lecTitle"].ToString() + " " + Session["lecName"].ToString();
                     lblPosition.Text = Session["position"].ToString();
                     lblContact.Text = Session["contactNo"].ToString();
@@ -51,8 +51,10 @@ namespace AdaptiveLearningSystem
                 lblPassErrorMsg.Text = "Both field is required.";
                 return false;
             }
-            else if (Session["lecPass"].ToString() != txtOldPass.Text.ToString())
+            else if (!Session["lecPass"].ToString().Trim().Equals(txtOldPass.Text))
             {
+                Label2.Text = txtOldPass.Text;
+                Label4.Text = Session["lecPass"].ToString();
                 lblPassErrorMsg.Visible = true;
                 lblPassErrorMsg.Text = "Invalid Old Password.";
                 return false;
@@ -102,7 +104,7 @@ namespace AdaptiveLearningSystem
                 writePass.UpdateCommand.ExecuteNonQuery();
                 cmd.Dispose();
                 conn.Close();
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Password Changed Successfully'); window.location.href='LecProfile.aspx;", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Password Changed Successfully'); window.location.href='LecProfile.aspx';", true);
 
 
             }

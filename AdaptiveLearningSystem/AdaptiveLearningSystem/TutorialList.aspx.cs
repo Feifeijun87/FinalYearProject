@@ -16,10 +16,11 @@ namespace AdaptiveLearningSystem
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+            
             if (Session["lecturerID"] != null)
             {
                 if (!IsPostBack)
-
                 {
                     lblUserName.Text = Session["lecName"].ToString();
                     SqlCommand cmd = new SqlCommand("prc_get_tutorial_list", conn);
@@ -59,6 +60,8 @@ namespace AdaptiveLearningSystem
                 string title = lblCourseName.Text;
                 string[] splitted = title.Split(':');
                 Session["chapterName"] = splitted[1].Trim();
+                Calendar2.Visible = false;
+                Calendar1.Visible = false;
                 popoutActivate.Show();
 
             }
@@ -118,37 +121,42 @@ namespace AdaptiveLearningSystem
 
         protected void btnActivateTutorial_Click(object sender, EventArgs e)
         {
-            string days = txtDays.Text.Trim();
-            Boolean check = true;
-            for (int i = 0; i < days.Length; i++)
-            {
-                if (!Char.IsDigit(days[i]))
-                    check = false;
-            }
-            if (check == true)
-            {
 
-                string startDate = DateTime.Now.ToString("MM/dd/yyyy");
-                string expiryDate = DateTime.Now.AddDays(Double.Parse(days)).ToString("MM/dd/yyyy");
-                SqlCommand cmd = new SqlCommand("prc_activate_tutorial", conn);
-                cmd.Parameters.AddWithValue("@StartDate", startDate);
-                cmd.Parameters.AddWithValue("@ExpiryDate", expiryDate);
-                cmd.Parameters.AddWithValue("@CourseID", Request.QueryString["course"].ToString());
-                cmd.Parameters.AddWithValue("@ChapterName", Session["chapterName"].ToString());
-                cmd.Parameters.AddWithValue("@Duration", int.Parse(days));
-                cmd.CommandType = CommandType.StoredProcedure;
-                conn.Open();
-                SqlDataAdapter writePass = new SqlDataAdapter();
-                writePass.UpdateCommand = cmd;
-                writePass.UpdateCommand.ExecuteNonQuery();
-                cmd.Dispose();
-                conn.Close();
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial Activated Successfully'); window.location.href='LecHome.aspx';", true);
-                popoutActivate.Hide();
+            if (!txtEndDate.Text.Equals(String.Empty) && !txtStartDate.Text.Equals(String.Empty))
+            {
+                DateTime startDate = DateTime.Parse(txtStartDate.Text);
+                DateTime endDate = DateTime.Parse(txtEndDate.Text);
+                int days = int.Parse((endDate - startDate).TotalDays.ToString());
+                if (days > 0)
+                {
+
+                    SqlCommand cmd = new SqlCommand("prc_activate_tutorial", conn);
+                    cmd.Parameters.AddWithValue("@StartDate", Session["startDate"].ToString());
+                    cmd.Parameters.AddWithValue("@ExpiryDate", Session["endDate"].ToString());
+                    cmd.Parameters.AddWithValue("@CourseID", Request.QueryString["course"].ToString());
+                    cmd.Parameters.AddWithValue("@ChapterName", Session["chapterName"].ToString());
+                    cmd.Parameters.AddWithValue("@Duration", days);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    conn.Open();
+                    SqlDataAdapter writePass = new SqlDataAdapter();
+                    writePass.UpdateCommand = cmd;
+                    writePass.UpdateCommand.ExecuteNonQuery();
+                    cmd.Dispose();
+                    conn.Close();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial Activated Successfully'); window.location.href='LecHome.aspx';", true);
+                    popoutActivate.Hide();
+                }
+                else
+                {
+                    lblActvateError.Visible = true;
+                    lblActvateError.Text = "Invalid Date Range";
+                }
             }
             else
-                lblActvateError.Text = "Only digit is acceptable";
-
+            {
+                lblActvateError.Visible = true;
+                lblActvateError.Text = "Date cannot be blank";
+            }
         }
 
         protected void btnActivateCancel_Click(object sender, EventArgs e)
@@ -159,6 +167,58 @@ namespace AdaptiveLearningSystem
         protected void btnAddTut_Click(object sender, EventArgs e)
         {
             Response.Redirect("CreateTut.aspx");
+        }
+
+        protected void btnStartDate_Click(object sender, EventArgs e)
+        {
+            if (Calendar1.Visible == true)
+                Calendar1.Visible = false;
+            if (Calendar2.Visible == false)
+                Calendar2.Visible = true;
+            else
+                Calendar2.Visible = false;
+        }
+
+        protected void btnEndDate_Click(object sender, EventArgs e)
+        {
+            if (Calendar2.Visible == true)
+                Calendar2.Visible = false;
+            if (Calendar1.Visible == false)
+                Calendar1.Visible = true;
+            else
+                Calendar1.Visible = false;
+        }
+
+        protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
+        {
+            if (e.Day.Date < DateTime.Now.Date)
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Gray;
+            }
+        }
+
+        protected void Calendar2_DayRender(object sender, DayRenderEventArgs e)
+        {
+            if (e.Day.Date < DateTime.Now.Date)
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Gray;
+            }
+        }
+
+        protected void Calendar1_SelectionChanged(object sender, EventArgs e)
+        {
+            Session["endDate"] = Calendar1.SelectedDate.ToString("MM/dd/yyyy");
+            txtEndDate.Text = Calendar1.SelectedDate.ToString("dd/MM/yyyy");
+            Calendar1.Visible = false;
+        }
+
+        protected void Calendar2_SelectionChanged(object sender, EventArgs e)
+        {
+            Session["startDate"] = Calendar2.SelectedDate.ToString("MM/dd/yyyy");
+            txtStartDate.Text = Calendar2.SelectedDate.ToString("dd/MM/yyyy");
+            Calendar2.Visible = false;
         }
     }
 }
