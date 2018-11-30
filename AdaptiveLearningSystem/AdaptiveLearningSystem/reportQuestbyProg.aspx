@@ -146,9 +146,9 @@
                 </tr>
                  <tr style="font-family: Arial, Helvetica, sans-serif; font-size: medium">
                             <td class="auto-style5">
-                                <label id="subjname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Course:&nbsp; </label>
+                                <label id="subjname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Course:&nbsp; 
                                 <asp:Label ID="lblCourse" runat="server"></asp:Label>
-                              
+                              </label>
                             </td>
                         </tr>
                         <tr style="font-family: Arial, Helvetica, sans-serif; font-size: medium">
@@ -190,6 +190,11 @@
                      Average Points : <asp:Label ID="lblAvgPoint" runat="server" Text='<%# Eval("Average Points")%>'></asp:Label>
                     
                     </td></tr>
+                                 <tr>
+                                     <td>
+                                         <hr />
+                                     </td>
+                                 </tr>
                                  </ItemTemplate>
         </asp:Repeater>
                         <tr><td><br /></td></tr>
@@ -197,11 +202,7 @@
                         Tutorial Completion : 
                         <asp:Label ID="lblTutComplete" runat="server"></asp:Label> students have completed the tutorial
                         </td></tr>
-                    <tr>
-                        <td>
-                            <hr />
-                        </td>
-                    </tr>
+                    
                 </table>
                   </div>
                       
@@ -213,7 +214,9 @@
                        <div class="container" runat="server" id="container1">
                             <div class="MyCourseList"> 
                 <table style="margin-left: 20px; border-bottom-style: none;" class="auto-style1">   
-                                       <tr><td>Student who did not completed the tutorial : </td></tr> 
+                                       <tr><td>
+                                           <br />
+                                           Student who did not completed the tutorial : </td></tr> 
                         <asp:Repeater ID="Repeater3"  runat="server">
                              <ItemTemplate>
                                  <tr><td class="auto-style5">
@@ -261,9 +264,9 @@
                 </tr>
                  <tr style="font-family: Arial, Helvetica, sans-serif; font-size: medium">
                             <td class="auto-style5">
-                                <label id="subjname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Course:&nbsp; </label>
+                                <label id="subjname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Course:&nbsp; 
                                 <asp:Label ID="lblCourse2" runat="server"></asp:Label>
-                              
+                              </label>
                             </td>
                         </tr>
                         <tr style="font-family: Arial, Helvetica, sans-serif; font-size: medium">
@@ -311,12 +314,16 @@
                 <tr><td>
                         Tutorial Completion : 
                         <asp:Label ID="lblTutComplete1" runat="server"></asp:Label> students have completed the tutorial
+                        <br />
+                       <hr />
                         </td></tr>
                  <tr>
                      <td>
                          
                 <table style="width:100%">   
-                                       <tr><td colspan="3">Student who did not completed the tutorial : </td></tr> 
+                                       <tr><td colspan="3">
+                                           
+                                           Student who did not completed the tutorial : </td></tr> 
                         <asp:Repeater ID="Repeater4"  runat="server">
                              <ItemTemplate>
                                  <tr><td class="auto-style5">

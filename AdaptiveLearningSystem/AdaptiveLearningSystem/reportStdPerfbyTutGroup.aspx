@@ -61,6 +61,25 @@
 
         .auto-style8 {
             width: 100%;
+            margin-top: 0px;
+        }
+
+        .auto-style9 {
+            width: 183px;
+        }
+        .auto-style10 {
+            height: 29px;
+        }
+        .auto-style11 {
+            width: 183px;
+            height: 29px;
+        }
+        .auto-style12 {
+            height: 30px;
+        }
+        .auto-style13 {
+            width: 183px;
+            height: 30px;
         }
 
         </style>
@@ -116,9 +135,9 @@
                 </tr>
                  <tr style="font-family: Arial, Helvetica, sans-serif; font-size: medium">
                             <td colspan="2" class="auto-style5">
-                                <label id="subjname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Course:&nbsp; </label>
+                                <label id="subjname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Course:&nbsp; 
                                 <asp:Label ID="lblCourse" runat="server"></asp:Label>
-                              
+                              </label>
                             </td>
                         </tr>
                         <tr style="font-family: Arial, Helvetica, sans-serif; font-size: medium">
@@ -178,7 +197,7 @@
                         </div></td></tr>
                 <tr><td colspan="2">
                         Tutorial Completion : 
-                        <asp:Label ID="lblTutComplete" runat="server"></asp:Label> students have completed the tutorial</td></tr>
+                        <asp:Label ID="lblTutComplete" runat="server"></asp:Label> students have completed the tutorial<br /> </td></tr>
                  <tr>
                    <td colspan="2">
                        <div class="container" runat="server" id="Div1">
@@ -210,13 +229,6 @@
                </tr>
                 </table></asp:Panel>
 
-
-           
-
-
-
-
-        
             <div class="BottomButtonGroup">
         <asp:Button ID="lblBack" runat="server" Text="Back" CssClass="BottomButton" OnClick="lblBack_Click" />
         <asp:Button ID="lblSavePDF" runat="server" OnClick="Button2_Click" Text="Save to PDF" CssClass="BottomButton" />
@@ -238,9 +250,9 @@
                 </tr>
                  <tr style="font-family: Arial, Helvetica, sans-serif; font-size: medium">
                             <td colspan="2" class="auto-style5">
-                                <label id="subjname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Course:&nbsp; </label>
+                                <label id="subjname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Course:&nbsp; 
                                 <asp:Label ID="lblCourse2" runat="server"></asp:Label>
-                                
+                                </label>
                             </td>
                         </tr>
                         <tr style="font-family: Arial, Helvetica, sans-serif; font-size: medium">
@@ -277,43 +289,41 @@
                                 <td>
                                     <asp:Label ID="Label9" runat="server" Width ="110px" Text="StudentID" Font-Bold="True"></asp:Label>  
                                 </td>
-                                <td>
+                                <td class="auto-style9" style="text-align:center">
                                     <asp:Label ID="Label10" runat="server" Width="163px" Text="Student Name" Font-Bold="True" CssClass="auto-style7"></asp:Label>
                             
                                 </td>
                                 
-                                <td>
-                                    <asp:Label ID="Label11" runat="server" Text="Total Score" Font-Bold="True"></asp:Label>
-                            
+                                <td style="text-align:center">
+                                    <asp:Label ID="Label11"  runat="server" Text="Total Score" Font-Bold="True"></asp:Label>
                                 </td>
                             </tr>
-                            <asp:Repeater ID="Repeater2"  runat="server" >
+                            <asp:Repeater ID="Repeater2"  runat="server">
                              <ItemTemplate>
                             <tr>
                                 <td>
                                     <asp:Label ID="lblNumber" runat="server" Width ="5px" Text='<%# Container.ItemIndex + 1 %>'> </asp:Label> . 
                
-                <asp:Label ID="lblStudentID" runat="server" Width =" 150px" Text='<%# String.Format("{0,-20}",Eval("StudentID"))%>' ></asp:Label>
+                <asp:Label ID="lblStudentID" runat="server" Width ="50px" Text='<%# String.Format("{0,-20}",Eval("StudentID"))%>' ></asp:Label>
                           
                                 </td>
-                                <td>
-                                    <asp:Label ID="lblStudName" runat="server" Width="180px" Text ='<%# String.Format("{0,-60}",Eval("StudentName"))%>' ></asp:Label>  
+                                <td style="text-align:center">
+                                    <asp:Label ID="lblStudName" runat="server" Width="50px" Text ='<%# Eval("StudentName")%>' ></asp:Label>  
                        
                                 </td>
-                               <td>
-                                    <asp:Label ID="lblTutGrp" runat="server" Text="Tutorial Group"></asp:Label>
-                                </td>
-                                <td>
-                                     <asp:Label ID="lblTotalScore" runat="server" Text='<%# String.Format("{0,4}",Eval("Total Score"))%>'></asp:Label>
-                    
-                                </td>
+                               
+                                <td style="text-align:center">
+                                    
+                                     <asp:Label ID="lblTotalScore" runat="server"  Width="50px" Text='<%# Eval("Total Score")%>'></asp:Label>
+                               </td>
                             </tr>
                         
                                
             </ItemTemplate>
         </asp:Repeater><tr><td colspan="3">
+                                <br />
                         Tutorial Completion : 
-                       <asp:Label ID="lblkkk" runat="server" Text="Label"></asp:Label>students have completed the tutorial<br/><hr />
+                       <asp:Label ID="lblkkk" runat="server" Text="Label"></asp:Label>&nbsp;students have completed the tutorial<br/><hr />
                         </td></tr></table>
 </td></tr>
                 <tr>
@@ -331,10 +341,10 @@
                 </td>
                                      <td>
                         <asp:Label ID="lblStudName" runat="server" Width="180px" Text ='<%# Eval("StudentName")%>' ></asp:Label>  
-                          </td><td>
+                          </td>
+                                     <td>
                   <asp:Label ID="lblTutGroup" runat="server" Text='<%# Eval("TutorialGrpName")%>'></asp:Label>
-                    
-                            </td></tr>
+                    </td></tr>
                
                                  </ItemTemplate>
         </asp:Repeater></table>

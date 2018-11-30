@@ -145,9 +145,9 @@
                 </tr>
                  <tr style="font-family: Arial, Helvetica, sans-serif; font-size: medium">
                             <td class="auto-style5">
-                                <label id="subjname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Course:&nbsp; </label>
+                                <label id="subjname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Course:&nbsp; 
                                 <asp:Label ID="lblCourse" runat="server"></asp:Label>
-                              
+                              </label>
                             </td>
                         </tr>
                         <tr style="font-family: Arial, Helvetica, sans-serif; font-size: medium">
@@ -269,9 +269,9 @@
                 </tr>
                  <tr style="font-family: Arial, Helvetica, sans-serif; font-size: medium">
                             <td class="auto-style5">
-                                <label id="subjname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Course:&nbsp; </label>
+                                <label id="subjname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Course:&nbsp; 
                                 <asp:Label ID="lblCourse2" runat="server"></asp:Label>
-                              
+                              </label>
                             </td>
                         </tr>
                         <tr style="font-family: Arial, Helvetica, sans-serif; font-size: medium">
@@ -319,17 +319,24 @@
                      Average Points : <asp:Label ID="lblAvgPoint" runat="server" Text='<%# Eval("Average Points")%>'></asp:Label>
                     
                     </td></tr>
-                                 <tr><td><br /><hr /></td></tr>
+                                 <tr>
+                                     <td>
+                                         <br />
+                                         <hr />
+                                     </td>
+                                 </tr>
+                                 
 
             </ItemTemplate>
         </asp:Repeater>
                 <tr><td>
+                        <br />
                         Tutorial Completion : 
                         <asp:Label ID="lblTutComplete1" runat="server"></asp:Label> students have completed the tutorial
                         </td></tr>
                 <tr>
                     <td>
-                        <br />
+                        <hr />
                         <br />
                     </td>
                 </tr>
