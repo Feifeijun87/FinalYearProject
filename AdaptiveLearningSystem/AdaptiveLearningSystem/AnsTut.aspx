@@ -86,17 +86,9 @@
     </style>
 
     <script type = "text/javascript">
-        function Confirm() {
-            var confirm_value = document.createElement("INPUT");
-            confirm_value.type = "hidden";
-            confirm_value.name = "confirm_value";
-            if (confirm("Are you sure want to stop doing this tutorial?")) {
-                confirm_value.value = "Yes";
-            } else {
-                confirm_value.value = "No";
-            }
-            document.forms[0].appendChild(confirm_value);
-        }
+        window.onbeforeunload = function () {
+            return 'Are you sure you want to leave?';
+        };
     </script>
 
     <script>

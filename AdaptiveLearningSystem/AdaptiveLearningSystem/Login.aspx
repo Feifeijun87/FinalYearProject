@@ -8,6 +8,7 @@
     <link rel="icon" href="images/tarIco.ico" />
 
     <link rel="stylesheet" runat="server" media="screen" href="Login.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" type="text/css" />
     <script type="text/javascript">
         function check() {
             if (!document.getElementById("txtLecturerID").value) {
@@ -29,7 +30,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <div class="SystemTitle">
+            <div class="SystemTitle" style="width:700px;">
                 <h1>Adaptive Learning System</h1>
             </div>
 

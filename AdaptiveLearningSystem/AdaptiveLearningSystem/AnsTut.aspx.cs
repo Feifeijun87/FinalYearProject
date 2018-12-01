@@ -9,6 +9,7 @@ using System.Web.Configuration;
 using Iveonik.Stemmers;
 using System.Text.RegularExpressions;
 using System.Data;
+using IronPython.Hosting;
 
 namespace AdaptiveLearningSystem
 {
@@ -167,32 +168,35 @@ namespace AdaptiveLearningSystem
             //make exact matching
             if (checkExact(sampleAns, studAns) == true)
             {
-                insertDB(100);
+                string[] separatedKeywords = keyword.Split(',');
+                insertDB(separatedKeywords.Length+1,100);
                 return true;
             }
-            //check keyword
-            else if (checkKeyword(keyword, studAns) == true)
+            //check keyword.
+            
+            else 
             {
-                //check sentence matching rate
-                double editDistance = Double.Parse(levenshtein(studAns, sampleAns).ToString());
-                matchRate = 100 - ((editDistance / sampleAns.Length) * 100);
-                if (matchRate > 60)
+                int mark = checkKeyword(keyword, studAns);
+                if (mark > 0)
                 {
-                    insertDB(matchRate);
+                    //check sentence matching rate
+                    double editDistance = Double.Parse(levenshtein(studAns, sampleAns).ToString());
+                    matchRate = 100 - ((editDistance / sampleAns.Length) * 100);
+                    if (matchRate > 60)
+                        mark++;
 
+                    insertDB(mark, matchRate);
                     return true;
                 }
                 else
                     return false;
             }
-            return false;
         }
 
-        protected void insertDB(double matchRate)
+        protected void insertDB(int mark,double matchRate)
         {
-            int timeMark = computeMarkForTimeUsed();
-            int matchMark = computeMarkForMatching(matchRate);
-            int totalMark = timeMark + matchMark;
+            int timeBonus = computeMarkForTimeUsed();
+            int totalMark = timeBonus + mark;
             string doneDate = DateTime.Now.ToString("MM/dd/yyyy");
             string doneTime = DateTime.Now.ToLongTimeString();
             //get current row count of studans table
@@ -226,34 +230,14 @@ namespace AdaptiveLearningSystem
             conn.Close();
         }
 
-        protected int computeMarkForMatching(double matchRate)
-        {
-            int point = 0;
-
-            if (matchRate > 90)
-                point = 3;
-            else if (matchRate > 75)
-                point = 2;
-            else if (matchRate > 60)
-                point = 1;
-
-            return point;
-        }
-
         protected int computeMarkForTimeUsed()
         {
-            int point = 0;
             double timeLimitInSec = Double.Parse(listTime[currCount].ToString()) * 60;
-            double timePercent = (Double.Parse(secUsed.ToString()) / timeLimitInSec ) * 100;
- 
-            if (timePercent <= 25)
-                point = 3;
-            else if (timePercent <= 50)
-                point = 2;
-            else if (timePercent <= 75)
-                point = 1;
 
-            return point;
+            if (Double.Parse(secUsed.ToString()) <= timeLimitInSec)
+                return 1;
+            else
+                return 0;              
         }
 
         protected string chgWordFormat(string oriString)
@@ -274,8 +258,9 @@ namespace AdaptiveLearningSystem
             return false;
         }
 
-        protected Boolean checkKeyword(string keyword, string studAns)
+        protected int checkKeyword(string keyword, string studAns)
         {
+            int mark = 0;
             double matchRate = 0.00; // to determine the match ratio of keyword
             string[] separatedKeywords = keyword.Split(',');
             int arrayLength = separatedKeywords.Length;
@@ -284,6 +269,7 @@ namespace AdaptiveLearningSystem
             string stemmedStudAns = stemWord(new EnglishStemmer(), studAns, 1); //stem the student answer sentence
             foreach (string key in separatedKeywords) // for each keyword 
             {
+
                 string[] splittedKeyword = key.Split(' '); //split the keyword string
                 foreach (string word in splittedKeyword)
                 {
@@ -294,13 +280,22 @@ namespace AdaptiveLearningSystem
                         score += 1;
                     else if (stemmedStudAns.Contains(stemWord(new EnglishStemmer(), word, 2).Trim())) // stem the keyword and check against the stemmed student answer
                         score += 1;
+                    else
+                    {
+                        string[] studAnsList = studAns.Split(' ');
+                        if (wordnetCheckKeyword(word, studAnsList))
+                            score += 1;
+                    }
+
+                    
                 }
+                matchRate = score / keywordLength;
+                if (matchRate > 0.6)
+                    mark++;
+
             }
-            matchRate = score / keywordLength;
-            if (matchRate > 0.6)
-                return true;
-            else
-                return false;
+            return mark;
+            
         }
 
         protected string stemWord(IStemmer stemmer, string oriString, int type) //type=1 to stem sentence(answer), 2 to stem a word (keyword)
@@ -321,6 +316,30 @@ namespace AdaptiveLearningSystem
             }
             return stemmedString;
 
+        }
+
+        private Boolean wordnetCheckKeyword(string keyword, string[] studAns)
+        {
+            var engine = Python.CreateEngine();
+            var searchPaths = engine.GetSearchPaths();
+            searchPaths.Add(@"C:\Python27");
+            searchPaths.Add(@"C:\Python27\Lib");
+            searchPaths.Add(@"C:\Python27\libs");
+            searchPaths.Add(@"C:\Python27\Lib\site-packages");
+            searchPaths.Add(@"C:\Users\ASUSPC\Documents\Visual Studio 2015\Projects\ADM\AdaptiveLearningSystem\packages\IronPython.2.7.9\lib");
+            searchPaths.Add(@"C:\Users\ASUSPC\Documents\Visual Studio 2015\Projects\ADM\AdaptiveLearningSystem\packages\IronPython.2.7.9\lib\net45\IronPython.SQLite.dll");
+            searchPaths.Add(@"C:\Users\ASUSPC\Documents\Visual Studio 2015\Projects\ADM\AdaptiveLearningSystem\packages\IronPython.2.7.9\wordMatching.py");
+
+            engine.SetSearchPaths(searchPaths);
+            var mainfile = @"C:\Users\ASUSPC\Documents\Visual Studio 2015\Projects\ADM\AdaptiveLearningSystem\packages\IronPython.2.7.9\wordMatching.py";
+            var scope = engine.CreateScope();
+            scope.SetVariable("sentence", studAns);
+            scope.SetVariable("keyword", keyword);
+            engine.CreateScriptSourceFromFile(mainfile).Execute(scope);
+
+            return(scope.GetVariable("result"));  
+
+            
         }
 
         private int levenshtein(string studAns, string sampleAns)
