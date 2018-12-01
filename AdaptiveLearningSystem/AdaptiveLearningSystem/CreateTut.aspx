@@ -156,7 +156,7 @@
                         <tr>
                             <td colspan="2" class="auto-style5">
                                 <label id="subjname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Course:&nbsp; </label>&nbsp;
-                                <asp:DropDownList ID="ddlCourse" runat="server" Width="381px" Height="33px" OnSelectedIndexChanged="DropDownList3_SelectedIndexChanged" AutoPostBack="True">
+                                <asp:DropDownList ID="ddlCourse" runat="server" Width="381px" OnSelectedIndexChanged="DropDownList3_SelectedIndexChanged" AutoPostBack="True">
                                 </asp:DropDownList>
                                 <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
                                 <br />
@@ -189,7 +189,7 @@
                                     <asp:Label ID="lblQNum" runat="server" Text="1"></asp:Label>
                                     :
                                 </td>
-                                <td colspan="2">
+                                <td>
 
                                     <asp:TextBox ID="txtQues" runat="server" Height="50px" Width="460px"></asp:TextBox>
 
@@ -201,7 +201,7 @@
                             <tr>
                                 <td class="auto-style4">Sample answers:
                                 </td>
-                                <td colspan="2">
+                                <td>
                                     <asp:TextBox ID="txtAns" runat="server" Height="50px" Width="460px"></asp:TextBox><br />
                                     <asp:Label ID="lblAnsEnter" runat="server" ForeColor="Red" Visible="False"></asp:Label>
                                     <br />
@@ -210,7 +210,7 @@
                             <tr>
                                 <td class="auto-style4">Keywords: 
                                 </td>
-                                <td colspan="2"><asp:TextBox ID="txtKeyword" runat="server" Height="50px" Width="460px"></asp:TextBox>
+                                <td><asp:TextBox ID="txtKeyword" runat="server" Height="50px" Width="460px"></asp:TextBox>
                                     <br />Please seperate each keyword by ','<br />
                                     <asp:Label ID="lblKeyEnter" runat="server" ForeColor="Red" Visible="False"></asp:Label>
                                     <br />
@@ -274,8 +274,17 @@
              <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                     <ContentTemplate>
             <div class="panelDtl">
-                
-                <table class="editProf">
+                 <table class="editProf">
+                    <tr>
+                        <td colspan="2">
+                            Tutorial Question Preview
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <asp:Label ID="lblPreview" runat="server" Width="300px" Text="iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"></asp:Label>
+                        </td>
+                    </tr>
                     <tr>
                         <td class="auto-style7">
                             Compulsory Easy:</td>
