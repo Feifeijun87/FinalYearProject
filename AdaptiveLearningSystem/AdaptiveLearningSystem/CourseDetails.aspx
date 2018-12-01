@@ -139,6 +139,8 @@
         <div class="tutorialGrpList">
             <asp:Label ID="lblErrorMessage" runat="server" Text="[lblErrorMessage]" ForeColor="Red"></asp:Label>
             <asp:CheckBoxList ID="chkboxTutorialGroup" runat="server"></asp:CheckBoxList>
+            <br />
+            <asp:CheckBox ID="chkAll" runat="server" Text="Select All" OnCheckedChanged="CheckBox1_CheckedChanged" AutoPostBack="true" />
         </div>
                 <div class="BottomButtonGroup">
                     <asp:Button ID="btnBack" CssClass="BottomButton" runat="server" Text="Back" OnClick="btnBack_Click" />

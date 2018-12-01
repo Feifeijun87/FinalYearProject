@@ -60,6 +60,8 @@ namespace AdaptiveLearningSystem
 
         protected void ProfilesLinkButton_Click(object sender, EventArgs e)
         {
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "blah", "toHome();", true);
+
             Response.Redirect("LecProfile.aspx");
         }
 

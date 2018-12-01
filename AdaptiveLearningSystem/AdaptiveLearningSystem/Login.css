@@ -1,81 +1,118 @@
-﻿.LoginTextbox {
-    float:left;
-    clear:left;
-    width: 50%;
-    padding: 10px 15px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    font-family:'Times New Roman', Times, serif;
-    font-size:15px;
-    margin-left:25%;
+﻿body {
+    height:100vh;
+	margin:0;
+    padding:0;
+	color: #fff;
+	background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+	background-size: 400% 400%;
+	-webkit-animation: Gradient 15s ease infinite;
+	-moz-animation: Gradient 15s ease infinite;
+	animation: Gradient 15s ease infinite;
+    font-family:sans-serif;
 }
 
-.ForgetPass {
-float:left;
-clear:left;
-margin-left:25%;
+@-webkit-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
 }
 
-html, body,form{
-
-min-height:100vh;
+@-moz-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
 }
 
-body{
-    text-align:center;
-    background-image:url("images/backgroundImg.jpg");
-    background-repeat: repeat;
-    background-size: auto;
-    margin: 0px;
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
 }
 
-h1{
-    display:inline;
-    font-size:40px;
-}
 
 .SystemTitle{
     position:absolute;
-    top:18%;
-    left:35%;
-    color:dodgerblue;
+    top:10%;
+    left:32%;
+    font-size:18pt;
+    font-weight:500;
+}
+.lblLogin{
+    font-size:25pt;
 }
 
 .loginPanel{
+    width:300px;
+    padding:40px;
     position:absolute;
-    width:30%;
-    top:25%;
-    left:35%;
-    margin-bottom:0px; 
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    background: #191919;
     text-align:center;
-    background-color:white;
-    overflow:hidden;
-    
-}
-.loginTitle{
-    font-family:Impact, Charcoal, sans-serif;
-    color:#1A7FEC;
-    
-}
-
-.btnSignIn:hover{
-    background-color:#0D1BCE;
+    background-color:rgba(0,0,0,0.2);
 }
 
 .btnSignIn{
-    background-color: #1A7FEC; /* Green */
-    border: none;
-    color: white;
-    float:left;
-    clear:left;
-    width:50%;
-    margin-left:25%;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+    border:0;
+    background:none;
+    display:block;
+    margin:20px auto;
+    text-align:center;
+    border: 2px solid #2ecc71;
+    padding: 14px 40px;
+    outline:none;
+    color:white;
+    border-radius:24px;
+    transition:0.25s;
     cursor:pointer;
-    margin-top:10px;
-    margin-bottom:10px;
+    width:200px;
+}
+
+.btnSignIn:hover{
+    background:#2ecc71;
+}
+
+.LoginTextbox{
+     border:0;
+    background:none;
+    display:block;
+    margin:20px auto;
+    text-align:center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 200px;
+    outline:none;
+    color:white;
+    border-radius:24px;
+    transition:0.25s;
+    
+}
+
+.LoginTextbox:focus{
+    width:280px;
+    border-color:#2ecc71;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 0.5; /* Firefox */
 }

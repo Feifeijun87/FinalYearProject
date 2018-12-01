@@ -37,6 +37,30 @@
 
     </script>
     <style type="text/css">
+        .course-content {
+            display: none;
+            overflow: hidden;
+            position: absolute;
+            top: 15%;
+            right: 53%;
+            background-color: #f9f9f9;
+            min-width: 171px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            text-align:left;
+        }
+        .course-item {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .coursebtn:hover .course-content {
+            display: block;
+        }
+        .course-content .course-item:hover {
+            background-color: #f1f1f1;
+        }
         .auto-style1 {
             width: 100%;
         }
@@ -105,43 +129,47 @@
     <form id="form1" runat="server">
 
         <div id="upperNavBar">
-            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
             <ul id="UpperNavList">
                 <li>
                     <img id="tarcIcon" src="images/tarcIcon.png" width="50" /><p>Adaptive Learning System</p>
                 </li>
-                <li class="dropdown"><a>
+                <li class="dropdown">
+                <a>
                     <asp:Image ID="profilePic" ImageUrl="~/images/profIcon.png" runat="server" Style="width: 35px" />
                     <span id="welcome"><small>Welcome</small><br />
-                        <small>
-                            <asp:Label ID="lblUserName" runat="server" Text="Label">Loo Zhe Xin</asp:Label></small>
+                        <small><asp:Label ID="lblUserName" runat="server" Text="Label">Loo Zhe Xin</asp:Label></small>
                     </span>
                     <div id="downIcon">&#9660;</div>
                 </a>
                     <div class="dropdown-content">
-                        <asp:LinkButton CssClass="dropdown-item" ID="ProfileLinkButton" runat="server">Profile</asp:LinkButton>
-                        <asp:LinkButton CssClass="dropdown-item" ID="LogOutLinkButton" runat="server">Log Out</asp:LinkButton>
+                        <asp:LinkButton CssClass="dropdown-item" ID="LogOutLinkButton" runat="server" OnClick="LogOutLinkButton_Click">Log Out</asp:LinkButton>
                     </div>
 
                 </li>
-
+                
             </ul>
         </div>
         <div>
+            <%-- Second Line Navigation Bar Below --%>
             <ul class="SecondNavBar">
                 <li>
-                    <asp:LinkButton CssClass="SecondNavList" ID="HomeLinkButton" runat="server">Home</asp:LinkButton></li>
+                    <asp:LinkButton CssClass="SecondNavList" ID="HomeLinkButton" runat="server" OnClick="HomeLinkButton_Click">Home</asp:LinkButton></li>
+                <li class="coursebtn">
+                   <div class="SecondNavList"> Course</div>
+                    <div class="course-content">
+                        <asp:LinkButton CssClass="course-item" ID="MyCourseLinkButton" runat="server" OnClick="MyCourseLinkButton_Click">My Course</asp:LinkButton>
+                        <asp:LinkButton CssClass="course-item" ID="EnrollCourseLinkButton" runat="server" OnClick="TutorialLinkButton_Click">Enroll Course</asp:LinkButton>
+                    </div>
+                </li>
                 <li>
-                    <asp:LinkButton CssClass="SecondNavList" ID="TutorialLinkButton" runat="server">Course</asp:LinkButton></li>
+                    <asp:LinkButton CssClass="SecondNavList" ID="ResultLinkButton" OnClick="ResultLinkButton_Click" runat="server">Report</asp:LinkButton></li>
                 <li>
-                    <asp:LinkButton CssClass="SecondNavList" ID="ResultLinkButton" runat="server" OnClick="ResultLinkButton_Click">Report</asp:LinkButton></li>
-                <li>
-                    <asp:LinkButton CssClass="SecondNavList" ID="ProfilesLinkButton" runat="server">My Profile</asp:LinkButton></li>
-                <li></li>
+                    <asp:LinkButton CssClass="SecondNavList" ID="ProfilesLinkButton" runat="server"  OnClick="ProfilesLinkButton_Click">My Profile</asp:LinkButton></li>
             </ul>
         </div>
         <%-- start your coding inside div below --%>
-        
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <div class="wrap-content">
             <div class="Header">
                 

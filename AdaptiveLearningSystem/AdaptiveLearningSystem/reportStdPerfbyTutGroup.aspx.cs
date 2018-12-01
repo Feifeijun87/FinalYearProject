@@ -43,10 +43,11 @@ namespace AdaptiveLearningSystem
         string sql;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["lecturerID"] != null)
             {
-                if (Session["lecturerID"] != null)
+                if (!IsPostBack)
                 {
+                    lblUserName.Text = Session["lecName"].ToString();
                     if (Session["tutIntakeID"] != null)
                     {
                         intakeID = Session["tutIntakeID"].ToString();
@@ -107,7 +108,7 @@ namespace AdaptiveLearningSystem
 
                     for (int i = 2; i < splitArray1.Length; i++)
                     {
-                        tutTitle += splitArray1[i] + " "; 
+                        tutTitle += splitArray1[i] + " ";
                     }
                     tutTitle = tutTitle.TrimEnd();
                     StringBuilder sb = new StringBuilder(tutNum);
@@ -149,23 +150,26 @@ namespace AdaptiveLearningSystem
                         Repeater2.DataBind();
                         conn.Close();
 
-                        conn.Open();
-                        int studTotal = 0, studDone = 0;
-                        sql = "SELECT A.totalStud, A.TutorialNumber,A.ExpiryDate,A.StartDate, A.ChapterName, A.CourseName,A.CourseID,COUNT(k.CheckID) AS doneNumber FROM (SELECT  t.TutorialNumber, t.ExpiryDate, t.StartDate, t.ChapterName, c.CourseName, c.CourseID, t.TutorialID, COUNT(s.StudentID) AS totalStud FROM Tutorial t, Course c, CourseAvailable v, Student s, TutorialGroup g  WHERE c.CourseID = t.CourseID AND c.CourseID = v.CourseID AND s.TutorialGroupID = g.TutorialGrpID AND v.IntakeID = @intakeID AND v.TutorialGrpID = @tutGrpID AND t.TutorialID = @tutID AND v.CourseID = @courseID AND g.TutorialGrpID = v.TutorialGrpID AND v.LecturerID = @lecID AND v.Status = 1 AND t.Status = 1 GROUP BY t.TutorialNumber, t.ChapterName, c.CourseName, c.CourseID, t.ExpiryDate, t.StartDate, t.TutorialID )A LEFT JOIN Tutorial t ON A.TutorialID = t.TutorialID LEFT JOIN Course c ON t.CourseID = c.CourseID LEFT JOIN CourseAvailable v ON v.CourseID = c.CourseID LEFT JOIN TutorialGroup g ON v.TutorialGrpID = g.TutorialGrpID LEFT JOIN Student s ON s.TutorialGroupID = g.TutorialGrpID LEFT JOIN TutorialCheck k ON t.TutorialID = k.TutorialID AND k.StudentID = s.StudentID AND CONVERT(date, k.CompletionDate) BETWEEN CONVERT(date, t.StartDate) AND CONVERT(date, t.ExpiryDate) WHERE t.Status = 1 AND v.LecturerID = @lecID AND v.Status = 1 GROUP BY A.totalStud, A.TutorialNumber, A.ExpiryDate, A.StartDate, A.ChapterName, A.CourseName, A.CourseID ORDER BY A.CourseID, A.TutorialNumber";
+                        sql = "SELECT COUNT(s.StudentID) FROM Student s, CourseAvailable a, TutorialCheck k, Tutorial t WHERE a.IntakeID = @intakeID AND a.CourseID = @courseID AND k.TutorialID = @tutID AND a.TutorialGrpID = @tutGrpID AND a.TutorialGrpID = s.TutorialGroupID AND k.StudentID = s.StudentID AND a.LecturerID = @lecID AND a.Status = 1 AND k.TutorialID=t.TutorialID AND CONVERT(date, k.CompletionDate) BETWEEN CONVERT(date, t.StartDate) AND CONVERT(date, t.ExpiryDate) ";
                         SqlCommand cmdDone = new SqlCommand(sql, conn);
                         cmdDone.Parameters.AddWithValue("@intakeID", intakeID);
                         cmdDone.Parameters.AddWithValue("@courseID", courseID);
                         cmdDone.Parameters.AddWithValue("@tutID", tutID);
-                        cmdDone.Parameters.AddWithValue("@lecID", lecID);
                         cmdDone.Parameters.AddWithValue("@tutGrpID", tutGroupID);
-                        dtr = cmdDone.ExecuteReader();
-                        while (dtr.Read())
-                        {
-                            studTotal = dtr.GetInt32(0);
-                            studDone = dtr.GetInt32(7);
-                        }
+                        cmdDone.Parameters.AddWithValue("@lecID", lecID);
+                        conn.Open();
+                        int studDone = (int)cmdDone.ExecuteScalar();
                         conn.Close();
 
+                        sql = "SELECT COUNT(s.StudentID) FROM Student s, CourseAvailable a WHERE a.IntakeID = @intakeID AND a.CourseID = @courseID AND a.TutorialGrpID = @tutGrpID AND a.TutorialGrpID = s.TutorialGroupID AND a.LecturerID = @lecID AND a.Status = 1 AND a.IntakeID = s.IntakeID";
+                        SqlCommand cmdTotal = new SqlCommand(sql, conn);
+                        cmdTotal.Parameters.AddWithValue("@intakeID", intakeID);
+                        cmdTotal.Parameters.AddWithValue("@courseID", courseID);
+                        cmdTotal.Parameters.AddWithValue("@tutGrpID", tutGroupID);
+                        cmdTotal.Parameters.AddWithValue("@lecID", lecID);
+                        conn.Open();
+                        int studTotal = (int)cmdTotal.ExecuteScalar();
+                        conn.Close();
 
                         lblTutComplete.Text = studDone.ToString() + "/" + studTotal.ToString();
                         lblkkk.Text = studDone.ToString() + "/" + studTotal.ToString();
@@ -173,7 +177,20 @@ namespace AdaptiveLearningSystem
 
                         if (studDone != studTotal)
                         {
-                            sql = "SELECT S.StudentID AS StudentID,S.StudentName,p.ProgramID,s.TutorialGroupID, g.TutorialGrpName  FROM( SELECT c.CourseID, c.CourseName, v.IntakeID, v.TutorialGrpID FROM Course c, CourseAvailable v, TutorialGroup g WHERE v.Status = 1 AND c.CourseID = v.CourseID AND v.LecturerID = @lecID AND c.CourseID = @courseID AND v.IntakeID = @intakeID  AND v.TutorialGrpID = @tutGrpID GROUP BY c.CourseID, c.CourseName, v.IntakeID, v.TutorialGrpID)a LEFT JOIN Intake i ON a.IntakeID = i.IntakeID LEFT JOIN TutorialGroup g ON a.TutorialGrpID = g.TutorialGrpID LEFT JOIN Student s ON s.IntakeID = i.IntakeID AND g.TutorialGrpID = s.TutorialGroupID LEFT JOIN Tutorial t ON a.CourseID = t.CourseID AND t.Status = 1 AND t.TutorialID = @tutID LEFT JOIN TutorialCheck k ON t.TutorialID = k.TutorialID AND s.StudentID = k.StudentID left join Program p ON i.ProgramID = p.ProgramID WHERE(k.CheckID IS NULL OR CONVERT(date, k.CompletionDate) NOT BETWEEN CONVERT(date, t.StartDate) AND CONVERT(date, t.ExpiryDate)) AND s.StudentID IS NOT NULL GROUP BY S.StudentID,S.StudentName,p.ProgramID,s.TutorialGroupID , g.TutorialGrpName ORDER BY g.TutorialGrpName ASC";
+                            sql = @"SELECT S.StudentID,S.StudentName,p.ProgramID,s.TutorialGroupID,g.TutorialGrpName 
+                                    FROM(SELECT c.CourseID, c.CourseName, v.IntakeID, v.TutorialGrpID
+                                    FROM Course c, CourseAvailable v, TutorialGroup g
+                                    WHERE v.Status = 1 AND c.CourseID = v.CourseID AND v.LecturerID = @lecID AND c.CourseID = @courseID AND v.IntakeID = @intakeID AND v.TutorialGrpID = @tutGrpID
+                                    GROUP BY c.CourseID, c.CourseName, v.IntakeID, v.TutorialGrpID)a
+                                    LEFT JOIN Intake i ON a.IntakeID = i.IntakeID
+                                    LEFT JOIN TutorialGroup g ON a.TutorialGrpID = g.TutorialGrpID
+                                    LEFT JOIN Student s ON s.IntakeID = i.IntakeID AND g.TutorialGrpID = s.TutorialGroupID
+                                    LEFT JOIN Tutorial t ON a.CourseID = t.CourseID AND t.Status = 1 AND t.TutorialID = @tutID
+                                    LEFT JOIN TutorialCheck k ON t.TutorialID = k.TutorialID AND s.StudentID = k.StudentID
+                                    left join Program p ON i.ProgramID = p.ProgramID
+                                    WHERE(k.CheckID IS NULL OR CONVERT(date, k.CompletionDate) NOT BETWEEN CONVERT(date, t.StartDate) AND CONVERT(date, t.ExpiryDate)) AND s.StudentID IS NOT NULL
+                                    GROUP BY S.StudentID,S.StudentName,p.ProgramID,s.TutorialGroupID,g.TutorialGrpName
+                                    ORDER BY g.TutorialGrpName ASC";
                             SqlCommand cmdGetStudNotComplete = new SqlCommand(sql, conn);
                             cmdGetStudNotComplete.Parameters.AddWithValue("@intakeID", intakeID);//
                             cmdGetStudNotComplete.Parameters.AddWithValue("@courseID", courseID);//
@@ -202,13 +219,15 @@ namespace AdaptiveLearningSystem
                         }
                         conn.Close();
                     }
-                    else
-                    {
-                        Response.Redirect("Login.aspx");
-                    }
-
                 }
             }
+            else
+            {
+                Response.Redirect("Login.aspx");
+            }
+
+                
+            
         }
 
         protected void lblBack_Click(object sender, EventArgs e)
