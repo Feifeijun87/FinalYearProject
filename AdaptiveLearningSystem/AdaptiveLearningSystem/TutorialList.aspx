@@ -166,7 +166,7 @@
                         </td>
                         <td>
                             <asp:TextBox ID="txtEndDate" runat="server" ReadOnly="true"></asp:TextBox>
-                            <asp:Button ID="btnEndDate" runat="server" Text="Button" OnClick="btnEndDate_Click" />
+                            <asp:ImageButton ID="imgEndDate" runat="server" />
                         </td>
                     </tr>
                     <tr>

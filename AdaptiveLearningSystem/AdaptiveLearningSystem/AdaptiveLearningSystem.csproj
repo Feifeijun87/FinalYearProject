@@ -144,6 +144,7 @@
     <Content Include="CreateTut.aspx" />
     <Content Include="EditTut.aspx" />
     <Content Include="EditTutHome.aspx" />
+    <Content Include="images\calendar.jpg" />
     <Content Include="LecResultHome.aspx" />
     <Content Include="LecturerRegister.aspx" />
     <Content Include="LecturerRegister.css" />

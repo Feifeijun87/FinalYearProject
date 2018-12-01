@@ -220,5 +220,10 @@ namespace AdaptiveLearningSystem
             txtStartDate.Text = Calendar2.SelectedDate.ToString("dd/MM/yyyy");
             Calendar2.Visible = false;
         }
+
+        protected void btnEndDate_Click1(object sender, ImageClickEventArgs e)
+        {
+
+        }
     }
 }

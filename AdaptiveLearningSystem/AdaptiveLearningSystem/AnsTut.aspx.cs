@@ -426,9 +426,6 @@ namespace AdaptiveLearningSystem
         {
             string ansGet = txtAns.Text;
 
-            string confirmValue = Request.Form["confirm_value"];
-            if (confirmValue == "Yes")
-            {
                 if (ansGet == "")
                 {
                     //lblAnsEnter.Text = "Please enter your answer!";
@@ -592,11 +589,6 @@ namespace AdaptiveLearningSystem
                     }
                 }
                 //this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('You clicked YES!')", true);
-            }
-            else
-            {
-                //this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('You clicked NO!')", true);
-            }
             
         }
 
