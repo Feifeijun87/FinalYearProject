@@ -50,92 +50,101 @@ namespace AdaptiveLearningSystem
                    // ViewState["postids"] = System.Guid.NewGuid().ToString();
                     //Session["postid"] = ViewState["postids"].ToString();
                     //Session["update"] = Server.UrlEncode(System.DateTime.Now.ToString());
-
-                    lblUserName.Text = Session["lecName"].ToString();
-                    currCount = 0;
-                    //lecID = Session["lecturerID"].ToString();
-                    courseID = Request.QueryString["course"].ToString();
-                    coursename = Request.QueryString["coursename"].ToString();
-                    tutNum = Request.QueryString["tutNum"].ToString();
-                    tutTitle = Request.QueryString["tutTitle"].ToString();
-                    lblCourse.Text = courseID + " " + coursename;
-                    txtTutNum.Text = tutNum;
-                    txtTutName.Text = tutTitle;
-
-                    //get tutID
-                    conn.Open();
-                    string sql = "SELECT TutorialID, CompulsaryEasy,CompulsaryMedium,CompulsaryHard FROM Tutorial WHERE TutorialNumber = @tutNum AND CourseID = @courseID GROUP BY TutorialID, CompulsaryEasy,CompulsaryMedium,CompulsaryHard";
-                    SqlCommand cmdGetTutID = new SqlCommand(sql, conn);
-                    cmdGetTutID.Parameters.AddWithValue("@tutNum", tutNum);
-                    cmdGetTutID.Parameters.AddWithValue("@courseID", courseID);
-                    SqlDataReader dtr = cmdGetTutID.ExecuteReader();
-                    while (dtr.Read())
+                    if(Session["checkEdit"].ToString() == "fromPage")
                     {
-                        tutID = dtr.GetString(0);
-                        compEasy = dtr.GetInt32(1);
-                        compMed = dtr.GetInt32(2);
-                        compHard = dtr.GetInt32(3);
-                    }
-                    conn.Close();
+                        Session["checkEdit"] = "refresh";
+                        lblUserName.Text = Session["lecName"].ToString();
+                        currCount = 0;
+                        //lecID = Session["lecturerID"].ToString();
+                        courseID = Request.QueryString["course"].ToString();
+                        coursename = Request.QueryString["coursename"].ToString();
+                        tutNum = Request.QueryString["tutNum"].ToString();
+                        tutTitle = Request.QueryString["tutTitle"].ToString();
+                        lblCourse.Text = courseID + " " + coursename;
+                        txtTutNum.Text = tutNum;
+                        txtTutName.Text = tutTitle;
 
-                    sql = "SELECT q.QuestionID,q.Question,q.SampleAns,q.Keyword,q.TimeLimit,q.Level FROM Tutorial t, Question q WHERE q.TutorialID = @tutID AND q.Status = 1 GROUP BY q.QuestionID,q.Question,q.SampleAns,q.Keyword,q.TimeLimit,q.Level ORDER BY q.QuestionID ASC";
-                    SqlCommand cmdGetQuest = new SqlCommand(sql, conn);
-                    cmdGetQuest.Parameters.AddWithValue("@tutID", tutID);
-                    conn.Open();
-                    //oriQuestCount = 0;
-                    dtr = cmdGetQuest.ExecuteReader();
-                    while (dtr.Read())
-                    {
-                        qid[oriQuestCount] = dtr.GetString(0);
-                        question[oriQuestCount] = dtr.GetString(1);
-                        answer[oriQuestCount] = dtr.GetString(2);
-                        key[oriQuestCount] = dtr.GetString(3);
-                        time[oriQuestCount] = dtr.GetInt32(4) - 1;
-                        leveltext[oriQuestCount] = dtr.GetString(5);
-                        oriQuestCount += 1;
-
-                    }
-                    conn.Close();
-
-                    for (int i = 0; i < oriQuestCount; i++)
-                    {
-                        if (leveltext[i].Contains("easy"))
+                        //get tutID
+                        conn.Open();
+                        string sql = "SELECT TutorialID, CompulsaryEasy,CompulsaryMedium,CompulsaryHard FROM Tutorial WHERE TutorialNumber = @tutNum AND CourseID = @courseID GROUP BY TutorialID, CompulsaryEasy,CompulsaryMedium,CompulsaryHard";
+                        SqlCommand cmdGetTutID = new SqlCommand(sql, conn);
+                        cmdGetTutID.Parameters.AddWithValue("@tutNum", tutNum);
+                        cmdGetTutID.Parameters.AddWithValue("@courseID", courseID);
+                        SqlDataReader dtr = cmdGetTutID.ExecuteReader();
+                        while (dtr.Read())
                         {
-                            level[i] = 0;
+                            tutID = dtr.GetString(0);
+                            compEasy = dtr.GetInt32(1);
+                            compMed = dtr.GetInt32(2);
+                            compHard = dtr.GetInt32(3);
                         }
-                        else if (leveltext[i].Contains("medium"))
+                        conn.Close();
+
+                        sql = "SELECT q.QuestionID,q.Question,q.SampleAns,q.Keyword,q.TimeLimit,q.Level FROM Tutorial t, Question q WHERE q.TutorialID = @tutID AND q.Status = 1 GROUP BY q.QuestionID,q.Question,q.SampleAns,q.Keyword,q.TimeLimit,q.Level ORDER BY q.QuestionID ASC";
+                        SqlCommand cmdGetQuest = new SqlCommand(sql, conn);
+                        cmdGetQuest.Parameters.AddWithValue("@tutID", tutID);
+                        conn.Open();
+                        //oriQuestCount = 0;
+                        dtr = cmdGetQuest.ExecuteReader();
+                        while (dtr.Read())
                         {
-                            level[i] = 1;
+                            qid[oriQuestCount] = dtr.GetString(0);
+                            question[oriQuestCount] = dtr.GetString(1);
+                            answer[oriQuestCount] = dtr.GetString(2);
+                            key[oriQuestCount] = dtr.GetString(3);
+                            time[oriQuestCount] = dtr.GetInt32(4) - 1;
+                            leveltext[oriQuestCount] = dtr.GetString(5);
+                            oriQuestCount += 1;
+
                         }
-                        else
+                        conn.Close();
+
+                        for (int i = 0; i < oriQuestCount; i++)
                         {
-                            level[i] = 2;
+                            if (leveltext[i].Contains("easy"))
+                            {
+                                level[i] = 0;
+                            }
+                            else if (leveltext[i].Contains("medium"))
+                            {
+                                level[i] = 1;
+                            }
+                            else
+                            {
+                                level[i] = 2;
+                            }
                         }
-                    }
 
-                    for(int k =0; k<oriQuestCount;k++)
+                        for (int k = 0; k < oriQuestCount; k++)
+                        {
+                            questionReset[k] = question[k];
+                            answerReset[k] = answer[k];
+                            keyReset[k] = key[k];
+                            levelReset[k] = level[k];
+                            timeReset[k] = time[k];
+                        }
+
+
+                        txtQues.Text = question[currCount];
+                        txtAns.Text = answer[currCount];
+                        txtKeyword.Text = key[currCount];
+                        ddlCompleteTime.SelectedIndex = time[currCount];
+                        ddlLevel.SelectedIndex = level[currCount];
+                        totalCount = oriQuestCount;
+
+                        string txt = "";
+                        for (int i = 0; i < oriQuestCount; i++)
+                        {
+                            txt += i + "=" + qid[i];
+                        }
+                        Label4.Text = txt;
+                    }
+                    else
                     {
-                        questionReset[k] = question[k];
-                        answerReset[k] = answer[k];
-                        keyReset[k] = key[k];
-                        levelReset[k] = level[k];
-                        timeReset[k] = time[k];
-                    }
-                    
 
-                    txtQues.Text = question[currCount];
-                    txtAns.Text = answer[currCount];
-                    txtKeyword.Text = key[currCount];
-                    ddlCompleteTime.SelectedIndex = time[currCount];
-                    ddlLevel.SelectedIndex = level[currCount];
-                    totalCount = oriQuestCount;
-
-                    string txt = "";
-                    for (int i = 0; i < oriQuestCount; i++)
-                    {
-                        txt += i + "=" + qid[i];
                     }
-                    Label4.Text = txt;
+
+                   
 
                 }
             }
@@ -914,6 +923,7 @@ namespace AdaptiveLearningSystem
                 Array.Clear(levelReset, 0, levelReset.Length);
                 Array.Clear(timeReset, 0, timeReset.Length);
                 oriQuestCount = 0;
+                Session["checkEdit"] = null;
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial Edited Successfully'); window.location.href='TutorialList.aspx?course=" + courseID + "&name=" + coursename + "';", true);
                 //Response.Redirect("TutorialList.aspx?course=" + courseID + "&name=" + coursename);
                 
