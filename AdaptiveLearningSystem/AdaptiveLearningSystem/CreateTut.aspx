@@ -75,20 +75,18 @@
         .auto-style5 {
             height: 33px;
         }
-        .auto-style6 {
-            width: 115px;
-        }
         .auto-style7 {
             height: 40px;
         }
-        .auto-style8 {
-            width: 115px;
-            height: 40px;
-        }
         .background {
-    background-color: black;
-    opacity: 0.8;
-    filter: alpha(opacity=90);
+            background-color: black;
+            opacity: 0.8;
+            filter: alpha(opacity=90);
+        }
+    .template {
+   height: 200px;
+   overflow-y: scroll;
+}
 }
 
         
@@ -97,7 +95,7 @@
     border-bottom:none;
 }
 .pnlChgContact{
-    width:40%;
+    width:80%;
     background-color:white;
 }
 .panelDtl{
@@ -105,7 +103,7 @@
     width:100%;
 }
 .editProf{
-    float:left;
+    float:initial;
     margin-left:20px;
     margin-top:20px;
 }
@@ -121,6 +119,23 @@
         .auto-style10 {
             width: 646px;
             height: 95px;
+        }
+
+        .auto-style12 {
+            height: 31px;
+        }
+
+        .auto-style13 {
+            float: left;
+            width: 60%;
+            height: 600px;
+        }
+
+        .auto-style14 {
+            float: left;
+            width: 90%;
+            margin-left: 20px;
+            margin-top: 20px;
         }
 
     </style>
@@ -184,7 +199,7 @@
                         <tr>
                             <td colspan="2" class="auto-style5">
                                 <label id="subjname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Course:&nbsp; </label>&nbsp;
-                                <asp:DropDownList ID="ddlCourse" runat="server" Width="381px" OnSelectedIndexChanged="DropDownList3_SelectedIndexChanged" AutoPostBack="True">
+                                <asp:DropDownList ID="ddlCourse" runat="server" Width="381px" Height="25px" OnSelectedIndexChanged="DropDownList3_SelectedIndexChanged" AutoPostBack="True">
                                 </asp:DropDownList>
                                 <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
                                 <br />
@@ -192,13 +207,13 @@
                         </tr>
                         <tr style="font-family: Arial, Helvetica, sans-serif; font-size: medium">
                             <td class="auto-style9">
-                                <label id="tutnum" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Tutorial:&nbsp; <asp:TextBox ID="txtTutNum" runat="server" Width="101px" OnTextChanged="txtTutNum_TextChanged"></asp:TextBox>
+                                <label id="tutnum" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Tutorial:&nbsp; <asp:TextBox ID="txtTutNum" Height="20px" runat="server" Width="101px" OnTextChanged="txtTutNum_TextChanged"></asp:TextBox>
                                 <br />
                                     <asp:Label ID="lblTutNumEnter" runat="server" ForeColor="Red" Visible="False"></asp:Label>
                                 </label>
                             </td>
                             <td class="auto-style10">
-                                <label id="tutname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Tutorial Title: <asp:TextBox ID="txtTutName" runat="server" Width="288px"></asp:TextBox>
+                                <label id="tutname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Tutorial Title: <asp:TextBox ID="txtTutName" Height="20px"  runat="server" Width="288px"></asp:TextBox>
                                 <br />
                                     <asp:Label ID="lblTutTitleEnter" runat="server" ForeColor="Red" Visible="False"></asp:Label>
                                 </label>
@@ -288,7 +303,7 @@
                         <asp:Button CssClass="BottomButton" ID="btnRemove" runat="server" Text="Remove this question" OnClick="btnRemove_Click" Visible="False" />
                         <asp:Button CssClass="BottomButton" ID="btnBack" runat="server" OnClick="Button1_Click" Text="Previous" Visible="False" />
                         <asp:Button CssClass="BottomButton" ID="btnNext" runat="server" OnClick="Button2_Click" Text="Next" />
-                        <asp:Button CssClass="BottomButton" ID="btnReset" runat="server" OnClick="Button3_Click" Text="Reset" Visible="False" />
+                        <asp:Button CssClass="BottomButton" ID="btnReset" runat="server" OnClick="Button3_Click" Text="Clear Text" Visible="False" />
                         <asp:Button CssClass="BottomButton" ID="btnFin" runat="server" OnClick="Button4_Click" Text="Finish" style="width: 122px" />
                     </div>
                 </div>
@@ -298,41 +313,96 @@
         </ContentTemplate>
                     </asp:UpdatePanel>
                         
-                    <asp:Panel ID="compQuestNum" CssClass="pnlChgContact" runat="server">
+                    <asp:Panel ID="compQuestNum" CssClass="pnlChgContact" runat="server" >
              <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                     <ContentTemplate>
-            <div class="panelDtl">
-                 <table class="editProf">
+            <div class="auto-style13" style="overflow-y:scroll; background-color:lightblue" >
+                
+                <table class="auto-style14">
                     <tr>
-                        <td colspan="2">
+                        <td class="auto-style12" style="font-size: x-large; text-decoration: underline;">
                             Tutorial Question Preview
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="2">
-                            <asp:Label ID="lblPreview" runat="server" Width="300px" Text="iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"></asp:Label>
-                        </td>
-                    </tr>
+                   
+             <asp:Repeater ID="categoryRepeater" runat="server" >
+                 <ItemTemplate><asp:Panel ID="Panel1" runat="server" ScrollBars="Vertical" >
+    <tr>
+        </tr>
+
+                      <td>
+            <asp:Label ID="lblNumber" runat="server" Width ="5px" Text='<%# Eval("Key") %>'></asp:Label> .
+            <asp:Repeater ID="Repeater1" runat="server" DataSource='<%# Eval("Value") %>' ><ItemTemplate>
+           <asp:Label ID="lblquest" 
+                        runat="server"
+                        Text='<%# Eval("Key") %>' />
+   
+        </td>
+                     <asp:Repeater ID="nestedRepeater" runat="server" DataSource='<%# Eval("Value") %>'>
+                         <ItemTemplate>
+                             <tr>
+                                 <td>Sample answer :
+                                     <asp:Label ID="lblAns" runat="server" Text='<%# Eval("Key") %>' />
+                                 </td>
+                             </tr>
+                             <asp:Repeater ID="nestedRepeater1" runat="server" DataSource='<%# Eval("Value") %>'>
+                                 <ItemTemplate>
+                                     <tr>
+                                         <td>Keyword :
+                                             <asp:Label ID="lblKey" runat="server" Text='<%# Eval("Key") %>' />
+                                         </td>
+                                     </tr>
+                                     <asp:Repeater ID="nestedRepeater1" runat="server" DataSource='<%# Eval("Value") %>'>
+                                         <ItemTemplate>
+                                             <tr>
+                                                 <td>Point awarded time :
+                                                     <asp:Label ID="lblTime" runat="server" Text='<%# Eval("Key") %>' /> minutes
+                                                 </td>
+                                             </tr>
+                                             <tr>
+                                                 <td>Difficulty level :
+                                                     <asp:Label ID="lblLevel" runat="server" Text='<%# Eval("Value") %>' />
+                                                 </td>
+                                             </tr>
+                                             <tr>
+                                                 <td>
+                                                     <br />
+                                                 </td>
+                                             </tr>
+                                         </ItemTemplate>
+                                     </asp:Repeater>
+                                 </ItemTemplate>
+                             </asp:Repeater>
+                         </ItemTemplate>
+                     </asp:Repeater></ItemTemplate>
+                     </asp:Repeater>
+    </tr></asp:Panel></ItemTemplate></asp:Repeater>
+   
+      
+        </table>
+                    </div>
+                        <div id="num" style="width:40%; float:right">
+                 <table class="editProf" style="border-bottom:1px; border-top:1px;border-left:1px;border-right:1px">
                     <tr>
                         <td class="auto-style7">
-                            Compulsory Easy:</td>
-                        <td class="auto-style8">
-                            <asp:TextBox ID="txtEasy" runat="server" Width="62px"></asp:TextBox>/ <asp:Label ID="lblCompEasyNum" runat="server">0</asp:Label>
+                            Compulsory Easy :</td>
+                        <td >
+                            <asp:TextBox ID="txtEasy" runat="server" Width="62px"></asp:TextBox> / <asp:Label ID="lblCompEasyNum" runat="server">0</asp:Label>
                             
                         </td>
                     </tr>
                     <tr>
                         <td class="stayRight">
-                            Compulsory Medium:</td>
-                        <td class="auto-style6">
+                            Compulsory Medium :</td>
+                        <td >
                             <asp:TextBox ID="txtMed" runat="server" Width="62px"></asp:TextBox>
                             /
                             <asp:Label ID="lblCompMedNum" runat="server">0</asp:Label>
                         </td>
                     </tr>
                     <tr>
-                        <td  class="stayRight">Compulsory Difficult:</td>
-                        <td class="auto-style6">
+                        <td  class="stayRight">Compulsory Difficult :</td>
+                        <td >
                             <asp:TextBox ID="txtDifficult" runat="server" Width="62px"></asp:TextBox>
                             /
                             <asp:Label ID="lblCompDiffNum" runat="server">0</asp:Label>
@@ -345,17 +415,14 @@
                     </tr>
                 </table>
                        
-            </div>
-           
-            <div class="BottomButtonGroup">
-                
- </div> <div class="BottomButtonGroup">
+            
+           <div class="BottomButtonGroup">
                            
                  
                             <asp:Button ID="btnCancel" runat="server" CssClass="BottomButton" OnClick="btnContactCancel_Click" Text="Close" />
                             <asp:Button ID="btnDone" CssClass="BottomButton" runat="server" Text="Done" OnClick="btnChgContact_Click" />
                  
- </div>
+ </div></div>
                 </ContentTemplate>
                     </asp:UpdatePanel>
                         
