@@ -141,7 +141,21 @@ namespace AdaptiveLearningSystem
                     }
                     else
                     {
-
+                        currCount = 0;
+                        txtTutNum.Text = tutNum;
+                        txtTutName.Text = tutTitle;
+                        txtQues.Text = question[currCount];
+                        txtAns.Text = answer[currCount];
+                        txtKeyword.Text = key[currCount];
+                        ddlCompleteTime.SelectedIndex = time[currCount];
+                        ddlLevel.SelectedIndex = level[currCount];
+                        totalCount = oriQuestCount;
+                            string txt = "";
+                        for (int i = 0; i < oriQuestCount; i++)
+                        {
+                            txt += i + "=" + qid[i];
+                        }
+                        Label4.Text = txt;
                     }
 
                    

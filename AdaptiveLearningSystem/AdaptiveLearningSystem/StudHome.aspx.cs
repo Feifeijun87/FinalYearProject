@@ -117,6 +117,7 @@ namespace AdaptiveLearningSystem
                 }
                 else
                 {
+                    Session["checkAns"] = "fromHome";
                     Response.Redirect("AnsTut.aspx?tutNum=" + tutNum + "&courseID=" + courseID + "&coursename=" + coursename + "&chapname=" + tutTitle + "&questDone=" + questDone);
 
                 }

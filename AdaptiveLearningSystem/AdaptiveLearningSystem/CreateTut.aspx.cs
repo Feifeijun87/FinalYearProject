@@ -407,6 +407,7 @@ namespace AdaptiveLearningSystem
                     string[] splitArray = courseID.Split(delimiters);
                     courseID = splitArray[0];
 
+                        coursename = "";
                     for (int i = 1; i < splitArray.Length; i++)
                     {
                         coursename += splitArray[i] + " "; //coursename
