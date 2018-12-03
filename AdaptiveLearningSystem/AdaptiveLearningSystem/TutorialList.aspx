@@ -141,9 +141,9 @@
                         <td class="stayRight">
                             <asp:Label ID="Label8" runat="server"> Start Date : </asp:Label>
                         </td>
-                        <td>
+                        <td style="position:relative;height:50px;" >
                             <asp:TextBox ID="txtStartDate" runat="server" ReadOnly="true" ></asp:TextBox>
-                            <asp:Button ID="btnStartDate" runat="server" Text="Button" OnClick="btnStartDate_Click" />
+                            <asp:ImageButton ID="imgStartDate" style="position:absolute;bottom:10px;left:170px;" ImageUrl="~/images/calendar.png" Width="35px" Height="30px" OnClick="imgStartDate_Click" runat="server" />
                         </td>
                         
                     </tr>
@@ -164,9 +164,9 @@
                         <td class="stayRight">
                             <asp:Label ID="Label1" runat="server"> End Date : </asp:Label>
                         </td>
-                        <td>
+                        <td style="position:relative;height:50px;">
                             <asp:TextBox ID="txtEndDate" runat="server" ReadOnly="true"></asp:TextBox>
-                            <asp:ImageButton ID="imgEndDate" runat="server" />
+                            <asp:ImageButton ID="imgEndDate" style="position:absolute;bottom:10px;left:170px;" ImageUrl="~/images/calendar.png" Width="35px" Height="30px" OnClick="imgEndDate_Click" runat="server" />
                         </td>
                     </tr>
                     <tr>

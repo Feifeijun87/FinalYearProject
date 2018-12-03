@@ -220,13 +220,13 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.WebControls.TextBox txtStartDate;
         
         /// <summary>
-        /// btnStartDate control.
+        /// imgStartDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnStartDate;
+        protected global::System.Web.UI.WebControls.ImageButton imgStartDate;
         
         /// <summary>
         /// Calendar2 control.

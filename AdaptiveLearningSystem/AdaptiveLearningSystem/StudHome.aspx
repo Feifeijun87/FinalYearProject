@@ -41,7 +41,7 @@
         .BottomButton {
             position:absolute;
             margin-top:50px;
-            display:none;
+            display:inline-block;
     background-color: #1A7FEC;
     border: none;
     color: white;
@@ -58,9 +58,7 @@
     .BottomButton:active {
         background-color: #1421CC;
     }
-    .tutorialCompletion:hover .BottomButton{
-        display:inline-block;
-    }
+
     </style>
 
     </head>
