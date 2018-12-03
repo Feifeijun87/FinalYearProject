@@ -39,33 +39,36 @@ namespace AdaptiveLearningSystem
             {
                 if (!IsPostBack)
                 {
+                    courseID = Request.QueryString["course"].ToString();
+                    coursename = Request.QueryString["coursename"].ToString();
+                    lblCourse.Text = courseID + " " + coursename;
                     lblUserName.Text = Session["lecName"].ToString();
-                    Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
-                    sql = " SELECT DISTINCT c.CourseID + ' ' + c.CourseName AS Course FROM CourseAvailable a, Course c WHERE a.LecturerID = @lecID AND a.CourseID = c.CourseID AND a.Status =1";
-                    SqlCommand cmdGetCourse = new SqlCommand(sql, conn);
-                    cmdGetCourse.Parameters.AddWithValue("@lecID", Session["lecturerID"].ToString());
-                    DataTable dt = new DataTable();
-                    cmdGetCourse.CommandType = CommandType.Text;
-                    SqlDataAdapter sda = new SqlDataAdapter();
-                    sda.SelectCommand = cmdGetCourse;
-                    conn.Close();
-                    conn.Open();
-                    sda.Fill(dt);
-                    if (dt != null && dt.Rows.Count > 0)
-                    {
-                        ddlCourse.DataTextField = "Course";
-                        ddlCourse.DataValueField = "Course";
-                        ddlCourse.DataSource = dt;
-                        ddlCourse.DataBind();
-                        ddlCourse.Items.Insert(0, new ListItem(String.Empty, String.Empty));
-                        ddlCourse.SelectedIndex = 0;
-
-                    }
-                    else
-                    {
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('No course found'); window.location.href='LecHome.aspx';", true);
-                    }
-                    conn.Close();
+                    //Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
+                   // sql = " SELECT DISTINCT c.CourseID + ' ' + c.CourseName AS Course FROM CourseAvailable a, Course c WHERE a.LecturerID = @lecID AND a.CourseID = c.CourseID AND a.Status =1";
+                    //SqlCommand cmdGetCourse = new SqlCommand(sql, conn);
+                   // cmdGetCourse.Parameters.AddWithValue("@lecID", Session["lecturerID"].ToString());
+                   // DataTable dt = new DataTable();
+                   // cmdGetCourse.CommandType = CommandType.Text;
+                  //  SqlDataAdapter sda = new SqlDataAdapter();
+                  //  sda.SelectCommand = cmdGetCourse;
+                 //   conn.Close();
+                  //  conn.Open();
+                  //  sda.Fill(dt);
+                  //  if (dt != null && dt.Rows.Count > 0)
+                 //   {
+                 //       ddlCourse.DataTextField = "Course";
+                //        ddlCourse.DataValueField = "Course";
+                ///        ddlCourse.DataSource = dt;
+                //        ddlCourse.DataBind();
+               //         ddlCourse.Items.Insert(0, new ListItem(String.Empty, String.Empty));
+                   //     ddlCourse.SelectedIndex = 0;
+//
+                 //   }
+                  //  else
+                    //{
+                   //     ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('No course found'); window.location.href='LecHome.aspx';", true);
+                    //}
+                   // conn.Close();
                 }
             }
             else
@@ -156,7 +159,7 @@ namespace AdaptiveLearningSystem
                 btnRemove.Visible = false;
                 btnBack.Visible = false;
             }
-            Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
+           // Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
 
         }
 
@@ -184,6 +187,21 @@ namespace AdaptiveLearningSystem
             else
             {
                 return false;
+            }
+        }
+
+        protected string FormatColorRow(string ix)
+        {
+            lblCompEasyNum.Text = "kikik";
+            int index = int.Parse(ix);
+
+            if ((index % 2) == 1)
+            {
+                return "style='background-color:lightblue'";
+            }
+            else
+            {
+                return "style='background-color:white'";
             }
         }
 
@@ -262,7 +280,7 @@ namespace AdaptiveLearningSystem
                 btnBack.Visible = true;
 
             }
-            Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
+            //Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
         }
 
         protected void clearLabel()
@@ -291,6 +309,11 @@ namespace AdaptiveLearningSystem
             if (tutNumGet == "")
             {
                 lblTutNumEnter.Text = "Please fill in the tutorial number!";
+                return false;
+            }
+            else if(tutNumGet == "0")
+            {
+                lblTutNumEnter.Text = "Tutorial number cannot be zero!";
                 return false;
             }
             else if (tutTitleGet == "")
@@ -402,17 +425,17 @@ namespace AdaptiveLearningSystem
                     //lblNoCourseFound.Text = "TutID: " + tutorialID;
 
                     //Check tutorial existance (tut num)
-                    courseID = ddlCourse.SelectedItem.Text;
-                    char delimiters = ' ';
-                    string[] splitArray = courseID.Split(delimiters);
-                    courseID = splitArray[0];
+                   // courseID = ddlCourse.SelectedItem.Text;
+                  //  char delimiters = ' ';
+                    //string[] splitArray = courseID.Split(delimiters);
+                    //courseID = splitArray[0];
 
-                        coursename = "";
-                    for (int i = 1; i < splitArray.Length; i++)
-                    {
-                        coursename += splitArray[i] + " "; //coursename
-                    }
-                    coursename = coursename.TrimEnd();
+                   //     coursename = "";
+                   // for (int i = 1; i < splitArray.Length; i++)
+                   // {
+                   //     coursename += splitArray[i] + " "; //coursename
+                  //  }
+                  //  coursename = coursename.TrimEnd();
 
                     sql = "SELECT TutorialNumber FROM [Tutorial] WHERE CourseID = @courseID";
                     SqlCommand cmdGetTutNum = new SqlCommand(sql, conn);
@@ -532,12 +555,35 @@ namespace AdaptiveLearningSystem
                             final.Clear();
 
 
-                            Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
+               //             Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
 
                         lblCompEasyNum.Text = easy.ToString();
                         lblCompMedNum.Text = medium.ToString();
                         lblCompDiffNum.Text = hard.ToString();
-                            //UpdatePanel5.Visible = false;
+
+                            txtEasy.Enabled = true;
+                            txtMed.Enabled = true;
+                            txtDifficult.Enabled = true;
+                            txtEasy.Text = "";
+                            txtMed.Text = "";
+                            txtDifficult.Text = "";
+
+                            if (easy == 0)
+                            {
+                                txtEasy.Text = "0";
+                                txtEasy.Enabled = false;
+                            }
+                            if (medium == 0)
+                            {
+                                txtMed.Text = "0";
+                                txtMed.Enabled = false;
+                            }
+                            if(hard == 0)
+                            {
+                                txtDifficult.Text = "0";
+                                txtDifficult.Enabled = false;
+                            }
+                                //UpdatePanel5.Visible = false;
                             //compQuestNum.Visible = true;
                         ModalPopupExtender3.Show();
                     }
@@ -568,10 +614,27 @@ namespace AdaptiveLearningSystem
             int easyGetInt = 0, mediumGetInt = 0, HardGetInt = 0, valid = 0;
 
             lblCompErrorMsg.Visible = false;
+            lblErrorDiff.Visible = false;
+            lblErrorEasy.Visible = false;
+            lblErrorMed.Visible = false;
 
             if (easyGet == "" || mediumGet == "" || hardGet == "")
             {
                 lblCompErrorMsg.Visible = true;
+
+                if(easyGet == "")
+                {
+                    lblErrorEasy.Visible = true;
+                }
+                if(mediumGet =="")
+                {
+                    lblErrorMed.Visible = true;
+                }
+                if(hardGet == "")
+                {
+                    lblErrorDiff.Visible = true;
+                }
+
                 lblCompErrorMsg.Text = "Please enter a digit";
             }
             else
@@ -579,58 +642,67 @@ namespace AdaptiveLearningSystem
                 if (checkDigit(easyGet))
                 {
                     easyGetInt = int.Parse(easyGet);
-                    if ((easyGetInt == 0 && easy == 0) || easyGetInt <= easy)
+                    if ((easyGetInt == 0 && easy == 0) || (easyGetInt <= easy && easyGetInt > 0))
                     {
 
                     }
                     else
                     {
+                        lblErrorEasy.Visible = true;
                         valid += 1;
                     }
                 }
                 else
                 { //not int
+                    lblErrorEasy.Visible = true;
+
                     valid += 1;
                 }
 
                 if (checkDigit(mediumGet))
                 {
                     mediumGetInt = int.Parse(mediumGet);
-                    if ((mediumGetInt == 0 && medium == 0) || mediumGetInt <= medium)
+                    if ((mediumGetInt == 0 && medium == 0) || (mediumGetInt <= medium && mediumGetInt >0))
                     {
 
                     }
                     else
                     {
+                        lblErrorMed.Visible = true;
                         valid += 1;
                     }
                 }
                 else
                 {
+                    lblErrorMed.Visible = true;
+
                     valid += 1;
                 }
 
                 if (checkDigit(hardGet))
                 {
                     HardGetInt = int.Parse(hardGet);
-                    if ((HardGetInt == 0 && hard == 0) || HardGetInt <= hard)
+                    if ((HardGetInt == 0 && hard == 0) || (HardGetInt <= hard && HardGetInt >0))
                     {
 
                     }
                     else
                     {
+                        lblErrorDiff.Visible = true;
                         valid += 1;
                     }
                 }
                 else
                 {
+                    lblErrorDiff.Visible = true;
+
                     valid += 1;
                 }
 
                 if (valid > 0)
                 {
                     lblCompErrorMsg.Visible = true;
-                    lblCompErrorMsg.Text = "Compulsory question must be at least one and within range!";
+                    lblCompErrorMsg.Text = "Compulsory question must be at least 1 and within range !";
 
                 }
                 else
@@ -700,7 +772,7 @@ namespace AdaptiveLearningSystem
 
                         txt += "Db Question" + (i + 1) + "success";
                     }
-                    Label4.Text = txt;
+                   // Label4.Text = txt;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial Created Successfully'); window.location.href='TutorialList.aspx?course=" + courseID + "&name=" + coursename+"';", true);
                     //Response.Redirect("TutorialList.aspx?course=" + courseID + "&name=" + coursename);
 

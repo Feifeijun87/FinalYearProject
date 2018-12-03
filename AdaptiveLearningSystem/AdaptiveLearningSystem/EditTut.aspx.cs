@@ -141,6 +141,7 @@ namespace AdaptiveLearningSystem
                     }
                     else
                     {
+                        lblUserName.Text = Session["lecName"].ToString();
                         currCount = 0;
                         txtTutNum.Text = tutNum;
                         txtTutName.Text = tutTitle;
@@ -150,6 +151,7 @@ namespace AdaptiveLearningSystem
                         ddlCompleteTime.SelectedIndex = time[currCount];
                         ddlLevel.SelectedIndex = level[currCount];
                         totalCount = oriQuestCount;
+                        lblCourse.Text = courseID + " " + coursename;
                         string txt = "";
                         for (int i = 0; i < oriQuestCount; i++)
                         {
@@ -410,6 +412,11 @@ namespace AdaptiveLearningSystem
                 lblTutNumEnter.Text = "Please fill in the tutorial number!";
                 return false;
             }
+            else if (tutNumGet == "0")
+            {
+                lblTutNumEnter.Text = "Tutorial number cannot be zero!";
+                return false;
+            }
             else if (tutTitleGet == "")
             {
                 lblTutTitleEnter.Text = "Please fill in the tutorial title!";
@@ -517,9 +524,7 @@ namespace AdaptiveLearningSystem
                     {
                         //get tut ID
                         conn.Open();
-
-
-
+                        
                         sql = "SELECT TutorialNumber,TutorialID FROM [Tutorial] WHERE CourseID = @courseID";
                         SqlCommand cmdGetTutNum = new SqlCommand(sql, conn);
                         cmdGetTutNum.Parameters.AddWithValue("@courseID", courseID);
@@ -579,6 +584,22 @@ namespace AdaptiveLearningSystem
                             txtEasy.Text = compEasy.ToString();
                             txtMed.Text = compMed.ToString();
                             txtDifficult.Text = compHard.ToString();
+
+                            if (easy == 0)
+                            {
+                                txtEasy.Text = "0";
+                                txtEasy.Enabled = false;
+                            }
+                            if (medium == 0)
+                            {
+                                txtMed.Text = "0";
+                                txtMed.Enabled = false;
+                            }
+                            if (hard == 0)
+                            {
+                                txtDifficult.Text = "0";
+                                txtDifficult.Enabled = false;
+                            }
 
 
                             for (int i = 0; i < totalCount; i++)
@@ -732,8 +753,28 @@ namespace AdaptiveLearningSystem
             int status;
             string leveltxt = "";
 
+            lblCompErrorMsg.Visible = false;
+            lblErrorDiff.Visible = false;
+            lblErrorEasy.Visible = false;
+            lblErrorMed.Visible = false;
+
             if (easyGet == "" || mediumGet == "" || hardGet == "")
             {
+                lblCompErrorMsg.Visible = true;
+
+                if (easyGet == "")
+                {
+                    lblErrorEasy.Visible = true;
+                }
+                if (mediumGet == "")
+                {
+                    lblErrorMed.Visible = true;
+                }
+                if (hardGet == "")
+                {
+                    lblErrorDiff.Visible = true;
+                }
+
                 lblCompErrorMsg.Text = "Please enter a digit";
             }
             else
@@ -741,57 +782,69 @@ namespace AdaptiveLearningSystem
                 if (checkDigit(easyGet))
                 {
                     easyGetInt = int.Parse(easyGet);
-                    if ((easyGetInt == 0 && easy == 0) || easyGetInt <= easy)
+                    if ((easyGetInt == 0 && easy == 0) || (easyGetInt <= easy && easyGetInt > 0))
                     {
 
                     }
                     else
                     {
+                        lblErrorEasy.Visible = true;
                         valid += 1;
                     }
                 }
                 else
                 { //not int
+                    lblErrorEasy.Visible = true;
+
                     valid += 1;
                 }
 
                 if (checkDigit(mediumGet))
                 {
                     mediumGetInt = int.Parse(mediumGet);
-                    if ((mediumGetInt == 0 && medium == 0) || mediumGetInt <= medium)
+                    if ((mediumGetInt == 0 && medium == 0) || (mediumGetInt <= medium && mediumGetInt > 0))
                     {
 
                     }
                     else
                     {
+                        lblErrorMed.Visible = true;
                         valid += 1;
                     }
                 }
                 else
                 {
+                    lblErrorMed.Visible = true;
+
                     valid += 1;
                 }
+
 
                 if (checkDigit(hardGet))
                 {
                     HardGetInt = int.Parse(hardGet);
-                    if ((HardGetInt == 0 && hard == 0) || HardGetInt <= hard)
+                    if ((HardGetInt == 0 && hard == 0) || (HardGetInt <= hard && HardGetInt > 0))
                     {
 
                     }
                     else
                     {
+                        lblErrorDiff.Visible = true;
                         valid += 1;
                     }
                 }
                 else
                 {
+                    lblErrorDiff.Visible = true;
+
                     valid += 1;
                 }
 
+
                 if (valid > 0)
                 {
-                    lblCompErrorMsg.Text = "Compulsory question must be at least one and within range!";
+                    lblCompErrorMsg.Visible = true;
+                    lblCompErrorMsg.Text = "Compulsory question must be at least 1 and within range!";
 
                 }
                 else
@@ -929,24 +982,27 @@ namespace AdaptiveLearningSystem
                     cmdUpdateTut.ExecuteNonQuery();
                     conn.Close();
 
+                    Array.Clear(qid, 0, qid.Length);
+                    Array.Clear(question, 0, question.Length);
+                    Array.Clear(answer, 0, answer.Length);
+                    Array.Clear(key, 0, key.Length);
+                    Array.Clear(level, 0, level.Length);
+                    Array.Clear(time, 0, time.Length);
+                    Array.Clear(questionReset, 0, questionReset.Length);
+                    Array.Clear(answerReset, 0, answerReset.Length);
+                    Array.Clear(keyReset, 0, keyReset.Length);
+                    Array.Clear(levelReset, 0, levelReset.Length);
+                    Array.Clear(timeReset, 0, timeReset.Length);
+                    oriQuestCount = 0;
+
+                    Session["checkEdit"] = null;
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial Edited Successfully'); window.location.href='TutorialList.aspx?course=" + courseID + "&name=" + coursename + "';", true);
+
                 }
                 //lblNoCourseFound.Text = txt;
 
-                Array.Clear(qid, 0, qid.Length);
-                Array.Clear(question, 0, question.Length);
-                Array.Clear(answer, 0, answer.Length);
-                Array.Clear(key, 0, key.Length);
-                Array.Clear(level, 0, level.Length);
-                Array.Clear(time, 0, time.Length);
-                Array.Clear(questionReset, 0, questionReset.Length);
-                Array.Clear(answerReset, 0, answerReset.Length);
-                Array.Clear(keyReset, 0, keyReset.Length);
-                Array.Clear(levelReset, 0, levelReset.Length);
-                Array.Clear(timeReset, 0, timeReset.Length);
-                oriQuestCount = 0;
-                Session["checkEdit"] = null;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial Edited Successfully'); window.location.href='TutorialList.aspx?course=" + courseID + "&name=" + coursename + "';", true);
-                //Response.Redirect("TutorialList.aspx?course=" + courseID + "&name=" + coursename);
+            
+               //Response.Redirect("TutorialList.aspx?course=" + courseID + "&name=" + coursename);
 
             }
 

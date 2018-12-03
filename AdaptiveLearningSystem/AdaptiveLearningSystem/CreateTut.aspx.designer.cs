@@ -112,22 +112,13 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.UpdatePanel UpdatePanel5;
         
         /// <summary>
-        /// ddlCourse control.
+        /// lblCourse control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCourse;
-        
-        /// <summary>
-        /// Label4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.WebControls.Label lblCourse;
         
         /// <summary>
         /// txtTutNum control.
@@ -337,6 +328,15 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.WebControls.Label lblCompEasyNum;
         
         /// <summary>
+        /// lblErrorEasy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorEasy;
+        
+        /// <summary>
         /// txtMed control.
         /// </summary>
         /// <remarks>
@@ -355,6 +355,15 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.WebControls.Label lblCompMedNum;
         
         /// <summary>
+        /// lblErrorMed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorMed;
+        
+        /// <summary>
         /// txtDifficult control.
         /// </summary>
         /// <remarks>
@@ -371,6 +380,15 @@ namespace AdaptiveLearningSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCompDiffNum;
+        
+        /// <summary>
+        /// lblErrorDiff control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorDiff;
         
         /// <summary>
         /// lblCompErrorMsg control.

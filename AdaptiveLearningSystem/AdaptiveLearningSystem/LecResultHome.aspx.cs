@@ -72,9 +72,14 @@ namespace AdaptiveLearningSystem
             lblTutGroup.Visible = false;
             ddlTutGroup.Visible = false;
             lblNoTutGroup.Visible = false;
-            ddlCourse.SelectedIndex = 0;
-            btnDone.Visible = false;
             
+            btnDone.Visible = false;
+            if (lblNoIntake.Visible == true)
+            {
+                ddlCourse.SelectedIndex = 0;
+            }
+           
+
             //Label1.Text = "";
             //Label1.Text = (radReportSelect.SelectedValue).ToString();
 
