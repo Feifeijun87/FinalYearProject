@@ -169,26 +169,6 @@ namespace AdaptiveLearningSystem
             Response.Redirect("CreateTut.aspx");
         }
 
-        protected void btnStartDate_Click(object sender, EventArgs e)
-        {
-            if (Calendar1.Visible == true)
-                Calendar1.Visible = false;
-            if (Calendar2.Visible == false)
-                Calendar2.Visible = true;
-            else
-                Calendar2.Visible = false;
-        }
-
-        protected void btnEndDate_Click(object sender, EventArgs e)
-        {
-            if (Calendar2.Visible == true)
-                Calendar2.Visible = false;
-            if (Calendar1.Visible == false)
-                Calendar1.Visible = true;
-            else
-                Calendar1.Visible = false;
-        }
-
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
         {
             if (e.Day.Date < DateTime.Now.Date)
@@ -221,9 +201,24 @@ namespace AdaptiveLearningSystem
             Calendar2.Visible = false;
         }
 
-        protected void btnEndDate_Click1(object sender, ImageClickEventArgs e)
+        protected void imgEndDate_Click(object sender, ImageClickEventArgs e)
         {
+            if (Calendar2.Visible == true)
+                Calendar2.Visible = false;
+            if (Calendar1.Visible == false)
+                Calendar1.Visible = true;
+            else
+                Calendar1.Visible = false;
+        }
 
+        protected void imgStartDate_Click(object sender, ImageClickEventArgs e)
+        {
+            if (Calendar1.Visible == true)
+                Calendar1.Visible = false;
+            if (Calendar2.Visible == false)
+                Calendar2.Visible = true;
+            else
+                Calendar2.Visible = false;
         }
     }
 }

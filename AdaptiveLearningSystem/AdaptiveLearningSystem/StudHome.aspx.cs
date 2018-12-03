@@ -112,6 +112,7 @@ namespace AdaptiveLearningSystem
 
                 if(numTQ == numQD)
                 {
+                    Session["load"] = "once";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial already completed!'); window.location.href='StudHome.aspx';", true);
 
                 }

@@ -773,6 +773,7 @@ namespace AdaptiveLearningSystem
                         txt += listRandomQuestionID[i] + "." + listRandomQuestion[i] + ",";
                     }
 
+
                     Label1.Text = "final random:" + txt;
 
                     lblQNum.Text = (questdone + 1).ToString();
@@ -781,6 +782,7 @@ namespace AdaptiveLearningSystem
                     //lblTimeCount.Text = mm.ToString();
                     Timer1.Enabled = true;
                 }
+
             }
             else
             {
