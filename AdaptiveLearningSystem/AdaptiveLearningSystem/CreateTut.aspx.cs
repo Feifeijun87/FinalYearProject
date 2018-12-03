@@ -407,6 +407,7 @@ namespace AdaptiveLearningSystem
                     string[] splitArray = courseID.Split(delimiters);
                     courseID = splitArray[0];
 
+                        coursename = "";
                     for (int i = 1; i < splitArray.Length; i++)
                     {
                         coursename += splitArray[i] + " "; //coursename
@@ -456,11 +457,88 @@ namespace AdaptiveLearningSystem
                                 hard += 1;
                             }
                         }
-                        Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
+
+                            //here
+                            List<string> listQuestPrev = new List<string>();
+                            List<string> listAnsPrev = new List<string>();
+                            List<string> listKeyPrev = new List<string>();
+                            List<int> listTimePrev = new List<int>();
+                            List<string> listlevelPrev = new List<string>();
+                            List<string> listTimeText = new List<string>();
+
+                            string txt;
+
+                            listQuestPrev = question.ToList();
+                            listAnsPrev = answer.ToList();
+                            listKeyPrev = key.ToList();
+                            for (int i = 0; i < totalCount; i++)
+                            {
+                                if (level[i] == 0)
+                                {
+                                    listlevelPrev.Add("Easy");
+                                }
+                                else if (level[i] == 1)
+                                {
+                                    listlevelPrev.Add("Medium");
+                                }
+                                else
+                                {
+                                    listlevelPrev.Add("Difficult");
+                                }
+
+                                
+                               // listTimeText.Add()
+                            }
+
+                            listTimePrev = time.ToList();
+                            int plus;
+                            Dictionary<string, Dictionary<string,Dictionary<string, Dictionary<string, Dictionary<string, string>>>>> final =
+                  new Dictionary<string, Dictionary<string, Dictionary<string, Dictionary<string, Dictionary<string, string>>>>>();
+
+                             for (int i = 0; i < totalCount; i++)
+                            {
+                                Dictionary<string, Dictionary<string, Dictionary<string, Dictionary<string, string>>>> combined =
+                                new Dictionary<string, Dictionary<string, Dictionary<string, Dictionary<string, string>>>>();
+
+                                Dictionary<string, Dictionary<string, Dictionary<string, string>>> inner = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
+
+                                Dictionary<string, Dictionary<string, string>> inner2 = new Dictionary<string, Dictionary<string, string>>();
+                                Dictionary<string, string> inner3 = new Dictionary<string, string>();
+
+                                plus = listTimePrev[i] + 1;
+                                txt = plus.ToString();
+
+                                inner3.Add((plus).ToString(),
+                                    listlevelPrev[i].ToString());
+
+                                inner2.Add(listKeyPrev[i].ToString(),
+                                       inner3);
+                                inner.Add(listAnsPrev[i], inner2);
+
+                                plus = i + 1;
+                                txt = plus.ToString();
+
+                                combined.Add(listQuestPrev[i].ToString(), inner);
+                                final.Add((txt).ToString(), combined);
+
+                               // combined.Clear();
+                            //    inner.Clear();
+                              //  inner2.Clear();
+                              //  inner3.Clear();
+                            }
+
+                            categoryRepeater.DataSource = final;
+                            categoryRepeater.DataBind();
+                            final.Clear();
+
+
+                            Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
 
                         lblCompEasyNum.Text = easy.ToString();
                         lblCompMedNum.Text = medium.ToString();
                         lblCompDiffNum.Text = hard.ToString();
+                            //UpdatePanel5.Visible = false;
+                            //compQuestNum.Visible = true;
                         ModalPopupExtender3.Show();
                     }
                 }
@@ -476,6 +554,8 @@ namespace AdaptiveLearningSystem
         {
             lblCompErrorMsg.Text = "";
             lblCompErrorMsg.Visible = false;
+           // UpdatePanel5.Visible = true;
+           // compQuestNum.Visible = false;
             ModalPopupExtender3.Hide();
 
         }

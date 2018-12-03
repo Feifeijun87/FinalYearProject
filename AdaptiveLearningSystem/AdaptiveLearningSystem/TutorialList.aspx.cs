@@ -77,6 +77,7 @@ namespace AdaptiveLearningSystem
                 string courseID = Request.QueryString["course"].ToString();
                 string coursename = Request.QueryString["name"].ToString();
 
+                Session["checkEdit"] = "fromPage";
                 Response.Redirect("EditTut.aspx?course=" + courseID +"&coursename=" + coursename + "&tutNum=" + tutNum + "&tutTitle=" + chapterName);
 
             }

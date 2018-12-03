@@ -596,13 +596,17 @@ namespace AdaptiveLearningSystem
 
         protected void Page_Load(object sender, EventArgs e)
         {
-          
+
             if (Session["studID"] != null)
             {
                 lblUserName.Text = Session["studName"].ToString();
                 if (!IsPostBack)
                 {
-                    studID = Session["studID"].ToString();
+
+                    if (Session["checkAns"].ToString() == "fromHome")
+                    {
+                        Session["checkAns"] = "refreshPg";
+                        studID = Session["studID"].ToString();
                     mm = 0;
                     ss = 0;
                     Timer1.Enabled = false;
@@ -648,7 +652,7 @@ namespace AdaptiveLearningSystem
                         listTime.Add(dtr.GetInt32(3));
                     }
                     string hh = "";
-                    for(int k=0;k<listQuestID.Count;k++)
+                    for (int k = 0; k < listQuestID.Count; k++)
                     {
                         hh += listQuestID[k];
                     }
@@ -773,7 +777,6 @@ namespace AdaptiveLearningSystem
                         txt += listRandomQuestionID[i] + "." + listRandomQuestion[i] + ",";
                     }
 
-
                     Label1.Text = "final random:" + txt;
 
                     lblQNum.Text = (questdone + 1).ToString();
@@ -782,7 +785,27 @@ namespace AdaptiveLearningSystem
                     //lblTimeCount.Text = mm.ToString();
                     Timer1.Enabled = true;
                 }
+                    else
+                    {
+                        Timer1.Enabled = false;
+                        lblCourse.Text = courseID + " " + courseName;
+                        lblTutorial.Text = tutNum;
+                        lblTitle.Text = chapName;
+                        string txt = "";
+                        for (int i = 0; i < listRandomQuestionID.Count; i++)
+                        {
+                            txt += listRandomQuestionID[i] + "." + listRandomQuestion[i] + ",";
+                        }
 
+                        Label1.Text = "final random:" + txt;
+
+                        lblQNum.Text = (questdone + 1).ToString();
+                        lblQuest.Text = listRandomQuestion[currCount].ToString();
+                        mm = listRandomTime[currCount];
+                        //lblTimeCount.Text = mm.ToString();
+                        Timer1.Enabled = true;
+                    }
+            }
             }
             else
             {

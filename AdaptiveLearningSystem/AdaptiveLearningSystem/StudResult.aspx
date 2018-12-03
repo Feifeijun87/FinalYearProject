@@ -8,6 +8,7 @@
     <link rel="icon" href="images/tarIco.ico" />
     <link rel="stylesheet" runat="server" media="screen" href="studMain.css"/>
     <link rel="stylesheet" runat="server" media="screen" href="CourseList.css"/>
+    <link rel="stylesheet" runat="server" media="screen" href="grid.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script> 
 
@@ -85,22 +86,16 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
 
-                <asp:GridView ID="GridView1" runat="server" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
-                 <AlternatingRowStyle BackColor="White" />
+                <asp:GridView ID="GridView1" Width="95%" runat="server" CssClass="mydatagrid" PagerStyle-CssClass="page" HeaderStyle-CssClass="header" RowStyle-CssClass="rows" AllowPaging="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnPageIndexChanging="GridView1_PageIndexChanging" PagerSettings-PageButtonCount="4">
                     <Columns>
-                        <asp:CommandField ShowSelectButton="True" />
+                        <asp:CommandField ShowSelectButton="True" SelectText="View Result" />
                     </Columns>
-            <EditRowStyle BackColor="#2461BF" />
-            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-            <RowStyle BackColor="#EFF3FB" />
-            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-            <SortedAscendingCellStyle BackColor="#F5F7FB" />
-            <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-            <SortedDescendingCellStyle BackColor="#E9EBEF" />
-            <SortedDescendingHeaderStyle BackColor="#4870BE" />
-                </asp:GridView>
+                    <HeaderStyle CssClass="header" />
+                    <PagerStyle CssClass="page" />
+                    <RowStyle CssClass="rows" />
+ </asp:GridView>
+
+                
             </ContentTemplate>
     </asp:UpdatePanel>
 </div>

@@ -166,6 +166,15 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.WebControls.Label lblTutTitleEnter;
         
         /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+        
+        /// <summary>
         /// lblQNum control.
         /// </summary>
         /// <remarks>
@@ -317,6 +326,15 @@ namespace AdaptiveLearningSystem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel3;
+        
+        /// <summary>
+        /// categoryRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater categoryRepeater;
         
         /// <summary>
         /// txtEasy control.
