@@ -241,10 +241,10 @@
                                 </td>
                                 <td>
 
-                                    <asp:TextBox ID="txtQues" runat="server" Height="50px" Width="460px" TextMode="MultiLine"></asp:TextBox>
+                                    <asp:TextBox ID="txtQues" runat="server" Height="50px" Width="460px" Font-Names="Arial" TextMode="MultiLine"></asp:TextBox>
 
                                     <br />
-                                    <asp:Label ID="lblQuestEnter" runat="server" ForeColor="Red"></asp:Label>
+                                    <asp:Label ID="lblQuestEnter" runat="server" ForeColor="Red" ></asp:Label>
                                     <br />
                                 </td>
                             </tr>
@@ -252,7 +252,7 @@
                                 <td class="auto-style4" style="width:200px">Sample answers:
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtAns" runat="server" Height="50px" Width="460px" TextMode="MultiLine"></asp:TextBox><br />
+                                    <asp:TextBox ID="txtAns" runat="server" Height="50px" Width="460px" Font-Names="Arial" TextMode="MultiLine"></asp:TextBox><br />
                                     <asp:Label ID="lblAnsEnter" runat="server" ForeColor="Red"></asp:Label>
                                     <br />
 </td>
@@ -260,7 +260,7 @@
                             <tr>
                                 <td class="auto-style4" style="width:200px">Keywords: 
                                 </td>
-                                <td><asp:TextBox ID="txtKeyword" runat="server" Height="50px" Width="460px" TextMode="MultiLine"></asp:TextBox>
+                                <td><asp:TextBox ID="txtKeyword" runat="server" Height="50px" Width="460px" Font-Names="Arial" TextMode="MultiLine"></asp:TextBox>
                                     <br />Please seperate each keyword by ','<br />
                                     <asp:Label ID="lblKeyEnter" runat="server" ForeColor="Red"></asp:Label>
                                     <br />
@@ -395,7 +395,7 @@
                         <td class="auto-style7">
                             Compulsory Easy :</td>
                         <td >
-                            <asp:TextBox ID="txtEasy" runat="server" Width="62px"></asp:TextBox> / <asp:Label ID="lblCompEasyNum" runat="server">0</asp:Label>
+                            <asp:TextBox ID="txtEasy" Style="text-align:center" runat="server" Width="62px"></asp:TextBox> / <asp:Label ID="lblCompEasyNum" runat="server">0</asp:Label>
                             
                         </td>
                     </tr>
@@ -403,7 +403,7 @@
                         <td class="stayRight">
                             Compulsory Medium :</td>
                         <td >
-                            <asp:TextBox ID="txtMed" runat="server" Width="62px"></asp:TextBox>
+                            <asp:TextBox ID="txtMed" Style="text-align:center" runat="server" Width="62px"></asp:TextBox>
                             /
                             <asp:Label ID="lblCompMedNum" runat="server">0</asp:Label>
                         </td>
@@ -411,7 +411,7 @@
                     <tr>
                         <td  class="stayRight">Compulsory Difficult :</td>
                         <td >
-                            <asp:TextBox ID="txtDifficult" runat="server" Width="62px"></asp:TextBox>
+                            <asp:TextBox ID="txtDifficult" Style="text-align:center" runat="server" Width="62px"></asp:TextBox>
                             /
                             <asp:Label ID="lblCompDiffNum" runat="server">0</asp:Label>
                         </td>
