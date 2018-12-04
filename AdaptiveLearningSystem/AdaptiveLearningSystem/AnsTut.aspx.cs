@@ -605,6 +605,42 @@ namespace AdaptiveLearningSystem
 
                     if (Session["checkAns"].ToString() == "fromHome")
                     {
+                        mm = 0;
+                        ss = 0;
+                        listQuestID.Clear();
+                        listQuest.Clear();
+                        listLevel.Clear();
+                        listTime.Clear();
+                        listEasyQuestionID.Clear();
+                        listMedQuestionID.Clear();
+                        listHardQuestionID.Clear();
+                        listCompletedQuestion.Clear();
+                        listEasyDoneQID.Clear();
+                        listMedDoneQID.Clear();
+                        listHardDoneQID.Clear();
+                        listTemp.Clear();
+                        listTempEasyQID.Clear();
+                        listTempMedQID.Clear();
+                        listTempHardQID.Clear();
+
+                        totalCount = 0;
+                        currCount = 0;
+                        randomQIDCount = 0;
+                        compEasy = 0;
+                        compMed = 0;
+                        compHard = 0;
+                        easyDone = 0;
+                        medDone = 0;
+                        hardDone = 0;
+                        easyLeft = 0;
+                        medLeft = 0;
+                        hardLeft = 0;
+                        totalQuestLeft = 0;
+                        listRandomQuestionID.Clear();
+                        listRandomQuestion.Clear();
+                        listRandomTime.Clear();
+                        listRandomLevel.Clear();
+
                         Session["checkAns"] = "refreshPg";
                         mm = 0;
                         ss = 0;

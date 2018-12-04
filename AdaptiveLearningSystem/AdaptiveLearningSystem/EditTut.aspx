@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Adaptive Learning System</title>
     <link rel="icon" href="images/tarIco.ico" />
@@ -74,13 +73,26 @@
         .caption{
             display:block;
         }
+        .rowEven{
+    background-color:#D6EAF8;
+}
 
+.rowOdd{
+    background-color:lightblue;
+}
+     
     </style>
     <style type="text/css">
         .auto-style13 {
             float: left;
             width: 60%;
             height: 600px;
+        }
+        .auto-style14 {
+            float: left;
+            width: 90%;
+            margin-left: 20px;
+            margin-top: 20px;
         }
 
         .auto-style1 {
@@ -199,7 +211,7 @@
                         <tr>
                             <td colspan="2" class="auto-style5">
                                 <label id="subjname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Course:&nbsp; </label>&nbsp;
-                                <asp:Label ID="lblCourse" runat="server"></asp:Label>
+                                <asp:Label ID="lblCourse" style="font-family: Arial, Helvetica, sans-serif; font-size: large" runat="server"></asp:Label>
                                 <br />
                                 <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
                                 <br />
@@ -241,10 +253,10 @@
                                 </td>
                                 <td>
 
-                                    <asp:TextBox ID="txtQues" runat="server" Height="50px" Width="460px" TextMode="MultiLine"></asp:TextBox>
+                                    <asp:TextBox ID="txtQues" runat="server" Height="50px" Width="460px" Font-Names="Arial" TextMode="MultiLine"></asp:TextBox>
 
                                     <br />
-                                    <asp:Label ID="lblQuestEnter" runat="server" ForeColor="Red"></asp:Label>
+                                    <asp:Label ID="lblQuestEnter" runat="server" ForeColor="Red" ></asp:Label>
                                     <br />
                                 </td>
                             </tr>
@@ -252,7 +264,7 @@
                                 <td class="auto-style4" style="width:200px">Sample answers:
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtAns" runat="server" Height="50px" Width="460px" TextMode="MultiLine"></asp:TextBox><br />
+                                    <asp:TextBox ID="txtAns" runat="server" Height="50px" Width="460px" Font-Names="Arial" TextMode="MultiLine"></asp:TextBox><br />
                                     <asp:Label ID="lblAnsEnter" runat="server" ForeColor="Red"></asp:Label>
                                     <br />
 </td>
@@ -260,7 +272,7 @@
                             <tr>
                                 <td class="auto-style4" style="width:200px">Keywords: 
                                 </td>
-                                <td><asp:TextBox ID="txtKeyword" runat="server" Height="50px" Width="460px" TextMode="MultiLine"></asp:TextBox>
+                                <td><asp:TextBox ID="txtKeyword" runat="server" Height="50px" Width="460px" Font-Names="Arial" TextMode="MultiLine"></asp:TextBox>
                                     <br />Please seperate each keyword by ','<br />
                                     <asp:Label ID="lblKeyEnter" runat="server" ForeColor="Red"></asp:Label>
                                     <br />
@@ -324,28 +336,28 @@
                     <asp:Panel ID="compQuestNum" CssClass="pnlChgContact" runat="server" >
              <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                     <ContentTemplate>
-            <div class="auto-style13" style="overflow-y:scroll; background-color:lightblue" >
+            <div class="auto-style13" style="overflow-y:scroll; background-color:white" >
                 
-                <table class="auto-style14">
+               <table class="auto-style14" border="0" style="border-style: none; border-width: 0px; border-collapse: collapse; border-spacing: 0px;" >
                     <tr>
-                        <td class="auto-style12" style="font-size: x-large; text-decoration: underline;">
-                            Tutorial Question Preview
+                        <td class="auto-style12" style="font-size: x-large; text-decoration: underline; background-color:#2980B9  " >
+                              Tutorial Question Preview
                         </td>
                     </tr>
                    
              <asp:Repeater ID="categoryRepeater" runat="server" >
                  <ItemTemplate><asp:Panel ID="Panel1" runat="server" ScrollBars="Vertical" >
-    <tr>
-        </tr>
+    <tr class="<%# Container.ItemIndex % 2 == 0 ? "rowOdd" : "rowEven" %>">
+        <td>
+            <table class="auto-style14" border="0" style="border-style: none; border-width: 0px; border-collapse: collapse; border-spacing: 0px;" >
 
-                      <td>
-            <asp:Label ID="lblNumber" runat="server" Width ="5px" Text='<%# Eval("Key") %>'></asp:Label> .
+            <tr><td><asp:Label ID="lblNumber" runat="server" Width ="5px" Text='<%# Eval("Key") %>'></asp:Label> .
             <asp:Repeater ID="Repeater1" runat="server" DataSource='<%# Eval("Value") %>' ><ItemTemplate>
            <asp:Label ID="lblquest" 
                         runat="server"
-                        Text='<%# Eval("Key") %>' />
+                        Text='<%# Eval("Key") %>' /></td></tr>
    
-        </td>
+      
                      <asp:Repeater ID="nestedRepeater" runat="server" DataSource='<%# Eval("Value") %>'>
                          <ItemTemplate>
                              <tr>
@@ -383,8 +395,8 @@
                              </asp:Repeater>
                          </ItemTemplate>
                      </asp:Repeater></ItemTemplate>
-                     </asp:Repeater>
-    </tr></asp:Panel></ItemTemplate></asp:Repeater>
+                     </asp:Repeater></td>
+    </tr></table></asp:Panel></ItemTemplate></asp:Repeater>
    
       
         </table>
@@ -395,7 +407,7 @@
                         <td class="auto-style7">
                             Compulsory Easy :</td>
                         <td >
-                            <asp:TextBox ID="txtEasy" runat="server" Width="62px"></asp:TextBox> / <asp:Label ID="lblCompEasyNum" runat="server">0</asp:Label>
+                            <asp:TextBox ID="txtEasy" Style="text-align:center" runat="server" Width="62px"></asp:TextBox> / <asp:Label ID="lblCompEasyNum" runat="server">0</asp:Label><asp:Label ID="lblErrorEasy" runat="server" Text="*" ForeColor="Red" Visible="false"></asp:Label>
                             
                         </td>
                     </tr>
@@ -403,24 +415,25 @@
                         <td class="stayRight">
                             Compulsory Medium :</td>
                         <td >
-                            <asp:TextBox ID="txtMed" runat="server" Width="62px"></asp:TextBox>
+                            <asp:TextBox ID="txtMed" Style="text-align:center" runat="server" Width="62px"></asp:TextBox>
                             /
-                            <asp:Label ID="lblCompMedNum" runat="server">0</asp:Label>
+                            <asp:Label ID="lblCompMedNum" runat="server">0</asp:Label><asp:Label ID="lblErrorMed" runat="server" Text="*" ForeColor="Red" Visible="false"></asp:Label>
                         </td>
                     </tr>
                     <tr>
                         <td  class="stayRight">Compulsory Difficult :</td>
                         <td >
-                            <asp:TextBox ID="txtDifficult" runat="server" Width="62px"></asp:TextBox>
+                            <asp:TextBox ID="txtDifficult" Style="text-align:center" runat="server" Width="62px"></asp:TextBox>
                             /
-                            <asp:Label ID="lblCompDiffNum" runat="server">0</asp:Label>
+                            <asp:Label ID="lblCompDiffNum" runat="server">0</asp:Label><asp:Label ID="lblErrorDiff" runat="server" Text="*" ForeColor="Red" Visible="false"></asp:Label>
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="2">
+                    </table>
+                        <table class="editProf">
+                            <tr>
+                        <td>
                             <asp:Label ID="lblCompErrorMsg" runat="server" ForeColor="Red" Visible="False"></asp:Label>
-                        </td>
-                    </tr>
+                        </td></tr>
                 </table>
                        
             

@@ -170,7 +170,10 @@ namespace AdaptiveLearningSystem
 
         protected void btnAddTut_Click(object sender, EventArgs e)
         {
-            Response.Redirect("CreateTut.aspx");
+            string courseID = Request.QueryString["course"].ToString();
+            string coursename = Request.QueryString["name"].ToString();
+            Response.Redirect("CreateTut.aspx?course=" + courseID + "&coursename=" + coursename);
+            
         }
 
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)

@@ -96,7 +96,7 @@
 <body>
     <form id="form1" runat="server">
          <div id="upperNavBar">
-            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+            &nbsp;<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
             <ul id="UpperNavList">
                 <li>
                     <img id="tarcIcon" src="images/tarcIcon.png" width="50" /><p>Adaptive Learning System</p>
