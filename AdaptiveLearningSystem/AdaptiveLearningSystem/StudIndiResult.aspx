@@ -245,7 +245,7 @@
                     <div id="downIcon">&#9660;</div>
                 </a>
                     <div class="dropdown-content">
-                        <asp:LinkButton CssClass="dropdown-item" ID="LogOutLinkButton" runat="server">Log Out</asp:LinkButton>
+                        <asp:LinkButton CssClass="dropdown-item" ID="LogOutLinkButton" runat="server" OnClick="LogOutLinkButton_Click">Log Out</asp:LinkButton>
                     </div>
 
                 </li>
@@ -266,14 +266,14 @@
             <div class="Header">
                 <h1><i>Student Individual Tutorial Result</i></h1></div></td></tr>
                 
-                       <tr>
+                                               <tr style="font-family: Arial, Helvetica, sans-serif; font-size: medium">
+
                             <td colspan="2" class="auto-style5">
                                 <label id="subjname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Course:&nbsp; </label>&nbsp;
                                 <asp:Label ID="lblCourse" runat="server"></asp:Label>
                                 <br />
                                 <br />
-                            </td>
-                        </tr>
+                            </td></tr>
                         <tr style="font-family: Arial, Helvetica, sans-serif; font-size: medium">
                             <td style="width: 258px">
                                 <label id="tutnum" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Tutorial:&nbsp; </label>
@@ -307,6 +307,7 @@
                             Intake : <asp:Label ID="lblIntake" runat="server" Text=""></asp:Label>
                         </td>
                         </tr>
+                <tr><td><br /></td></tr>
                       
                     
 <tr><td colspan ="2">
@@ -338,8 +339,9 @@
                     </td></tr>
                     <tr><td>Point(s) earned : <asp:Label ID="Label1" runat="server" Text='<%# Eval("Points")%>' ></asp:Label>             
                 </td></tr>
-                    <tr><td>Sample Answer : <asp:Label ID="lblSampleAns" runat="server" Text='<%# Eval("SampleAns")%>' ></asp:Label>             
+                    <tr><td>Sample Answer : <asp:Label ID="lblSampleAns" runat="server" Text='<%# Eval("SampleAns")%>' ></asp:Label>         
                </td></tr>
+         <tr><td><br /></td></tr>
                     </table> 
                     
                

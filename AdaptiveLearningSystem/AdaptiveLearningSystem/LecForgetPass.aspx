@@ -58,10 +58,10 @@
 
                         <div class="ForgetTitle">
                             <h1>
-                                <asp:Label ID="Label1" runat="server" Text="Label"> Forget Password</asp:Label></h1>
+                                <asp:Label ID="Label1" runat="server" ForeColor="White" Text="Label"> Forget Password</asp:Label></h1>
                         </div>
                         <div class="description">
-                            <asp:Label ID="lblDesc" runat="server" ForeColor="Black">Enter your email address to retrieve your password</asp:Label>
+                            <asp:Label ID="lblDesc" runat="server" ForeColor="white">Enter your email address to retrieve your password</asp:Label>
                         </div>
                         <div class="errorMessage">
 
@@ -70,7 +70,7 @@
                         <div runat="server" id="EmailPanel">
                             <div class="EmailDetails">
 
-                                <asp:TextBox ID="txtEmail" CssClass="txtEmail" runat="server" placeholder="Email Address"></asp:TextBox>
+                                <asp:TextBox ID="txtEmail" CssClass="ForgetTextbox" runat="server" placeholder="Email Address"></asp:TextBox>
 
                             </div>
 
@@ -82,9 +82,9 @@
                     <div runat="server" id="ResetPanel">
                         <div class="ResetDetails">
 
-                            <asp:TextBox ID="txtCode" CssClass="txtEmail" runat="server" placeholder="Code"></asp:TextBox>
-                            <asp:TextBox ID="txtNewPass" CssClass="txtEmail" TextMode="Password"  runat="server" placeholder="Enter New Password"></asp:TextBox>
-                            <asp:TextBox ID="txtConfirmPass" CssClass="txtEmail" TextMode="Password" runat="server" placeholder="Confirm New Password"></asp:TextBox>
+                            <asp:TextBox ID="txtCode" CssClass="ForgetTextbox" runat="server" placeholder="Code"></asp:TextBox>
+                            <asp:TextBox ID="txtNewPass" CssClass="ForgetTextbox" TextMode="Password"  runat="server" placeholder="Enter New Password"></asp:TextBox>
+                            <asp:TextBox ID="txtConfirmPass" CssClass="ForgetTextbox" TextMode="Password" runat="server" placeholder="Confirm New Password"></asp:TextBox>
 
                         </div>
 

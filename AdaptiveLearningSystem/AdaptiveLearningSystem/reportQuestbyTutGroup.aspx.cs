@@ -67,10 +67,12 @@ namespace AdaptiveLearningSystem
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["lecturerID"] != null)
             {
-                if (Session["lecturerID"] != null)
-                {
+                if (!IsPostBack)
+            {
+                lblUserName.Text = Session["lecName"].ToString();
+                
                     
                     lecID = Session["lecturerID"].ToString();
 
@@ -219,12 +221,13 @@ namespace AdaptiveLearningSystem
                     conn.Close();
 
                 }
-                else
-                {
-                    Response.Redirect("Login.aspx");
-                }
-
+                
             }
+            else
+            {
+                Response.Redirect("Login.aspx");
+            }
+
 
         }
 

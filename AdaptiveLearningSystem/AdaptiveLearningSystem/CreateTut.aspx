@@ -201,7 +201,7 @@
                                 <label id="subjname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Course:&nbsp; </label>&nbsp;
                                 <asp:DropDownList ID="ddlCourse" runat="server" Width="381px" Height="25px" OnSelectedIndexChanged="DropDownList3_SelectedIndexChanged" AutoPostBack="True">
                                 </asp:DropDownList>
-                                <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
+                                
                                 <br />
                             </td>
                         </tr>
@@ -234,7 +234,7 @@
                                 </td>
                                 <td>
 
-                                    <asp:TextBox ID="txtQues" runat="server" Height="50px" Width="460px"></asp:TextBox>
+                                    <asp:TextBox ID="txtQues" runat="server" Height="50px" TextMode="MultiLine" Width="460px"></asp:TextBox>
 
                                     <br />
                                     <asp:Label ID="lblQuestEnter" runat="server" ForeColor="Red" Visible="False"></asp:Label>
@@ -245,7 +245,7 @@
                                 <td class="auto-style4">Sample answers:
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtAns" runat="server" Height="50px" Width="460px"></asp:TextBox><br />
+                                    <asp:TextBox ID="txtAns" runat="server" TextMode="MultiLine" Height="50px" Width="460px"></asp:TextBox><br />
                                     <asp:Label ID="lblAnsEnter" runat="server" ForeColor="Red" Visible="False"></asp:Label>
                                     <br />
 </td>
@@ -253,7 +253,7 @@
                             <tr>
                                 <td class="auto-style4">Keywords: 
                                 </td>
-                                <td><asp:TextBox ID="txtKeyword" runat="server" Height="50px" Width="460px"></asp:TextBox>
+                                <td><asp:TextBox ID="txtKeyword" runat="server" TextMode="MultiLine" Height="50px" Width="460px"></asp:TextBox>
                                     <br />Please seperate each keyword by ','<br />
                                     <asp:Label ID="lblKeyEnter" runat="server" ForeColor="Red" Visible="False"></asp:Label>
                                     <br />

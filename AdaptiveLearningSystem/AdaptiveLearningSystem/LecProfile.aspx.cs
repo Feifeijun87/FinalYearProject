@@ -20,7 +20,7 @@ namespace AdaptiveLearningSystem
             {
                 if (Session["lecturerID"] != null)
                 {
-                    lblUserName.Text = Session["lecPass"].ToString();
+                    lblUserName.Text = Session["lecName"].ToString();
                     
                     lblTutorName.Text = Session["lecTitle"].ToString() + " " + Session["lecName"].ToString();
                     lblPosition.Text = Session["position"].ToString();

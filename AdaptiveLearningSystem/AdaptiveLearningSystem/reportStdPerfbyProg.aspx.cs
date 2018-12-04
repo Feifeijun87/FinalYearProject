@@ -43,10 +43,11 @@ namespace AdaptiveLearningSystem
         string sql;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["lecturerID"] != null)
             {
-                if (Session["lecturerID"] != null)
+                if (!IsPostBack)
                 {
+                    lblUserName.Text = Session["lecName"].ToString();
                     if (Session["tutIntakeID"] != null)
                     {
                         intakeID = Session["tutIntakeID"].ToString();
@@ -68,18 +69,18 @@ namespace AdaptiveLearningSystem
                         //tutGroupID = Request.QueryString["tutGroup"].ToString();//tutgroupID
                     }
 
-                   
+
 
                     lecID = Session["lecturerID"].ToString();
                     lblCourse.Text = course.ToString();
                     lblTutorial.Text = tutorial.ToString();
                     lblIntake.Text = intakeID.ToString();
-                   // lblTutGroup.Text = tutGroup.ToString();
+                    // lblTutGroup.Text = tutGroup.ToString();
 
                     lblCourse2.Text = lblCourse.Text;
                     lblTutorial2.Text = lblTutorial.Text;
                     lblIntake2.Text = lblIntake.Text;
-                   // lblTutGroup2.Text = lblTutGroup.Text;
+                    // lblTutGroup2.Text = lblTutGroup.Text;
                     coursename = "";
                     tutTitle = "";
 
@@ -122,7 +123,7 @@ namespace AdaptiveLearningSystem
                     SqlCommand cmdGetResult = new SqlCommand(sql, conn);
                     cmdGetResult.Parameters.AddWithValue("@courseID", courseID);
                     cmdGetResult.Parameters.AddWithValue("@tutNum", tutNum);
-                   // cmdGetResult.Parameters.AddWithValue("@tutGroup", tutGroupID);
+                    // cmdGetResult.Parameters.AddWithValue("@tutGroup", tutGroupID);
                     cmdGetResult.Parameters.AddWithValue("@lecID", lecID);
                     cmdGetResult.Parameters.AddWithValue("@intakeID", intakeID);
                     DataTable dt = new DataTable();
@@ -189,13 +190,15 @@ namespace AdaptiveLearningSystem
                         }
                         conn.Close();
                     }
-                    else
-                    {
-                        Response.Redirect("Login.aspx");
-                    }
+                    
 
                 }
             }
+            else
+            {
+                Response.Redirect("Login.aspx");
+            }
+
         }
 
         protected void lblBack_Click(object sender, EventArgs e)

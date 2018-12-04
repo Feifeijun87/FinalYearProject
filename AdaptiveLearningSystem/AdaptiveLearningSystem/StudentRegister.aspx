@@ -105,7 +105,7 @@
                 <tr>
                     <td><asp:Label CssClass="label" ID="Label4" runat="server" Text="IC Number: "></asp:Label><asp:TextBox ID="txtIC" runat="server"> </asp:TextBox>
                         <asp:Label CssClass="lblError" ID="lblErrorIC" runat="server" Text="Label"></asp:Label>
-                        <asp:Label CssClass="lblReminder" ID="Label5" runat="server" Text="*The pasword by be same with ICNo by default"></asp:Label></td>
+                        <asp:Label CssClass="lblReminder" ID="Label5" style="font-size:12pt;" runat="server" Text="*The pasword by be same with ICNo by default"></asp:Label></td>
  
                 </tr>
                 <tr>

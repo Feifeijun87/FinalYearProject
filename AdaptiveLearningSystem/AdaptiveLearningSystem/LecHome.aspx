@@ -170,7 +170,7 @@
         <%-- Content Code Below --%>
         <div class="wrap-content">
             <div class="Header">
-                <h1><i>TutorialTrack</i>
+                <h1><i>Tutorial Track</i>
                 </h1>
             </div>
             <div style="width:100%;">

@@ -99,6 +99,7 @@ Thank You.";
             ResetPanel.Visible = true;
             EmailPanel.Visible = false;
             lblDesc.Text = "A recovery mail has sent to your email address.";
+            MainPanel.Attributes["class"] = "ForgetPanelDown";
         }
         protected void btnBackLogin_Click(object sender, EventArgs e)
         {

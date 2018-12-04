@@ -3,7 +3,7 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
-    background-color: #39D8CE;
+    background-color: #017AB6;
     height: 57px;
 }
 
@@ -47,7 +47,7 @@
 
 
     #UpperNavList li a:hover {
-        background-color: #28BCB2;
+        background-color: #089BE5;
     }
 
 
@@ -93,7 +93,7 @@ li:last-child {
 }
 
 .activeBackground {
-    background-color: #28BCB2;
+    background-color: #089BE5;
 }
 
 .dropdown.passive .dropdown-content {
@@ -110,7 +110,7 @@ li:last-child {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    background-color: #2DF2E5;
+    background-color: #0089CE;
     height: 57px;
 }
 
@@ -134,7 +134,7 @@ li:last-child {
 }
 
     .SecondNavList:hover {
-        color: #74831E;
+        color: #1919F7;
     }
 
 /* Body Css*/

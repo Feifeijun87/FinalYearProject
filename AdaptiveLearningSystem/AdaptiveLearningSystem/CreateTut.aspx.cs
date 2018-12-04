@@ -40,7 +40,7 @@ namespace AdaptiveLearningSystem
                 if (!IsPostBack)
                 {
                     lblUserName.Text = Session["lecName"].ToString();
-                    Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
+                    
                     sql = " SELECT DISTINCT c.CourseID + ' ' + c.CourseName AS Course FROM CourseAvailable a, Course c WHERE a.LecturerID = @lecID AND a.CourseID = c.CourseID AND a.Status =1";
                     SqlCommand cmdGetCourse = new SqlCommand(sql, conn);
                     cmdGetCourse.Parameters.AddWithValue("@lecID", Session["lecturerID"].ToString());
@@ -156,7 +156,7 @@ namespace AdaptiveLearningSystem
                 btnRemove.Visible = false;
                 btnBack.Visible = false;
             }
-            Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
+            
 
         }
 
@@ -262,7 +262,7 @@ namespace AdaptiveLearningSystem
                 btnBack.Visible = true;
 
             }
-            Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
+           
         }
 
         protected void clearLabel()
@@ -532,7 +532,7 @@ namespace AdaptiveLearningSystem
                             final.Clear();
 
 
-                            Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
+                            
 
                         lblCompEasyNum.Text = easy.ToString();
                         lblCompMedNum.Text = medium.ToString();
@@ -700,7 +700,7 @@ namespace AdaptiveLearningSystem
 
                         txt += "Db Question" + (i + 1) + "success";
                     }
-                    Label4.Text = txt;
+                    
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial Created Successfully'); window.location.href='TutorialList.aspx?course=" + courseID + "&name=" + coursename+"';", true);
                     //Response.Redirect("TutorialList.aspx?course=" + courseID + "&name=" + coursename);
 

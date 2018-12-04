@@ -35,7 +35,7 @@ namespace AdaptiveLearningSystem
                                     SELECT t.StartDate, t.ExpiryDate, t.TutorialID, t.TutorialNumber, t.ChapterName, c.CourseID, c.CourseName, t.CompulsaryEasy + t.CompulsaryHard + t.CompulsaryMedium AS NoOfQuestion
                                     FROM  Tutorial t, Course c WHERE c.CourseID = t.CourseID AND t.Status = 1 AND CONVERT(Date, GetDate()) BETWEEN CONVERT(date, t.StartDate) AND CONVERT(date, t.ExpiryDate)
                                     GROUP BY t.StartDate, t.ExpiryDate, t.TutorialID, t.TutorialNumber, t.ChapterName, c.CourseID, c.CourseName, t.CompulsaryEasy + t.CompulsaryHard + t.CompulsaryMedium)a
-                                    LEFT JOIN CourseAvailable v ON A.CourseID = v.CourseID
+                                    LEFT JOIN CourseAvailable v ON A.CourseID = v.CourseID AND v.LecturerID iS NOT NULL
                                     LEFT JOIN Intake i ON v.IntakeID = i.IntakeID
                                     LEFT JOIN TutorialGroup g ON v.TutorialGrpID = g.TutorialGrpID
                                     LEFT JOIN Student s ON i.IntakeID = s.IntakeID AND s.TutorialGroupID = g.TutorialGrpID
@@ -112,7 +112,7 @@ namespace AdaptiveLearningSystem
 
                 if(numTQ == numQD)
                 {
-                    Session["load"] = "once";
+                   
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial already completed!'); window.location.href='StudHome.aspx';", true);
 
                 }

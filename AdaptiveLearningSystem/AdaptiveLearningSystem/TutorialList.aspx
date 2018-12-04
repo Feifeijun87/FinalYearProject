@@ -135,8 +135,8 @@
              <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
             <div class="panelDtl">
-                
-                <table class="activateDtl">
+                <div style="float:left;clear:left">
+                <table class="activateDtl" >
                     <tr>
                         <td class="stayRight">
                             <asp:Label ID="Label8" runat="server"> Start Date : </asp:Label>
@@ -184,12 +184,10 @@
                         <TodayDayStyle BackColor="#CCCC99" />
                              </asp:Calendar></td>
                     </tr>
-                    <tr>
-                        <td>
-                            <asp:Label ID="lblActvateError" runat="server" Visible="false" ForeColor="Red"></asp:Label>
-                        </td>
-                    </tr>
+
                 </table>
+                    <asp:Label ID="lblActvateError" style="float:left;margin-left:8%" runat="server" Visible="false" ForeColor="Red"></asp:Label>
+                    </div>
                        
             </div>
            

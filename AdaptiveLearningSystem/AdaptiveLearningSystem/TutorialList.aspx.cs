@@ -62,6 +62,9 @@ namespace AdaptiveLearningSystem
                 Session["chapterName"] = splitted[1].Trim();
                 Calendar2.Visible = false;
                 Calendar1.Visible = false;
+                txtStartDate.Text = "";
+                txtEndDate.Text = "";
+                lblActvateError.Visible = false;
                 popoutActivate.Show();
 
             }
