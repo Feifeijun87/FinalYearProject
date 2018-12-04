@@ -120,7 +120,10 @@ namespace AdaptiveLearningSystem
 
         protected void btnCreateTutorial_Click(object sender, EventArgs e)
         {
-            Response.Redirect("CreateTut.aspx");
+            string courseID = Request.QueryString["course"].ToString();
+            string coursename = Request.QueryString["name"].ToString();
+            Session["checkCreate"] = "fromList";
+            Response.Redirect("CreateTut.aspx?course=" + courseID + "&coursename=" + coursename);
         }
 
         protected void btnActivateTutorial_Click(object sender, EventArgs e)
@@ -172,6 +175,7 @@ namespace AdaptiveLearningSystem
         {
             string courseID = Request.QueryString["course"].ToString();
             string coursename = Request.QueryString["name"].ToString();
+            Session["checkCreate"] = "fromList";
             Response.Redirect("CreateTut.aspx?course=" + courseID + "&coursename=" + coursename);
             
         }

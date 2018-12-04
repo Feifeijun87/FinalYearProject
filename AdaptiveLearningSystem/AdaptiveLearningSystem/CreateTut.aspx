@@ -95,6 +95,8 @@
     background-color :#D6EAF8;
     border-radius: 25px;
     float:initial;
+    margin-left:27px;
+    margin-top:27%;
      
 }
 .rowEven{
@@ -250,8 +252,7 @@
                                     <asp:TextBox ID="txtQues" runat="server" TextMode="MultiLine" Height="50px" Width="460px" Font-Names="Arial"></asp:TextBox>
 
                                     <br />
-                                    <asp:Label ID="lblQuestEnter" runat="server" ForeColor="Red" Visible="False"></asp:Label>
-                                    <br />
+                                    <asp:Label ID="lblQuestEnter" runat="server" ForeColor="Red" Visible="False"></asp:Label><br />
                                 </td>
                             </tr>
                             <tr>
@@ -259,8 +260,7 @@
                                 </td>
                                 <td>
                                     <asp:TextBox ID="txtAns" TextMode="MultiLine" Font-Names="Arial" runat="server" Height="50px" Width="460px"></asp:TextBox><br />
-                                    <asp:Label ID="lblAnsEnter" runat="server" ForeColor="Red" Visible="False"></asp:Label>
-                                    <br />
+                                    <asp:Label ID="lblAnsEnter" runat="server" ForeColor="Red" Visible="False"></asp:Label><br />
 </td>
                             </tr>
                             <tr>
@@ -268,8 +268,7 @@
                                 </td>
                                 <td><asp:TextBox ID="txtKeyword" runat="server" TextMode="MultiLine" Font-Names="Arial" Height="50px" Width="460px"></asp:TextBox>
                                     <br />Please seperate each keyword by ','<br />
-                                    <asp:Label ID="lblKeyEnter" runat="server" ForeColor="Red" Visible="False"></asp:Label>
-                                    <br />
+                                    <asp:Label ID="lblKeyEnter" runat="server" ForeColor="Red" Visible="False"></asp:Label><br />
 </td>
                             </tr>
 
@@ -316,7 +315,7 @@
                         <asp:Button CssClass="BottomButton" ID="btnRemove" runat="server" Text="Remove this question" OnClick="btnRemove_Click" Visible="False" />
                         <asp:Button CssClass="BottomButton" ID="btnBack" runat="server" OnClick="Button1_Click" Text="Previous" Visible="False" />
                         <asp:Button CssClass="BottomButton" ID="btnNext" runat="server" OnClick="Button2_Click" Text="Next" />
-                        <asp:Button CssClass="BottomButton" ID="btnReset" runat="server" OnClick="Button3_Click" Text="Clear Text" Visible="False" />
+                        <asp:Button CssClass="BottomButton" ID="btnReset" runat="server" OnClick="Button3_Click" Text="Clear Text"  />
                         <asp:Button CssClass="BottomButton" ID="btnFin" runat="server" OnClick="Button4_Click" Text="Finish" style="width: 122px" />
                     </div>
                 </div>
@@ -431,7 +430,7 @@
                 </table>
                        
             
-           <div class="BottomButtonGroup">
+           <div class="PanelBottomButtonGroup">
                            
                  
                             <asp:Button ID="btnCancel" runat="server" CssClass="BottomButton" OnClick="btnContactCancel_Click" Text="Close" />

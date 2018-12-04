@@ -33,7 +33,7 @@ namespace AdaptiveLearningSystem
         List<string> listKey = new List<string>();
         List<int> listTime = new List<int>();
         List<int> listlevel = new List<int>();
-        static int oriQuestCount = 0, compEasy = 0, compMed = 0, compHard = 0;
+        static int oriQuestCount = 0, compEasy = 0, compMed = 0, compHard = 0, orioriQuestcount = 0;
         static string courseID, coursename, tutNum, tutTitle, tutID;
         static string[] questionReset = new string[100];
         static string[] answerReset = new string[100];
@@ -53,6 +53,21 @@ namespace AdaptiveLearningSystem
                     if (Session["checkEdit"].ToString() == "fromPage")
                     {
                         Session["checkEdit"] = "refresh";
+
+                        Array.Clear(qid, 0, qid.Length);
+                        Array.Clear(question, 0, question.Length);
+                        Array.Clear(answer, 0, answer.Length);
+                        Array.Clear(key, 0, key.Length);
+                        Array.Clear(level, 0, level.Length);
+                        Array.Clear(time, 0, time.Length);
+                        Array.Clear(questionReset, 0, questionReset.Length);
+                        Array.Clear(answerReset, 0, answerReset.Length);
+                        Array.Clear(keyReset, 0, keyReset.Length);
+                        Array.Clear(levelReset, 0, levelReset.Length);
+                        Array.Clear(timeReset, 0, timeReset.Length);
+                        oriQuestCount = 0;
+                        orioriQuestcount = 0;
+
                         lblUserName.Text = Session["lecName"].ToString();
                         currCount = 0;
                         //lecID = Session["lecturerID"].ToString();
@@ -131,13 +146,9 @@ namespace AdaptiveLearningSystem
                         ddlCompleteTime.SelectedIndex = time[currCount];
                         ddlLevel.SelectedIndex = level[currCount];
                         totalCount = oriQuestCount;
+                        orioriQuestcount = oriQuestCount;
 
-                        string txt = "";
-                        for (int i = 0; i < oriQuestCount; i++)
-                        {
-                            txt += i + "=" + qid[i];
-                        }
-                        Label4.Text = txt;
+
                     }
                     else
                     {
@@ -152,12 +163,8 @@ namespace AdaptiveLearningSystem
                         ddlLevel.SelectedIndex = level[currCount];
                         totalCount = oriQuestCount;
                         lblCourse.Text = courseID + " " + coursename;
-                        string txt = "";
-                        for (int i = 0; i < oriQuestCount; i++)
-                        {
-                            txt += i + "=" + qid[i];
-                        }
-                        Label4.Text = txt;
+                      
+                       
                     }
 
 
@@ -473,7 +480,7 @@ namespace AdaptiveLearningSystem
 
 
 
-            if (questGet == "" && ansGet == "" && keywGet == "" && question.Length == 0)
+            if (questGet == "" && ansGet == "" && keywGet == "" && totalCount == 0)
             {//no quest avai
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Please enter at least one question'); window.location.href='CreateTut.aspx';", true);
 
@@ -712,19 +719,30 @@ namespace AdaptiveLearningSystem
         protected Boolean checkKeyword(string ans, string keywd)
         {
             int count = 0;
-            char delimiters = ' ';
+            char delimiters = ',', space = ' ';
             string[] splitArray = keywd.Split(delimiters);
-            for (int i = 0; i < splitArray.Length; i++)
-            {
-                if (ans.Contains(splitArray[i]))
-                {
 
-                }
-                else
+            for (int i = 0; i < splitArray.Length; i++) //check inside ,
+            {
+
+                string[] splitArray2 = splitArray[i].Split(space);
+                for(int k =0;k<splitArray2.Length;k++) 
                 {
-                    count += 1;
+                    if (ans.Contains(splitArray2[k]))
+                    {
+
+                    }
+                    else
+                    {
+                        count += 1;
+                    }
                 }
+                
             }
+
+            
+          
+
 
             if (count == 0)
             {
@@ -850,9 +868,9 @@ namespace AdaptiveLearningSystem
                 else
                 {
 
-                    if (totalCount > oriQuestCount) //after edit, more question appeared
+                    if (totalCount > orioriQuestcount) //after edit, more question appeared
                     {
-                        for (int i = 0; i < oriQuestCount; i++)
+                        for (int i = 0; i < orioriQuestcount; i++)
                         {
                             if (level[i] == 0)
                             {
@@ -881,11 +899,13 @@ namespace AdaptiveLearningSystem
                             conn.Close();
                         }
 
+                        conn.Open();
                         sql = "SELECT COUNT(QuestionID) FROM [Question]";
                         SqlCommand cmdQuesCount = new SqlCommand(sql, conn);
                         int questID = (int)cmdQuesCount.ExecuteScalar();
+                        conn.Close();
 
-                        for (int i = oriQuestCount; i < totalCount; i++)
+                        for (int i = orioriQuestcount; i < totalCount; i++)
                         {
                             //insert new quest
 
@@ -907,17 +927,19 @@ namespace AdaptiveLearningSystem
 
                             status = 1;
                             sql = "insert into [Question] values (@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8)";
-                            //conn.Open();
+                            conn.Open();
                             SqlCommand cmdAddQuest = new SqlCommand(sql, conn);
                             cmdAddQuest.Parameters.AddWithValue("@p1", questionID); //quest ID
                             cmdAddQuest.Parameters.AddWithValue("@p2", question[i]); //quest
                             cmdAddQuest.Parameters.AddWithValue("@p3", leveltxt); //level
                             cmdAddQuest.Parameters.AddWithValue("@p4", answer[i]); //sample ans
                             cmdAddQuest.Parameters.AddWithValue("@p5", key[i]); //keyw
-                            cmdAddQuest.Parameters.AddWithValue("@p6", tutorialID); //tutorialID
+                            cmdAddQuest.Parameters.AddWithValue("@p6", tutID); //tutorialID
                             cmdAddQuest.Parameters.AddWithValue("@p7", (time[i] + 1)); //time
                             cmdAddQuest.Parameters.AddWithValue("@p8", status); //status
                             cmdAddQuest.ExecuteNonQuery();
+                            conn.Close();
+
                         }
 
                     }
@@ -953,10 +975,10 @@ namespace AdaptiveLearningSystem
                             conn.Close();
                         }
 
-                        if (totalCount < oriQuestCount)
+                        if (totalCount < orioriQuestcount)
                         {
                             //update (set status =0)
-                            for (int i = totalCount; i < oriQuestCount; i++)
+                            for (int i = totalCount; i < orioriQuestcount; i++)
                             {
                                 status = 0;
                                 sql = "UPDATE Question SET Status = 0 WHERE QuestionID = @questID";
@@ -994,7 +1016,7 @@ namespace AdaptiveLearningSystem
                     Array.Clear(levelReset, 0, levelReset.Length);
                     Array.Clear(timeReset, 0, timeReset.Length);
                     oriQuestCount = 0;
-
+                    orioriQuestcount = 0;
                     Session["checkEdit"] = null;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial Edited Successfully'); window.location.href='TutorialList.aspx?course=" + courseID + "&name=" + coursename + "';", true);
 

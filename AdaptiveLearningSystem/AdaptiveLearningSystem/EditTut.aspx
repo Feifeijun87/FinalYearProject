@@ -213,7 +213,7 @@
                                 <label id="subjname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Course:&nbsp; </label>&nbsp;
                                 <asp:Label ID="lblCourse" style="font-family: Arial, Helvetica, sans-serif; font-size: large" runat="server"></asp:Label>
                                 <br />
-                                <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
+                                
                                 <br />
                             </td>
                         </tr>
@@ -314,7 +314,7 @@
                             </tr>
 
                         </table>
-                        <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
+                        
                         <br />
                     </div>
                    
