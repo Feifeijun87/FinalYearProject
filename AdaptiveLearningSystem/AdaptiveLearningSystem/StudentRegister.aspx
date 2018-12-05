@@ -114,7 +114,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td> <asp:Label CssClass="label" ID="Label6" runat="server" Text="Address: "></asp:Label><asp:TextBox ID="txtAddress" TextMode="MultiLine" runat="server"></asp:TextBox>
+                    <td> <asp:Label CssClass="label" ID="Label6" runat="server" Text="Address: "></asp:Label><asp:TextBox ID="txtAddress" TextMode="MultiLine" runat="server" Font-Names="Arial"></asp:TextBox>
                         <asp:Label CssClass="lblError" ID="lblErrorAddress" runat="server" Text="Label"></asp:Label>
                     </td>
                 </tr>

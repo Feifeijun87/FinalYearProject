@@ -182,7 +182,7 @@
                                  <tr><td class="auto-style5">
                                 <asp:Label ID="lblNumber" runat="server" Width ="5px" Text='<%# Container.ItemIndex + 1 %>'> </asp:Label> . 
                
-                <asp:Label ID="lblStudentID" runat="server" Width =" 110px" Text='<%#Eval("Question")%>' ></asp:Label>
+                <asp:Label ID="lblStudentID" runat="server" Text='<%#Eval("Question")%>' ></asp:Label>
                           </td></tr>
                     <tr><td>
                         Level : <asp:Label ID="lblStudName" runat="server" Width="180px" Text ='<%# Eval("Level")%>' ></asp:Label>  
