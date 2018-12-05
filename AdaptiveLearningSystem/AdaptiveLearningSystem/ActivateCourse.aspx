@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="adminHome.aspx.cs" Inherits="AdaptiveLearningSystem.adminHome" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ActivateCourse.aspx.cs" Inherits="AdaptiveLearningSystem.ActivateCourse" %>
 
 <!DOCTYPE html>
 
@@ -6,7 +6,7 @@
 <head runat="server">
     <title>Adaptive Learning System</title>
     <link rel="icon" href="images/tarIco.ico" />
-
+    <link rel="stylesheet" href="DropCourse.css" />
     <link rel="stylesheet" runat="server" media="screen" href="adminMain.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style>
@@ -109,6 +109,44 @@
                     <asp:LinkButton CssClass="SecondNavList" ID="ActivateCourseLinkButton" runat="server" OnClick="btnActivateCourse_Click">Activate Course</asp:LinkButton></li>
             </ul>
         </div>
+
+         <div class="wrap-content">
+            <div class="Header">
+                <h1><i>Add Course</i>
+                </h1>
+            </div>
+       <div class="Header">
+            <h2><i>
+            Please choose tutorial group(s).</i>
+            </h2>           
+       </div>
+            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+
+                
+            <div class="dropDetail">
+                <div class="displayFormat">
+                    <asp:Label ID="lblCourse" runat="server" Text="Course: "></asp:Label>
+                    <asp:DropDownList CssClass="dropdownFormat" ID="ddlCourse" runat="server" ></asp:DropDownList>
+                    <asp:Label ID="lblErrorCourse" ForeColor="Red" runat="server" Text="Label"></asp:Label>
+                </div>
+                <div class="displayFormat">
+                    <asp:Label ID="lblIntake" runat="server" Text="Intake: "></asp:Label>
+                    <asp:DropDownList ID="ddlIntake" runat="server"></asp:DropDownList>
+                    <asp:Label ID="lblErrorIntake" ForeColor="Red" runat="server" Text="Label"></asp:Label>
+                </div>
+
+            </div>
+            <div>
+                <div class="ButtonGroup">
+                    <asp:Button CssClass="DropButton" ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+                </div>
+            </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+        </div>
+
     </form>
 </body>
 </html>

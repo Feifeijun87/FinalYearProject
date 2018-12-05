@@ -7,7 +7,7 @@
     <title>Adaptive Learning System</title>
     <link rel="icon" href="images/tarIco.ico" />
     <link rel="stylesheet" href="StudentRegister.css" />
-    <link rel="stylesheet" runat="server" media="screen" href="main.css"/>
+    <link rel="stylesheet" runat="server" media="screen" href="adminMain.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <script> 
@@ -75,7 +75,7 @@
                 <li>
                     <asp:LinkButton CssClass="SecondNavList" ID="btnAddCourse" runat="server" OnClick="btnAddCourse_Click">Add Course</asp:LinkButton></li>
                 <li>
-                    <asp:LinkButton CssClass="SecondNavList" ID="ProfilesLinkButton" runat="server" OnClick="ProfilesLinkButton_Click">My Profile</asp:LinkButton></li>
+                    <asp:LinkButton CssClass="SecondNavList" ID="ActivateCourseLinkButton" runat="server" OnClick="btnActivateCourse_Click">Activate Course</asp:LinkButton></li>
             </ul>
         </div>
 

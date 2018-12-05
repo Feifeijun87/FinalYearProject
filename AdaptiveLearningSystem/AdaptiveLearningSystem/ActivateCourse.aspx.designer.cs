@@ -10,7 +10,7 @@
 namespace AdaptiveLearningSystem {
     
     
-    public partial class AddCourse {
+    public partial class ActivateCourse {
         
         /// <summary>
         /// form1 control.
@@ -112,85 +112,58 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
-        /// lblCourseID control.
+        /// lblCourse control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCourseID;
+        protected global::System.Web.UI.WebControls.Label lblCourse;
         
         /// <summary>
-        /// txtCourseID control.
+        /// ddlCourse control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCourseID;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCourse;
         
         /// <summary>
-        /// lblErrorCourseID control.
+        /// lblErrorCourse control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorCourseID;
+        protected global::System.Web.UI.WebControls.Label lblErrorCourse;
         
         /// <summary>
-        /// lblCourseName control.
+        /// lblIntake control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCourseName;
+        protected global::System.Web.UI.WebControls.Label lblIntake;
         
         /// <summary>
-        /// txtCourseName control.
+        /// ddlIntake control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCourseName;
+        protected global::System.Web.UI.WebControls.DropDownList ddlIntake;
         
         /// <summary>
-        /// lblErrorCourseName control.
+        /// lblErrorIntake control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorCourseName;
-        
-        /// <summary>
-        /// lblCreditHour control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCreditHour;
-        
-        /// <summary>
-        /// ddlCreditHour control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCreditHour;
-        
-        /// <summary>
-        /// lblErrorCreditHours control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorCreditHours;
+        protected global::System.Web.UI.WebControls.Label lblErrorIntake;
         
         /// <summary>
         /// btnAdd control.
