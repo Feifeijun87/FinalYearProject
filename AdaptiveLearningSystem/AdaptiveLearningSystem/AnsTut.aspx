@@ -231,7 +231,7 @@
                                 <td class="auto-style4">Answers:
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtAns" runat="server" Height="50px" Width="460px" TextMode="MultiLine"></asp:TextBox><asp:Label ID="Label8" Visible="false" runat="server" Text="correct"></asp:Label><br />
+                                    <asp:TextBox ID="txtAns" runat="server" Height="50px" Width="460px" TextMode="MultiLine" Font-Names="Arial"></asp:TextBox><asp:Label ID="Label8" Visible="false" runat="server" Text="correct"></asp:Label><br />
                                     <asp:Label ID="lblAnsEnter" runat="server" ForeColor="Red"></asp:Label>
 </td>
                             </tr>

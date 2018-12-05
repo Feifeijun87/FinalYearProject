@@ -373,6 +373,8 @@ namespace AdaptiveLearningSystem
             lblQuestEnter.Text = "";
             lblAnsEnter.Text = "";
             lblKeyEnter.Text = "";
+            lblTutNumEnter.Text = "";
+            lblTutTitleEnter.Text = "";
         }
 
         protected void Button3_Click(object sender, EventArgs e) //reset

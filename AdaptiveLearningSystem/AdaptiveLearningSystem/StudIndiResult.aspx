@@ -326,20 +326,20 @@
                          if want call c# function and bind the return value "<%# calculatePercentage(int.Parse(Eval("doneNumber").ToString())) %>"  something like that--%>
                     <%-- The value inside eval is the column name of the data in sql  --%>
                     <%-- next, c# code there --%>
-                    <tr><td><asp:Label ID="lblNumber" runat="server" Text='<%# Container.ItemIndex + 1 %>'> </asp:Label>. 
+                    <tr><td><asp:Label ID="lblNumber" runat="server" Text='<%# Container.ItemIndex + 1 %>' Font-Bold="True"> </asp:Label>. 
                
-                      <asp:Label ID="lblQuestion" runat="server" Text='<%# Eval("Question")%>' ></asp:Label>
+                      <asp:Label ID="lblQuestion" Font-Bold="True" runat="server" Text='<%# Eval("Question")%>' ></asp:Label>
                 </td></tr>
-                    <tr><td>Student Answer : <asp:Label ID="lblStudAns" runat="server" Text='<%# Eval("Answer")%>' ></asp:Label>             
+                    <tr><td><b>Student Answer : </b><asp:Label ID="lblStudAns" runat="server" Text='<%# Eval("Answer")%>' ></asp:Label>             
                 </td></tr>
                 
-                    <tr><td>Time Spent : <asp:Label ID="lblTimeSpent" runat="server" Text='<%#  Eval("TimeSpent")%>'></asp:Label>second(s)
+                    <tr><td><b>Time Spent : </b><asp:Label ID="lblTimeSpent" runat="server" Text='<%#  Eval("TimeSpent")%>'></asp:Label>second(s)
                     <asp:Label ID="Label4" runat="server" Text=" | "></asp:Label>
-                    Matching Percentage: <asp:Label ID="lblMatchPercent" runat="server" Text='<%#  Eval("MatchPercent")%> '></asp:Label>%
+                    <b>Matching Percentage: </b><asp:Label ID="lblMatchPercent" runat="server" Text='<%#  Eval("MatchPercent")%> '></asp:Label>%
                     </td></tr>
-                    <tr><td>Point(s) earned : <asp:Label ID="Label1" runat="server" Text='<%# Eval("Points")%>' ></asp:Label>             
+                    <tr><td><b>Point(s) earned : </b><asp:Label ID="Label1" runat="server" Text='<%# Eval("Points")%>' ></asp:Label>             
                 </td></tr>
-                    <tr><td>Sample Answer : <asp:Label ID="lblSampleAns" runat="server" Text='<%# Eval("SampleAns")%>' ></asp:Label>         
+                    <tr><td><b>Sample Answer : </b><asp:Label ID="lblSampleAns" runat="server" Text='<%# Eval("SampleAns")%>' ></asp:Label>         
                </td></tr>
          <tr><td><br /></td></tr>
                     </table> 
@@ -418,37 +418,37 @@
                    <ItemTemplate>
                     <tr>
                         <td colspan="4">
-                      <asp:Label ID="lblNumber" runat="server" Text='<%# Container.ItemIndex + 1 %>'> </asp:Label>. 
-                      <asp:Label ID="lblQuestion" runat="server"  Text='<%# Eval("Question")%>' ></asp:Label>
+                      <asp:Label ID="lblNumber" runat="server" Text='<%# Container.ItemIndex + 1 %>' Font-Bold="True"> </asp:Label>. 
+                      <asp:Label ID="lblQuestion" runat="server" Font-Bold="True"  Text='<%# Eval("Question")%>' ></asp:Label>
                 </td>
                 </tr>
                 <tr>
-                    <td>
-                        Student Answer : 
-                        </td>
-                    <td colspan="3">
+                    <td colspan="4">
+                        <b>Student Answer : </b>
+                        </td></tr><tr>
+                    <td colspan="4">
                         <asp:Label ID="lblStudAns" runat="server" Text='<%# Eval("Answer")%>' ></asp:Label>             
                 </td></tr>
                 
                     <tr>
-                        <td>Time Spent : </td>
-                        <td>
+                        <td style="width:300px"><b>Time Spent : </b></td>
+                        <td style="width:300px">
                             <asp:Label ID="lblTimeSpent" runat="server" Text='<%#  Eval("TimeSpent")%>'></asp:Label>second(s) </td>
                             
-                            <td>
-                                Matching Percentage: 
+                            <td style="width:400px">
+                               <b> Matching Percentage:</b> 
                             </td>
-                            <td>
+                            <td style="width:200px">
                                 <asp:Label ID="lblMatchPercent" runat="server" Text='<%#  Eval("MatchPercent")%> '></asp:Label>%
                     
                             </td>
                    
                     </tr>
-                    <tr><td>Point(s) earned : </td>
+                    <tr><td><b>Point(s) earned :</b> </td>
                         <td colspan="3"><asp:Label ID="Label1" runat="server" Text='<%# Eval("Points")%>' ></asp:Label>             
                 </td></tr>
-                    <tr><td>Sample Answer : </td>
-                        <td colspan="3"><asp:Label ID="lblSampleAns" runat="server" Text='<%# Eval("SampleAns")%>' ></asp:Label>             
+                    <tr><td colspan="4"><b>Sample Answer : </b></td></tr>
+                      <tr>  <td colspan="4"><asp:Label ID="lblSampleAns" runat="server" Text='<%# Eval("SampleAns")%>' ></asp:Label>             
                </td></tr>
                   <tr><td colspan="4"><hr /></td></tr>
 
