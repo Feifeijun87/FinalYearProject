@@ -348,8 +348,8 @@
             </div>
             </ItemTemplate>
         </asp:Repeater></div></div></td></tr>
-               <tr><td colspan="2"><asp:Label ID="Label3" runat="server" Text="Points : "></asp:Label>
-                 <asp:Label ID="Label2" runat="server" Text="6- Excellent ; 5 - Good ; 4 - Moderate ; 3 - Pass ; 2 - Poor ; 1 - Very Poor"></asp:Label>
+               <tr><td colspan="2"><asp:Label ID="Label3" runat="server" Text="Marking Criteria : "></asp:Label><br />
+                 <asp:Label ID="Label2" runat="server" Text="Time bonus get 1 point ; Matching percentage &gt; 60% get 1 point ; Each keyword match will get extra 1 point"></asp:Label><br />
              </td></tr> 
          </table></div>
                  </asp:Panel>
@@ -458,9 +458,9 @@
                     </table> 
                     
                
-            </td></tr> <tr><td colspan="2"><asp:Label ID="Label5" runat="server" Text="Points : "></asp:Label>
+            </td></tr> <tr><td colspan="2"><asp:Label ID="Label5" runat="server" Text="Marking Criteria : "></asp:Label>
                  </td></tr> 
-                <tr><td colspan="2"><asp:Label ID="Label7" runat="server" Text="6- Excellent ; 5 - Good ; 4 - Moderate ; 3 - Pass ; 2 - Poor ; 1 - Very Poor"></asp:Label>
+                <tr><td colspan="2"><asp:Label ID="Label7" runat="server" Text="Time bonus get 1 point ; Matching percentage &gt; 60% get 1 point ; Each keyword match will get extra 1 point"></asp:Label>
             
              </td></tr> 
                  </table></asp:Panel>
