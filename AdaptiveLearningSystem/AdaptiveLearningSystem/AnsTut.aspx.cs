@@ -845,10 +845,10 @@ namespace AdaptiveLearningSystem
                     txt = "";
                     for (i = 0; i < listRandomQuestionID.Count; i++)
                     {
-                        txt += listRandomQuestionID[i] + "." + listRandomQuestion[i] + ",";
+                        txt += listRandomQuestionID[i] + ",";
                     }
 
-                    Label1.Text = "final random:" + txt;
+                    Label1.Text = "  || final random:" + txt;
 
                     lblQNum.Text = (questdone + 1).ToString();
                     lblQuest.Text = listRandomQuestion[currCount].ToString();
