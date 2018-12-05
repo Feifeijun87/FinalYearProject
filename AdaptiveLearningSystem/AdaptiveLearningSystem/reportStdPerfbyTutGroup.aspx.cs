@@ -148,9 +148,17 @@ namespace AdaptiveLearningSystem
                         Repeater1.DataBind();
                         Repeater2.DataSource = dt;
                         Repeater2.DataBind();
-                        conn.Close();
-
-                        sql = "SELECT COUNT(s.StudentID) FROM Student s, CourseAvailable a, TutorialCheck k, Tutorial t WHERE a.IntakeID = @intakeID AND a.CourseID = @courseID AND k.TutorialID = @tutID AND a.TutorialGrpID = @tutGrpID AND a.TutorialGrpID = s.TutorialGroupID AND k.StudentID = s.StudentID AND a.LecturerID = @lecID AND a.Status = 1 AND k.TutorialID=t.TutorialID AND CONVERT(date, k.CompletionDate) BETWEEN CONVERT(date, t.StartDate) AND CONVERT(date, t.ExpiryDate) ";
+                       
+                    }
+                    else
+                    {
+                        container.Visible = false;
+                        divnoresult.Visible = true;
+                        lblSavePDF.Visible = false;
+                        //filler.Visible = false;
+                    }
+                    conn.Close();
+                    sql = "SELECT COUNT(s.StudentID) FROM Student s, CourseAvailable a, TutorialCheck k, Tutorial t WHERE a.IntakeID = @intakeID AND a.CourseID = @courseID AND k.TutorialID = @tutID AND a.TutorialGrpID = @tutGrpID AND a.TutorialGrpID = s.TutorialGroupID AND k.StudentID = s.StudentID AND a.LecturerID = @lecID AND a.Status = 1 AND k.TutorialID=t.TutorialID AND CONVERT(date, k.CompletionDate) BETWEEN CONVERT(date, t.StartDate) AND CONVERT(date, t.ExpiryDate) ";
                         SqlCommand cmdDone = new SqlCommand(sql, conn);
                         cmdDone.Parameters.AddWithValue("@intakeID", intakeID);
                         cmdDone.Parameters.AddWithValue("@courseID", courseID);
@@ -174,8 +182,9 @@ namespace AdaptiveLearningSystem
                         lblTutComplete.Text = studDone.ToString() + "/" + studTotal.ToString();
                         lblkkk.Text = studDone.ToString() + "/" + studTotal.ToString();
                         //lbltutcomple.Text = studDone.ToString() + "/" + studTotal.ToString();
+                   
 
-                        if (studDone != studTotal)
+                    if (studDone != studTotal)
                         {
                             sql = @"SELECT S.StudentID,S.StudentName,p.ProgramID,s.TutorialGroupID,g.TutorialGrpName 
                                     FROM(SELECT c.CourseID, c.CourseName, v.IntakeID, v.TutorialGrpID
@@ -214,11 +223,14 @@ namespace AdaptiveLearningSystem
                         }
                         else
                         {
-                            container.Visible = false;
+                            divnodone.Visible = false;
+                        divnodone2.Visible = false;
+                           
                             //filler.Visible = false;
                         }
+
                         conn.Close();
-                    }
+                  
                 }
             }
             else

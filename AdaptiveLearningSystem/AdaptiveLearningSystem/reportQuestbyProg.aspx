@@ -174,20 +174,20 @@
                         <asp:Repeater ID="Repeater1"  runat="server">
                              <ItemTemplate>
                                  <tr><td class="auto-style5">
-                                <asp:Label ID="lblNumber" runat="server" Width ="5px" Text='<%# Container.ItemIndex + 1 %>'> </asp:Label> . 
+                                <asp:Label ID="lblNumber" runat="server" Width ="5px" Text='<%# Container.ItemIndex + 1 %>' Font-Bold="True"> </asp:Label> . 
                
-                <asp:Label ID="lblStudentID" runat="server"  Text='<%#Eval("Question")%>' ></asp:Label>
+                <asp:Label ID="lblStudentID" runat="server"  Text='<%#Eval("Question")%>' Font-Bold="True"></asp:Label>
                           </td></tr>
                     <tr><td>
-                        Level : <asp:Label ID="lblStudName" runat="server" Width="180px" Text ='<%# Eval("Level")%>' ></asp:Label>  
+                        <b>Level :</b> <asp:Label ID="lblStudName" runat="server" Width="180px" Text ='<%# Eval("Level")%>' ></asp:Label>  
                            
                         </td></tr>
                         <tr><td>
-                    Total Answers : <asp:Label ID="lblTotalAns" runat="server" Text='<%# Eval("Total Answer")%>'></asp:Label>
+                    <b>Total Answers :</b> <asp:Label ID="lblTotalAns" runat="server" Text='<%# Eval("Total Answer")%>'></asp:Label>
                     
                             </td></tr>
                 <tr><td>
-                     Average Points : <asp:Label ID="lblAvgPoint" runat="server" Text='<%# Eval("Average Points")%>'></asp:Label>
+                   <b>Average Points :</b> <asp:Label ID="lblAvgPoint" runat="server" Text='<%# Eval("Average Points")%>'></asp:Label>
                     
                     </td></tr>
                                  <tr>
@@ -291,20 +291,20 @@
                              <ItemTemplate>
                                
                        <tr><td>
-                                <asp:Label ID="lblNumber" runat="server" Width ="5px" Text='<%# Container.ItemIndex + 1 %>'> </asp:Label> . 
+                                <asp:Label ID="lblNumber" runat="server" Width ="5px" Text='<%# Container.ItemIndex + 1 %>' Font-Bold="True"> </asp:Label> . 
                
-                <asp:Label ID="lblStudentID" runat="server" Width =" 110px" Text='<%#Eval("Question")%>' ></asp:Label>
+                <asp:Label ID="lblStudentID" runat="server" Width =" 110px" Text='<%#Eval("Question")%>' Font-Bold="True"></asp:Label>
                           </td></tr>
                     <tr><td>
-                        Level : <asp:Label ID="lblStudName" runat="server" Width="180px" Text ='<%# Eval("Level")%>' ></asp:Label>  
+                        <b>Level :</b> <asp:Label ID="lblStudName" runat="server" Width="180px" Text ='<%# Eval("Level")%>' ></asp:Label>  
                            
                         </td></tr>
                         <tr><td>
-                    Total Answers : <asp:Label ID="lblTotalAns" runat="server" Text='<%# Eval("Total Answer")%>'></asp:Label>
+                   <b> Total Answers :</b> <asp:Label ID="lblTotalAns" runat="server" Text='<%# Eval("Total Answer")%>'></asp:Label>
                     
                             </td></tr>
                 <tr><td>
-                     Average Points : <asp:Label ID="lblAvgPoint" runat="server" Text='<%# Eval("Average Points")%>'></asp:Label>
+                     <b>Average Points : </b><asp:Label ID="lblAvgPoint" runat="server" Text='<%# Eval("Average Points")%>'></asp:Label>
                     
                     </td></tr>
                                  <tr><td><br /><hr /></td></tr>

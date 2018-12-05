@@ -194,13 +194,17 @@
             </ItemTemplate>
         </asp:Repeater>
 
-                        </div></td></tr>
+                        </div>
+
+                        <div class="container" runat="server" id="divnoresult" visible="false" style="text-align:center"><br />Currently there is no student completed the tutorial <br /></div>
+                       
+                        </td></tr>
                 <tr><td colspan="2">
                         Tutorial Completion : 
                         <asp:Label ID="lblTutComplete" runat="server"></asp:Label> students have completed the tutorial<br /> </td></tr>
                  <tr>
                    <td colspan="2">
-                       <div class="container" runat="server" id="Div1">
+                       <div class="container" runat="server" id="divnodone">
                             <div class="MyCourseList"> 
                 <table style="margin-left: 20px; border-bottom-style: none; width :100%" class="auto-style1">   
                                        <tr><td>Student who did not completed the tutorial : </td></tr> 
@@ -328,7 +332,7 @@
 </td></tr>
                 <tr>
                    <td colspan="2">
-                       <div class="container" runat="server" id="container1">
+                       <div class="container" runat="server" id="divnodone2">
                             <div class="MyCourseList"> 
                <table style="width:100%">   
                                        <tr><td colspan="3">Student who did not completed the tutorial : </td></tr> 
