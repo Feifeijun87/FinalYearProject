@@ -39,10 +39,36 @@ namespace AdaptiveLearningSystem
             {
                 if (!IsPostBack)
                 {
-                    courseID = Request.QueryString["course"].ToString();
-                    coursename = Request.QueryString["coursename"].ToString();
-                    lblCourse.Text = courseID + " " + coursename;
-                    lblUserName.Text = Session["lecName"].ToString();
+                    if(Session["checkCreate"].ToString() == "fromList")
+                    {
+                        Session["checkCreate"] = "refresh";
+                        Array.Clear(question, 0, question.Length);
+                        Array.Clear(answer, 0, answer.Length);
+                        Array.Clear(key, 0, key.Length);
+                        Array.Clear(level, 0, level.Length);
+                        Array.Clear(time, 0, time.Length);
+                        totalCount = 0;
+                        currCount = 0;
+
+                        courseID = Request.QueryString["course"].ToString();
+                        coursename = Request.QueryString["coursename"].ToString();
+                        lblCourse.Text = courseID + " " + coursename;
+                        lblUserName.Text = Session["lecName"].ToString();
+                    }
+                    else
+                    {
+                        Array.Clear(question, 0, question.Length);
+                        Array.Clear(answer, 0, answer.Length);
+                        Array.Clear(key, 0, key.Length);
+                        Array.Clear(level, 0, level.Length);
+                        Array.Clear(time, 0, time.Length);
+                        currCount = 0;
+                        totalCount = 0;
+                        lblCourse.Text = courseID + " " + coursename;
+                        lblUserName.Text = Session["lecName"].ToString();
+
+                    }
+                    
                     //Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
                    // sql = " SELECT DISTINCT c.CourseID + ' ' + c.CourseName AS Course FROM CourseAvailable a, Course c WHERE a.LecturerID = @lecID AND a.CourseID = c.CourseID AND a.Status =1";
                     //SqlCommand cmdGetCourse = new SqlCommand(sql, conn);
@@ -166,21 +192,29 @@ namespace AdaptiveLearningSystem
         protected Boolean checkKeyword(string ans, string keywd)
         {
             int count = 0;
-            char delimiters = ' ';
+            char delimiters = ',', space = ' ';
             string[] splitArray = keywd.Split(delimiters);
-            for (int i = 0; i < splitArray.Length; i++)
+
+            for (int i = 0; i < splitArray.Length; i++) //check inside ,
             {
-                if (ans.Contains(splitArray[i]))
+
+                string[] splitArray2 = splitArray[i].Split(space);
+                for (int k = 0; k < splitArray2.Length; k++)
                 {
-                   
+                    if (ans.Contains(splitArray2[k]))
+                    {
+
+                    }
+                    else
+                    {
+                        count += 1;
+                    }
                 }
-                else
-                {
-                    count += 1;
-                }
+
             }
 
-            if(count==0)
+
+            if (count==0)
             {
                 return true;
             }
@@ -367,7 +401,7 @@ namespace AdaptiveLearningSystem
             hard = 0;
 
             int levelGet = ddlLevel.SelectedIndex;
-            if (questGet == "" && ansGet == "" && keywGet == "" && question.Length == 0)
+            if (questGet == "" && ansGet == "" && keywGet == "" && totalCount==0)
             {//no quest avai
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Please enter at least one question'); window.location.href='CreateTut.aspx';", true);
 
@@ -553,11 +587,17 @@ namespace AdaptiveLearningSystem
                             categoryRepeater.DataSource = final;
                             categoryRepeater.DataBind();
                             final.Clear();
+                            listQuestPrev.Clear();
+                            listAnsPrev.Clear();
+                            listKeyPrev.Clear();
+                            listTimePrev.Clear();
+                            listlevelPrev.Clear();
+                            listTimeText.Clear();
 
 
-               //             Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
+                            //             Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
 
-                        lblCompEasyNum.Text = easy.ToString();
+                            lblCompEasyNum.Text = easy.ToString();
                         lblCompMedNum.Text = medium.ToString();
                         lblCompDiffNum.Text = hard.ToString();
 
@@ -756,7 +796,7 @@ namespace AdaptiveLearningSystem
                             levelTxt = "difficult";
                         }
 
-
+                        status = 1;
                         sql = "insert into [Question] values (@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8)";
                         //conn.Open();
                         SqlCommand cmdAddQuest = new SqlCommand(sql, conn);
@@ -772,7 +812,15 @@ namespace AdaptiveLearningSystem
 
                         txt += "Db Question" + (i + 1) + "success";
                     }
-                   // Label4.Text = txt;
+                    // Label4.Text = txt;
+                    Array.Clear(question, 0, question.Length);
+                    Array.Clear(answer, 0, answer.Length);
+                    Array.Clear(key, 0, key.Length);
+                    Array.Clear(level, 0, level.Length);
+                    Array.Clear(time, 0, time.Length);
+                    totalCount = 0;
+                    currCount = 0;
+                    Session["checkCreate"] = null;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('Tutorial Created Successfully'); window.location.href='TutorialList.aspx?course=" + courseID + "&name=" + coursename+"';", true);
                     //Response.Redirect("TutorialList.aspx?course=" + courseID + "&name=" + coursename);
 
@@ -827,6 +875,12 @@ namespace AdaptiveLearningSystem
                 key = listKey.ToArray();
                 level = listlevel.ToArray();
                 time = listTime.ToArray();
+
+                listQuest.Clear();
+                listAns.Clear();
+                listKey.Clear();
+                listTime.Clear();
+                listlevel.Clear();
 
                 if (currCount < totalCount)
                 {
