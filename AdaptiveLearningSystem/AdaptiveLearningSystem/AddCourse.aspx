@@ -7,7 +7,7 @@
     <title>Adaptive Learning System</title>
     <link rel="icon" href="images/tarIco.ico" />
     <link rel="stylesheet" href="DropCourse.css" />
-    <link rel="stylesheet" runat="server" media="screen" href="main.css"/>
+    <link rel="stylesheet" runat="server" media="screen" href="adminMain.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style>
 
@@ -104,9 +104,10 @@
                     </div>
                 </li>
                 <li>
-                    <asp:LinkButton CssClass="SecondNavList" ID="btnAddCourse" runat="server" OnClick="btnAddCourse_Click">Add Course</asp:LinkButton></li>
+                    <asp:LinkButton CssClass="SecondNavList" ID="btnAddCourse" runat="server" OnClick="btnAddCourse_Click">Add Course</asp:LinkButton>
+                    </li>
                 <li>
-                    <asp:LinkButton CssClass="SecondNavList" ID="ProfilesLinkButton" runat="server" OnClick="ProfilesLinkButton_Click">My Profile</asp:LinkButton></li>
+                   <asp:LinkButton CssClass="SecondNavList" ID="ActivateCourseLinkButton" runat="server" OnClick="btnActivateCourse_Click">Activate Course</asp:LinkButton></li>
             </ul>
         </div>
 
@@ -127,14 +128,22 @@
                 
             <div class="dropDetail">
                 <div class="displayFormat">
-                    <asp:Label ID="lblCourse" runat="server" Text="Course: "></asp:Label>
-                    <asp:DropDownList CssClass="dropdownFormat" ID="ddlCourse" runat="server" ></asp:DropDownList>
-                    <asp:Label ID="lblErrorCourse" ForeColor="Red" runat="server" Text="Label"></asp:Label>
+                    <asp:Label ID="lblCourseID" Width="180px" runat="server" Text="Course ID: "></asp:Label>
+                    <asp:TextBox ID="txtCourseID" runat="server" placeholder="BAIT3153"></asp:TextBox>
+                    <asp:Label ID="lblErrorCourseID" ForeColor="Red" runat="server" Text="Label" ></asp:Label>
                 </div>
                 <div class="displayFormat">
-                    <asp:Label ID="lblIntake" runat="server" Text="Intake: "></asp:Label>
-                    <asp:DropDownList ID="ddlIntake" runat="server"></asp:DropDownList>
-                    <asp:Label ID="lblErrorIntake" ForeColor="Red" runat="server" Text="Label"></asp:Label>
+                    <asp:Label ID="lblCourseName" Width="180px" runat="server" Text="Course Name: "></asp:Label>
+                    <asp:TextBox ID="txtCourseName" runat="server" placeholder="Database Management"></asp:TextBox>
+                    <asp:Label ID="lblErrorCourseName" ForeColor="Red" runat="server" Text="Label" ></asp:Label>
+                </div>
+                <div class="displayFormat">
+                    <asp:Label ID="lblCreditHour" Width="180px" runat="server" Text="Credit Hour(s): "></asp:Label>
+                    <asp:DropDownList ID="ddlCreditHour" runat="server">
+                         <asp:ListItem Value="">Please Select</asp:ListItem><asp:ListItem Value="1">1</asp:ListItem> <asp:ListItem Value="2">2</asp:ListItem> <asp:ListItem Value="3">3</asp:ListItem>
+                        <asp:ListItem Value="4">4</asp:ListItem> <asp:ListItem Value="5">5</asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:Label ID="lblErrorCreditHours" ForeColor="Red" runat="server" Text="Label"></asp:Label>
                 </div>
 
             </div>

@@ -286,9 +286,9 @@ namespace AdaptiveLearningSystem
             Response.Redirect("AddCourse.aspx");
         }
 
-        protected void ProfilesLinkButton_Click(object sender, EventArgs e)
+        protected void btnActivateCourse_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("ActivateCourse.aspx");
         }
 
         protected void LogOutLinkButton_Click(object sender, EventArgs e)

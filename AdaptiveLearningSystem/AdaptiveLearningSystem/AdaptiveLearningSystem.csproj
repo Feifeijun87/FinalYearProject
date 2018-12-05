@@ -138,8 +138,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ActivateCourse.aspx" />
     <Content Include="AddCourse.aspx" />
     <Content Include="adminHome.aspx" />
+    <Content Include="adminMain.css" />
     <Content Include="AnsTut.aspx" />
     <Content Include="CreateTut.aspx" />
     <Content Include="EditTut.aspx" />
@@ -207,6 +209,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivateCourse.aspx.cs">
+      <DependentUpon>ActivateCourse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ActivateCourse.aspx.designer.cs">
+      <DependentUpon>ActivateCourse.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AddCourse.aspx.cs">
       <DependentUpon>AddCourse.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
