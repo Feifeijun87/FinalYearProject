@@ -208,7 +208,7 @@ namespace AdaptiveLearningSystem
             if (!Regex.IsMatch(txtOffice.Text.Trim(), "^[A-Za-z][0-9]{3}$"))
             {
                 lblErrorOffice.Visible = true;
-                lblErrorOffice.Text = "Invalid Contact Number Format.";
+                lblErrorOffice.Text = "Invalid Office Location Format.";
                 return false;
             }
 
