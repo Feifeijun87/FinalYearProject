@@ -36,6 +36,16 @@
 
 
     </script>
+
+     <script>
+        function confirm_user() {
+            if (confirm("Are you sure you want to leave? The changes made might not be saved.") == true)
+                return true;
+            else
+                return false;
+        }
+    </script>
+
     <style type="text/css">
         .course-content {
             display: none;
@@ -181,7 +191,7 @@
                     <div id="downIcon">&#9660;</div>
                 </a>
                     <div class="dropdown-content">
-                        <asp:LinkButton CssClass="dropdown-item" ID="LogOutLinkButton" runat="server" OnClick="LogOutLinkButton_Click">Log Out</asp:LinkButton>
+                        <asp:LinkButton CssClass="dropdown-item" ID="LogOutLinkButton" runat="server"  OnClientClick="return confirm_user()" OnClick="LogOutLinkButton_Click">Log Out</asp:LinkButton>
                     </div>
 
                 </li>
@@ -192,18 +202,18 @@
             <%-- Second Line Navigation Bar Below --%>
             <ul class="SecondNavBar">
                 <li>
-                    <asp:LinkButton CssClass="SecondNavList" ID="HomeLinkButton" runat="server" OnClick="HomeLinkButton_Click">Home</asp:LinkButton></li>
+                    <asp:LinkButton CssClass="SecondNavList" ID="HomeLinkButton" runat="server"  OnClientClick="return confirm_user()" OnClick="HomeLinkButton_Click">Home</asp:LinkButton></li>
                 <li class="coursebtn">
                    <div class="SecondNavList"> Course</div>
                     <div class="course-content">
-                        <asp:LinkButton CssClass="course-item" ID="MyCourseLinkButton" runat="server" OnClick="MyCourseLinkButton_Click">My Course</asp:LinkButton>
-                        <asp:LinkButton CssClass="course-item" ID="EnrollCourseLinkButton" runat="server" OnClick="TutorialLinkButton_Click">Enroll Course</asp:LinkButton>
+                        <asp:LinkButton CssClass="course-item" ID="MyCourseLinkButton" runat="server"  OnClientClick="return confirm_user()" OnClick="MyCourseLinkButton_Click">My Course</asp:LinkButton>
+                        <asp:LinkButton CssClass="course-item" ID="EnrollCourseLinkButton" runat="server"  OnClientClick="return confirm_user()" OnClick="TutorialLinkButton_Click">Enroll Course</asp:LinkButton>
                     </div>
                 </li>
                 <li>
-                    <asp:LinkButton CssClass="SecondNavList" ID="ResultLinkButton" OnClick="ResultLinkButton_Click" runat="server">Report</asp:LinkButton></li>
+                    <asp:LinkButton CssClass="SecondNavList" ID="ResultLinkButton"  OnClientClick="return confirm_user()" OnClick="ResultLinkButton_Click" runat="server">Report</asp:LinkButton></li>
                 <li>
-                    <asp:LinkButton CssClass="SecondNavList" ID="ProfilesLinkButton" runat="server"  OnClick="ProfilesLinkButton_Click">My Profile</asp:LinkButton></li>
+                    <asp:LinkButton CssClass="SecondNavList" ID="ProfilesLinkButton" runat="server"  OnClientClick="return confirm_user()"  OnClick="ProfilesLinkButton_Click">My Profile</asp:LinkButton></li>
             </ul>
         </div>
         <%-- start your coding inside div below --%>
