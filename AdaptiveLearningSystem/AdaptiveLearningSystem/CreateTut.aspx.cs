@@ -322,6 +322,11 @@ namespace AdaptiveLearningSystem
             lblQuestEnter.Text = "";
             lblAnsEnter.Text = "";
             lblKeyEnter.Text = "";
+            lblTutTitleEnter.Text = "";
+            lblTutNumEnter.Text = "";
+            lblQuestEnter.Visible = false;
+            lblAnsEnter.Visible = false;
+            lblKeyEnter.Visible = false;
         }
 
         protected void Button3_Click(object sender, EventArgs e) //reset
@@ -342,16 +347,19 @@ namespace AdaptiveLearningSystem
 
             if (tutNumGet == "")
             {
+                lblTutNumEnter.Visible = true;
                 lblTutNumEnter.Text = "Please fill in the tutorial number!";
                 return false;
             }
             else if(tutNumGet == "0")
             {
+                lblTutNumEnter.Visible = true;
                 lblTutNumEnter.Text = "Tutorial number cannot be zero!";
                 return false;
             }
             else if (tutTitleGet == "")
             {
+                lblTutTitleEnter.Visible = true;
                 lblTutTitleEnter.Text = "Please fill in the tutorial title!";
                 return false;
             }
@@ -368,6 +376,7 @@ namespace AdaptiveLearningSystem
 
                 if (tutNumValid > 0)
                 {
+                    lblTutTitleEnter.Visible = true;
                     lblTutNumEnter.Text = "Please fill in digit only!";
                     return false;
                 }
@@ -411,14 +420,17 @@ namespace AdaptiveLearningSystem
                 clearLabel();
                 if (questGet == "" && (ansGet != "" || keywGet != ""))
                 {
+                    lblQuestEnter.Visible = true;
                     lblQuestEnter.Text = "Please fill in the question!";
                 }
                 else if (ansGet == "" && (questGet != "" || keywGet != ""))
                 {
+                    lblAnsEnter.Visible = true;
                     lblAnsEnter.Text = "Please fill in the sample answer!";
                 }
                 else if (keywGet == "" && (questGet != "" || ansGet != ""))
                 {
+                    lblKeyEnter.Visible = true;
                     lblKeyEnter.Text = "Please fill in the keyword!";
                 }
                 else if (checkKeyword(ansGet, keywGet) == false)
@@ -628,6 +640,10 @@ namespace AdaptiveLearningSystem
                         ModalPopupExtender3.Show();
                     }
                 }
+                    else
+                    {
+
+                    }
             }
 
 
