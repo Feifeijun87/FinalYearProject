@@ -394,6 +394,7 @@
       
         </table>
                     </div>
+
                         <div id="num" style="width:40%; float:right">
                             <div class="design">
                  <table class="editProf">

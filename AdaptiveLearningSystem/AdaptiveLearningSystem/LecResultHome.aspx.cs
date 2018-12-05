@@ -63,7 +63,7 @@ namespace AdaptiveLearningSystem
 
         protected void RadioButtonList1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lblNoIntake.Visible = false;
+            //lblNoIntake.Visible = false;
             lblNoTutorial.Visible = false;
             lblIntake.Visible = false;
             ddlIntake.Visible = false;
@@ -72,14 +72,13 @@ namespace AdaptiveLearningSystem
             lblTutGroup.Visible = false;
             ddlTutGroup.Visible = false;
             lblNoTutGroup.Visible = false;
-            
             btnDone.Visible = false;
-            if (lblNoIntake.Visible == true)
+
+            if (lblNoIntake.Visible == false)
             {
                 ddlCourse.SelectedIndex = 0;
             }
            
-
             //Label1.Text = "";
             //Label1.Text = (radReportSelect.SelectedValue).ToString();
 
