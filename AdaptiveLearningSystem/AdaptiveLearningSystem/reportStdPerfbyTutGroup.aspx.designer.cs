@@ -184,6 +184,15 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.WebControls.Repeater Repeater1;
         
         /// <summary>
+        /// divnoresult control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divnoresult;
+        
+        /// <summary>
         /// lblTutComplete control.
         /// </summary>
         /// <remarks>
@@ -193,13 +202,13 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.WebControls.Label lblTutComplete;
         
         /// <summary>
-        /// Div1 control.
+        /// divnodone control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divnodone;
         
         /// <summary>
         /// Repeater4 control.
@@ -319,13 +328,13 @@ namespace AdaptiveLearningSystem {
         protected global::System.Web.UI.WebControls.Label lblkkk;
         
         /// <summary>
-        /// container1 control.
+        /// divnodone2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl container1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divnodone2;
         
         /// <summary>
         /// Repeater3 control.

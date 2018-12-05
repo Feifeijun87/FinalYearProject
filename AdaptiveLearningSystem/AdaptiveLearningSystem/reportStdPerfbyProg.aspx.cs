@@ -139,6 +139,16 @@ namespace AdaptiveLearningSystem
                         Repeater1.DataBind();
                         Repeater2.DataSource = dt;
                         Repeater2.DataBind();
+                    }
+
+                    else
+                    {
+                        container.Visible = false;
+                        divnoresult.Visible = true;
+                        lblSavePDF.Visible = false;
+                        //filler.Visible = false;
+                    }
+
                         conn.Close();
                         conn.Open();
                         int studTotal = 0, studDone = 0;
@@ -183,11 +193,11 @@ namespace AdaptiveLearningSystem
                                 conn.Close();
                             }
                         }
-                        else
-                        {
-                            container.Visible = false;
-                            //filler.Visible = false;
-                        }
+                    else
+                    {
+                        divnodone.Visible = false;
+                        divnodone2.Visible = false;
+
                         conn.Close();
                     }
                     

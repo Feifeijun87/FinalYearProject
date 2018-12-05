@@ -333,7 +333,7 @@
                     <tr><td><b>Student Answer : </b><asp:Label ID="lblStudAns" runat="server" Text='<%# Eval("Answer")%>' ></asp:Label>             
                 </td></tr>
                 
-                    <tr><td><b>Time Spent : </b><asp:Label ID="lblTimeSpent" runat="server" Text='<%#  Eval("TimeSpent")%>'></asp:Label>second(s)
+                    <tr><td><b>Time Spent : </b><asp:Label ID="lblTimeSpent" runat="server" Text='<%#  Eval("TimeSpent")%>'></asp:Label> second(s)
                     <asp:Label ID="Label4" runat="server" Text=" | "></asp:Label>
                     <b>Matching Percentage: </b><asp:Label ID="lblMatchPercent" runat="server" Text='<%#  Eval("MatchPercent")%> '></asp:Label>%
                     </td></tr>
@@ -348,8 +348,8 @@
             </div>
             </ItemTemplate>
         </asp:Repeater></div></div></td></tr>
-               <tr><td colspan="2"><asp:Label ID="Label3" runat="server" Text="Points : "></asp:Label>
-                 <asp:Label ID="Label2" runat="server" Text="6- Excellent ; 5 - Good ; 4 - Moderate ; 3 - Pass ; 2 - Poor ; 1 - Very Poor"></asp:Label>
+               <tr><td colspan="2"><asp:Label ID="Label3" runat="server" Text="Marking Criteria : "></asp:Label><br />
+                 <asp:Label ID="Label2" runat="server" Text="Time bonus get 1 point ; Matching percentage &gt; 60% get 1 point ; Each keyword match will get extra 1 point"></asp:Label><br />
              </td></tr> 
          </table></div>
                  </asp:Panel>
@@ -433,7 +433,7 @@
                     <tr>
                         <td style="width:300px"><b>Time Spent : </b></td>
                         <td style="width:300px">
-                            <asp:Label ID="lblTimeSpent" runat="server" Text='<%#  Eval("TimeSpent")%>'></asp:Label>second(s) </td>
+                            <asp:Label ID="lblTimeSpent" runat="server" Text='<%#  Eval("TimeSpent")%>'></asp:Label> second(s) </td>
                             
                             <td style="width:400px">
                                <b> Matching Percentage:</b> 
@@ -458,9 +458,9 @@
                     </table> 
                     
                
-            </td></tr> <tr><td colspan="2"><asp:Label ID="Label5" runat="server" Text="Points : "></asp:Label>
+            </td></tr> <tr><td colspan="2"><asp:Label ID="Label5" runat="server" Text="Marking Criteria : "></asp:Label>
                  </td></tr> 
-                <tr><td colspan="2"><asp:Label ID="Label7" runat="server" Text="6- Excellent ; 5 - Good ; 4 - Moderate ; 3 - Pass ; 2 - Poor ; 1 - Very Poor"></asp:Label>
+                <tr><td colspan="2"><asp:Label ID="Label7" runat="server" Text="Time bonus get 1 point ; Matching percentage &gt; 60% get 1 point ; Each keyword match will get extra 1 point"></asp:Label>
             
              </td></tr> 
                  </table></asp:Panel>
