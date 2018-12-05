@@ -85,11 +85,6 @@
 
     </style>
 
-    <script type = "text/javascript">
-        window.onbeforeunload = function () {
-            return 'Are you sure you want to leave?';
-        };
-    </script>
 
     <script>
 
@@ -116,6 +111,14 @@
         });
 
 
+    </script>
+    <script>
+        function confirm_user() {
+            if (confirm("Are you sure you want to leave? The changes made might not be saved.") == true)
+                return true;
+            else
+                return false;
+        }
     </script>
     <style type="text/css">
         .auto-style1 {
@@ -151,9 +154,8 @@
                     </span>
                     <div id="downIcon">&#9660;</div>
                 </a>
-                    <div class="dropdown-content">
-                        <asp:LinkButton CssClass="dropdown-item" ID="ProfileLinkButton" runat="server">Profile</asp:LinkButton>
-                        <asp:LinkButton CssClass="dropdown-item" ID="LogOutLinkButton" runat="server">Log Out</asp:LinkButton>
+                    <div class="dropdown-content">                       
+                        <asp:LinkButton CssClass="dropdown-item" ID="LogOutLinkButton" OnClientClick="return confirm_user()" OnClick="LogOutLinkButton_Click" runat="server">Log Out</asp:LinkButton>
                     </div>
 
                 </li>
@@ -163,12 +165,12 @@
         <div>
             <ul class="SecondNavBar">
                  <li>
-                    <asp:LinkButton CssClass="SecondNavList" ID="HomeLinkButton" runat="server" OnClick="HomeLinkButton_Click">Home</asp:LinkButton></li>
+                    <asp:LinkButton CssClass="SecondNavList" ID="HomeLinkButton" runat="server" OnClientClick="return confirm_user()" OnClick="HomeLinkButton_Click">Home</asp:LinkButton></li>
                 
                 <li>
-                    <asp:LinkButton CssClass="SecondNavList" ID="ResultLinkButton" runat="server" OnClick="ResultLinkButton_Click1" >Tutorial Result</asp:LinkButton></li>
+                    <asp:LinkButton CssClass="SecondNavList" ID="ResultLinkButton" runat="server"  OnClientClick="return confirm_user()" OnClick="ResultLinkButton_Click1" >Tutorial Result</asp:LinkButton></li>
                 <li>
-                    <asp:LinkButton CssClass="SecondNavList" ID="ProfilesLinkButton" runat="server" OnClick="ProfilesLinkButton_Click">My Profile</asp:LinkButton></li>
+                    <asp:LinkButton CssClass="SecondNavList" ID="ProfilesLinkButton" runat="server" OnClientClick="return confirm_user()" OnClick="ProfilesLinkButton_Click">My Profile</asp:LinkButton></li>
             </ul>
         </div>
         <%-- start your coding inside div below --%>
@@ -254,7 +256,7 @@
                         
                         <asp:Button CssClass="BottomButton" ID="btnScore" runat="server" OnClick="btnScore_Click" Text="Result" />
                         <asp:Button CssClass="BottomButton" ID="btnNext" runat="server" OnClick="Button2_Click" Text="Next" />
-                        <asp:Button CssClass="BottomButton" ID="btnDone" runat="server" OnClick="Button4_Click" Text="Done" OnClientClick = "Confirm()" />
+                        <asp:Button CssClass="BottomButton" ID="btnDone" runat="server" OnClick="Button4_Click" Text="Done" OnClientClick = "confirm_user()" />
                     </div>
                     
                         

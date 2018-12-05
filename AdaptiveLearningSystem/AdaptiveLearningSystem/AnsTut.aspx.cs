@@ -505,7 +505,7 @@ namespace AdaptiveLearningSystem
                             cmdAddTut.Parameters.AddWithValue("@p2", status); //status
                             cmdAddTut.Parameters.AddWithValue("@p3", studID); //stud ID
                             cmdAddTut.Parameters.AddWithValue("@p4", tutorialID); //tutorialID
-                            cmdAddTut.Parameters.AddWithValue("@p5", DateTime.Now.ToShortDateString()); //complete date
+                            cmdAddTut.Parameters.AddWithValue("@p5", DateTime.Now.ToString("MM/dd/yyyy")); //complete date
                             cmdAddTut.Parameters.AddWithValue("@p6", DateTime.Now.ToLongTimeString()); //complete time          
                             cmdAddTut.ExecuteNonQuery();
                             conn.Close();
