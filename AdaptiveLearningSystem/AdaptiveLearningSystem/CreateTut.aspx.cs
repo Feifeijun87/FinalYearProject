@@ -125,14 +125,17 @@ namespace AdaptiveLearningSystem
 
                 if (questGet == "" && (ansGet != "" || keywGet != ""))
                 {
+                    lblQuestEnter.Visible = true;
                     lblQuestEnter.Text = "Please fill in the question!";
                 }
                 else if (ansGet == "" && (questGet != "" || keywGet != ""))
                 {
+                    lblAnsEnter.Visible = true;
                     lblAnsEnter.Text = "Please fill in the sample answer!";
                 }
                 else if (keywGet == "" && (questGet != "" || ansGet != ""))
                 {
+                    lblKeyEnter.Visible = true;
                     lblKeyEnter.Text = "Please fill in the keyword!";
                 }
                 else if (checkKeyword(ansGet, keywGet) == false)

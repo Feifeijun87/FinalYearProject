@@ -116,8 +116,7 @@ namespace AdaptiveLearningSystem
                     StringBuilder sb = new StringBuilder(tutNum);
                     sb.Remove(0, 1);
                     tutNum = sb.ToString();
-                    sql = "SELECT q.Question, a.Answer, a.TimeSpent, a.MatchPercent, a.Points, q.SampleAns FROM Question q, StudAns a, Tutorial t WHERE t.CourseID = @courseID AND t.TutorialNumber = @tutNum AND a.StudentID = @studID AND q.QuestionID = a.QuestionID GROUP BY q.Question, a.Answer, a.TimeSpent, a.MatchPercent, a.Points, q.SampleAns ";
-
+                    sql = "SELECT q.Question, a.Answer, a.TimeSpent, a.MatchPercent, a.Points, q.SampleAns, a.AnswerID ,q.Level FROM Question q, StudAns a, Tutorial t WHERE t.CourseID = @courseID AND t.TutorialNumber = @tutNum AND a.StudentID = @studID AND q.QuestionID = a.QuestionID AND q.QuestionID = a.QuestionID AND q.TutorialID = t.TutorialID GROUP BY q.Question, a.Answer, a.TimeSpent, a.MatchPercent, a.Points, q.SampleAns, a.AnswerID, q.Level ORDER BY a.AnswerID ASC ";
                     SqlCommand cmdGetResult = new SqlCommand(sql, conn);
                     cmdGetResult.Parameters.AddWithValue("@courseID", courseID);
                     cmdGetResult.Parameters.AddWithValue("@tutNum", tutNum);

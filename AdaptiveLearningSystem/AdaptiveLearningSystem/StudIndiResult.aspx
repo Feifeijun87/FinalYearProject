@@ -339,6 +339,10 @@
                     </td></tr>
                     <tr><td><b>Point(s) earned : </b><asp:Label ID="Label1" runat="server" Text='<%# Eval("Points")%>' ></asp:Label>             
                 </td></tr>
+          <tr><td><b>Difficulty Level : </b><asp:Label ID="Label6" runat="server" Text='<%# Eval("Level")%>' ></asp:Label>              
+
+              </td ></tr >
+                   
                     <tr><td><b>Sample Answer : </b><asp:Label ID="lblSampleAns" runat="server" Text='<%# Eval("SampleAns")%>' ></asp:Label>         
                </td></tr>
          <tr><td><br /></td></tr>
@@ -447,6 +451,10 @@
                     <tr><td><b>Point(s) earned :</b> </td>
                         <td colspan="3"><asp:Label ID="Label1" runat="server" Text='<%# Eval("Points")%>' ></asp:Label>             
                 </td></tr>
+                       <tr><td><b>Difficulty Level:</b> </td>
+                        <td colspan = "3"><asp:Label ID = "Label8" runat = "server" Text = '<%# Eval("Level")%>' ></asp:Label >
+            
+                            </td ></tr >
                     <tr><td colspan="4"><b>Sample Answer : </b></td></tr>
                       <tr>  <td colspan="4"><asp:Label ID="lblSampleAns" runat="server" Text='<%# Eval("SampleAns")%>' ></asp:Label>             
                </td></tr>

@@ -131,8 +131,8 @@ namespace AdaptiveLearningSystem
 
             if (!txtEndDate.Text.Equals(String.Empty) && !txtStartDate.Text.Equals(String.Empty))
             {
-                DateTime startDate = DateTime.Parse(txtStartDate.Text);
-                DateTime endDate = DateTime.Parse(txtEndDate.Text);
+                DateTime startDate = DateTime.Parse(txtStartDate.Text.Trim());
+                DateTime endDate = DateTime.Parse(txtEndDate.Text.Trim());
                 int days = int.Parse((endDate - startDate).TotalDays.ToString());
                 if (days > 0)
                 {

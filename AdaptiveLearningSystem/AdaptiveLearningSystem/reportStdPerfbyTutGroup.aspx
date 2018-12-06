@@ -167,6 +167,7 @@
                     
                     <tr><td colspan="2">
                         <div class="container" runat="server" id="container">
+                                  Student who has completed the tutorial : <br /><br />
                      
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label1" runat="server" Width ="110px" Text="StudentID" Font-Bold="True"></asp:Label>  
                             <asp:Label ID="Label2" runat="server" Width="170px" Text="Student Name" Font-Bold="True"></asp:Label>
@@ -290,6 +291,11 @@
                     <tr><td colspan="2">
                         <table class="auto-style8">
                             <tr>
+                                <td colspan="4">
+                                    Student who has completed the tutorial : <br />
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>
                                     <asp:Label ID="Label9" runat="server" Width ="110px" Text="StudentID" Font-Bold="True"></asp:Label>  
                                 </td>
@@ -335,7 +341,7 @@
                        <div class="container" runat="server" id="divnodone2">
                             <div class="MyCourseList"> 
                <table style="width:100%">   
-                                       <tr><td colspan="3">Student who did not completed the tutorial : </td></tr> 
+                                       <tr><td colspan="3">Student who did not completed the tutorial : <br /></td></tr> 
                         <asp:Repeater ID="Repeater3"  runat="server">
                              <ItemTemplate>
                                  <tr><td class="auto-style5">

@@ -307,7 +307,7 @@
                             </tr>
 
                             <tr>
-                                <td class="auto-style4" style="width:200px">Point awarded time:<br /> &nbsp;<br />
+                                <td class="auto-style4" style="width:200px">Time allowed to get points:<br /> &nbsp;<br />
                                     &nbsp;</td>
                                <td class="auto-style4">
                                     <asp:DropDownList ID="ddlCompleteTime" runat="server" Width="104px" Height="30px">
@@ -402,7 +402,7 @@
                                      <asp:Repeater ID="nestedRepeater1" runat="server" DataSource='<%# Eval("Value") %>'>
                                          <ItemTemplate>
                                              <tr>
-                                                 <td><b>Point awarded time :</b>
+                                                 <td><b>Time allowed to get points: </b>
                                                      <asp:Label ID="lblTime" runat="server" Text='<%# Eval("Key") %>' /> minutes
                                                  </td>
                                              </tr>
@@ -439,7 +439,7 @@
 
                                 <table class="editProf" style="border: 1px solid #000000; padding: 1px;">
                     <tr>
-                        <td class="auto-style7">
+                        <td class="auto-style7" style="text-align:left">
                             Compulsory Easy Question :</td>
                         <td >
                             <asp:TextBox ID="txtEasy" Style="text-align:center" runat="server" Width="40px"></asp:TextBox> / <asp:Label ID="lblCompEasyNum" Width="20px" runat="server">0</asp:Label><asp:Label ID="lblErrorEasy" runat="server" Text="*" ForeColor="Red" Visible="false"></asp:Label>
@@ -447,7 +447,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="stayRight">
+                        <td class="stayRight" style="text-align:left">
                             Compulsory Medium Question :</td>
                         <td >
                             <asp:TextBox ID="txtMed" Style="text-align:center" runat="server" Width="40px"></asp:TextBox>
@@ -456,7 +456,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td  class="stayRight">Compulsory Difficult Question:</td>
+                        <td  class="stayRight" style="text-align:left">Compulsory Difficult Question:</td>
                         <td >
                             <asp:TextBox ID="txtDifficult" Style="text-align:center" runat="server" Width="40px"></asp:TextBox>
                             /
@@ -472,7 +472,7 @@
                 </table>
                        
             
-           <div class="BottomButtonGroup">
+           <div class="PanelBottomButtonGroup">
                            
                  
                             <asp:Button ID="btnCancel" runat="server" CssClass="BottomButton" OnClick="btnContactCancel_Click" Text="Close" />

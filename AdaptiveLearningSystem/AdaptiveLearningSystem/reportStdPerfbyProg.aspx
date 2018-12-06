@@ -140,7 +140,7 @@
                     
                     <tr><td>
                         <div class="container" runat="server" id="container">
-                     
+                     Student who has completed the tutorial : <br /><br />
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label1" runat="server" Width ="120px" Text="StudentID" Font-Bold="True"></asp:Label>  
                             <asp:Label ID="Label2" runat="server" Width="170px" Text="Student Name" Font-Bold="True"></asp:Label>
                             <asp:Label ID="Label5" runat="server" Width="170px" Text="Tutorial Group" Font-Bold="True"></asp:Label>
@@ -262,6 +262,11 @@
                     
                     <tr><td>
                         <table class="auto-style8">
+                            <tr>
+                                <td colspan="4">
+                                    Student who has completed the tutorial : <br /><br />
+                                </td>
+                            </tr>
                             <tr>
                                 <td>
                                     <asp:Label ID="Label9" runat="server" Width ="110px" Text="StudentID" Font-Bold="True"></asp:Label>  

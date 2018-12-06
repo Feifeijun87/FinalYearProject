@@ -223,7 +223,7 @@
                                     :
                                 </td>
                                 <td>
-                                    <asp:Label ID="lblQuest" runat="server"></asp:Label>
+                                    <asp:Label ID="lblQuest" Width="600px" runat="server"></asp:Label>
 
                                 </td>
                             </tr>
