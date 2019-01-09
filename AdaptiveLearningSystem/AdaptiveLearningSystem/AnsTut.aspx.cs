@@ -709,7 +709,9 @@ namespace AdaptiveLearningSystem
                     conn.Open();
 
                     //get quest
-                    sql = "SELECT q.QuestionID, q.Question, q.Level, q.TimeLimit  FROM Question q, Tutorial t WHERE t.TutorialNumber = @tutNum AND t.CourseID = @courseID AND t.TutorialID = q.TutorialID AND q.Status = 1";
+                    sql = "SELECT q.QuestionID, q.Question, q.Level, q.TimeLimit  "+
+                          "FROM Question q, Tutorial t "+
+                          "WHERE t.TutorialNumber = @tutNum AND t.CourseID = @courseID AND t.TutorialID = q.TutorialID AND q.Status = 1";
                     SqlCommand cmdGetQuest = new SqlCommand(sql, conn);
                     cmdGetQuest.Parameters.AddWithValue("@tutNum", tutNum);
                     cmdGetQuest.Parameters.AddWithValue("@courseID", courseID);
@@ -722,15 +724,20 @@ namespace AdaptiveLearningSystem
                         listLevel.Add(dtr.GetString(2));
                         listTime.Add(dtr.GetInt32(3));
                     }
+                    conn.Close();
+
+
+
                     string hh = "";
                     for (int k = 0; k < listQuestID.Count; k++)
                     {
                         hh += listQuestID[k];
                     }
-                    conn.Close();
+                    
                     conn.Open();
                     //get comp level
-                    sql = "SELECT [CompulsaryEasy], [CompulsaryMedium], [CompulsaryHard] FROM [Tutorial] WHERE TutorialNumber = @tutNum AND CourseID = @courseID AND Status =1";
+                    sql = "SELECT [CompulsaryEasy], [CompulsaryMedium], [CompulsaryHard] FROM [Tutorial]"+
+                            "WHERE TutorialNumber = @tutNum AND CourseID = @courseID AND Status =1";
                     SqlCommand cmdGetComp = new SqlCommand(sql, conn);
                     cmdGetComp.Parameters.AddWithValue("@tutNum", tutNum);
                     cmdGetComp.Parameters.AddWithValue("@courseID", courseID);
@@ -766,7 +773,6 @@ namespace AdaptiveLearningSystem
                     //  Label1.Text = "easy = " + listEasyQuestionID.Count + ", med = " + listMedQuestionID.Count + ",hard = " + listHardQuestionID.Count;
 
                     //get done how many quest done 
-
                     for (int j = 0; j < listQuestID.Count; j++)
                     {
                         sql = "SELECT * FROM [StudAns] WHERE QuestionID = @QuestionID AND StudentID = @StudentID";
@@ -795,7 +801,6 @@ namespace AdaptiveLearningSystem
                                 hardDone += 1;
                                 listHardDoneQID.Add(listQuestID.ElementAt(j));
                             }
-
                         }
                         else
                         {
@@ -809,7 +814,6 @@ namespace AdaptiveLearningSystem
                     medLeft = compMed - medDone;
                     hardLeft = compHard - hardDone;
                     totalQuestLeft = easyLeft + medLeft + hardLeft;
-
 
                     if (easyLeft != 0)
                     {
@@ -889,10 +893,7 @@ namespace AdaptiveLearningSystem
 
         protected void setQuestion(List<string> listLevelQuestionID, List<string> listTempQID, List<string> listDoneQID, int compLeft)
         {
-            int i;
-            //callSetEasy
-            //setEasyFunc
-            //listTempEasyQID = listEasyQuestionID;
+            int i;         
             foreach (string item in listLevelQuestionID)
             {
                 listTempQID.Add(item);
@@ -901,15 +902,7 @@ namespace AdaptiveLearningSystem
             var nonintersect = listTempQID.Except(listDoneQID).Union(listDoneQID.Except(listTempQID)).ToList();
             listTempQID.Clear();
             listTempQID.AddRange(nonintersect);
-
-            string txt = "";
-            for (i = 0; i < listTempQID.Count; i++)
-            {
-                txt += listTempQID[i].ToString();
-            }
-
-
-
+            
             if (listTempQID.Count == listLevelQuestionID.Count) // no do dao easy
             {
                 if (compLeft == listLevelQuestionID.Count) // no extra quest
@@ -917,10 +910,7 @@ namespace AdaptiveLearningSystem
                     for (i = 0; i < listTempQID.Count; i++)
                     {
                         listRandomQuestionID.Add(listTempQID[i]);
-                        //randomQIDCount++;
                     }
-                    //random in sequence
-
                 }
                 else //got extra quest
                 {
@@ -928,9 +918,7 @@ namespace AdaptiveLearningSystem
                     for (i = 0; i < temp.Length; i++)
                     {
                         listRandomQuestionID.Add(temp[i]);
-                        //randomQIDCount++;
                     }
-                    //select compEasy from easyQID then store in random
                 }
             }
             else if (listTempQID.Count != listLevelQuestionID.Count) //means done some question
@@ -940,9 +928,7 @@ namespace AdaptiveLearningSystem
                     for (i = 0; i < listTempQID.Count; i++)
                     {
                         listRandomQuestionID.Add(listTempQID[i]);
-                        //randomQIDCount++;
                     }
-                    //
                 }
                 else //left quest>comp
                 {
@@ -951,10 +937,7 @@ namespace AdaptiveLearningSystem
                     for (i = 0; i < temp.Length; i++)
                     {
                         listRandomQuestionID.Add(temp[i]);
-                        //randomQIDCount++;
                     }
-
-
                 }
             }
         }
@@ -962,7 +945,6 @@ namespace AdaptiveLearningSystem
         //random func 1
         protected string[] randomCompulsoryQuest(int compNum, List<string> questionRandom)
         {
-            //string[] tempRandom = new string[compNum];
             List<string> listNumbers = new List<string>();
             int number;
             for (int i = 0; i < compNum; i++)
@@ -973,9 +955,7 @@ namespace AdaptiveLearningSystem
                 } while (listNumbers.Contains(questionRandom[number]));
                 listNumbers.Add(questionRandom[number]);
             }
-            // tempRandom = listNumbers.ToArray();
             return listNumbers.ToArray();
-
         }
 
 
@@ -990,8 +970,7 @@ namespace AdaptiveLearningSystem
 
             List<KeyValuePair<int, string>> list =
                 new List<KeyValuePair<int, string>>();
-            // Add all strings from array.
-            // ... Add new random int each time.
+            
             foreach (string s in arr)
             {
                 list.Add(new KeyValuePair<int, string>(_random.Next(), s));
@@ -1002,6 +981,7 @@ namespace AdaptiveLearningSystem
                          select item;
             // Allocate new string array.
             string[] result = new string[arr.Length];
+
             // Copy values to array.
             int index = 0;
             foreach (KeyValuePair<int, string> pair in sorted)
@@ -1009,7 +989,6 @@ namespace AdaptiveLearningSystem
                 result[index] = pair.Value;
                 index++;
             }
-            // Return copied array.
             return result.ToList(); ;
         }
 

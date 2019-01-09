@@ -80,7 +80,7 @@ namespace AdaptiveLearningSystem
         {
             string courseID, coursename = "", tutNum, tutTitle = "", questDone, ttlQuest;
             int numQD, numTQ;
-            if (e.CommandName == "select") //edit
+            if (e.CommandName == "select") 
             {
 
                 Label lblCourseID1 = new Label();

@@ -13,7 +13,6 @@ namespace AdaptiveLearningSystem
 {
     public partial class StudResult : System.Web.UI.Page
     {
-
         SqlConnection conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["fyp"].ConnectionString);
 
         protected void Page_Load(object sender, EventArgs e)

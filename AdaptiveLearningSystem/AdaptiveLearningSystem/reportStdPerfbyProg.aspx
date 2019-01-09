@@ -177,7 +177,7 @@
                 <tr><td>
                         <br />
                         Tutorial Completion : 
-                        <asp:Label ID="lblTutComplete" runat="server"></asp:Label> students have completed the tutorial</td></tr>
+                        <asp:Label ID="lblTutComplete" runat="server"></asp:Label> students have completed the tutorial<br /> </td></tr>
                  <tr>
                    <td>
                        <div class="container" runat="server" id="divnodone">

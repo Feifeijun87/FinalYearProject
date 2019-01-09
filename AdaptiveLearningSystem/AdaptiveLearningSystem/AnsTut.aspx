@@ -188,7 +188,7 @@
                             <td colspan="2" class="auto-style5">
                                 <label id="subjname" style="font-family: Arial, Helvetica, sans-serif; font-size: large">Course:&nbsp; </label>&nbsp;
                                 <asp:Label ID="lblCourse" style="font-family: Arial, Helvetica, sans-serif; font-size: large" runat="server"></asp:Label>
-                                <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                                <asp:Label ID="Label1" runat="server" Text="Label" Visible="False"></asp:Label>
                                 <br />
                                 <br />
                             </td>

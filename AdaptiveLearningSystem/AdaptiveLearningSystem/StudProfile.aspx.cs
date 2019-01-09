@@ -63,7 +63,7 @@ namespace AdaptiveLearningSystem
             if (txtOldPass.Text.Trim() == String.Empty && txtNewPass.Text.Trim() == String.Empty)
             {
                 lblPassErrorMsg.Visible = true;
-                lblPassErrorMsg.Text = "Both field is required.";
+                lblPassErrorMsg.Text = "All fields are required.";
                 return false;
             }
             else if (!Session["studPass"].ToString().Trim().Equals(txtOldPass.Text.ToString()))

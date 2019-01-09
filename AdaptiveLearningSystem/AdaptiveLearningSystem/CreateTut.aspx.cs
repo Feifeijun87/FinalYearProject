@@ -68,33 +68,7 @@ namespace AdaptiveLearningSystem
                         lblUserName.Text = Session["lecName"].ToString();
 
                     }
-                    
-                    //Label4.Text = "currcount= " + currCount + "// total count= " + totalCount;
-                   // sql = " SELECT DISTINCT c.CourseID + ' ' + c.CourseName AS Course FROM CourseAvailable a, Course c WHERE a.LecturerID = @lecID AND a.CourseID = c.CourseID AND a.Status =1";
-                    //SqlCommand cmdGetCourse = new SqlCommand(sql, conn);
-                   // cmdGetCourse.Parameters.AddWithValue("@lecID", Session["lecturerID"].ToString());
-                   // DataTable dt = new DataTable();
-                   // cmdGetCourse.CommandType = CommandType.Text;
-                  //  SqlDataAdapter sda = new SqlDataAdapter();
-                  //  sda.SelectCommand = cmdGetCourse;
-                 //   conn.Close();
-                  //  conn.Open();
-                  //  sda.Fill(dt);
-                  //  if (dt != null && dt.Rows.Count > 0)
-                 //   {
-                 //       ddlCourse.DataTextField = "Course";
-                //        ddlCourse.DataValueField = "Course";
-                ///        ddlCourse.DataSource = dt;
-                //        ddlCourse.DataBind();
-               //         ddlCourse.Items.Insert(0, new ListItem(String.Empty, String.Empty));
-                   //     ddlCourse.SelectedIndex = 0;
-//
-                 //   }
-                  //  else
-                    //{
-                   //     ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", "alert('No course found'); window.location.href='LecHome.aspx';", true);
-                    //}
-                   // conn.Close();
+                  
                 }
             }
             else
@@ -766,7 +740,6 @@ namespace AdaptiveLearningSystem
                 }
                 else
                 {
-                    //store db
                     int status = 0;
                     //insert tutorial
                     sql = "insert into [Tutorial] values (@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10,@p11)";
@@ -784,18 +757,11 @@ namespace AdaptiveLearningSystem
                     cmdAddTut.Parameters.AddWithValue("@p10", ""); //exp date
                     cmdAddTut.Parameters.AddWithValue("@p11", courseID); //course ID
                     cmdAddTut.ExecuteNonQuery();
-
-                    //Label1.Text = "Db Tutorial success";
-
-                    //insert question     
-                    //get quest ID
-                    //get tut ID
-
+                    
                     sql = "SELECT COUNT(QuestionID) FROM [Question]";
                     SqlCommand cmdQuesCount = new SqlCommand(sql, conn);
                     int questID = (int)cmdQuesCount.ExecuteScalar();
-                    string levelTxt = "", txt = "";
-                    //Label2.Text = "TutID: " + tutorialID;
+                    string levelTxt = "";
 
                     for (int i = 0; i < totalCount; i++)
                     {
@@ -817,7 +783,6 @@ namespace AdaptiveLearningSystem
 
                         status = 1;
                         sql = "insert into [Question] values (@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8)";
-                        //conn.Open();
                         SqlCommand cmdAddQuest = new SqlCommand(sql, conn);
                         cmdAddQuest.Parameters.AddWithValue("@p1", questionID); //quest ID
                         cmdAddQuest.Parameters.AddWithValue("@p2", question[i]); //quest
@@ -828,9 +793,8 @@ namespace AdaptiveLearningSystem
                         cmdAddQuest.Parameters.AddWithValue("@p7", (time[i] + 1)); //time
                         cmdAddQuest.Parameters.AddWithValue("@p8", status); //status
                         cmdAddQuest.ExecuteNonQuery();
-
-                        txt += "Db Question" + (i + 1) + "success";
                     }
+
                     // Label4.Text = txt;
                     Array.Clear(question, 0, question.Length);
                     Array.Clear(answer, 0, answer.Length);
